@@ -712,13 +712,12 @@ async function run() {
     let petType = 'cat';
 
     // Check if user has starred the repo (ThanhNguyxn/Git-Gotchi)
-    // Check if user has starred the repo (ThanhNguyxn/Git-Gotchi)
     let hasStarred = false;
     try {
       console.log(`Checking if user '${username}' has starred ThanhNguyxn/Git-Gotchi...`);
 
-      // Fetch stargazers using typed API
-      const { data: stargazers } = await octokit.rest.activity.listStargazersForRepo({
+      // Fetch ALL stargazers using pagination
+      const stargazers = await octokit.paginate(octokit.rest.activity.listStargazersForRepo, {
         owner: 'ThanhNguyxn',
         repo: 'Git-Gotchi',
         per_page: 100
@@ -735,51 +734,50 @@ async function run() {
     } catch (error) {
       console.log('Warning: Error checking star status. Defaulting to false.');
       console.log('Error details:', error.message);
-      // Do not fail the action for this; just continue as normal pet
-    }
-
-    if (hasStarred) {
-      petType = 'unicorn';
-      console.log('Legendary Status Unlocked! 🦄');
-    } else {
+    
+  
+     (hasStarred) {
+    petType = 'unicorn';
+    console.log('Legendary Status Unlocked! 🦄');
+  } else {
       const repos = await octokit.rest.repos.listForUser({
-        username: username,
-        sort: 'updated',
-        per_page: 10,
-      });
-
-      const languages = {};
-      repos.data.forEach(repo => {
-        if (repo.language) {
-          languages[repo.language] = (languages[repo.language] || 0) + 1;
+      username: username,
+      sort: 'updated',
+      per_page: 10,
+    });
+    
+      nst languages = {};
+      pos.data.forEach(repo => {
+      if (repo.language) {
+        languages[repo.language] = (languages[repo.language] || 0) + 1;
         }
-      });
+    });
+    
+      nst topLanguage = Object.keys(languages).reduce((a, b) => languages[a] > languages[b] ? a : b, 'Unknown');
+        ype = getPetType(topLanguage);
+      nsole.log(`Top Language: ${topLanguage}`);
+    
 
-      const topLanguage = Object.keys(languages).reduce((a, b) => languages[a] > languages[b] ? a : b, 'Unknown');
-      petType = getPetType(topLanguage);
-      console.log(`Top Language: ${topLanguage}`);
-    }
+    nsole.log(`User: ${username}, Mood: ${mood}, Type: ${petType}`);
+    
+     4. Generate SVG
+  const svgContent = generateSVG(petType, mood);
 
-    console.log(`User: ${username}, Mood: ${mood}, Type: ${petType}`);
-
-    // 4. Generate SVG
-    const svgContent = generateSVG(petType, mood);
-
-    // 5. Write to File
+  // 5. Write to File
     const fs = require('fs');
-    if (!fs.existsSync('dist')) {
-      fs.mkdirSync('dist');
+  if (!fs.existsSync('dist')) {
+    fs.mkdirSync('dist');
     }
-    fs.writeFileSync('dist/pet.svg', svgContent);
-    console.log('Generated dist/pet.svg');
+  fs.writeFileSync('dist/pet.svg', svgContent);
+  console.log('Generated dist/pet.svg');
+  
+    tch (error) {
+  core.setFailed(error.message);
+  
+  
 
-  } catch (error) {
-    core.setFailed(error.message);
-  }
-}
-
-function calculateStreak(events) {
-  if (!events || events.length === 0) return 0;
+nction calculateStreak(events) {
+   (!events || events.length === 0) return 0;
 
   // Extract unique dates (YYYY-MM-DD)
   const dates = new Set(events.map(e => e.created_at.split('T')[0]));
