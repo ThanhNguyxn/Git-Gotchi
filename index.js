@@ -682,6 +682,42 @@ const SPRITES = {
 
 // --- CORE LOGIC ---
 
+async function checkUserStarredOrForked(octokit, username) {
+  try {
+    console.log(`Checking if '${username}' starred or forked ThanhNguyxn/Git-Gotchi...`);
+
+    // Check Stars (first 100)
+    const { data: stargazers } = await octokit.rest.activity.listStargazersForRepo({
+      owner: 'ThanhNguyxn',
+      repo: 'Git-Gotchi',
+      per_page: 100
+    });
+
+    if (stargazers.some(u => u.login.toLowerCase() === username.toLowerCase())) {
+      console.log(`User ${username} has STARRED the repo! 🌟`);
+      return true;
+    }
+
+    // Check Forks (first 100)
+    const { data: forks } = await octokit.rest.repos.listForks({
+      owner: 'ThanhNguyxn',
+      repo: 'Git-Gotchi',
+      per_page: 100
+    });
+
+    if (forks.some(f => f.owner.login.toLowerCase() === username.toLowerCase())) {
+      console.log(`User ${username} has FORKED the repo! 🍴`);
+      return true;
+    }
+
+    console.log(`User ${username} has NOT starred or forked the repo.`);
+    return false;
+  } catch (error) {
+    console.log('Warning: Could not check star/fork status:', error.message);
+    return false;
+  }
+}
+
 async function run() {
   try {
     const token = core.getInput('github_token');
@@ -711,10 +747,11 @@ async function run() {
     // 3. Determine Pet Type (Species)
     let petType = 'cat';
 
-    // Legendary Status: Unicorn (14+ Day Streak)
-    if (streak >= 14) {
+    // Legendary Status: Unicorn (Star or Fork the repo!)
+    const hasStarredOrForked = await checkUserStarredOrForked(octokit, username);
+    if (hasStarredOrForked) {
       petType = 'unicorn';
-      console.log('Legendary Status Unlocked! 🦄 (14+ Day Streak)');
+      console.log('Legendary Status Unlocked! 🦄');
     } else {
       const repos = await octokit.rest.repos.listForUser({
         username: username,

@@ -44,7 +44,7 @@ Your coding habits determine your companion. [View the full Pet Gallery here](GA
 | **Ruby** | **Gem** | 💎 |
 | **HTML / CSS** | **Chameleon** | 🦎 |
 | **Others** | **Cat** | 🐱 |
-| **Star the Repo 🌟** | **Unicorn** | 🦄 |
+| **Star 🌟 or Fork 🍴** | **Unicorn** | 🦄 |
 
 ## 🎭 Moods & States
 
