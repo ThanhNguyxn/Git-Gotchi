@@ -606,46 +606,58 @@ const SPRITES = {
   },
   unicorn: {
     normal: [
-      "      Y     ",
-      "     K K    ",
-      "   KKXKXK   ",
-      "  KXXXXXXK  ",
-      " RXXXXWXXK  ",
-      " YXXXXXXXK  ",
-      " BXXXXXXXK  ",
-      " PXXXXXXXK  ",
-      " RXXXXXXXK  ",
-      " YXXXXXXXK  ",
-      "  KKKKKKK   ",
-      "            "
+      '                ',
+      '      Y         ',
+      '     YY         ',
+      '    WWWW      R ',
+      '   WWKKWW    RO ',
+      '  WWWWWWWW  ROY ',
+      '  WWWWWWWW ROYG ',
+      '  WWWWWWWW OYGB ',
+      '   WW  WW  YGBP ',
+      '   WW  WW  GB P ',
+      '           B P  ',
+      '            P   ',
+      '                ',
+      '                ',
+      '                ',
+      '                '
     ],
     sleep: [
-      "      Y     ",
-      "     K K    ",
-      "   KKXKXK   ",
-      "  KXXXXXXK  ",
-      " RXXXXKXXK  ",
-      " YXXXXXXXK  ",
-      " BXXXXXXXK  ",
-      " PXXXXXXXK  ",
-      " RXXXXXXXK  ",
-      " YXXXXXXXK  ",
-      "  KKKKKKK   ",
-      "            "
+      '                ',
+      '      Y         ',
+      '     YY         ',
+      '    WWWW      R ',
+      '   WWWWWW    RO ',
+      '  WWWWWWWW  ROY ',
+      '  WWWWWWWW ROYG ',
+      '  WWWWWWWW OYGB ',
+      '   WW  WW  YGBP ',
+      '   WW  WW  GB P ',
+      '           B P  ',
+      '            P   ',
+      '                ',
+      '                ',
+      '                ',
+      '                '
     ],
     ghost: [
-      "      Y     ",
-      "     K K    ",
-      "   KKXKXK   ",
-      "  KXXXXXXK  ",
-      " RXXXXK X K ",
-      " YXXXXXXXK  ",
-      " BXXXXXXXK  ",
-      " PXXXXXXXK  ",
-      " RXXXXXXXK  ",
-      " YXXXXXXXK  ",
-      "  K K K K   ",
-      "            "
+      '                ',
+      '      Y         ',
+      '     YY         ',
+      '    WWWW      R ',
+      '   WW K WW   RO ',
+      '  WWWWWWWW  ROY ',
+      '  WWWWWWWW ROYG ',
+      '  WWWWWWWW OYGB ',
+      '   WW  WW  YGBP ',
+      '   WW  WW  GB P ',
+      '           B P  ',
+      '            P   ',
+      '                ',
+      '                ',
+      '                ',
+      '                '
     ]
   }
 };
@@ -793,7 +805,8 @@ function renderPixelGrid(grid, baseColor, pixelSize = 10) {
     'R': '#FF0000',
     'Y': '#FFD700',
     'B': '#00ADD8',
-    'P': '#C678DD'
+    'P': '#C678DD',
+    'G': '#98c379'
   };
 
   grid.forEach((rowString, y) => {
@@ -820,8 +833,10 @@ function generateSVG(petType, mood) {
   const baseColor = PET_COLORS[petType] || '#e5c07b';
 
   const pixelSize = 16;
-  const width = 12 * pixelSize;
-  const height = 12 * pixelSize;
+  const rows = spriteGrid.length;
+  const cols = spriteGrid[0].length;
+  const width = cols * pixelSize;
+  const height = rows * pixelSize;
 
   // Ghost Logic: Override Base Color
   const finalBaseColor = mood === 'ghost' ? '#abb2bf' : baseColor;

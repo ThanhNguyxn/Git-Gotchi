@@ -25,7 +25,8 @@ function renderPixelGrid(grid, baseColor, pixelSize = 10) {
         'R': '#FF0000',
         'Y': '#FFD700',
         'B': '#00ADD8',
-        'P': '#C678DD'
+        'P': '#C678DD',
+        'G': '#98c379' // Added Green
     };
 
     grid.forEach((rowString, y) => {
@@ -51,8 +52,11 @@ function generateSVG(petType, mood) {
     const baseColor = PET_COLORS[petType] || '#e5c07b';
 
     const pixelSize = 16;
-    const width = 12 * pixelSize;
-    const height = 12 * pixelSize;
+    // Dynamic Size Logic
+    const rows = spriteGrid.length;
+    const cols = spriteGrid[0].length;
+    const width = cols * pixelSize;
+    const height = rows * pixelSize;
 
     // Ghost Logic: Override Base Color
     const finalBaseColor = mood === 'ghost' ? '#abb2bf' : baseColor;
@@ -86,12 +90,8 @@ console.log(`Generating 3 states for ${pets.length} pets...`);
 pets.forEach(pet => {
     ['happy', 'sleeping', 'ghost'].forEach(mood => {
         const svg = generateSVG(pet, mood);
-        // Save as pet_mood.svg (e.g., crab_happy.svg)
-        // For happy, we can also save as just pet.svg for the main gallery view
         const filename = (mood === 'happy') ? `${pet}.svg` : `${pet}_${mood}.svg`;
         fs.writeFileSync(`dist/${filename}`, svg);
-
-        // Also save explicit happy file for gallery consistency
         if (mood === 'happy') fs.writeFileSync(`dist/${pet}_happy.svg`, svg);
     });
 });
