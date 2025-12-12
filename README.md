@@ -7,7 +7,7 @@
 > **Turn your GitHub Profile into a living, breathing virtual pet habitat!** 🐾
 
 ## 🔴 Live Demo
-This is the actual pet generated for **[ThanhNguyxn/Git-Gotchi](https://github.com/ThanhNguyxn/Git-Gotchi)**, updated every 6 hours:
+This is the actual pet generated for **[ThanhNguyxn](https://github.com/ThanhNguyxn)**, updated every 6 hours:
 
 <div align="center">
   <img src="dist/pet.svg" alt="Live Profile Gotchi Demo" width="200" />
