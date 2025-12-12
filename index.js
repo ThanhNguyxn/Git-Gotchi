@@ -693,7 +693,24 @@ async function run() {
     // 3. Determine Pet Type (Species)
     let petType = 'cat';
 
-    if (streak >= 14) {
+    // Check if user has starred the repo (ThanhNguyxn/Git-Gotchi)
+    let hasStarred = false;
+    try {
+      await octokit.request('GET /user/starred/{owner}/{repo}', {
+        owner: 'ThanhNguyxn',
+        repo: 'Git-Gotchi'
+      });
+      hasStarred = true;
+      console.log('User has starred the repo! 🌟');
+    } catch (error) {
+      if (error.status === 404) {
+        console.log('User has NOT starred the repo.');
+      } else {
+        console.log('Error checking star status (might be token scope):', error.message);
+      }
+    }
+
+    if (hasStarred) {
       petType = 'unicorn';
       console.log('Legendary Status Unlocked! 🦄');
     } else {
