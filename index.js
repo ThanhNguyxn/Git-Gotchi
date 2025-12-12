@@ -711,73 +711,49 @@ async function run() {
     // 3. Determine Pet Type (Species)
     let petType = 'cat';
 
-    // Check if user has starred the repo (ThanhNguyxn/Git-Gotchi)
-    let hasStarred = false;
-    try {
-      console.log(`Checking if user '${username}' has starred ThanhNguyxn/Git-Gotchi...`);
-
-      // Fetch ALL stargazers using pagination
-      const stargazers = await octokit.paginate(octokit.rest.activity.listStargazersForRepo, {
-        owner: 'ThanhNguyxn',
-        repo: 'Git-Gotchi',
-        per_page: 100
+    // Legendary Status: Unicorn (14+ Day Streak)
+    if (streak >= 14) { 
+      petType = 'unicorn';
+      console.log('Legendary Status Unlocked! 🦄 (14+ Day Streak)');
+    } else {
+      const repos = await octokit.rest.repos.listForUser({
+        username: username,
+        sort: 'updated',
+        per_page: 10,
       });
 
-      // Check if the username is in the list
-      const starUser = stargazers.find(user => user.login.toLowerCase() === username.toLowerCase());
-      if (starUser) {
-        hasStarred = true;
-        console.log(`User ${username} has starred the repo! 🌟`);
-      } else {
-        console.log(`User ${username} has NOT starred the repo.`);
-      }
-    } catch (error) {
-      console.log('Warning: Error checking star status. Defaulting to false.');
-      console.log('Error details:', error.message);
-    
-  
-     (hasStarred) {
-    petType = 'unicorn';
-    console.log('Legendary Status Unlocked! 🦄');
-  } else {
-      const repos = await octokit.rest.repos.listForUser({
-      username: username,
-      sort: 'updated',
-      per_page: 10,
-    });
-    
-      nst languages = {};
-      pos.data.forEach(repo => {
-      if (repo.language) {
-        languages[repo.language] = (languages[repo.language] || 0) + 1;
+        const languages = {};
+        repos.data.forEach(repo => {
+        if (repo.language) {
+          languages[repo.language] = (languages[repo.language] || 0) + 1;
         }
-    });
-    
-      nst topLanguage = Object.keys(languages).reduce((a, b) => languages[a] > languages[b] ? a : b, 'Unknown');
-        ype = getPetType(topLanguage);
-      nsole.log(`Top Language: ${topLanguage}`);
-    
+      });
+      
+        nst topLanguage = Object.keys(languages).reduce((a, b) => languages[a] > languages[b] ? a : b, 'Unknown');
+          ype = getPetType(topLanguage);
+        nsole.log(`Top Language: ${topLanguage}`);
+      
 
-    nsole.log(`User: ${username}, Mood: ${mood}, Type: ${petType}`);
-    
-     4. Generate SVG
-  const svgContent = generateSVG(petType, mood);
+      nsole.log(`User: ${username}, Mood: ${mood}, Type: ${petType}`);
+      
+       4. Generate SVG
+    const svgContent = generateSVG(petType, mood);
 
-  // 5. Write to File
+    // 5. Write to File
     const fs = require('fs');
-  if (!fs.existsSync('dist')) {
-    fs.mkdirSync('dist');
+    if (!fs.existsSync('dist')) {
+      fs.mkdirSync('dist');
     }
-  fs.writeFileSync('dist/pet.svg', svgContent);
-  console.log('Generated dist/pet.svg');
-  
-    tch (error) {
-  core.setFailed(error.message);
-  
-  
+    fs.writeFileSync('dist/pet.svg', svgContent);
+    console.log('Generated dist/pet.svg');
+    
+      tch (error) {
+    core.setFailed(error.message);
+    
+    
 
-nction calculateStreak(events) {
-   (!events || events.length === 0) return 0;
+  nction calculateStreak(events) {
+     (!events || events.length === 0) return 0;
 
   // Extract unique dates (YYYY-MM-DD)
   const dates = new Set(events.map(e => e.created_at.split('T')[0]));
