@@ -75,7 +75,7 @@ jobs:
       - uses: actions/checkout@v3
       
       - name: Generate Pet 👾
-        uses: ThanhNguyxn/Git-Gotchi@main
+        uses: ThanhNguyxn/Git-Gotchi@v1.0.0
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           username: ${{ github.repository_owner }}
