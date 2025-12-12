@@ -1,7 +1,7 @@
 const core = require('@actions/core');
 const github = require('@actions/github');
 
-// --- PIXEL ART ASSETS (MULTI-COLOR) ---
+// --- PIXEL ART ASSETS (MULTI-COLOR & MULTI-STATE) ---
 
 // Legend:
 // ' ': Transparent
@@ -27,227 +27,628 @@ const PET_COLORS = {
   gem: '#e06c75',    // Red
   chameleon: '#98c379', // Green
   cat: '#e5c07b',    // Yellow/Orange
-  tux: '#2d333b',    // Black (Base for Tux is technically black, but we use K for black, so X can be ignored or used for shading)
+  tux: '#2d333b',    // Black
   unicorn: '#ffffff' // White
 };
 
 const SPRITES = {
-  crab: [
-    "            ",
-    "  K      K  ",
-    " KXK    KXK ",
-    " KXXK  KXXK ",
-    "  KXXKKXXK  ",
-    " KXXXXXXXXK ",
-    "KXXW KXXW K ",
-    "KXXK KXXK K ",
-    "KXXXXXXXXXK ",
-    " KX KXXX K  ",
-    "  K KKKK K  ",
-    "            "
-  ],
-  elephant: [
-    "            ",
-    "    KKKKK   ",
-    "   KXXXXXK  ",
-    "  KXXXXXXXK ",
-    " KXXXWKXWKXK",
-    "KXXXXKKXKKXK",
-    "KXXXXXXXXXXK",
-    "KXXXXXXXXXK ",
-    " KXXKXXKXXK ",
-    " KXXK  KXXK ",
-    "  KK    KK  ",
-    "            "
-  ],
-  coffee: [
-    "    K  K    ",
-    "    W  W    ",
-    "            ",
-    "  KKKKKKK   ",
-    " KXXXXXXXK  ",
-    " KXXXXXXXKK ",
-    " KXXWWXXXK K",
-    " KXXXXXXXKK ",
-    "  KXXXXXXXK ",
-    "   KKKKKKK  ",
-    "  KKKKKKKKK ",
-    "            "
-  ],
-  bird: [
-    "            ",
-    "      KKKK  ",
-    "     KXXXXK ",
-    "  K KXXXXXK ",
-    " KXKXWXXKXK ",
-    "KXXXXXXXXXK ",
-    "KXXXXXXXXK  ",
-    " KXXXXXXXK  ",
-    "  KXXXXXK   ",
-    "   KXXK     ",
-    "    KK      ",
-    "            "
-  ],
-  robot: [
-    "     KK     ",
-    "     KK     ",
-    "  KKKKKKKK  ",
-    " KXXXXXXXXK ",
-    "KXWWXXXXWWXK",
-    "KXWWXXXXWWXK",
-    "KXXXXXXXXXXK",
-    "KXKKKKKKKKXK",
-    "KXKRRRRRRKXK",
-    " KXXXXXXXXK ",
-    "  KKKKKKKK  ",
-    "            "
-  ],
-  whale: [
-    "       B B  ",
-    "      KBKBK ",
-    "     KBBBBBK",
-    "    KXXXXXXK",
-    "   KXXXXXXXK",
-    " KKXXWKXXXXK",
-    "KXXXXKKXXXXK",
-    "KXXXXXXXXXXK",
-    "KXXXXXXXXXK ",
-    " KKXXXXXKK  ",
-    "   KKKKK    ",
-    "            "
-  ],
-  gem: [
-    "            ",
-    "    KKKK    ",
-    "   KXXXXK   ",
-    "  KXWXXXXK  ",
-    " KXXXXXXXXK ",
-    "KXXXXXXXXXXK",
-    "KXXXXXXXXXXK",
-    " KXXXXXXXXK ",
-    "  KXXXXXK   ",
-    "   KXXXXK   ",
-    "    KKKK    ",
-    "            "
-  ],
-  chameleon: [
-    "            ",
-    "     KKKK   ",
-    "    KXXXXK  ",
-    "   KXXXXXK  ",
-    "  KXXXXWXXK ",
-    " KXXXXXXXXK ",
-    "KXXXRRXXXXK ",
-    "KXXXRRXXXK  ",
-    " KXXXXXXXK  ",
-    "  KKKKKKK   ",
-    "            ",
-    "            "
-  ],
-  spider: [
-    "     K      ",
-    "     K      ",
-    "K   KKK   K ",
-    " K KKKKK K  ",
-    "  KKXXXKK   ",
-    " KXXWKWXXK  ",
-    "KXXXXXXXXXK ",
-    "  KKXXXKK   ",
-    " K  KKK  K  ",
-    "K  K   K  K ",
-    "  K     K   ",
-    "            "
-  ],
-  snake: [
-    "            ",
-    "     KKK    ",
-    "    KXXXK   ",
-    "   KXWKXXK  ",
-    "   KXXXXXK  ",
-    "    KKKXXK  ",
-    "   KXXKXXK  ",
-    "  KXXXXXK   ",
-    " KXXXXXK    ",
-    " KXXKKXK    ",
-    "  KK  KK    ",
-    "            "
-  ],
-  gopher: [
-    "            ",
-    "    KKKK    ",
-    "   KXXXXK   ",
-    "  KXWKXWXXK ",
-    "  KXXXXXXK  ",
-    "  KXXWWXXK  ",
-    " KXXXWWXXXK ",
-    "KXXXXXXXXXXK",
-    "KXXXXXXXXXXK",
-    " KXXXXXXXXK ",
-    "  KKKKKKKK  ",
-    "            "
-  ],
-  cat: [
-    "            ",
-    "  K      K  ",
-    " KXK    KXK ",
-    " KXXKKKKXXK ",
-    " KXXXXXXXXK ",
-    " KXWKXXWKXK ",
-    " KXXXXXXXXK ",
-    " KXXXOOXXXK ",
-    "  KXXXXXXK  ",
-    "  KXXXXXXK  ",
-    "   KK  KK   ",
-    "            "
-  ],
-  tux: [
-    "            ",
-    "    KKKKK   ",
-    "   KKKKKKK  ",
-    "  KKWKKKWKK ",
-    "  KKKKKKKKK ",
-    " KKKKKKKKKK ",
-    " KWWWWWWWWK ",
-    "KWWWWWWWWWWK",
-    "KWWWWWWWWWWK",
-    " KWWWWWWWWK ",
-    " KK OOO KK  ",
-    "    O O     "
-  ],
-  unicorn: [
-    "      K K   ",
-    "      K K   ",
-    "   KKKKKKK  ",
-    "  KXXXXXXXK ",
-    "  KXXXXXXXK ",
-    " KXXXWKXXXK ",
-    " KXXXXXXXXK ",
-    " KXXXXXXXXK ",
-    " KXXXXXXXXK ",
-    " KXXXXXXXXK ",
-    "  KKKKKKKK  ",
-    "            "
-  ]
+  crab: {
+    normal: [
+      "            ",
+      "  K      K  ",
+      " KXK    KXK ",
+      " KXXK  KXXK ",
+      "  KXXKKXXK  ",
+      " KXXXXXXXXK ",
+      "KXXW KXXW K ",
+      "KXXK KXXK K ",
+      "KXXXXXXXXXK ",
+      " KX KXXX K  ",
+      "  K KKKK K  ",
+      "            "
+    ],
+    sleep: [
+      "            ",
+      "            ",
+      "  K      K  ",
+      " KXK    KXK ",
+      " KXXKKKKXXK ",
+      " KXXXXXXXXK ",
+      "KXXK KXXK K ",
+      "KXXXXXXXXXK ",
+      "KXXXXXXXXXK ",
+      " KX KXXX K  ",
+      "  K KKKK K  ",
+      "            "
+    ],
+    ghost: [
+      "            ",
+      "   K    K   ",
+      "  K K  K K  ",
+      "  K K  K K  ",
+      "  K      K  ",
+      " KXXXXXXXXK ",
+      "KXXK KXXK K ",
+      "KXXK KXXK K ",
+      "KXXXXXXXXXK ",
+      " KX KXXX K  ",
+      "  K K  K K  ",
+      "            "
+    ]
+  },
+  elephant: {
+    normal: [
+      "            ",
+      "    KKKKK   ",
+      "   KXXXXXK  ",
+      "  KXXXXXXXK ",
+      " KXXXWKXWKXK",
+      "KXXXXKKXKKXK",
+      "KXXXXXXXXXXK",
+      "KXXXXXXXXXK ",
+      " KXXKXXKXXK ",
+      " KXXK  KXXK ",
+      "  KK    KK  ",
+      "            "
+    ],
+    sleep: [
+      "            ",
+      "    KKKKK   ",
+      "   KXXXXXK  ",
+      "  KXXXXXXXK ",
+      " KXXXKKXKKXK",
+      "KXXXXXXXXXXK",
+      "KXXXXXXXXXXK",
+      "KXXXXXXXXXK ",
+      " KXXKXXKXXK ",
+      " KXXK  KXXK ",
+      "  KK    KK  ",
+      "            "
+    ],
+    ghost: [
+      "            ",
+      "    KKKKK   ",
+      "   KXXXXXK  ",
+      "  KXXXXXXXK ",
+      " KXXXKKXKKXK",
+      "KXXXXXXXXXXK",
+      "KXXXXXXXXXXK",
+      "KXXXXXXXXXK ",
+      " KXXKXXKXXK ",
+      " K  K  K  K ",
+      "            ",
+      "            "
+    ]
+  },
+  coffee: {
+    normal: [
+      "    K  K    ",
+      "    W  W    ",
+      "            ",
+      "  KKKKKKK   ",
+      " KXXXXXXXK  ",
+      " KXXXXXXXKK ",
+      " KXXWWXXXK K",
+      " KXXXXXXXKK ",
+      "  KXXXXXXXK ",
+      "   KKKKKKK  ",
+      "  KKKKKKKKK ",
+      "            "
+    ],
+    sleep: [
+      "            ",
+      "            ",
+      "            ",
+      "  KKKKKKK   ",
+      " KXXXXXXXK  ",
+      " KXXXXXXXKK ",
+      " KXXKKXXXK K",
+      " KXXXXXXXKK ",
+      "  KXXXXXXXK ",
+      "   KKKKKKK  ",
+      "  KKKKKKKKK ",
+      "            "
+    ],
+    ghost: [
+      "    K  K    ",
+      "    K  K    ",
+      "            ",
+      "  KKKKKKK   ",
+      " KXXXXXXXK  ",
+      " KXXK KXXKK ",
+      " KXXK KXXK K",
+      " KXXXXXXXKK ",
+      "  KXXXXXXXK ",
+      "   KKKKKKK  ",
+      "   K K K K  ",
+      "            "
+    ]
+  },
+  bird: {
+    normal: [
+      "            ",
+      "      KKKK  ",
+      "     KXXXXK ",
+      "  K KXXXXXK ",
+      " KXKXWXXKXK ",
+      "KXXXXXXXXXK ",
+      "KXXXXXXXXK  ",
+      " KXXXXXXXK  ",
+      "  KXXXXXK   ",
+      "   KXXK     ",
+      "    KK      ",
+      "            "
+    ],
+    sleep: [
+      "            ",
+      "      KKKK  ",
+      "     KXXXXK ",
+      "  K KXXXXXK ",
+      " KXKXKXXKXK ",
+      "KXXXXXXXXXK ",
+      "KXXXXXXXXK  ",
+      " KXXXXXXXK  ",
+      "  KXXXXXK   ",
+      "   KXXK     ",
+      "    KK      ",
+      "            "
+    ],
+    ghost: [
+      "            ",
+      "      KKKK  ",
+      "     KXXXXK ",
+      "  K KXXXXXK ",
+      " KXKXKXXKXK ",
+      "KXXXXXXXXXK ",
+      "KXXXXXXXXK  ",
+      " KXXXXXXXK  ",
+      "  KXXXXXK   ",
+      "   K  K     ",
+      "            ",
+      "            "
+    ]
+  },
+  robot: {
+    normal: [
+      "     KK     ",
+      "     KK     ",
+      "  KKKKKKKK  ",
+      " KXXXXXXXXK ",
+      "KXWWXXXXWWXK",
+      "KXWWXXXXWWXK",
+      "KXXXXXXXXXXK",
+      "KXKKKKKKKKXK",
+      "KXKRRRRRRKXK",
+      " KXXXXXXXXK ",
+      "  KKKKKKKK  ",
+      "            "
+    ],
+    sleep: [
+      "     KK     ",
+      "     KK     ",
+      "  KKKKKKKK  ",
+      " KXXXXXXXXK ",
+      "KXKKXXXXKKXK",
+      "KXKKXXXXKKXK",
+      "KXXXXXXXXXXK",
+      "KXKKKKKKKKXK",
+      "KXK      KXK",
+      " KXXXXXXXXK ",
+      "  KKKKKKKK  ",
+      "            "
+    ],
+    ghost: [
+      "     KK     ",
+      "     KK     ",
+      "  KKKKKKKK  ",
+      " KXXXXXXXXK ",
+      "KXKXXXXXXKXK",
+      "KXKXXXXXXKXK",
+      "KXXXXXXXXXXK",
+      "KXKKKKKKKKXK",
+      "KXKRRRRRRKXK",
+      " KXXXXXXXXK ",
+      "  K K  K K  ",
+      "            "
+    ]
+  },
+  whale: {
+    normal: [
+      "       B B  ",
+      "      KBKBK ",
+      "     KBBBBBK",
+      "    KXXXXXXK",
+      "   KXXXXXXXK",
+      " KKXXWKXXXXK",
+      "KXXXXKKXXXXK",
+      "KXXXXXXXXXXK",
+      "KXXXXXXXXXK ",
+      " KKXXXXXKK  ",
+      "   KKKKK    ",
+      "            "
+    ],
+    sleep: [
+      "            ",
+      "            ",
+      "            ",
+      "    KXXXXXXK",
+      "   KXXXXXXXK",
+      " KKXXKKXXXXK",
+      "KXXXXXXXXXXK",
+      "KXXXXXXXXXXK",
+      "KXXXXXXXXXK ",
+      " KKXXXXXKK  ",
+      "   KKKKK    ",
+      "            "
+    ],
+    ghost: [
+      "       K K  ",
+      "      K K K ",
+      "     K     K",
+      "    KXXXXXXK",
+      "   KXXXXXXXK",
+      " KKXXK KXXXK",
+      "KXXXXK KXXXK",
+      "KXXXXXXXXXXK",
+      "KXXXXXXXXXK ",
+      " KKXXXXXKK  ",
+      "   K K K    ",
+      "            "
+    ]
+  },
+  gem: {
+    normal: [
+      "            ",
+      "    KKKK    ",
+      "   KXXXXK   ",
+      "  KXWXXXXK  ",
+      " KXXXXXXXXK ",
+      "KXXXXXXXXXXK",
+      "KXXXXXXXXXXK",
+      " KXXXXXXXXK ",
+      "  KXXXXXK   ",
+      "   KXXXXK   ",
+      "    KKKK    ",
+      "            "
+    ],
+    sleep: [
+      "            ",
+      "    KKKK    ",
+      "   KXXXXK   ",
+      "  KXXXXXXK  ",
+      " KXXXXXXXXK ",
+      "KXXXXXXXXXXK",
+      "KXXXXXXXXXXK",
+      " KXXXXXXXXK ",
+      "  KXXXXXK   ",
+      "   KXXXXK   ",
+      "    KKKK    ",
+      "            "
+    ],
+    ghost: [
+      "            ",
+      "    KKKK    ",
+      "   KXXXXK   ",
+      "  KXXXXXXK  ",
+      " KXXXXXXXXK ",
+      "KXXKXXXXKXXK",
+      "KXXKXXXXKXXK",
+      " KXXXXXXXXK ",
+      "  KXXXXXK   ",
+      "   KXXXXK   ",
+      "    K  K    ",
+      "            "
+    ]
+  },
+  chameleon: {
+    normal: [
+      "            ",
+      "     KKKK   ",
+      "    KXXXXK  ",
+      "   KXXXXXK  ",
+      "  KXXXXWXXK ",
+      " KXXXXXXXXK ",
+      "KXXXRRXXXXK ",
+      "KXXXRRXXXK  ",
+      " KXXXXXXXK  ",
+      "  KKKKKKK   ",
+      "            ",
+      "            "
+    ],
+    sleep: [
+      "            ",
+      "     KKKK   ",
+      "    KXXXXK  ",
+      "   KXXXXXK  ",
+      "  KXXXXKXXK ",
+      " KXXXXXXXXK ",
+      "KXXXRRXXXXK ",
+      "KXXXRRXXXK  ",
+      " KXXXXXXXK  ",
+      "  KKKKKKK   ",
+      "            ",
+      "            "
+    ],
+    ghost: [
+      "            ",
+      "     KKKK   ",
+      "    KXXXXK  ",
+      "   KXXXXXK  ",
+      "  KXXXXKXXK ",
+      " KXXXXXXXXK ",
+      "KXXXRRXXXXK ",
+      "KXXXRRXXXK  ",
+      " KXXXXXXXK  ",
+      "  K K K K   ",
+      "            ",
+      "            "
+    ]
+  },
+  spider: {
+    normal: [
+      "     K      ",
+      "     K      ",
+      "K   KKK   K ",
+      " K KKKKK K  ",
+      "  KKXXXKK   ",
+      " KXXWKWXXK  ",
+      "KXXXXXXXXXK ",
+      "  KKXXXKK   ",
+      " K  KKK  K  ",
+      "K  K   K  K ",
+      "  K     K   ",
+      "            "
+    ],
+    sleep: [
+      "            ",
+      "            ",
+      "K   KKK   K ",
+      " K KKKKK K  ",
+      "  KKXXXKK   ",
+      " KXXKKKXXK  ",
+      "KXXXXXXXXXK ",
+      "  KKXXXKK   ",
+      " K  KKK  K  ",
+      "K  K   K  K ",
+      "  K     K   ",
+      "            "
+    ],
+    ghost: [
+      "     K      ",
+      "     K      ",
+      "K   KKK   K ",
+      " K KKKKK K  ",
+      "  KKXXXKK   ",
+      " KXXK KXXK  ",
+      "KXXXXXXXXXK ",
+      "  KKXXXKK   ",
+      " K  KKK  K  ",
+      "K  K   K  K ",
+      "  K     K   ",
+      "            "
+    ]
+  },
+  snake: {
+    normal: [
+      "            ",
+      "     KKK    ",
+      "    KXXXK   ",
+      "   KXWKXXK  ",
+      "   KXXXXXK  ",
+      "    KKKXXK  ",
+      "   KXXKXXK  ",
+      "  KXXXXXK   ",
+      " KXXXXXK    ",
+      " KXXKKXK    ",
+      "  KK  KK    ",
+      "            "
+    ],
+    sleep: [
+      "            ",
+      "     KKK    ",
+      "    KXXXK   ",
+      "   KXKKXXK  ",
+      "   KXXXXXK  ",
+      "    KKKXXK  ",
+      "   KXXKXXK  ",
+      "  KXXXXXK   ",
+      " KXXXXXK    ",
+      " KXXKKXK    ",
+      "  KK  KK    ",
+      "            "
+    ],
+    ghost: [
+      "            ",
+      "     KKK    ",
+      "    KXXXK   ",
+      "   KXK KXXK ",
+      "   KXXXXXK  ",
+      "    KKKXXK  ",
+      "   KXXKXXK  ",
+      "  KXXXXXK   ",
+      " KXXXXXK    ",
+      " KXXKKXK    ",
+      "  K    K    ",
+      "            "
+    ]
+  },
+  gopher: {
+    normal: [
+      "            ",
+      "    KKKK    ",
+      "   KXXXXK   ",
+      "  KXWKXWXXK ",
+      "  KXXXXXXK  ",
+      "  KXXWWXXK  ",
+      " KXXXWWXXXK ",
+      "KXXXXXXXXXXK",
+      "KXXXXXXXXXXK",
+      " KXXXXXXXXK ",
+      "  KKKKKKKK  ",
+      "            "
+    ],
+    sleep: [
+      "            ",
+      "    KKKK    ",
+      "   KXXXXK   ",
+      "  KXKKXKXXK ",
+      "  KXXXXXXK  ",
+      "  KXXWWXXK  ",
+      " KXXXWWXXXK ",
+      "KXXXXXXXXXXK",
+      "KXXXXXXXXXXK",
+      " KXXXXXXXXK ",
+      "  KKKKKKKK  ",
+      "            "
+    ],
+    ghost: [
+      "            ",
+      "    KKKK    ",
+      "   KXXXXK   ",
+      "  KXK K X K ",
+      "  KXXXXXXK  ",
+      "  KXXWWXXK  ",
+      " KXXXWWXXXK ",
+      "KXXXXXXXXXXK",
+      "KXXXXXXXXXXK",
+      " KXXXXXXXXK ",
+      "  K K K K   ",
+      "            "
+    ]
+  },
+  cat: {
+    normal: [
+      "            ",
+      "  K      K  ",
+      " KXK    KXK ",
+      " KXXKKKKXXK ",
+      " KXXXXXXXXK ",
+      " KXWKXXWKXK ",
+      " KXXXXXXXXK ",
+      " KXXXOOXXXK ",
+      "  KXXXXXXK  ",
+      "  KXXXXXXK  ",
+      "   KK  KK   ",
+      "            "
+    ],
+    sleep: [
+      "            ",
+      "  K      K  ",
+      " KXK    KXK ",
+      " KXXKKKKXXK ",
+      " KXXXXXXXXK ",
+      " KXKKXXKKXK ",
+      " KXXXXXXXXK ",
+      " KXXXOOXXXK ",
+      "  KXXXXXXK  ",
+      "  KXXXXXXK  ",
+      "   KK  KK   ",
+      "            "
+    ],
+    ghost: [
+      "            ",
+      "  K      K  ",
+      " KXK    KXK ",
+      " KXXKKKKXXK ",
+      " KXXXXXXXXK ",
+      " KXK K  K K ",
+      " KXXXXXXXXK ",
+      " KXXXOOXXXK ",
+      "  KXXXXXXK  ",
+      "  KXXXXXXK  ",
+      "   K    K   ",
+      "            "
+    ]
+  },
+  tux: {
+    normal: [
+      "            ",
+      "    KKKKK   ",
+      "   KKKKKKK  ",
+      "  KKWKKKWKK ",
+      "  KKKKKKKKK ",
+      " KKKKKKKKKK ",
+      " KWWWWWWWWK ",
+      "KWWWWWWWWWWK",
+      "KWWWWWWWWWWK",
+      " KWWWWWWWWK ",
+      " KK OOO KK  ",
+      "    O O     "
+    ],
+    sleep: [
+      "            ",
+      "    KKKKK   ",
+      "   KKKKKKK  ",
+      "  KKKKKKKKK ",
+      "  KKKKKKKKK ",
+      " KKKKKKKKKK ",
+      " KWWWWWWWWK ",
+      "KWWWWWWWWWWK",
+      "KWWWWWWWWWWK",
+      " KWWWWWWWWK ",
+      " KK OOO KK  ",
+      "    O O     "
+    ],
+    ghost: [
+      "            ",
+      "    KKKKK   ",
+      "   KKKKKKK  ",
+      "  KKK K K K ",
+      "  KKKKKKKKK ",
+      " KKKKKKKKKK ",
+      " KWWWWWWWWK ",
+      "KWWWWWWWWWWK",
+      "KWWWWWWWWWWK",
+      " KWWWWWWWWK ",
+      " K  OOO  K  ",
+      "            "
+    ]
+  },
+  unicorn: {
+    normal: [
+      "      Y     ",
+      "     K K    ",
+      "   KKXKXK   ",
+      "  KXXXXXXK  ",
+      " RXXXXWXXK  ",
+      " YXXXXXXXK  ",
+      " BXXXXXXXK  ",
+      " PXXXXXXXK  ",
+      " RXXXXXXXK  ",
+      " YXXXXXXXK  ",
+      "  KKKKKKK   ",
+      "            "
+    ],
+    sleep: [
+      "      Y     ",
+      "     K K    ",
+      "   KKXKXK   ",
+      "  KXXXXXXK  ",
+      " RXXXXKXXK  ",
+      " YXXXXXXXK  ",
+      " BXXXXXXXK  ",
+      " PXXXXXXXK  ",
+      " RXXXXXXXK  ",
+      " YXXXXXXXK  ",
+      "  KKKKKKK   ",
+      "            "
+    ],
+    ghost: [
+      "      Y     ",
+      "     K K    ",
+      "   KKXKXK   ",
+      "  KXXXXXXK  ",
+      " RXXXXK X K ",
+      " YXXXXXXXK  ",
+      " BXXXXXXXK  ",
+      " PXXXXXXXK  ",
+      " RXXXXXXXK  ",
+      " YXXXXXXXK  ",
+      "  K K K K   ",
+      "            "
+    ]
+  }
 };
-
-// Override Unicorn with Rainbow Mane logic in rendering or just hardcode it here?
-// The user said: "mix of 'X' (White body) and 'R', 'Y', 'B', 'P' for the rainbow mane/tail."
-// Let's update the Unicorn sprite to actually use those chars.
-SPRITES.unicorn = [
-  "      Y     ",
-  "     K K    ",
-  "   KKXKXK   ",
-  "  KXXXXXXK  ",
-  " RXXXXWXXK  ",
-  " YXXXXXXXK  ",
-  " BXXXXXXXK  ",
-  " PXXXXXXXK  ",
-  " RXXXXXXXK  ",
-  " YXXXXXXXK  ",
-  "  KKKKKKK   ",
-  "            "
-];
-
 
 // --- CORE LOGIC ---
 
@@ -325,7 +726,6 @@ function calculateStreak(events) {
 
   // Extract unique dates (YYYY-MM-DD)
   const dates = new Set(events.map(e => e.created_at.split('T')[0]));
-  const sortedDates = Array.from(dates).sort().reverse(); // Newest first
 
   let streak = 0;
   let currentDate = new Date();
@@ -339,8 +739,6 @@ function calculateStreak(events) {
     return 0;
   }
 
-  // Iterate backwards
-  // Simple logic: Check consecutive days from today/yesterday
   // Reset current date to today for iteration
   currentDate = new Date();
 
@@ -411,33 +809,25 @@ function renderPixelGrid(grid, baseColor, pixelSize = 10) {
 }
 
 function generateSVG(petType, mood) {
-  const sprite = SPRITES[petType] || SPRITES['cat'];
+  // 1. Select the Sprite Set
+  const spriteSet = SPRITES[petType] || SPRITES['cat'];
+
+  // 2. Select the specific Mood Grid
+  // Map 'happy' to 'normal' if needed, or use 'normal' as default
+  const moodKey = (mood === 'happy') ? 'normal' : mood;
+  const spriteGrid = spriteSet[moodKey] || spriteSet['normal'];
+
   const baseColor = PET_COLORS[petType] || '#e5c07b';
-
-  let renderSprite = [...sprite]; // Copy array
-
-  if (mood === 'sleeping') {
-    // Replace 'W' (eyes) with 'K' (closed) or 'X' (eyelids)
-    renderSprite = renderSprite.map(row => row.replace(/W/g, 'K'));
-  }
-
-  if (mood === 'ghost') {
-    // Ghost logic: Turn Base Color to Grey, keep Outline
-    // We can hack this by changing the baseColor passed to render
-    // But we also need to handle other colors.
-    // Simpler: Just render normally but apply a CSS filter or override baseColor to grey
-    // and maybe replace other colors with grey too.
-    // Let's just override baseColor for now.
-  }
 
   const pixelSize = 16;
   const width = 12 * pixelSize;
   const height = 12 * pixelSize;
 
-  // If ghost, override baseColor
+  // Ghost Logic: Override Base Color
   const finalBaseColor = mood === 'ghost' ? '#abb2bf' : baseColor;
+  const groupOpacity = mood === 'ghost' ? '0.7' : '1';
 
-  const pixelArt = renderPixelGrid(renderSprite, finalBaseColor, pixelSize);
+  const pixelArt = renderPixelGrid(spriteGrid, finalBaseColor, pixelSize);
 
   let animation = '';
   if (mood === 'happy') {
@@ -459,9 +849,6 @@ function generateSVG(petType, mood) {
             repeatCount="indefinite" 
         />`;
   }
-
-  // Ghost opacity effect
-  const groupOpacity = mood === 'ghost' ? '0.7' : '1';
 
   return `<svg xmlns="http://www.w3.org/2000/svg" width="${width + 40}" height="${height + 40}" viewBox="0 0 ${width + 40} ${height + 40}">
       <style>

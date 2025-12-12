@@ -41,23 +41,24 @@ function renderPixelGrid(grid, baseColor, pixelSize = 10) {
 }
 
 function generateSVG(petType, mood) {
-    const sprite = SPRITES[petType] || SPRITES['cat'];
+    // 1. Select the Sprite Set
+    const spriteSet = SPRITES[petType] || SPRITES['cat'];
+
+    // 2. Select the specific Mood Grid
+    const moodKey = (mood === 'happy') ? 'normal' : mood;
+    const spriteGrid = spriteSet[moodKey] || spriteSet['normal'];
+
     const baseColor = PET_COLORS[petType] || '#e5c07b';
-
-    let renderSprite = [...sprite];
-
-    if (mood === 'sleeping') {
-        renderSprite = renderSprite.map(row => row.replace(/W/g, 'K'));
-    }
 
     const pixelSize = 16;
     const width = 12 * pixelSize;
     const height = 12 * pixelSize;
 
+    // Ghost Logic: Override Base Color
     const finalBaseColor = mood === 'ghost' ? '#abb2bf' : baseColor;
     const groupOpacity = mood === 'ghost' ? '0.7' : '1';
 
-    const pixelArt = renderPixelGrid(renderSprite, finalBaseColor, pixelSize);
+    const pixelArt = renderPixelGrid(spriteGrid, finalBaseColor, pixelSize);
 
     let animation = '';
     if (mood === 'happy') {
@@ -72,6 +73,7 @@ function generateSVG(petType, mood) {
       <g transform="translate(20, 20)" opacity="${groupOpacity}">
         <g class="pet">${pixelArt}${animation}</g>
       </g>
+      <text x="50%" y="${height + 35}" text-anchor="middle" font-family="monospace" font-size="12" fill="#666">${mood.toUpperCase()}</text>
     </svg>`;
 }
 
@@ -79,18 +81,19 @@ function generateSVG(petType, mood) {
 if (!fs.existsSync('dist')) fs.mkdirSync('dist');
 
 const pets = Object.keys(SPRITES);
-console.log(`Generating ${pets.length} pets...`);
+console.log(`Generating 3 states for ${pets.length} pets...`);
 
 pets.forEach(pet => {
-    const svg = generateSVG(pet, 'happy');
-    fs.writeFileSync(`dist/${pet}.svg`, svg);
-    console.log(`Generated dist/${pet}.svg`);
-});
+    ['happy', 'sleeping', 'ghost'].forEach(mood => {
+        const svg = generateSVG(pet, mood);
+        // Save as pet_mood.svg (e.g., crab_happy.svg)
+        // For happy, we can also save as just pet.svg for the main gallery view
+        const filename = (mood === 'happy') ? `${pet}.svg` : `${pet}_${mood}.svg`;
+        fs.writeFileSync(`dist/${filename}`, svg);
 
-// Generate Mood Variants for Crab
-['sleeping', 'ghost'].forEach(mood => {
-    const svg = generateSVG('crab', mood);
-    fs.writeFileSync(`dist/crab_${mood}.svg`, svg);
+        // Also save explicit happy file for gallery consistency
+        if (mood === 'happy') fs.writeFileSync(`dist/${pet}_happy.svg`, svg);
+    });
 });
 
 console.log('Done!');
