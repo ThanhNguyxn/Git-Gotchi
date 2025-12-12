@@ -1,7 +1,7 @@
 # 🎨 Profile-Gotchi Gallery
 
-Here is the full roster of pixel art mascots available in **Profile-Gotchi v1.4.0**.
-Now featuring **Multi-Color** sprites, unique **Sleep/Ghost** states, and a **High-Res Legendary Unicorn**!
+Here is the full roster of pixel art mascots available in **Profile-Gotchi v1.11.0**.
+Now featuring **Multi-Color** sprites, unique **Sleep/Ghost** states, and a **Legendary Unicorn** (unlock by ⭐ Star or 🍴 Fork)!
 
 ## 🦁 The Roster
 
