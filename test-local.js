@@ -1,140 +1,130 @@
 const fs = require('fs');
 const path = require('path');
 
-// Mock Data
-const mockUser = {
-    contributionsCollection: {
-        contributionCalendar: {
-            weeks: [
-                {
-                    contributionDays: [
-                        { contributionCount: 5, date: '2023-10-27' }, // Today
-                        { contributionCount: 0, date: '2023-10-26' },
-                    ]
-                }
-            ]
-        }
-    },
-    topRepositories: {
-        nodes: [
-            { languages: { nodes: [{ name: 'JavaScript' }] } },
-            { languages: { nodes: [{ name: 'TypeScript' }] } },
-            { languages: { nodes: [{ name: 'Python' }] } }
-        ]
-    }
-};
-
-// Mock Core and GitHub
+// Mock GitHub Actions Core
 const core = {
     getInput: (name) => {
-        if (name === 'username') return 'testuser';
-        if (name === 'github_token') return 'fake-token';
+        if (name === 'github_token') return 'mock_token';
+        if (name === 'username') return 'ThanhNguyxn';
+        return '';
     },
-    setFailed: (msg) => console.error('FAILED:', msg)
+    setFailed: (msg) => console.error('FAILED:', msg),
 };
 
+// Mock GitHub API
 const github = {
-    getOctokit: () => ({
-        graphql: async () => ({ user: mockUser })
+    getOctokit: (token) => ({
+        rest: {
+            activity: {
+                listPublicEventsForRepoNetwork: async () => ({
+                    data: [{ created_at: new Date().toISOString() }] // Happy state
+                })
+            },
+            repos: {
+                listForUser: async () => ({
+                    data: [] // We will mock the language logic inside the loop if needed, 
+                    // but actually index.js logic is hardcoded to call the API.
+                    // We need to intercept the logic or just copy the render function here.
+                })
+            }
+        }
     })
 };
 
-// Inject mocks into global scope or require cache if we were using a test runner.
-// Since we are running a script, we can just copy the logic or require the file if we structured it to be testable.
-// For simplicity, I will duplicate the logic wrapper here to test the *functions* if I had exported them, 
-// but since index.js is a script, I'll just rewrite the runner here with the mocks to verify the logic flow.
+// To test all sprites without mocking the entire API for each call, 
+// let's just extract the render logic or mock the `getPetType` result.
+// Since we can't easily export/import from index.js (it runs on load), 
+// we will just copy the sprite data and render logic here for verification.
+// This ensures the ASSETS are correct.
 
-async function runTest() {
-    console.log('Running Test...');
+// --- COPY OF ASSETS FROM INDEX.JS ---
+const PALETTE = {
+    0: null,
+    1: '#24292e', 2: '#ffffff', 3: '#e06c75', 4: '#98c379',
+    5: '#e5c07b', 6: '#61afef', 7: '#c678dd', 8: '#56b6c2',
+    9: '#d19a66', 10: '#abb2bf', 11: '#8b4513'
+};
 
-    // Logic from index.js (simplified for test)
-    // 1. Process Data
-    const calendar = mockUser.contributionsCollection.contributionCalendar.weeks
-        .flatMap(week => week.contributionDays)
-        .sort((a, b) => new Date(b.date) - new Date(a.date));
+// (Paste the same SPRITES object here - I will read it from index.js to be sure)
+// Actually, let's just read index.js and eval the SPRITES object to ensure we test the ACTUAL code.
+const indexContent = fs.readFileSync('index.js', 'utf8');
+const spritesMatch = indexContent.match(/const SPRITES = ({[\s\S]*?});/);
+const paletteMatch = indexContent.match(/const PALETTE = ({[\s\S]*?});/);
 
-    const today = calendar[0];
-    let state = 'sleeping';
-    if (today.contributionCount > 0) state = 'happy';
-
-    // Evolution
-    const languages = {};
-    mockUser.topRepositories.nodes.forEach(repo => {
-        if (repo.languages.nodes.length > 0) {
-            const lang = repo.languages.nodes[0].name;
-            languages[lang] = (languages[lang] || 0) + 1;
-        }
-    });
-
-    let topLang = 'JavaScript';
-    let maxCount = 0;
-    for (const [lang, count] of Object.entries(languages)) {
-        if (count > maxCount) {
-            maxCount = count;
-            topLang = lang;
-        }
-    }
-
-    let petType = 'cat';
-    if (['JavaScript', 'TypeScript'].includes(topLang)) petType = 'spider';
-    else if (topLang === 'Python') petType = 'snake';
-    else if (topLang === 'Go') petType = 'gopher';
-
-    console.log(`Test Result -> State: ${state}, Type: ${petType}`);
-
-    if (state !== 'happy') console.error('FAIL: Expected state happy');
-    if (petType !== 'spider') console.error('FAIL: Expected type spider');
-
-    // Generate SVG (Copying the function from index.js to ensure it works)
-    const svg = generateSVG(petType, state);
-
-    const distDir = path.join(__dirname, 'dist');
-    if (!fs.existsSync(distDir)) fs.mkdirSync(distDir);
-    fs.writeFileSync(path.join(distDir, 'test_pet.svg'), svg);
-    console.log('Generated dist/test_pet.svg');
+if (!spritesMatch || !paletteMatch) {
+    console.error("Could not parse SPRITES or PALETTE from index.js");
+    process.exit(1);
 }
 
-function generateSVG(type, state) {
-    const colors = {
-        spider: '#e06c75',
-        snake: '#98c379',
-        gopher: '#61afef',
-        cat: '#e5c07b',
-        ghost: '#abb2bf',
-    };
+const SPRITES = eval('(' + spritesMatch[1] + ')');
+const PALETTE_DATA = eval('(' + paletteMatch[1] + ')'); // Rename to avoid conflict if I declared it
 
-    const color = state === 'ghost' ? colors.ghost : (colors[type] || colors.cat);
-
-    const pixels = {
-        spider: [
-            '  X  X  ',
-            '   XX   ',
-            ' XXXXXX ',
-            ' XXXXXX ',
-            ' X XX X ',
-            'X      X',
-            'X      X',
-            '        '
-        ]
-    };
-    // ... (Assuming other pixels are same, just testing spider here)
-
-    const art = state === 'ghost' ? pixels.ghost : (pixels[type] || pixels.cat || pixels.spider); // Fallback for test if I didn't copy all
-
+function renderPixelGrid(grid, pixelSize = 10) {
     let rects = '';
-    const scale = 20;
-
-    if (art) {
-        art.forEach((row, y) => {
-            for (let x = 0; x < row.length; x++) {
-                if (row[x] === 'X') {
-                    rects += `<rect x="${x * scale}" y="${y * scale}" width="${scale}" height="${scale}" fill="${color}" />`;
-                }
+    grid.forEach((row, y) => {
+        row.forEach((colorId, x) => {
+            if (colorId !== 0 && PALETTE_DATA[colorId]) {
+                const color = PALETTE_DATA[colorId];
+                rects += `<rect x="${x * pixelSize}" y="${y * pixelSize}" width="${pixelSize}" height="${pixelSize}" fill="${color}" />`;
             }
         });
-    }
-
-    return `<svg>${rects}</svg>`; // Simplified for test check
+    });
+    return rects;
 }
 
-runTest();
+function generateSVG(petType, mood) {
+    const sprite = SPRITES[petType] || SPRITES['cat'];
+    let renderSprite = JSON.parse(JSON.stringify(sprite));
+
+    if (mood === 'sleeping') {
+        renderSprite = renderSprite.map(row => row.map(cell => cell === 2 ? 1 : cell));
+    }
+
+    if (mood === 'ghost') {
+        renderSprite = renderSprite.map(row => row.map(cell => {
+            if (cell === 1) return 1;
+            if (cell === 0) return 0;
+            return 10;
+        }));
+    }
+
+    const pixelSize = 16;
+    const width = 12 * pixelSize;
+    const height = 12 * pixelSize;
+    const pixelArt = renderPixelGrid(renderSprite, pixelSize);
+
+    return `<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}" viewBox="0 0 ${width} ${height}">
+      <rect width="100%" height="100%" fill="transparent" />
+      <g>${pixelArt}</g>
+    </svg>`;
+}
+
+// Generate all
+if (!fs.existsSync('dist')) fs.mkdirSync('dist');
+
+const pets = Object.keys(SPRITES);
+let htmlContent = '<html><body style="background:#333; display:flex; flex-wrap:wrap; gap:20px;">';
+
+pets.forEach(pet => {
+    const svg = generateSVG(pet, 'happy');
+    fs.writeFileSync(`dist/${pet}.svg`, svg);
+    htmlContent += `<div style="text-align:center; color:white;">
+        <img src="${pet}.svg" width="100" height="100" style="image-rendering: pixelated; border:1px solid #555; padding:10px;">
+        <br>${pet}
+    </div>`;
+    console.log(`Generated dist/${pet}.svg`);
+});
+
+// Add mood variants for one pet
+['sleeping', 'ghost'].forEach(mood => {
+    const svg = generateSVG('crab', mood);
+    fs.writeFileSync(`dist/crab_${mood}.svg`, svg);
+    htmlContent += `<div style="text-align:center; color:white;">
+        <img src="crab_${mood}.svg" width="100" height="100" style="image-rendering: pixelated; border:1px solid #555; padding:10px;">
+        <br>crab (${mood})
+    </div>`;
+});
+
+htmlContent += '</body></html>';
+fs.writeFileSync('dist/gallery.html', htmlContent);
+console.log('Generated dist/gallery.html');

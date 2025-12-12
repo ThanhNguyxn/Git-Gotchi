@@ -1,7 +1,215 @@
 const core = require('@actions/core');
 const github = require('@actions/github');
-const fs = require('fs');
-const path = require('path');
+
+// --- PIXEL ART ASSETS ---
+
+// 12x12 Grid System
+// 0: Transparent
+// 1: Outline (Dark)
+// 2: White (Eyes/Highlights)
+// 3: Primary
+// 4: Secondary
+// 5: Accent
+
+const PALETTE = {
+  0: null,
+  1: '#24292e', // Dark Grey (Outline)
+  2: '#ffffff', // White
+  3: '#e06c75', // Red
+  4: '#98c379', // Green
+  5: '#e5c07b', // Yellow
+  6: '#61afef', // Blue
+  7: '#c678dd', // Purple
+  8: '#56b6c2', // Cyan
+  9: '#d19a66', // Orange
+  10: '#abb2bf', // Grey
+  11: '#8b4513', // Brown
+};
+
+const SPRITES = {
+  // Rust: Crab (Red)
+  crab: [
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0],
+    [0, 1, 3, 1, 0, 0, 0, 0, 1, 3, 1, 0],
+    [0, 1, 3, 3, 1, 0, 0, 1, 3, 3, 1, 0],
+    [0, 0, 1, 3, 3, 1, 1, 3, 3, 1, 0, 0],
+    [0, 1, 3, 3, 3, 3, 3, 3, 3, 3, 1, 0],
+    [1, 3, 3, 2, 1, 3, 3, 2, 1, 3, 3, 1],
+    [1, 3, 3, 1, 1, 3, 3, 1, 1, 3, 3, 1],
+    [1, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 1],
+    [0, 1, 3, 1, 3, 3, 3, 3, 1, 3, 1, 0],
+    [0, 0, 1, 0, 1, 1, 1, 1, 0, 1, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+  ],
+  // PHP: Elephant (Blue)
+  elephant: [
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0],
+    [0, 0, 0, 1, 6, 6, 6, 6, 6, 1, 0, 0],
+    [0, 0, 1, 6, 6, 6, 6, 6, 6, 6, 1, 0],
+    [0, 1, 6, 6, 6, 2, 1, 6, 2, 1, 6, 1],
+    [1, 6, 6, 6, 6, 1, 1, 6, 1, 1, 6, 1],
+    [1, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 1],
+    [1, 6, 6, 6, 6, 6, 6, 6, 6, 6, 1, 0],
+    [0, 1, 6, 6, 1, 6, 6, 1, 6, 6, 1, 0],
+    [0, 1, 6, 6, 1, 0, 0, 1, 6, 6, 1, 0],
+    [0, 0, 1, 1, 0, 0, 0, 0, 1, 1, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+  ],
+  // Java: Coffee (Brown)
+  coffee: [
+    [0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0],
+    [0, 0, 0, 0, 2, 0, 0, 2, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0],
+    [0, 1, 11, 11, 11, 11, 11, 11, 1, 0, 0],
+    [0, 1, 11, 11, 11, 11, 11, 11, 1, 1, 0],
+    [0, 1, 11, 2, 2, 11, 11, 11, 1, 0, 1],
+    [0, 1, 11, 11, 11, 11, 11, 11, 1, 1, 0],
+    [0, 0, 1, 11, 11, 11, 11, 11, 1, 0, 0],
+    [0, 0, 0, 1, 1, 1, 1, 1, 1, 0, 0, 0],
+    [0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+  ],
+  // Swift: Bird (Orange)
+  bird: [
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0],
+    [0, 0, 0, 0, 0, 1, 9, 9, 9, 9, 1, 0],
+    [0, 0, 1, 0, 1, 9, 2, 1, 9, 9, 1, 0],
+    [0, 1, 9, 1, 9, 9, 1, 1, 9, 9, 1, 0],
+    [1, 9, 9, 9, 9, 9, 9, 9, 9, 9, 1, 0],
+    [1, 9, 9, 9, 9, 9, 9, 9, 9, 1, 0, 0],
+    [0, 1, 9, 9, 9, 9, 9, 9, 1, 0, 0, 0],
+    [0, 0, 1, 9, 9, 9, 9, 1, 0, 0, 0, 0],
+    [0, 0, 0, 1, 9, 9, 1, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+  ],
+  // C++/C#: Robot (Grey)
+  robot: [
+    [0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0],
+    [0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0],
+    [0, 1, 10, 10, 10, 10, 10, 10, 10, 1, 0],
+    [1, 10, 2, 2, 10, 10, 2, 2, 10, 1],
+    [1, 10, 2, 1, 10, 10, 2, 1, 10, 1],
+    [1, 10, 10, 10, 10, 10, 10, 10, 10, 1],
+    [1, 10, 1, 1, 1, 1, 1, 1, 10, 1],
+    [1, 10, 1, 3, 3, 3, 3, 1, 10, 1],
+    [0, 1, 10, 1, 1, 1, 1, 10, 1, 0],
+    [0, 0, 1, 1, 1, 1, 1, 1, 1, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+  ],
+  // Shell/Docker: Whale (Blue)
+  whale: [
+    [0, 0, 0, 0, 0, 0, 0, 8, 0, 8, 0, 0],
+    [0, 0, 0, 0, 0, 0, 1, 8, 1, 8, 1, 0],
+    [0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 0],
+    [0, 0, 0, 0, 1, 6, 6, 6, 6, 6, 6, 1],
+    [0, 0, 0, 1, 6, 6, 6, 6, 6, 6, 6, 1],
+    [0, 1, 1, 6, 6, 2, 1, 6, 6, 6, 6, 1],
+    [1, 6, 6, 6, 6, 1, 1, 6, 6, 6, 6, 1],
+    [1, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 1],
+    [1, 6, 6, 6, 6, 6, 6, 6, 6, 6, 1, 0],
+    [0, 1, 1, 6, 6, 6, 6, 6, 1, 1, 0, 0],
+    [0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+  ],
+  // Ruby: Gem (Red)
+  gem: [
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0],
+    [0, 0, 0, 1, 3, 3, 3, 3, 1, 0, 0, 0],
+    [0, 0, 1, 3, 2, 3, 3, 3, 3, 1, 0, 0],
+    [0, 1, 3, 3, 3, 3, 3, 3, 3, 3, 1, 0],
+    [1, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 1],
+    [1, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 1],
+    [0, 1, 3, 3, 3, 3, 3, 3, 3, 3, 1, 0],
+    [0, 0, 1, 3, 3, 3, 3, 3, 3, 1, 0, 0],
+    [0, 0, 0, 1, 3, 3, 3, 3, 1, 0, 0, 0],
+    [0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+  ],
+  // HTML/CSS: Chameleon (Green)
+  chameleon: [
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0],
+    [0, 0, 0, 0, 1, 4, 4, 4, 4, 1, 0, 0],
+    [0, 0, 0, 1, 4, 4, 2, 1, 4, 4, 1, 0],
+    [0, 0, 1, 4, 4, 4, 1, 1, 4, 4, 1, 0],
+    [0, 1, 4, 4, 4, 4, 4, 4, 4, 4, 1, 0],
+    [1, 4, 4, 4, 3, 3, 4, 4, 4, 4, 1, 0],
+    [1, 4, 4, 4, 3, 3, 4, 4, 4, 1, 0, 0],
+    [0, 1, 4, 4, 4, 4, 4, 4, 1, 0, 0, 0],
+    [0, 0, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+  ],
+  // JS/TS: Spider (Yellow/Black)
+  spider: [
+    [0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0],
+    [1, 0, 0, 0, 1, 1, 1, 0, 0, 0, 1, 0],
+    [0, 1, 0, 1, 1, 1, 1, 1, 0, 1, 0, 0],
+    [0, 0, 1, 1, 5, 5, 5, 1, 1, 0, 0, 0],
+    [0, 1, 1, 5, 2, 1, 2, 5, 1, 1, 0, 0],
+    [1, 0, 1, 5, 5, 5, 5, 5, 1, 0, 1, 0],
+    [0, 0, 1, 1, 5, 5, 5, 1, 1, 0, 0, 0],
+    [0, 1, 0, 0, 1, 1, 1, 0, 0, 1, 0, 0],
+    [1, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1, 0],
+    [0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+  ],
+  // Python: Snake (Green/Yellow)
+  snake: [
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0],
+    [0, 0, 0, 0, 1, 6, 6, 6, 1, 0, 0, 0],
+    [0, 0, 0, 1, 6, 2, 1, 6, 6, 1, 0, 0],
+    [0, 0, 0, 1, 6, 6, 6, 6, 6, 1, 0, 0],
+    [0, 0, 0, 0, 1, 1, 6, 6, 1, 0, 0, 0],
+    [0, 0, 0, 1, 5, 5, 1, 1, 0, 0, 0, 0],
+    [0, 0, 1, 5, 5, 5, 5, 1, 0, 0, 0, 0],
+    [0, 1, 5, 5, 5, 5, 5, 1, 0, 0, 0, 0],
+    [0, 1, 5, 5, 1, 1, 5, 1, 0, 0, 0, 0],
+    [0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+  ],
+  // Go: Gopher (Blue/Cyan)
+  gopher: [
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0],
+    [0, 0, 0, 1, 8, 8, 8, 8, 1, 0, 0, 0],
+    [0, 0, 1, 8, 2, 1, 2, 8, 8, 1, 0, 0],
+    [0, 0, 1, 8, 1, 1, 1, 8, 8, 1, 0, 0],
+    [0, 0, 1, 8, 8, 2, 2, 8, 8, 1, 0, 0],
+    [0, 1, 8, 8, 8, 2, 2, 8, 8, 8, 1, 0],
+    [1, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 1],
+    [1, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 1],
+    [0, 1, 8, 8, 8, 8, 8, 8, 8, 8, 1, 0],
+    [0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+  ],
+  // Default: Cat (Orange/Tabby)
+  cat: [
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0],
+    [0, 1, 5, 1, 0, 0, 0, 0, 1, 5, 1, 0],
+    [0, 1, 5, 5, 1, 1, 1, 1, 5, 5, 1, 0],
+    [0, 1, 5, 5, 5, 5, 5, 5, 5, 5, 1, 0],
+    [0, 1, 5, 2, 1, 5, 5, 2, 1, 5, 1, 0],
+    [0, 1, 5, 1, 1, 5, 5, 1, 1, 5, 1, 0],
+    [0, 1, 5, 5, 5, 3, 3, 5, 5, 5, 1, 0],
+    [0, 0, 1, 5, 5, 5, 5, 5, 5, 1, 0, 0],
+    [0, 0, 1, 5, 1, 1, 1, 1, 5, 1, 0, 0],
+    [0, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+  ]
+};
+
+// --- CORE LOGIC ---
 
 async function run() {
   try {
@@ -9,91 +217,50 @@ async function run() {
     const username = core.getInput('username');
     const octokit = github.getOctokit(token);
 
-    // 1. Fetch Data
-    const query = `
-      query($username: String!) {
-        user(login: $username) {
-          contributionsCollection {
-            contributionCalendar {
-              weeks {
-                contributionDays {
-                  contributionCount
-                  date
-                }
-              }
-            }
-          }
-          topRepositories(first: 10, orderBy: {field: UPDATED_AT, direction: DESC}) {
-            nodes {
-              languages(first: 1, orderBy: {field: SIZE, direction: DESC}) {
-                nodes {
-                  name
-                }
-              }
-            }
-          }
-        }
-      }
-    `;
+    // 1. Fetch User Activity
+    const events = await octokit.rest.activity.listPublicEventsForRepoNetwork({
+      username: username,
+      per_page: 100,
+    });
 
-    const response = await octokit.graphql(query, { username });
-    const user = response.user;
+    // 2. Determine State (Mood)
+    const lastEvent = events.data[0];
+    const lastEventDate = lastEvent ? new Date(lastEvent.created_at) : new Date(0);
+    const now = new Date();
+    const hoursSinceLastEvent = (now - lastEventDate) / (1000 * 60 * 60);
 
-    if (!user) {
-      throw new Error(`User ${username} not found`);
-    }
+    let mood = 'sleeping';
+    if (hoursSinceLastEvent < 24) mood = 'happy';
+    if (hoursSinceLastEvent > 168) mood = 'ghost'; // 7 days
 
-    // 2. Process Data for Game Logic
-    const calendar = user.contributionsCollection.contributionCalendar.weeks
-      .flatMap(week => week.contributionDays)
-      .sort((a, b) => new Date(b.date) - new Date(a.date)); // Newest first
+    // 3. Determine Pet Type (Species)
+    const repos = await octokit.rest.repos.listForUser({
+      username: username,
+      sort: 'updated',
+      per_page: 10,
+    });
 
-    const today = calendar[0];
-    const last7Days = calendar.slice(0, 7);
-    const totalContributionsLast7Days = last7Days.reduce((acc, day) => acc + day.contributionCount, 0);
-
-    // Determine State
-    let state = 'sleeping'; // Default
-    if (today.contributionCount > 0) {
-      state = 'happy';
-    } else if (totalContributionsLast7Days === 0) {
-      state = 'ghost';
-    }
-
-    // Determine Evolution (Pet Type)
     const languages = {};
-    user.topRepositories.nodes.forEach(repo => {
-      if (repo.languages.nodes.length > 0) {
-        const lang = repo.languages.nodes[0].name;
-        languages[lang] = (languages[lang] || 0) + 1;
+    repos.data.forEach(repo => {
+      if (repo.language) {
+        languages[repo.language] = (languages[repo.language] || 0) + 1;
       }
     });
 
-    let topLang = 'JavaScript'; // Default
-    let maxCount = 0;
-    for (const [lang, count] of Object.entries(languages)) {
-      if (count > maxCount) {
-        maxCount = count;
-        topLang = lang;
-      }
+    const topLanguage = Object.keys(languages).reduce((a, b) => languages[a] > languages[b] ? a : b, 'Unknown');
+    const petType = getPetType(topLanguage);
+
+    console.log(`User: ${username}, Mood: ${mood}, Type: ${petType} (${topLanguage})`);
+
+    // 4. Generate SVG
+    const svgContent = generateSVG(petType, mood);
+
+    // 5. Write to File
+    const fs = require('fs');
+    if (!fs.existsSync('dist')) {
+      fs.mkdirSync('dist');
     }
-
-    let petType = 'cat';
-    if (['JavaScript', 'TypeScript'].includes(topLang)) petType = 'spider';
-    else if (topLang === 'Python') petType = 'snake';
-    else if (topLang === 'Go') petType = 'gopher';
-
-    console.log(`User: ${username}, State: ${state}, Type: ${petType}, Top Lang: ${topLang}`);
-
-    // 3. Generate SVG
-    const svgContent = generateSVG(petType, state);
-
-    // 4. Save File
-    const distDir = path.join(__dirname, 'dist');
-    if (!fs.existsSync(distDir)) {
-      fs.mkdirSync(distDir);
-    }
-    fs.writeFileSync(path.join(distDir, 'pet.svg'), svgContent);
+    fs.writeFileSync('dist/pet.svg', svgContent);
     console.log('Generated dist/pet.svg');
 
   } catch (error) {
@@ -101,152 +268,107 @@ async function run() {
   }
 }
 
-function generateSVG(type, state) {
-  // Simple pixel art maps (5x5 or similar small grid scaled up)
-  // We'll use a simple grid system for the "pixels"
-  
-  const colors = {
-    spider: '#e06c75', // Red/Pinkish
-    snake: '#98c379',  // Green
-    gopher: '#61afef', // Blue
-    cat: '#e5c07b',    // Yellow/Gold
-    ghost: '#abb2bf',  // Grey
+function getPetType(language) {
+  const map = {
+    'JavaScript': 'spider',
+    'TypeScript': 'spider',
+    'Python': 'snake',
+    'Go': 'gopher',
+    'Rust': 'crab',
+    'PHP': 'elephant',
+    'Java': 'coffee',
+    'Swift': 'bird',
+    'C++': 'robot',
+    'C#': 'robot',
+    'Shell': 'whale',
+    'Dockerfile': 'whale',
+    'Ruby': 'gem',
+    'HTML': 'chameleon',
+    'CSS': 'chameleon',
   };
+  return map[language] || 'cat';
+}
 
-  const color = state === 'ghost' ? colors.ghost : (colors[type] || colors.cat);
-  
-  // 8x8 Pixel Grids
-  const pixels = {
-    spider: [
-      '  X  X  ',
-      '   XX   ',
-      ' XXXXXX ',
-      ' XXXXXX ',
-      ' X XX X ',
-      'X      X',
-      'X      X',
-      '        '
-    ],
-    snake: [
-      '   XX   ',
-      '  X  X  ',
-      '      X ',
-      '     X  ',
-      '   XX   ',
-      '  X     ',
-      ' X      ',
-      'XXXXX   '
-    ],
-    gopher: [
-      '  XXXX  ',
-      ' X    X ',
-      'X  XX  X',
-      'X      X',
-      'X XXXX X',
-      ' X    X ',
-      '  XXXX  ',
-      '        '
-    ],
-    cat: [
-      'X      X',
-      'X      X',
-      ' XXXXXX ',
-      'X  XX  X',
-      'X      X',
-      ' XXXXXX ',
-      '  X  X  ',
-      '  X  X  '
-    ],
-    ghost: [
-      '  XXXX  ',
-      ' XXXXXX ',
-      'X  XX  X',
-      'X      X',
-      'X      X',
-      'X      X',
-      'X X  X X',
-      ' X    X '
-    ]
-  };
-
-  const art = state === 'ghost' ? pixels.ghost : (pixels[type] || pixels.cat);
-  
-  // Modifiers for state
-  let eyeColor = 'black';
-  let mouth = '';
-
-  if (state === 'sleeping') {
-    eyeColor = 'transparent'; // Closed eyes effect (or just lines)
-    // We might modify the art for sleeping, but for simplicity let's just change eyes/mouth in a more complex version.
-    // For this simple version, let's just use the base art.
-  }
-
-  // Convert grid to SVG rects
+function renderPixelGrid(grid, pixelSize = 10) {
   let rects = '';
-  const scale = 20;
-  
-  art.forEach((row, y) => {
-    for (let x = 0; x < row.length; x++) {
-      if (row[x] === 'X') {
-        rects += `<rect x="${x * scale}" y="${y * scale}" width="${scale}" height="${scale}" fill="${color}" />`;
+  grid.forEach((row, y) => {
+    row.forEach((colorId, x) => {
+      if (colorId !== 0 && PALETTE[colorId]) {
+        const color = PALETTE[colorId];
+        rects += `<rect x="${x * pixelSize}" y="${y * pixelSize}" width="${pixelSize}" height="${pixelSize}" fill="${color}" />`;
       }
-    }
+    });
   });
+  return rects;
+}
 
-  // Add some "face" details on top if needed, or just rely on the silhouette.
-  // Let's add a simple animation for "Happy" state (bouncing)
-  let animate = '';
-  if (state === 'happy') {
-    animate = `
-      <animateTransform 
-        attributeName="transform" 
-        type="translate" 
-        values="0 0; 0 -5; 0 0" 
-        dur="1s" 
-        repeatCount="indefinite" 
-      />
-    `;
-  } else if (state === 'sleeping') {
-     animate = `
-      <animateTransform 
-        attributeName="transform" 
-        type="scale" 
-        values="1 1; 1.05 1.05; 1 1" 
-        dur="3s" 
-        repeatCount="indefinite" 
-        additive="sum"
-        origin="80 80"
-      />
-    `;
+function generateSVG(petType, mood) {
+  const sprite = SPRITES[petType] || SPRITES['cat'];
+
+  // Modify sprite for mood if needed (e.g., close eyes for sleeping)
+  let renderSprite = JSON.parse(JSON.stringify(sprite)); // Deep copy
+
+  if (mood === 'sleeping') {
+    // Simple logic: replace eye pixels (color 2) with eyelids (color 1 or 3)
+    // Or just hardcode some changes. For now, let's just turn white eyes (2) to closed (1)
+    renderSprite = renderSprite.map(row => row.map(cell => cell === 2 ? 1 : cell));
   }
 
-  // Zzz for sleeping
-  let extras = '';
-  if (state === 'sleeping') {
-    extras = `
-      <text x="140" y="40" font-family="monospace" font-size="20" fill="#61afef">Z</text>
-      <text x="155" y="30" font-family="monospace" font-size="15" fill="#61afef">z</text>
-      <animate 
-        xlink:href="#zzz"
-        attributeName="opacity"
-        values="0;1;0"
-        dur="2s"
-        repeatCount="indefinite"
-      />
-    `;
+  if (mood === 'ghost') {
+    // Turn everything into a ghost style? Or just make it transparent/grey?
+    // Let's just use the robot palette (grey) for everything except outline
+    renderSprite = renderSprite.map(row => row.map(cell => {
+      if (cell === 1) return 1; // Keep outline
+      if (cell === 0) return 0;
+      return 10; // Turn everything else grey
+    }));
   }
 
-  return `
-<svg width="200" height="200" viewBox="0 0 160 160" xmlns="http://www.w3.org/2000/svg">
-  <rect width="100%" height="100%" fill="transparent"/>
-  <g>
-    ${animate}
-    ${rects}
-  </g>
-  ${extras}
-  <text x="10" y="150" font-family="monospace" font-size="12" fill="#333">Status: ${state}</text>
-</svg>
-  `;
+  const pixelSize = 16; // Bigger pixels for better visibility
+  const width = 12 * pixelSize;
+  const height = 12 * pixelSize;
+
+  const pixelArt = renderPixelGrid(renderSprite, pixelSize);
+
+  // Add some animation or background
+  let animation = '';
+  if (mood === 'happy') {
+    animation = `
+        <animateTransform 
+            attributeName="transform" 
+            type="translate" 
+            values="0 0; 0 -4; 0 0" 
+            dur="0.5s" 
+            repeatCount="indefinite" 
+        />`;
+  } else if (mood === 'sleeping') {
+    animation = `
+        <animateTransform 
+            attributeName="transform" 
+            type="scale" 
+            values="1 1; 1.02 0.98; 1 1" 
+            dur="2s" 
+            repeatCount="indefinite" 
+        />`;
+  }
+
+  return `<svg xmlns="http://www.w3.org/2000/svg" width="${width + 40}" height="${height + 40}" viewBox="0 0 ${width + 40} ${height + 40}">
+      <style>
+        .pet { transform-origin: center; }
+      </style>
+      <rect width="100%" height="100%" fill="transparent" />
+      <g transform="translate(20, 20)">
+        <g class="pet">
+            ${pixelArt}
+            ${animation}
+        </g>
+      </g>
+      
+      <!-- Mood Status Text -->
+      <text x="50%" y="${height + 35}" text-anchor="middle" font-family="monospace" font-size="12" fill="#666">
+        ${mood.toUpperCase()}
+      </text>
+    </svg>`;
 }
 
 run();

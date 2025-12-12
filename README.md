@@ -35,6 +35,14 @@ Your coding habits determine your companion:
 | **JavaScript / TypeScript** | **Spider** | 🕷️ |
 | **Python** | **Snake** | 🐍 |
 | **Go** | **Gopher** | 🐹 |
+| **Rust** | **Crab** | 🦀 |
+| **PHP** | **Elephant** | 🐘 |
+| **Java** | **Coffee** | ☕ |
+| **Swift** | **Bird** | 🕊️ |
+| **C++ / C#** | **Robot** | 🤖 |
+| **Shell / Docker** | **Whale** | 🐳 |
+| **Ruby** | **Gem** | 💎 |
+| **HTML / CSS** | **Chameleon** | 🦎 |
 | **Others** | **Cat** | 🐱 |
 
 ## 🎭 Moods & States
@@ -75,7 +83,7 @@ jobs:
       - uses: actions/checkout@v3
       
       - name: Generate Pet 👾
-        uses: ThanhNguyxn/Git-Gotchi@v1.0.0
+        uses: ThanhNguyxn/Git-Gotchi@main
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           username: ${{ github.repository_owner }}
