@@ -607,18 +607,18 @@ const SPRITES = {
   unicorn: {
     normal: [
       '                ',
-      '      Y         ',
-      '     YY         ',
-      '    WWWW      R ',
-      '   WWKKWW    RO ',
-      '  WWWWWWWW  ROY ',
-      '  WWWWWWWW ROYG ',
-      '  WWWWWWWW OYGB ',
-      '   WW  WW  YGBP ',
-      '   WW  WW  GB P ',
-      '           B P  ',
-      '            P   ',
-      '                ',
+      '      Y         ', // Y = Sừng vàng
+      '    WWYWW       ', // W = Đầu trắng
+      '   WKWWWWR      ', // K = Mắt đen, R = Bờm đỏ
+      '   WWWWWRO      ', // O = Bờm cam
+      '    WWWWROY     ', // Y = Bờm vàng
+      '     WWROYG     ', // G = Bờm xanh lá
+      '    WWROYGB     ', // B = Bờm xanh dương
+      '   WWROYGBP     ', // P = Bờm tím
+      '  WWWWWGBP      ',
+      '  WWWWWW        ',
+      ' WW  WW         ',
+      ' WW  WW         ',
       '                ',
       '                ',
       '                '
@@ -626,35 +626,35 @@ const SPRITES = {
     sleep: [
       '                ',
       '      Y         ',
-      '     YY         ',
-      '    WWWW      R ',
-      '   WWWWWW    RO ',
-      '  WWWWWWWW  ROY ',
-      '  WWWWWWWW ROYG ',
-      '  WWWWWWWW OYGB ',
-      '   WW  WW  YGBP ',
-      '   WW  WW  GB P ',
-      '           B P  ',
-      '            P   ',
-      '                ',
+      '    WWYWW       ',
+      '   WWWWWWR      ', // Mắt nhắm (không có K)
+      '   WWWWWRO      ',
+      '    WWWWROY     ',
+      '     WWROYG     ',
+      '    WWROYGB     ',
+      '   WWROYGBP     ',
+      '  WWWWWGBP      ',
+      '  WWWWWW        ',
+      ' WW  WW         ',
+      ' WW  WW         ',
       '                ',
       '                ',
       '                '
     ],
     ghost: [
       '                ',
-      '      Y         ',
-      '     YY         ',
-      '    WWWW      R ',
-      '   WW K WW   RO ',
-      '  WWWWWWWW  ROY ',
-      '  WWWWWWWW ROYG ',
-      '  WWWWWWWW OYGB ',
-      '   WW  WW  YGBP ',
-      '   WW  WW  GB P ',
-      '           B P  ',
-      '            P   ',
-      '                ',
+      '      K         ', // K = Sừng đen/xám
+      '    KKKKK       ',
+      '   KXXXXXK      ', // X = Mắt chết
+      '   KKKKKKK      ',
+      '    KKKKKKK     ',
+      '     KKKKKK     ',
+      '    KKKKKKK     ',
+      '   KKKKKKKK     ',
+      '  KKKKKKKK      ',
+      '  KKKKKK        ',
+      ' KK  KK         ',
+      ' KK  KK         ',
       '                ',
       '                ',
       '                '
