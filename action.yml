@@ -1,0 +1,16 @@
+name: 'Profile Gotchi'
+description: 'Generates a virtual pet SVG based on your GitHub activity.'
+author: 'Antigravity'
+inputs:
+  github_token:
+    description: 'GitHub Token to fetch user activity'
+    required: true
+  username:
+    description: 'GitHub Username to track'
+    required: true
+runs:
+  using: 'node20'
+  main: 'index.js'
+branding:
+  icon: 'smile'
+  color: 'purple'

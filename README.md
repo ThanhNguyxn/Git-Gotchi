@@ -1,0 +1,112 @@
+# 👾 Profile-Gotchi
+
+[![GitHub Action](https://img.shields.io/badge/GitHub-Action-blue?logo=github&style=for-the-badge)](https://github.com/features/actions)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](https://opensource.org/licenses/MIT)
+[![Version](https://img.shields.io/badge/Version-1.0.0-green?style=for-the-badge)](https://github.com/ThanhNguyxn/Git-Gotchi)
+
+> **Turn your GitHub Profile into a living, breathing virtual pet habitat!** 🐾
+
+**Profile-Gotchi** is a GitHub Action that generates a dynamic, pixel-art SVG of a virtual pet. Your pet's species and mood evolve based on your coding activity!
+
+---
+
+## ✨ Features
+
+- **Dynamic Evolution**: Your pet changes species based on your top programming language.
+- **Mood System**: Keep your pet happy by committing code daily!
+- **Zero Config**: Works out of the box with sensible defaults.
+- **Lightweight**: Generates a simple SVG, no heavy images.
+
+---
+
+## 🦁 The Pet Roster
+
+Your coding habits determine your companion:
+
+| Language | Pet Species | Icon |
+| :--- | :--- | :---: |
+| **JavaScript / TypeScript** | **Spider** | 🕷️ |
+| **Python** | **Snake** | 🐍 |
+| **Go** | **Gopher** | 🐹 |
+| **Others** | **Cat** | 🐱 |
+
+## 🎭 Moods & States
+
+| State | Condition | Appearance |
+| :--- | :--- | :---: |
+| **Happy** ⚡ | Contributions in the last **24 hours** | Bouncing / Energetic |
+| **Sleeping** 💤 | No contributions today, but active this week | Sleeping / Zzz |
+| **Ghost** 👻 | No contributions for **7+ days** | Spooky / Dead |
+
+---
+
+## 🚀 Quick Start
+
+### 1. Create the Workflow
+Create a new file in your repository at `.github/workflows/profile-gotchi.yml`:
+
+```yaml
+name: Profile Gotchi
+
+on:
+  schedule:
+    - cron: '0 */6 * * *' # Updates every 6 hours
+  workflow_dispatch: # Allows manual trigger
+
+jobs:
+  update-pet:
+    permissions:
+      contents: write
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Generate Pet 👾
+        uses: ThanhNguyxn/Git-Gotchi@main
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          username: ${{ github.repository_owner }}
+          
+      - name: Commit & Push 💾
+        run: |
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+          git add dist/pet.svg
+          git commit -m "Update Profile-Gotchi 👾" || exit 0
+          git push
+```
+
+### 2. Add to README
+Add this markdown to your profile `README.md` to display your pet:
+
+```markdown
+### My Coding Pet 👾
+![Profile Gotchi](dist/pet.svg)
+```
+
+---
+
+## ⚙️ Configuration
+
+| Input | Description | Required | Default |
+| :--- | :--- | :---: | :---: |
+| `github_token` | Your GitHub Token. Use `${{ secrets.GITHUB_TOKEN }}`. | ✅ | N/A |
+| `username` | The GitHub username to track. | ✅ | N/A |
+
+---
+
+## 🤝 Contributing
+
+Contributions are welcome! Feel free to open an issue or submit a Pull Request.
+
+1. Fork the project
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+
+---
+
+<p align="center">
+  Made with ❤️ by <a href="https://github.com/ThanhNguyxn">ThanhNguyxn</a>
+</p>
