@@ -6,6 +6,13 @@
 
 > **Turn your GitHub Profile into a living, breathing virtual pet habitat!** 🐾
 
+## 🔴 Live Demo
+This is the actual pet generated for **[ThanhNguyxn](https://github.com/ThanhNguyxn)** (the author), updated every 6 hours:
+
+<div align="center">
+  <img src="dist/pet.svg" alt="Live Profile Gotchi Demo" width="200" />
+</div>
+
 **Profile-Gotchi** is a GitHub Action that generates a dynamic, pixel-art SVG of a virtual pet. Your pet's species and mood evolve based on your coding activity!
 
 ---
