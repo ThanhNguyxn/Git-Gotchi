@@ -714,18 +714,23 @@ async function run() {
     // Check if user has starred the repo (ThanhNguyxn/Git-Gotchi)
     let hasStarred = false;
     try {
-      await octokit.request('GET /user/starred/{owner}/{repo}', {
+      // Fetch stargazers of the repo
+      const stargazers = await octokit.request('GET /repos/{owner}/{repo}/stargazers', {
         owner: 'ThanhNguyxn',
-        repo: 'Git-Gotchi'
+        repo: 'Git-Gotchi',
+        per_page: 100 // Check top 100 stargazers (pagination might be needed for huge repos)
       });
-      hasStarred = true;
-      console.log('User has starred the repo! 🌟');
-    } catch (error) {
-      if (error.status === 404) {
-        console.log('User has NOT starred the repo.');
+
+      // Check if the username is in the list
+      const starUser = stargazers.data.find(user => user.login.toLowerCase() === username.toLowerCase());
+      if (starUser) {
+        hasStarred = true;
+        console.log(`User ${username} has starred the repo! 🌟`);
       } else {
-        console.log('Error checking star status (might be token scope):', error.message);
+        console.log(`User ${username} has NOT starred the repo.`);
       }
+    } catch (error) {
+      console.log('Error checking star status:', error.message);
     }
 
     if (hasStarred) {
