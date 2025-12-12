@@ -40,6 +40,12 @@ Your coding habits determine your companion. [View the full Pet Gallery here](GA
 | **Java** | **Coffee** | ☕ |
 | **Swift** | **Bird** | 🕊️ |
 | **C++ / C#** | **Robot** | 🤖 |
+| **C** | **Gear** | ⚙️ |
+| **Kotlin** | **Fox** | 🦊 |
+| **Dart** | **Hummingbird** | 🐦 |
+| **Scala** | **Ladder** | 🪜 |
+| **R** | **Owl** | 🦉 |
+| **Perl** | **Camel** | 🐪 |
 | **Shell** | **Tux** | 🐧 |
 | **Ruby** | **Gem** | 💎 |
 | **HTML / CSS** | **Chameleon** | 🦎 |

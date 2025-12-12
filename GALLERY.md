@@ -1,7 +1,7 @@
 # 🎨 Profile-Gotchi Gallery
 
-Here is the full roster of pixel art mascots available in **Profile-Gotchi v1.11.0**.
-Now featuring **Multi-Color** sprites, unique **Sleep/Ghost** states, and a **Legendary Unicorn** (unlock by ⭐ Star or 🍴 Fork)!
+Here is the full roster of pixel art mascots available in **Profile-Gotchi v1.12.0**.
+Now featuring **20 unique pets**, **Multi-Color** sprites, unique **Sleep/Ghost** states, and a **Legendary Unicorn** (unlock by ⭐ Star or 🍴 Fork)!
 
 ## 🦁 The Roster
 
@@ -20,4 +20,11 @@ Now featuring **Multi-Color** sprites, unique **Sleep/Ghost** states, and a **Le
 | **Gopher** (Go) | ![Happy](dist/gopher_happy.svg) | ![Sleep](dist/gopher_sleeping.svg) | ![Ghost](dist/gopher_ghost.svg) |
 | **Cat** (Default) | ![Happy](dist/cat_happy.svg) | ![Sleep](dist/cat_sleeping.svg) | ![Ghost](dist/cat_ghost.svg) |
 | **Tux** (Shell) | ![Happy](dist/tux_happy.svg) | ![Sleep](dist/tux_sleeping.svg) | ![Ghost](dist/tux_ghost.svg) |
+| **Fox** (Kotlin) | ![Happy](dist/fox_happy.svg) | ![Sleep](dist/fox_sleeping.svg) | ![Ghost](dist/fox_ghost.svg) |
+| **Hummingbird** (Dart) | ![Happy](dist/hummingbird_happy.svg) | ![Sleep](dist/hummingbird_sleeping.svg) | ![Ghost](dist/hummingbird_ghost.svg) |
+| **Gear** (C) | ![Happy](dist/gear_happy.svg) | ![Sleep](dist/gear_sleeping.svg) | ![Ghost](dist/gear_ghost.svg) |
+| **Ladder** (Scala) | ![Happy](dist/ladder_happy.svg) | ![Sleep](dist/ladder_sleeping.svg) | ![Ghost](dist/ladder_ghost.svg) |
+| **Owl** (R) | ![Happy](dist/owl_happy.svg) | ![Sleep](dist/owl_sleeping.svg) | ![Ghost](dist/owl_ghost.svg) |
+| **Camel** (Perl) | ![Happy](dist/camel_happy.svg) | ![Sleep](dist/camel_sleeping.svg) | ![Ghost](dist/camel_ghost.svg) |
 | **Unicorn** (Legendary) | ![Happy](dist/unicorn_happy.svg) | ![Sleep](dist/unicorn_sleeping.svg) | ![Ghost](dist/unicorn_ghost.svg) |
+

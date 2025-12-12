@@ -28,7 +28,14 @@ const PET_COLORS = {
   chameleon: '#98c379', // Green
   cat: '#e5c07b',    // Yellow/Orange
   tux: '#2d333b',    // Black
-  unicorn: '#ffffff' // White
+  unicorn: '#ffffff', // White
+  // New Pets
+  fox: '#ff7f50',    // Coral/Orange (Kotlin)
+  hummingbird: '#00bcd4', // Cyan (Dart/Flutter)
+  gear: '#78909c',   // Blue Grey (C)
+  ladder: '#dc143c', // Crimson (Scala)
+  owl: '#9c27b0',    // Purple (R)
+  camel: '#d2691e'   // Chocolate (Perl)
 };
 
 const SPRITES = {
@@ -677,6 +684,271 @@ const SPRITES = {
       '                ',
       '                '
     ]
+  },
+  // --- NEW PETS ---
+  fox: {
+    normal: [
+      "            ",
+      "   K    K   ",
+      "  KXK  KXK  ",
+      " KXXXKKXXXK ",
+      " KXXXXXXXXK ",
+      "KXXW KXXW KK",
+      "KXXK KXXK KK",
+      " KXWWWWWWK  ",
+      "  KXXXXXXK  ",
+      "   KXXXXK   ",
+      "    KKKK    ",
+      "            "
+    ],
+    sleep: [
+      "            ",
+      "   K    K   ",
+      "  KXK  KXK  ",
+      " KXXXKKXXXK ",
+      " KXXXXXXXXK ",
+      "KXXK KXXK KK",
+      "KXXK KXXK KK",
+      " KXWWWWWWK  ",
+      "  KXXXXXXK  ",
+      "   KXXXXK   ",
+      "    KKKK    ",
+      "            "
+    ],
+    ghost: [
+      "            ",
+      "   K    K   ",
+      "  K K  K K  ",
+      " KXXXKKXXXK ",
+      " KXXXXXXXXK ",
+      "KXXK KXXK KK",
+      "KXXK KXXK KK",
+      " KXXXXXXK   ",
+      "  KXXXXXXK  ",
+      "   K K K K  ",
+      "            ",
+      "            "
+    ]
+  },
+  hummingbird: {
+    normal: [
+      "            ",
+      "     KKK    ",
+      "    KXXXK   ",
+      "   KXXXXXK  ",
+      "  KXW KXWK  ",
+      "  KXK KXKK  ",
+      "KKKXXXXXXK  ",
+      "  KXXXXXK   ",
+      "   KXXXK K  ",
+      "    KXK KK  ",
+      "     K      ",
+      "            "
+    ],
+    sleep: [
+      "            ",
+      "     KKK    ",
+      "    KXXXK   ",
+      "   KXXXXXK  ",
+      "  KXK KXKK  ",
+      "  KXK KXKK  ",
+      "KKKXXXXXXK  ",
+      "  KXXXXXK   ",
+      "   KXXXK K  ",
+      "    KXK KK  ",
+      "     K      ",
+      "            "
+    ],
+    ghost: [
+      "            ",
+      "     KKK    ",
+      "    KXXXK   ",
+      "   KXXXXXK  ",
+      "  KXK KXKK  ",
+      "  KXK KXKK  ",
+      "KKKXXXXXXK  ",
+      "  KXXXXXK   ",
+      "   K K K K  ",
+      "    K K K   ",
+      "            ",
+      "            "
+    ]
+  },
+  gear: {
+    normal: [
+      "            ",
+      "    K  K    ",
+      "   KKKKKK   ",
+      "  KXXXXXXK  ",
+      " KXKXXXXKXK ",
+      "KKXXW KW XXK",
+      "KKXXK KK XXK",
+      " KXKXXXXKXK ",
+      "  KXXXXXXK  ",
+      "   KKKKKK   ",
+      "    K  K    ",
+      "            "
+    ],
+    sleep: [
+      "            ",
+      "    K  K    ",
+      "   KKKKKK   ",
+      "  KXXXXXXK  ",
+      " KXKXXXXKXK ",
+      "KKXXK KK XXK",
+      "KKXXK KK XXK",
+      " KXKXXXXKXK ",
+      "  KXXXXXXK  ",
+      "   KKKKKK   ",
+      "    K  K    ",
+      "            "
+    ],
+    ghost: [
+      "            ",
+      "    K  K    ",
+      "   KKKKKK   ",
+      "  KXXXXXXK  ",
+      " K KXXXXK K ",
+      "KKXXK KK XXK",
+      "KKXXK KK XXK",
+      " K KXXXXK K ",
+      "  KXXXXXXK  ",
+      "   K K K K  ",
+      "            ",
+      "            "
+    ]
+  },
+  ladder: {
+    normal: [
+      "            ",
+      "  K      K  ",
+      "  KXXXXXXK  ",
+      "  K      K  ",
+      "  KXXXXXXK  ",
+      "  K  WW  K  ",
+      "  KXXKKXXK  ",
+      "  K      K  ",
+      "  KXXXXXXK  ",
+      "  K      K  ",
+      "  K      K  ",
+      "            "
+    ],
+    sleep: [
+      "            ",
+      "  K      K  ",
+      "  KXXXXXXK  ",
+      "  K      K  ",
+      "  KXXXXXXK  ",
+      "  K  KK  K  ",
+      "  KXXXXXXK  ",
+      "  K      K  ",
+      "  KXXXXXXK  ",
+      "  K      K  ",
+      "  K      K  ",
+      "            "
+    ],
+    ghost: [
+      "            ",
+      "  K      K  ",
+      "  K X  X K  ",
+      "  K      K  ",
+      "  K XXXX K  ",
+      "  K  KK  K  ",
+      "  K XXXX K  ",
+      "  K      K  ",
+      "  K X  X K  ",
+      "  K      K  ",
+      "            ",
+      "            "
+    ]
+  },
+  owl: {
+    normal: [
+      "            ",
+      "   K    K   ",
+      "  KKK  KKK  ",
+      " KXXXXXXXXXK",
+      " KXWK  KWXK ",
+      " KXKK  KKXK ",
+      "  KXXXXXXK  ",
+      "  KX KK XK  ",
+      "  KXXXXXXK  ",
+      "   KXXXXK   ",
+      "   KK  KK   ",
+      "            "
+    ],
+    sleep: [
+      "            ",
+      "   K    K   ",
+      "  KKK  KKK  ",
+      " KXXXXXXXXXK",
+      " KXKK  KKXK ",
+      " KXKK  KKXK ",
+      "  KXXXXXXK  ",
+      "  KX KK XK  ",
+      "  KXXXXXXK  ",
+      "   KXXXXK   ",
+      "   KK  KK   ",
+      "            "
+    ],
+    ghost: [
+      "            ",
+      "   K    K   ",
+      "  K K  K K  ",
+      " KXXXXXXXXXK",
+      " KXK    KXK ",
+      " KXK    KXK ",
+      "  KXXXXXXK  ",
+      "  K  KK  K  ",
+      "  KXXXXXXK  ",
+      "   K K K K  ",
+      "            ",
+      "            "
+    ]
+  },
+  camel: {
+    normal: [
+      "            ",
+      "     KK     ",
+      "    KXXK    ",
+      "   KXXXXK   ",
+      "  KXXXXXXK  ",
+      " KXW KXXXXXK",
+      " KXK KXXXXXK",
+      "  KXXXXXXXK ",
+      "  KXXXXXXXK ",
+      "  KXK  KXKK ",
+      "  KK    KK  ",
+      "            "
+    ],
+    sleep: [
+      "            ",
+      "     KK     ",
+      "    KXXK    ",
+      "   KXXXXK   ",
+      "  KXXXXXXK  ",
+      " KXK KXXXXXK",
+      " KXK KXXXXXK",
+      "  KXXXXXXXK ",
+      "  KXXXXXXXK ",
+      "  KXK  KXKK ",
+      "  KK    KK  ",
+      "            "
+    ],
+    ghost: [
+      "            ",
+      "     KK     ",
+      "    K  K    ",
+      "   KXXXXK   ",
+      "  KXXXXXXK  ",
+      " KXK KXXXXXK",
+      " KXK KXXXXXK",
+      "  KXXXXXXXK ",
+      "  K  X X  K ",
+      "  K K  K K  ",
+      "            ",
+      "            "
+    ]
   }
 };
 
@@ -845,6 +1117,13 @@ function getPetType(language) {
     'Ruby': 'gem',
     'HTML': 'chameleon',
     'CSS': 'chameleon',
+    // New languages
+    'Kotlin': 'fox',
+    'Dart': 'hummingbird',
+    'C': 'gear',
+    'Scala': 'ladder',
+    'R': 'owl',
+    'Perl': 'camel',
   };
   return map[language] || 'cat';
 }
