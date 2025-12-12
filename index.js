@@ -712,17 +712,20 @@ async function run() {
     let petType = 'cat';
 
     // Check if user has starred the repo (ThanhNguyxn/Git-Gotchi)
+    // Check if user has starred the repo (ThanhNguyxn/Git-Gotchi)
     let hasStarred = false;
     try {
-      // Fetch stargazers of the repo
-      const stargazers = await octokit.request('GET /repos/{owner}/{repo}/stargazers', {
+      console.log(`Checking if user '${username}' has starred ThanhNguyxn/Git-Gotchi...`);
+
+      // Fetch stargazers using typed API
+      const { data: stargazers } = await octokit.rest.activity.listStargazersForRepo({
         owner: 'ThanhNguyxn',
         repo: 'Git-Gotchi',
-        per_page: 100 // Check top 100 stargazers (pagination might be needed for huge repos)
+        per_page: 100
       });
 
       // Check if the username is in the list
-      const starUser = stargazers.data.find(user => user.login.toLowerCase() === username.toLowerCase());
+      const starUser = stargazers.find(user => user.login.toLowerCase() === username.toLowerCase());
       if (starUser) {
         hasStarred = true;
         console.log(`User ${username} has starred the repo! 🌟`);
@@ -730,7 +733,9 @@ async function run() {
         console.log(`User ${username} has NOT starred the repo.`);
       }
     } catch (error) {
-      console.log('Error checking star status:', error.message);
+      console.log('Warning: Error checking star status. Defaulting to false.');
+      console.log('Error details:', error.message);
+      // Do not fail the action for this; just continue as normal pet
     }
 
     if (hasStarred) {
