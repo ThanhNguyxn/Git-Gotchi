@@ -115,6 +115,10 @@ Edit your `README.md` and add the following markdown where you want the pet to a
 | `github_token` | Your GitHub Token. Use `${{ secrets.GITHUB_TOKEN }}`. | ✅ | N/A |
 | `username` | The GitHub username to track. | ✅ | N/A |
 
+> [!NOTE]
+> **Security Note**: The `${{ secrets.GITHUB_TOKEN }}` is a standard, temporary token automatically provided by GitHub Actions. It is **safe** to use in your workflow file and does **not** expose your personal access tokens or secrets.
+
+
 ---
 
 ## 🤝 Contributing
