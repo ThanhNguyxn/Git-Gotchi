@@ -712,7 +712,7 @@ async function run() {
     let petType = 'cat';
 
     // Legendary Status: Unicorn (14+ Day Streak)
-    if (streak >= 14) { 
+    if (streak >= 14) {
       petType = 'unicorn';
       console.log('Legendary Status Unlocked! 🦄 (14+ Day Streak)');
     } else {
@@ -722,21 +722,21 @@ async function run() {
         per_page: 10,
       });
 
-        const languages = {};
-        repos.data.forEach(repo => {
+      const languages = {};
+      repos.data.forEach(repo => {
         if (repo.language) {
           languages[repo.language] = (languages[repo.language] || 0) + 1;
         }
       });
-      
-        nst topLanguage = Object.keys(languages).reduce((a, b) => languages[a] > languages[b] ? a : b, 'Unknown');
-          ype = getPetType(topLanguage);
-        nsole.log(`Top Language: ${topLanguage}`);
-      
 
-      nsole.log(`User: ${username}, Mood: ${mood}, Type: ${petType}`);
-      
-       4. Generate SVG
+      const topLanguage = Object.keys(languages).reduce((a, b) => languages[a] > languages[b] ? a : b, 'Unknown');
+      petType = getPetType(topLanguage);
+      console.log(`Top Language: ${topLanguage}`);
+    }
+
+    console.log(`User: ${username}, Mood: ${mood}, Type: ${petType}`);
+
+    // 4. Generate SVG
     const svgContent = generateSVG(petType, mood);
 
     // 5. Write to File
@@ -746,14 +746,14 @@ async function run() {
     }
     fs.writeFileSync('dist/pet.svg', svgContent);
     console.log('Generated dist/pet.svg');
-    
-      tch (error) {
-    core.setFailed(error.message);
-    
-    
 
-  nction calculateStreak(events) {
-     (!events || events.length === 0) return 0;
+  } catch (error) {
+    core.setFailed(error.message);
+  }
+}
+
+function calculateStreak(events) {
+  if (!events || events.length === 0) return 0;
 
   // Extract unique dates (YYYY-MM-DD)
   const dates = new Set(events.map(e => e.created_at.split('T')[0]));
