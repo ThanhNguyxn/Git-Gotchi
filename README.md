@@ -28,7 +28,7 @@ This is the actual pet generated for **[ThanhNguyxn](https://github.com/ThanhNgu
 
 ## 🦁 The Pet Roster
 
-Your coding habits determine your companion:
+Your coding habits determine your companion. [View the full Pet Gallery here](GALLERY.md).
 
 | Language | Pet Species | Icon |
 | :--- | :--- | :---: |
