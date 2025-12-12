@@ -689,7 +689,7 @@ async function run() {
     const octokit = github.getOctokit(token);
 
     // 1. Fetch User Activity
-    const events = await octokit.rest.activity.listPublicEventsForRepoNetwork({
+    const events = await octokit.rest.activity.listPublicEventsForUser({
       username: username,
       per_page: 100,
     });
