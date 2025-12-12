@@ -72,7 +72,7 @@ name: Profile Gotchi
 
 on:
   schedule:
-    - cron: '0 */6 * * *' # Updates every 6 hours
+    - cron: '0 0 * * *' # Updates daily at 00:00 UTC
   workflow_dispatch: # Allows manual trigger
 
 jobs:

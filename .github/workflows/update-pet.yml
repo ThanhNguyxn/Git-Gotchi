@@ -2,7 +2,7 @@ name: Update Pet
 
 on:
   schedule:
-    - cron: "0 */6 * * *" # Run every 6 hours
+    - cron: "0 0 * * *" # Run daily at 00:00 UTC
   workflow_dispatch:
 
 jobs:
