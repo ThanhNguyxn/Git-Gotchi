@@ -49,6 +49,9 @@ Your coding habits determine your companion. [View the full Pet Gallery here](GA
 | **Shell** | **Tux** | 🐧 |
 | **Ruby** | **Gem** | 💎 |
 | **HTML / CSS** | **Chameleon** | 🦎 |
+| **Lua** | **Capybara** | 🦫 |
+| **Julia** | **Alpaca** | 🦙 |
+| **Elixir** | **Phoenix** | 🔥 |
 | **Others** | **Cat** | 🐱 |
 | **Star 🌟 or Fork 🍴** | **Unicorn** | 🦄 |
 

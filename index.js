@@ -35,7 +35,11 @@ const PET_COLORS = {
   gear: '#78909c',   // Blue Grey (C)
   ladder: '#dc143c', // Crimson (Scala)
   owl: '#9c27b0',    // Purple (R)
-  camel: '#d2691e'   // Chocolate (Perl)
+  camel: '#d2691e',  // Chocolate (Perl)
+  // Wave 2
+  capybara: '#8b7355', // Tan/Brown (Lua)
+  alpaca: '#f5f5dc',   // Beige/Cream (Julia)
+  phoenix: '#ff4500'   // Orange-Red (Elixir)
 };
 
 const SPRITES = {
@@ -949,6 +953,139 @@ const SPRITES = {
       "            ",
       "            "
     ]
+  },
+  // --- WAVE 2 ---
+  capybara: {
+    normal: [
+      "            ",
+      "    KKKK    ",
+      "   KXXXXK   ",
+      "  KXXXXXXK  ",
+      " KXW KXWXXK ",
+      " KXK KXKXXK ",
+      "  KXXXXXXXK ",
+      "  KXXXXXXXK ",
+      "  KXXXXXXXK ",
+      "  KXK  KXKK ",
+      "  KK    KK  ",
+      "            "
+    ],
+    sleep: [
+      "            ",
+      "    KKKK    ",
+      "   KXXXXK   ",
+      "  KXXXXXXK  ",
+      " KXK KXKXXK ",
+      " KXK KXKXXK ",
+      "  KXXXXXXXK ",
+      "  KXXXXXXXK ",
+      "  KXXXXXXXK ",
+      "  KXK  KXKK ",
+      "  KK    KK  ",
+      "            "
+    ],
+    ghost: [
+      "            ",
+      "    KKKK    ",
+      "   K    K   ",
+      "  KXXXXXXK  ",
+      " KXK KXKXXK ",
+      " KXK KXKXXK ",
+      "  KXXXXXXXK ",
+      "  KXXXXXXXK ",
+      "  K  X X  K ",
+      "  K K  K K  ",
+      "            ",
+      "            "
+    ]
+  },
+  alpaca: {
+    normal: [
+      "            ",
+      "     KK     ",
+      "    KXXK    ",
+      "   KXXXXK   ",
+      "   KXW KWK  ",
+      "   KXK KKK  ",
+      "    KXXXK   ",
+      "   KXXXXXK  ",
+      "  KXXXXXXXK ",
+      "  KXKKKKXK  ",
+      "  KK    KK  ",
+      "            "
+    ],
+    sleep: [
+      "            ",
+      "     KK     ",
+      "    KXXK    ",
+      "   KXXXXK   ",
+      "   KXK KKK  ",
+      "   KXK KKK  ",
+      "    KXXXK   ",
+      "   KXXXXXK  ",
+      "  KXXXXXXXK ",
+      "  KXKKKKXK  ",
+      "  KK    KK  ",
+      "            "
+    ],
+    ghost: [
+      "            ",
+      "     KK     ",
+      "    K  K    ",
+      "   KXXXXK   ",
+      "   KXK KKK  ",
+      "   KXK KKK  ",
+      "    KXXXK   ",
+      "   KXXXXXK  ",
+      "  K  X X  K ",
+      "  K K  K K  ",
+      "            ",
+      "            "
+    ]
+  },
+  phoenix: {
+    normal: [
+      "            ",
+      "   RR  YY   ",
+      "  RXXR YXY  ",
+      "   KXXXXK   ",
+      "  KXXXXXXXK ",
+      " KXXW KXWXXK",
+      " KXXK KXKXXK",
+      "  KXXXXXXXK ",
+      "   KXXXXXK  ",
+      "  RR KXK YY ",
+      "  R   K   Y ",
+      "            "
+    ],
+    sleep: [
+      "            ",
+      "   RR  YY   ",
+      "  RXXR YXY  ",
+      "   KXXXXK   ",
+      "  KXXXXXXXK ",
+      " KXXK KXKXXK",
+      " KXXK KXKXXK",
+      "  KXXXXXXXK ",
+      "   KXXXXXK  ",
+      "  RR KXK YY ",
+      "  R   K   Y ",
+      "            "
+    ],
+    ghost: [
+      "            ",
+      "            ",
+      "   K    K   ",
+      "   KXXXXK   ",
+      "  KXXXXXXXK ",
+      " KXXK KXKXXK",
+      " KXXK KXKXXK",
+      "  KXXXXXXXK ",
+      "   K X X K  ",
+      "   K K K K  ",
+      "            ",
+      "            "
+    ]
   }
 };
 
@@ -1124,6 +1261,10 @@ function getPetType(language) {
     'Scala': 'ladder',
     'R': 'owl',
     'Perl': 'camel',
+    // Wave 2
+    'Lua': 'capybara',
+    'Julia': 'alpaca',
+    'Elixir': 'phoenix',
   };
   return map[language] || 'cat';
 }
