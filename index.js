@@ -1345,7 +1345,8 @@ function generateSVG(petType, mood) {
       <style>
         .pet { transform-origin: center; }
       </style>
-      <rect width="100%" height="100%" fill="transparent" />
+      <!-- Subtle background for visibility on light/dark themes -->
+      <rect x="5" y="5" width="${width + 30}" height="${height + 25}" rx="12" ry="12" fill="rgba(45, 51, 59, 0.15)" />
       <g transform="translate(20, 20)" opacity="${groupOpacity}">
         <g class="pet">
             ${pixelArt}
