@@ -46,8 +46,8 @@ function generateSVG(petType, mood) {
     const spriteSet = SPRITES[petType] || SPRITES['cat'];
 
     // 2. Select the specific Mood Grid
-    const moodKey = (mood === 'happy') ? 'normal' : mood;
-    const spriteGrid = spriteSet[moodKey] || spriteSet['normal'];
+    // 2. Select the specific Mood Grid
+    const spriteGrid = spriteSet[mood] || spriteSet['normal'];
 
     const baseColor = PET_COLORS[petType] || '#e5c07b';
 

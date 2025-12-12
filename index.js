@@ -607,14 +607,32 @@ const SPRITES = {
   unicorn: {
     normal: [
       '                ',
-      '      Y         ', // Y = Sừng vàng
-      '    WWYWW       ', // W = Đầu trắng
-      '   WKWWWWR      ', // K = Mắt đen, R = Bờm đỏ
-      '   WWWWWRO      ', // O = Bờm cam
-      '    WWWWROY     ', // Y = Bờm vàng
-      '     WWROYG     ', // G = Bờm xanh lá
-      '    WWROYGB     ', // B = Bờm xanh dương
-      '   WWROYGBP     ', // P = Bờm tím
+      '      Y         ',
+      '    WWYWW       ',
+      '   WKWWWWR      ',
+      '   WWWWWRO      ',
+      '    WWWWROY     ',
+      '     WWROYG     ',
+      '    WWROYGB     ',
+      '   WWROYGBP     ',
+      '  WWWWWGBP      ',
+      '  WWWWWW        ',
+      ' WW  WW         ',
+      ' WW  WW         ',
+      '                ',
+      '                ',
+      '                '
+    ],
+    happy: [
+      '                ',
+      '      Y         ',
+      '    WWYWW       ',
+      '   WBWWWWR      ', // B = Blue Eye (Sparkling/Happy)
+      '   WWWWWRO      ',
+      '    WWWWROY     ',
+      '     WWROYG     ',
+      '    WWROYGB     ',
+      '   WWROYGBP     ',
       '  WWWWWGBP      ',
       '  WWWWWW        ',
       ' WW  WW         ',
@@ -627,8 +645,8 @@ const SPRITES = {
       '                ',
       '      Y         ',
       '    WWYWW       ',
-      '   WWWWWWR      ', // Mắt nhắm (không có K)
-      '   WWWWWRO      ',
+      '   WWWWWWR      ', // Eye removed from here
+      '   WKWWWRO      ', // Eye moved down (Closed/Sleeping)
       '    WWWWROY     ',
       '     WWROYG     ',
       '    WWROYGB     ',
@@ -643,9 +661,9 @@ const SPRITES = {
     ],
     ghost: [
       '                ',
-      '      K         ', // K = Sừng đen/xám
+      '      K         ',
       '    KKKKK       ',
-      '   KXXXXXK      ', // X = Mắt chết
+      '   KXXXXXK      ',
       '   KKKKKKK      ',
       '    KKKKKKK     ',
       '     KKKKKK     ',
