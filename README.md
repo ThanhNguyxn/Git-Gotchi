@@ -40,10 +40,16 @@ Your coding habits determine your companion:
 
 ---
 
-## 🚀 Quick Start
+## 📖 Setup Guide
 
-### 1. Create the Workflow
-Create a new file in your repository at `.github/workflows/profile-gotchi.yml`:
+Follow these steps to add a pet to your profile:
+
+### Step 1: Create the Workflow File
+
+1.  In your repository (e.g., `username/username`), go to the **Actions** tab.
+2.  Click **New workflow** -> **set up a workflow yourself**.
+3.  Name the file `profile-gotchi.yml`.
+4.  Paste the following code:
 
 ```yaml
 name: Profile Gotchi
@@ -76,8 +82,17 @@ jobs:
           git push
 ```
 
-### 2. Add to README
-Add this markdown to your profile `README.md` to display your pet:
+### Step 2: Check Permissions
+
+Ensure your workflow has permission to write to the repository:
+1.  Go to **Settings** -> **Actions** -> **General**.
+2.  Scroll down to **Workflow permissions**.
+3.  Select **Read and write permissions**.
+4.  Click **Save**.
+
+### Step 3: Add the Pet to your Profile
+
+Edit your `README.md` and add the following markdown where you want the pet to appear:
 
 ```markdown
 ### My Coding Pet 👾
