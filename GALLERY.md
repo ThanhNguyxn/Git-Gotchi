@@ -16,6 +16,10 @@ Here is the full roster of pixel art mascots available in **Profile-Gotchi v1.1.
 | :---: | :---: | :---: | :---: |
 | ![Spider](dist/spider.svg) | ![Snake](dist/snake.svg) | ![Gopher](dist/gopher.svg) | ![Cat](dist/cat.svg) |
 
+| **Tux** (Shell) | **Unicorn** (Legendary) | | |
+| :---: | :---: | :---: | :---: |
+| ![Tux](dist/tux.svg) | ![Unicorn](dist/unicorn.svg) | | |
+
 ---
 
 ## 🎭 Mood Examples (Demo with Crab)

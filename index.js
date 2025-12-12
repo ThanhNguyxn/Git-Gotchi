@@ -1,213 +1,253 @@
 const core = require('@actions/core');
 const github = require('@actions/github');
 
-// --- PIXEL ART ASSETS ---
+// --- PIXEL ART ASSETS (MULTI-COLOR) ---
 
-// 12x12 Grid System
-// 0: Transparent
-// 1: Outline (Dark)
-// 2: White (Eyes/Highlights)
-// 3: Primary
-// 4: Secondary
-// 5: Accent
+// Legend:
+// ' ': Transparent
+// 'X': Base Color (Dynamic)
+// 'W': White (#FFFFFF)
+// 'K': Black (#2d333b) - Outline
+// 'O': Orange (#FF9F00)
+// 'R': Red (#FF0000)
+// 'Y': Yellow (#FFD700)
+// 'B': Blue (#00ADD8)
+// 'P': Purple (#C678DD)
 
-const PALETTE = {
-  0: null,
-  1: '#24292e', // Dark Grey (Outline)
-  2: '#ffffff', // White
-  3: '#e06c75', // Red
-  4: '#98c379', // Green
-  5: '#e5c07b', // Yellow
-  6: '#61afef', // Blue
-  7: '#c678dd', // Purple
-  8: '#56b6c2', // Cyan
-  9: '#d19a66', // Orange
-  10: '#abb2bf', // Grey
-  11: '#8b4513', // Brown
+const PET_COLORS = {
+  spider: '#e5c07b', // Yellow
+  snake: '#98c379',  // Green
+  gopher: '#61afef', // Blue
+  crab: '#e06c75',   // Red
+  elephant: '#61afef', // Blue
+  coffee: '#8b4513', // Brown
+  bird: '#d19a66',   // Orange
+  robot: '#abb2bf',  // Grey
+  whale: '#61afef',  // Blue
+  gem: '#e06c75',    // Red
+  chameleon: '#98c379', // Green
+  cat: '#e5c07b',    // Yellow/Orange
+  tux: '#2d333b',    // Black (Base for Tux is technically black, but we use K for black, so X can be ignored or used for shading)
+  unicorn: '#ffffff' // White
 };
 
 const SPRITES = {
-  // Rust: Crab (Red)
   crab: [
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0],
-    [0, 1, 3, 1, 0, 0, 0, 0, 1, 3, 1, 0],
-    [0, 1, 3, 3, 1, 0, 0, 1, 3, 3, 1, 0],
-    [0, 0, 1, 3, 3, 1, 1, 3, 3, 1, 0, 0],
-    [0, 1, 3, 3, 3, 3, 3, 3, 3, 3, 1, 0],
-    [1, 3, 3, 2, 1, 3, 3, 2, 1, 3, 3, 1],
-    [1, 3, 3, 1, 1, 3, 3, 1, 1, 3, 3, 1],
-    [1, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 1],
-    [0, 1, 3, 1, 3, 3, 3, 3, 1, 3, 1, 0],
-    [0, 0, 1, 0, 1, 1, 1, 1, 0, 1, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+    "            ",
+    "  K      K  ",
+    " KXK    KXK ",
+    " KXXK  KXXK ",
+    "  KXXKKXXK  ",
+    " KXXXXXXXXK ",
+    "KXXW KXXW K ",
+    "KXXK KXXK K ",
+    "KXXXXXXXXXK ",
+    " KX KXXX K  ",
+    "  K KKKK K  ",
+    "            "
   ],
-  // PHP: Elephant (Blue)
   elephant: [
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0],
-    [0, 0, 0, 1, 6, 6, 6, 6, 6, 1, 0, 0],
-    [0, 0, 1, 6, 6, 6, 6, 6, 6, 6, 1, 0],
-    [0, 1, 6, 6, 6, 2, 1, 6, 2, 1, 6, 1],
-    [1, 6, 6, 6, 6, 1, 1, 6, 1, 1, 6, 1],
-    [1, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 1],
-    [1, 6, 6, 6, 6, 6, 6, 6, 6, 6, 1, 0],
-    [0, 1, 6, 6, 1, 6, 6, 1, 6, 6, 1, 0],
-    [0, 1, 6, 6, 1, 0, 0, 1, 6, 6, 1, 0],
-    [0, 0, 1, 1, 0, 0, 0, 0, 1, 1, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+    "            ",
+    "    KKKKK   ",
+    "   KXXXXXK  ",
+    "  KXXXXXXXK ",
+    " KXXXWKXWKXK",
+    "KXXXXKKXKKXK",
+    "KXXXXXXXXXXK",
+    "KXXXXXXXXXK ",
+    " KXXKXXKXXK ",
+    " KXXK  KXXK ",
+    "  KK    KK  ",
+    "            "
   ],
-  // Java: Coffee (Brown)
   coffee: [
-    [0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0],
-    [0, 0, 0, 0, 2, 0, 0, 2, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0],
-    [0, 1, 11, 11, 11, 11, 11, 11, 1, 0, 0],
-    [0, 1, 11, 11, 11, 11, 11, 11, 1, 1, 0],
-    [0, 1, 11, 2, 2, 11, 11, 11, 1, 0, 1],
-    [0, 1, 11, 11, 11, 11, 11, 11, 1, 1, 0],
-    [0, 0, 1, 11, 11, 11, 11, 11, 1, 0, 0],
-    [0, 0, 0, 1, 1, 1, 1, 1, 1, 0, 0, 0],
-    [0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+    "    K  K    ",
+    "    W  W    ",
+    "            ",
+    "  KKKKKKK   ",
+    " KXXXXXXXK  ",
+    " KXXXXXXXKK ",
+    " KXXWWXXXK K",
+    " KXXXXXXXKK ",
+    "  KXXXXXXXK ",
+    "   KKKKKKK  ",
+    "  KKKKKKKKK ",
+    "            "
   ],
-  // Swift: Bird (Orange)
   bird: [
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0],
-    [0, 0, 0, 0, 0, 1, 9, 9, 9, 9, 1, 0],
-    [0, 0, 1, 0, 1, 9, 2, 1, 9, 9, 1, 0],
-    [0, 1, 9, 1, 9, 9, 1, 1, 9, 9, 1, 0],
-    [1, 9, 9, 9, 9, 9, 9, 9, 9, 9, 1, 0],
-    [1, 9, 9, 9, 9, 9, 9, 9, 9, 1, 0, 0],
-    [0, 1, 9, 9, 9, 9, 9, 9, 1, 0, 0, 0],
-    [0, 0, 1, 9, 9, 9, 9, 1, 0, 0, 0, 0],
-    [0, 0, 0, 1, 9, 9, 1, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+    "            ",
+    "      KKKK  ",
+    "     KXXXXK ",
+    "  K KXXXXXK ",
+    " KXKXWXXKXK ",
+    "KXXXXXXXXXK ",
+    "KXXXXXXXXK  ",
+    " KXXXXXXXK  ",
+    "  KXXXXXK   ",
+    "   KXXK     ",
+    "    KK      ",
+    "            "
   ],
-  // C++/C#: Robot (Grey)
   robot: [
-    [0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0],
-    [0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0],
-    [0, 1, 10, 10, 10, 10, 10, 10, 10, 1, 0],
-    [1, 10, 2, 2, 10, 10, 2, 2, 10, 1],
-    [1, 10, 2, 1, 10, 10, 2, 1, 10, 1],
-    [1, 10, 10, 10, 10, 10, 10, 10, 10, 1],
-    [1, 10, 1, 1, 1, 1, 1, 1, 10, 1],
-    [1, 10, 1, 3, 3, 3, 3, 1, 10, 1],
-    [0, 1, 10, 1, 1, 1, 1, 10, 1, 0],
-    [0, 0, 1, 1, 1, 1, 1, 1, 1, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+    "     KK     ",
+    "     KK     ",
+    "  KKKKKKKK  ",
+    " KXXXXXXXXK ",
+    "KXWWXXXXWWXK",
+    "KXWWXXXXWWXK",
+    "KXXXXXXXXXXK",
+    "KXKKKKKKKKXK",
+    "KXKRRRRRRKXK",
+    " KXXXXXXXXK ",
+    "  KKKKKKKK  ",
+    "            "
   ],
-  // Shell/Docker: Whale (Blue)
   whale: [
-    [0, 0, 0, 0, 0, 0, 0, 8, 0, 8, 0, 0],
-    [0, 0, 0, 0, 0, 0, 1, 8, 1, 8, 1, 0],
-    [0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 0],
-    [0, 0, 0, 0, 1, 6, 6, 6, 6, 6, 6, 1],
-    [0, 0, 0, 1, 6, 6, 6, 6, 6, 6, 6, 1],
-    [0, 1, 1, 6, 6, 2, 1, 6, 6, 6, 6, 1],
-    [1, 6, 6, 6, 6, 1, 1, 6, 6, 6, 6, 1],
-    [1, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 1],
-    [1, 6, 6, 6, 6, 6, 6, 6, 6, 6, 1, 0],
-    [0, 1, 1, 6, 6, 6, 6, 6, 1, 1, 0, 0],
-    [0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+    "       B B  ",
+    "      KBKBK ",
+    "     KBBBBBK",
+    "    KXXXXXXK",
+    "   KXXXXXXXK",
+    " KKXXWKXXXXK",
+    "KXXXXKKXXXXK",
+    "KXXXXXXXXXXK",
+    "KXXXXXXXXXK ",
+    " KKXXXXXKK  ",
+    "   KKKKK    ",
+    "            "
   ],
-  // Ruby: Gem (Red)
   gem: [
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0],
-    [0, 0, 0, 1, 3, 3, 3, 3, 1, 0, 0, 0],
-    [0, 0, 1, 3, 2, 3, 3, 3, 3, 1, 0, 0],
-    [0, 1, 3, 3, 3, 3, 3, 3, 3, 3, 1, 0],
-    [1, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 1],
-    [1, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 1],
-    [0, 1, 3, 3, 3, 3, 3, 3, 3, 3, 1, 0],
-    [0, 0, 1, 3, 3, 3, 3, 3, 3, 1, 0, 0],
-    [0, 0, 0, 1, 3, 3, 3, 3, 1, 0, 0, 0],
-    [0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+    "            ",
+    "    KKKK    ",
+    "   KXXXXK   ",
+    "  KXWXXXXK  ",
+    " KXXXXXXXXK ",
+    "KXXXXXXXXXXK",
+    "KXXXXXXXXXXK",
+    " KXXXXXXXXK ",
+    "  KXXXXXK   ",
+    "   KXXXXK   ",
+    "    KKKK    ",
+    "            "
   ],
-  // HTML/CSS: Chameleon (Green)
   chameleon: [
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0],
-    [0, 0, 0, 0, 1, 4, 4, 4, 4, 1, 0, 0],
-    [0, 0, 0, 1, 4, 4, 2, 1, 4, 4, 1, 0],
-    [0, 0, 1, 4, 4, 4, 1, 1, 4, 4, 1, 0],
-    [0, 1, 4, 4, 4, 4, 4, 4, 4, 4, 1, 0],
-    [1, 4, 4, 4, 3, 3, 4, 4, 4, 4, 1, 0],
-    [1, 4, 4, 4, 3, 3, 4, 4, 4, 1, 0, 0],
-    [0, 1, 4, 4, 4, 4, 4, 4, 1, 0, 0, 0],
-    [0, 0, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+    "            ",
+    "     KKKK   ",
+    "    KXXXXK  ",
+    "   KXXXXXK  ",
+    "  KXXXXWXXK ",
+    " KXXXXXXXXK ",
+    "KXXXRRXXXXK ",
+    "KXXXRRXXXK  ",
+    " KXXXXXXXK  ",
+    "  KKKKKKK   ",
+    "            ",
+    "            "
   ],
-  // JS/TS: Spider (Yellow/Black)
   spider: [
-    [0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0],
-    [1, 0, 0, 0, 1, 1, 1, 0, 0, 0, 1, 0],
-    [0, 1, 0, 1, 1, 1, 1, 1, 0, 1, 0, 0],
-    [0, 0, 1, 1, 5, 5, 5, 1, 1, 0, 0, 0],
-    [0, 1, 1, 5, 2, 1, 2, 5, 1, 1, 0, 0],
-    [1, 0, 1, 5, 5, 5, 5, 5, 1, 0, 1, 0],
-    [0, 0, 1, 1, 5, 5, 5, 1, 1, 0, 0, 0],
-    [0, 1, 0, 0, 1, 1, 1, 0, 0, 1, 0, 0],
-    [1, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1, 0],
-    [0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+    "     K      ",
+    "     K      ",
+    "K   KKK   K ",
+    " K KKKKK K  ",
+    "  KKXXXKK   ",
+    " KXXWKWXXK  ",
+    "KXXXXXXXXXK ",
+    "  KKXXXKK   ",
+    " K  KKK  K  ",
+    "K  K   K  K ",
+    "  K     K   ",
+    "            "
   ],
-  // Python: Snake (Green/Yellow)
   snake: [
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0],
-    [0, 0, 0, 0, 1, 6, 6, 6, 1, 0, 0, 0],
-    [0, 0, 0, 1, 6, 2, 1, 6, 6, 1, 0, 0],
-    [0, 0, 0, 1, 6, 6, 6, 6, 6, 1, 0, 0],
-    [0, 0, 0, 0, 1, 1, 6, 6, 1, 0, 0, 0],
-    [0, 0, 0, 1, 5, 5, 1, 1, 0, 0, 0, 0],
-    [0, 0, 1, 5, 5, 5, 5, 1, 0, 0, 0, 0],
-    [0, 1, 5, 5, 5, 5, 5, 1, 0, 0, 0, 0],
-    [0, 1, 5, 5, 1, 1, 5, 1, 0, 0, 0, 0],
-    [0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+    "            ",
+    "     KKK    ",
+    "    KXXXK   ",
+    "   KXWKXXK  ",
+    "   KXXXXXK  ",
+    "    KKKXXK  ",
+    "   KXXKXXK  ",
+    "  KXXXXXK   ",
+    " KXXXXXK    ",
+    " KXXKKXK    ",
+    "  KK  KK    ",
+    "            "
   ],
-  // Go: Gopher (Blue/Cyan)
   gopher: [
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0],
-    [0, 0, 0, 1, 8, 8, 8, 8, 1, 0, 0, 0],
-    [0, 0, 1, 8, 2, 1, 2, 8, 8, 1, 0, 0],
-    [0, 0, 1, 8, 1, 1, 1, 8, 8, 1, 0, 0],
-    [0, 0, 1, 8, 8, 2, 2, 8, 8, 1, 0, 0],
-    [0, 1, 8, 8, 8, 2, 2, 8, 8, 8, 1, 0],
-    [1, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 1],
-    [1, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 1],
-    [0, 1, 8, 8, 8, 8, 8, 8, 8, 8, 1, 0],
-    [0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+    "            ",
+    "    KKKK    ",
+    "   KXXXXK   ",
+    "  KXWKXWXXK ",
+    "  KXXXXXXK  ",
+    "  KXXWWXXK  ",
+    " KXXXWWXXXK ",
+    "KXXXXXXXXXXK",
+    "KXXXXXXXXXXK",
+    " KXXXXXXXXK ",
+    "  KKKKKKKK  ",
+    "            "
   ],
-  // Default: Cat (Orange/Tabby)
   cat: [
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0],
-    [0, 1, 5, 1, 0, 0, 0, 0, 1, 5, 1, 0],
-    [0, 1, 5, 5, 1, 1, 1, 1, 5, 5, 1, 0],
-    [0, 1, 5, 5, 5, 5, 5, 5, 5, 5, 1, 0],
-    [0, 1, 5, 2, 1, 5, 5, 2, 1, 5, 1, 0],
-    [0, 1, 5, 1, 1, 5, 5, 1, 1, 5, 1, 0],
-    [0, 1, 5, 5, 5, 3, 3, 5, 5, 5, 1, 0],
-    [0, 0, 1, 5, 5, 5, 5, 5, 5, 1, 0, 0],
-    [0, 0, 1, 5, 1, 1, 1, 1, 5, 1, 0, 0],
-    [0, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+    "            ",
+    "  K      K  ",
+    " KXK    KXK ",
+    " KXXKKKKXXK ",
+    " KXXXXXXXXK ",
+    " KXWKXXWKXK ",
+    " KXXXXXXXXK ",
+    " KXXXOOXXXK ",
+    "  KXXXXXXK  ",
+    "  KXXXXXXK  ",
+    "   KK  KK   ",
+    "            "
+  ],
+  tux: [
+    "            ",
+    "    KKKKK   ",
+    "   KKKKKKK  ",
+    "  KKWKKKWKK ",
+    "  KKKKKKKKK ",
+    " KKKKKKKKKK ",
+    " KWWWWWWWWK ",
+    "KWWWWWWWWWWK",
+    "KWWWWWWWWWWK",
+    " KWWWWWWWWK ",
+    " KK OOO KK  ",
+    "    O O     "
+  ],
+  unicorn: [
+    "      K K   ",
+    "      K K   ",
+    "   KKKKKKK  ",
+    "  KXXXXXXXK ",
+    "  KXXXXXXXK ",
+    " KXXXWKXXXK ",
+    " KXXXXXXXXK ",
+    " KXXXXXXXXK ",
+    " KXXXXXXXXK ",
+    " KXXXXXXXXK ",
+    "  KKKKKKKK  ",
+    "            "
   ]
 };
+
+// Override Unicorn with Rainbow Mane logic in rendering or just hardcode it here?
+// The user said: "mix of 'X' (White body) and 'R', 'Y', 'B', 'P' for the rainbow mane/tail."
+// Let's update the Unicorn sprite to actually use those chars.
+SPRITES.unicorn = [
+  "      Y     ",
+  "     K K    ",
+  "   KKXKXK   ",
+  "  KXXXXXXK  ",
+  " RXXXXWXXK  ",
+  " YXXXXXXXK  ",
+  " BXXXXXXXK  ",
+  " PXXXXXXXK  ",
+  " RXXXXXXXK  ",
+  " YXXXXXXXK  ",
+  "  KKKKKKK   ",
+  "            "
+];
+
 
 // --- CORE LOGIC ---
 
@@ -223,34 +263,46 @@ async function run() {
       per_page: 100,
     });
 
-    // 2. Determine State (Mood)
+    // 2. Determine State (Mood) & Streak
+    const now = new Date();
     const lastEvent = events.data[0];
     const lastEventDate = lastEvent ? new Date(lastEvent.created_at) : new Date(0);
-    const now = new Date();
     const hoursSinceLastEvent = (now - lastEventDate) / (1000 * 60 * 60);
 
     let mood = 'sleeping';
     if (hoursSinceLastEvent < 24) mood = 'happy';
-    if (hoursSinceLastEvent > 168) mood = 'ghost'; // 7 days
+    if (hoursSinceLastEvent > 168) mood = 'ghost';
+
+    // Calculate Streak
+    const streak = calculateStreak(events.data);
+    console.log(`Current Streak: ${streak} days`);
 
     // 3. Determine Pet Type (Species)
-    const repos = await octokit.rest.repos.listForUser({
-      username: username,
-      sort: 'updated',
-      per_page: 10,
-    });
+    let petType = 'cat';
 
-    const languages = {};
-    repos.data.forEach(repo => {
-      if (repo.language) {
-        languages[repo.language] = (languages[repo.language] || 0) + 1;
-      }
-    });
+    if (streak >= 14) {
+      petType = 'unicorn';
+      console.log('Legendary Status Unlocked! 🦄');
+    } else {
+      const repos = await octokit.rest.repos.listForUser({
+        username: username,
+        sort: 'updated',
+        per_page: 10,
+      });
 
-    const topLanguage = Object.keys(languages).reduce((a, b) => languages[a] > languages[b] ? a : b, 'Unknown');
-    const petType = getPetType(topLanguage);
+      const languages = {};
+      repos.data.forEach(repo => {
+        if (repo.language) {
+          languages[repo.language] = (languages[repo.language] || 0) + 1;
+        }
+      });
 
-    console.log(`User: ${username}, Mood: ${mood}, Type: ${petType} (${topLanguage})`);
+      const topLanguage = Object.keys(languages).reduce((a, b) => languages[a] > languages[b] ? a : b, 'Unknown');
+      petType = getPetType(topLanguage);
+      console.log(`Top Language: ${topLanguage}`);
+    }
+
+    console.log(`User: ${username}, Mood: ${mood}, Type: ${petType}`);
 
     // 4. Generate SVG
     const svgContent = generateSVG(petType, mood);
@@ -268,6 +320,48 @@ async function run() {
   }
 }
 
+function calculateStreak(events) {
+  if (!events || events.length === 0) return 0;
+
+  // Extract unique dates (YYYY-MM-DD)
+  const dates = new Set(events.map(e => e.created_at.split('T')[0]));
+  const sortedDates = Array.from(dates).sort().reverse(); // Newest first
+
+  let streak = 0;
+  let currentDate = new Date();
+
+  // Check if there's an event today or yesterday to start the streak
+  const todayStr = currentDate.toISOString().split('T')[0];
+  currentDate.setDate(currentDate.getDate() - 1);
+  const yesterdayStr = currentDate.toISOString().split('T')[0];
+
+  if (!dates.has(todayStr) && !dates.has(yesterdayStr)) {
+    return 0;
+  }
+
+  // Iterate backwards
+  // Simple logic: Check consecutive days from today/yesterday
+  // Reset current date to today for iteration
+  currentDate = new Date();
+
+  // If no event today, start check from yesterday
+  if (!dates.has(todayStr)) {
+    currentDate.setDate(currentDate.getDate() - 1);
+  }
+
+  while (true) {
+    const dateStr = currentDate.toISOString().split('T')[0];
+    if (dates.has(dateStr)) {
+      streak++;
+      currentDate.setDate(currentDate.getDate() - 1);
+    } else {
+      break;
+    }
+  }
+
+  return streak;
+}
+
 function getPetType(language) {
   const map = {
     'JavaScript': 'spider',
@@ -280,7 +374,7 @@ function getPetType(language) {
     'Swift': 'bird',
     'C++': 'robot',
     'C#': 'robot',
-    'Shell': 'whale',
+    'Shell': 'tux',
     'Dockerfile': 'whale',
     'Ruby': 'gem',
     'HTML': 'chameleon',
@@ -289,12 +383,26 @@ function getPetType(language) {
   return map[language] || 'cat';
 }
 
-function renderPixelGrid(grid, pixelSize = 10) {
+function renderPixelGrid(grid, baseColor, pixelSize = 10) {
   let rects = '';
-  grid.forEach((row, y) => {
-    row.forEach((colorId, x) => {
-      if (colorId !== 0 && PALETTE[colorId]) {
-        const color = PALETTE[colorId];
+
+  const colorMap = {
+    ' ': null,
+    'X': baseColor,
+    'W': '#ffffff',
+    'K': '#2d333b',
+    'O': '#FF9F00',
+    'R': '#FF0000',
+    'Y': '#FFD700',
+    'B': '#00ADD8',
+    'P': '#C678DD'
+  };
+
+  grid.forEach((rowString, y) => {
+    const row = rowString.split('');
+    row.forEach((char, x) => {
+      const color = colorMap[char];
+      if (color) {
         rects += `<rect x="${x * pixelSize}" y="${y * pixelSize}" width="${pixelSize}" height="${pixelSize}" fill="${color}" />`;
       }
     });
@@ -304,33 +412,33 @@ function renderPixelGrid(grid, pixelSize = 10) {
 
 function generateSVG(petType, mood) {
   const sprite = SPRITES[petType] || SPRITES['cat'];
+  const baseColor = PET_COLORS[petType] || '#e5c07b';
 
-  // Modify sprite for mood if needed (e.g., close eyes for sleeping)
-  let renderSprite = JSON.parse(JSON.stringify(sprite)); // Deep copy
+  let renderSprite = [...sprite]; // Copy array
 
   if (mood === 'sleeping') {
-    // Simple logic: replace eye pixels (color 2) with eyelids (color 1 or 3)
-    // Or just hardcode some changes. For now, let's just turn white eyes (2) to closed (1)
-    renderSprite = renderSprite.map(row => row.map(cell => cell === 2 ? 1 : cell));
+    // Replace 'W' (eyes) with 'K' (closed) or 'X' (eyelids)
+    renderSprite = renderSprite.map(row => row.replace(/W/g, 'K'));
   }
 
   if (mood === 'ghost') {
-    // Turn everything into a ghost style? Or just make it transparent/grey?
-    // Let's just use the robot palette (grey) for everything except outline
-    renderSprite = renderSprite.map(row => row.map(cell => {
-      if (cell === 1) return 1; // Keep outline
-      if (cell === 0) return 0;
-      return 10; // Turn everything else grey
-    }));
+    // Ghost logic: Turn Base Color to Grey, keep Outline
+    // We can hack this by changing the baseColor passed to render
+    // But we also need to handle other colors.
+    // Simpler: Just render normally but apply a CSS filter or override baseColor to grey
+    // and maybe replace other colors with grey too.
+    // Let's just override baseColor for now.
   }
 
-  const pixelSize = 16; // Bigger pixels for better visibility
+  const pixelSize = 16;
   const width = 12 * pixelSize;
   const height = 12 * pixelSize;
 
-  const pixelArt = renderPixelGrid(renderSprite, pixelSize);
+  // If ghost, override baseColor
+  const finalBaseColor = mood === 'ghost' ? '#abb2bf' : baseColor;
 
-  // Add some animation or background
+  const pixelArt = renderPixelGrid(renderSprite, finalBaseColor, pixelSize);
+
   let animation = '';
   if (mood === 'happy') {
     animation = `
@@ -352,12 +460,15 @@ function generateSVG(petType, mood) {
         />`;
   }
 
+  // Ghost opacity effect
+  const groupOpacity = mood === 'ghost' ? '0.7' : '1';
+
   return `<svg xmlns="http://www.w3.org/2000/svg" width="${width + 40}" height="${height + 40}" viewBox="0 0 ${width + 40} ${height + 40}">
       <style>
         .pet { transform-origin: center; }
       </style>
       <rect width="100%" height="100%" fill="transparent" />
-      <g transform="translate(20, 20)">
+      <g transform="translate(20, 20)" opacity="${groupOpacity}">
         <g class="pet">
             ${pixelArt}
             ${animation}

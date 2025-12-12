@@ -40,10 +40,11 @@ Your coding habits determine your companion. [View the full Pet Gallery here](GA
 | **Java** | **Coffee** | ☕ |
 | **Swift** | **Bird** | 🕊️ |
 | **C++ / C#** | **Robot** | 🤖 |
-| **Shell / Docker** | **Whale** | 🐳 |
+| **Shell** | **Tux** | 🐧 |
 | **Ruby** | **Gem** | 💎 |
 | **HTML / CSS** | **Chameleon** | 🦎 |
 | **Others** | **Cat** | 🐱 |
+| **14 Day Streak** | **Unicorn** | 🦄 |
 
 ## 🎭 Moods & States
 
