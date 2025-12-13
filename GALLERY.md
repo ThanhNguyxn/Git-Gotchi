@@ -11,6 +11,17 @@ Now featuring **23 unique pets**, **3 themes**, **6 moods**, **Leveling System**
 | **Cyberpunk** 🌆 | ![Cyberpunk](dist/demo_cyberpunk.svg) |
 | **Nature** 🌿 | ![Nature](dist/demo_nature.svg) |
 
+## 😊 Mood Demos
+
+| Mood | Preview |
+| :--- | :---: |
+| **Happy** ⚡ | ![Happy](dist/mood_happy.svg) |
+| **Hyper** 🔥 | ![Hyper](dist/mood_hyper.svg) |
+| **Night Owl** 🦉 | ![Night Owl](dist/mood_nightowl.svg) |
+| **Weekend Chill** 🏖️ | ![Weekend](dist/mood_weekend.svg) |
+| **Sleeping** 💤 | ![Sleeping](dist/mood_sleeping.svg) |
+| **Ghost** 👻 | ![Ghost](dist/mood_ghost.svg) |
+
 ---
 
 ## 🦁 The Roster

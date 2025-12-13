@@ -134,5 +134,53 @@ pets.forEach(pet => {
     console.log(`Generated demo_${theme}.svg`);
 });
 
-console.log('Done!');
+// Generate mood demo files with custom labels
+const moodDemos = [
+    { name: 'happy', label: '⚡ HAPPY', sprite: 'happy' },
+    { name: 'sleeping', label: '💤 SLEEPING', sprite: 'sleeping' },
+    { name: 'ghost', label: '👻 GHOST', sprite: 'ghost' },
+    { name: 'hyper', label: '🔥 HYPER', sprite: 'happy' },
+    { name: 'nightowl', label: '🦉 NIGHT OWL', sprite: 'happy' },
+    { name: 'weekend', label: '🏖️ WEEKEND CHILL', sprite: 'happy' }
+];
 
+moodDemos.forEach(({ name, label, sprite }) => {
+    const spriteSet = SPRITES['unicorn'] || SPRITES['cat'];
+    const moodKey = (sprite === 'happy') ? 'normal' : sprite;
+    const spriteGrid = spriteSet[moodKey] || spriteSet['normal'];
+    const baseColor = PET_COLORS['unicorn'] || '#e5c07b';
+
+    const pixelSize = 16;
+    const rows = spriteGrid.length;
+    const cols = spriteGrid[0].length;
+    const width = cols * pixelSize;
+    const height = rows * pixelSize;
+    const svgWidth = width + 40;
+    const svgHeight = height + 40;
+
+    const finalBaseColor = sprite === 'ghost' ? '#abb2bf' : baseColor;
+    const groupOpacity = sprite === 'ghost' ? '0.7' : '1';
+    const pixelArt = renderPixelGrid(spriteGrid, finalBaseColor, pixelSize);
+    const themeBackground = getThemeBackground('minimal', svgWidth, svgHeight);
+
+    let animation = '';
+    if (sprite === 'happy') {
+        animation = `<animateTransform attributeName="transform" type="translate" values="0 0; 0 -4; 0 0" dur="0.5s" repeatCount="indefinite" />`;
+    } else if (sprite === 'sleeping') {
+        animation = `<animateTransform attributeName="transform" type="scale" values="1 1; 1.02 0.98; 1 1" dur="2s" repeatCount="indefinite" />`;
+    }
+
+    const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${svgWidth}" height="${svgHeight}" viewBox="0 0 ${svgWidth} ${svgHeight}">
+      <style>.pet { transform-origin: center; }</style>
+      ${themeBackground}
+      <g transform="translate(20, 20)" opacity="${groupOpacity}">
+        <g class="pet">${pixelArt}${animation}</g>
+      </g>
+      <text x="50%" y="${height + 35}" text-anchor="middle" font-family="monospace" font-size="11" fill="#666">${label}</text>
+    </svg>`;
+
+    fs.writeFileSync(`dist/mood_${name}.svg`, svg);
+    console.log(`Generated mood_${name}.svg`);
+});
+
+console.log('Done!');
