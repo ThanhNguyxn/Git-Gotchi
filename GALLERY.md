@@ -42,10 +42,10 @@ Your pet automatically wears holiday accessories based on the current date!
 
 Unlock special creatures by achieving milestones! **Harder achievements take priority.**
 
-| 🦖 Mecha-Rex | 🐉 Hydra | 🗿 Cyber Golem | 👻 Void Spirit |
-| :---: | :---: | :---: | :---: |
-| ![MechaRex](dist/legendary_mecha_rex.svg) | ![Hydra](dist/legendary_hydra.svg) | ![Golem](dist/legendary_cyber_golem.svg) | ![VoidSpirit](dist/legendary_void_spirit.svg) |
-| **1000+ commits** | **5+ languages** | **50+ closed issues** | **Night coder (00-04h)** |
+| 🦖 Mecha-Rex | 🐉 Hydra | 🗿 Cyber Golem | 👻 Void Spirit | 🦄 Unicorn |
+| :---: | :---: | :---: | :---: | :---: |
+| ![MechaRex](dist/legendary_mecha_rex.svg) | ![Hydra](dist/legendary_hydra.svg) | ![Golem](dist/legendary_cyber_golem.svg) | ![VoidSpirit](dist/legendary_void_spirit.svg) | ![Unicorn](dist/legendary_unicorn.svg) |
+| **1000+ commits** | **5+ languages** | **50+ closed issues** | **Night coder (00-04h)** | **⭐ Star/Fork repo** |
 
 ### Unlock Requirements (Priority Order)
 
@@ -87,4 +87,3 @@ Unlock special creatures by achieving milestones! **Harder achievements take pri
 | **Capybara** (Lua) | ![](dist/capybara.svg) |
 | **Alpaca** (Julia) | ![](dist/alpaca.svg) |
 | **Phoenix** (Elixir) | ![](dist/phoenix.svg) |
-| **Unicorn** (Legendary) | ![](dist/unicorn.svg) |
