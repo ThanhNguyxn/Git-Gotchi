@@ -2,7 +2,7 @@
 
 [![GitHub Action](https://img.shields.io/badge/GitHub-Action-blue?logo=github&style=for-the-badge)](https://github.com/features/actions)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](https://opensource.org/licenses/MIT)
-[![Version](https://img.shields.io/badge/Version-1.11.0-green?style=for-the-badge)](https://github.com/ThanhNguyxn/Git-Gotchi/releases/latest)
+[![Version](https://img.shields.io/badge/Version-2.0.0-green?style=for-the-badge)](https://github.com/ThanhNguyxn/Git-Gotchi/releases/latest)
 
 > **Turn your GitHub Profile into a living, breathing virtual pet habitat!** 🐾
 
@@ -65,6 +65,8 @@ Your coding habits determine your companion. [View the full Pet Gallery here](GA
 | 4 | **Night Owl** | Last commit between **00:00-04:00** (local time) | 🦉 |
 | 5 | **Weekend Chill** | Saturday/Sunday + < 3 commits | 🏖️ |
 | 6 | **Happy** | Default active state | ⚡ |
+
+> **NEW in v2.0.0:** Each mood has **unique pixel art** with distinct eye styles!
 
 ---
 
