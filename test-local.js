@@ -347,7 +347,8 @@ if (seasonalMatch) {
         { name: 'mecha_rex', label: '🦖 MECHA-REX', color: '#2e7d32' },
         { name: 'hydra', label: '🐉 HYDRA', color: '#6a1b9a' },
         { name: 'void_spirit', label: '👻 VOID SPIRIT', color: '#311b92' },
-        { name: 'cyber_golem', label: '🗿 CYBER GOLEM', color: '#37474f' }
+        { name: 'cyber_golem', label: '🗿 CYBER GOLEM', color: '#37474f' },
+        { name: 'unicorn', label: '🦄 UNICORN', color: '#ffffff' }
     ];
 
     legendaryDemos.forEach(({ name, label, color }) => {
