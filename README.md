@@ -70,6 +70,21 @@ Your coding habits determine your companion. [View the full Pet Gallery here](GA
 
 ---
 
+## 🎄 Seasonal Events (Auto-Detect!)
+
+Your pet automatically wears holiday accessories based on the current date!
+
+| 🎅 Christmas | 🎉 New Year | 💕 Valentine | 🎃 Halloween |
+| :---: | :---: | :---: | :---: |
+| ![Christmas](dist/seasonal_christmas.svg) | ![NewYear](dist/seasonal_newyear.svg) | ![Valentine](dist/seasonal_valentine.svg) | ![Halloween](dist/seasonal_halloween.svg) |
+
+> **Also includes:** 🧧 Tet (Lunar New Year), 🌹 Women's Day, ☕ Programmer Day, 🎩 Men's Day.
+> **Easter Eggs:** 👻 Friday 13th, 🤡 April Fools.
+
+[View full Event Calendar in Gallery](GALLERY.md#🎄-seasonal-events-auto-detect)
+
+---
+
 ## 📖 Setup Guide
 
 Follow these steps to add a pet to your profile:
