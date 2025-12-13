@@ -118,11 +118,68 @@ jobs:
 
 ### Advanced Configuration Options
 
-| Input | Default | Description |
+#### 🌍 Timezone
+Set your local timezone for accurate mood detection (Night Owl, Weekend Chill).
+
+```yaml
+timezone: 'America/New_York'    # US Eastern
+timezone: 'Europe/London'       # UK
+timezone: 'Asia/Tokyo'          # Japan
+timezone: 'Australia/Sydney'    # Australia
+```
+
+> **Find your timezone**: Use [IANA timezone format](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones). Common examples: `America/Los_Angeles`, `Europe/Paris`, `Asia/Singapore`.
+
+---
+
+#### 🎨 Background Theme
+Choose a visual style for your pet's background.
+
+| Theme | Preview | Description |
 | :--- | :---: | :--- |
-| `timezone` | `UTC` | Your timezone (IANA format) for mood detection |
-| `background_theme` | `minimal` | Theme: `minimal`, `cyberpunk`, `nature` |
-| `show_level` | `true` | Display level and XP on pet |
+| `minimal` | ![Minimal](dist/unicorn_happy.svg) | Clean, subtle gradient (default) |
+| `cyberpunk` | ![Cyberpunk](dist/demo_cyberpunk.svg) | Neon purple grid, futuristic |
+| `nature` | ![Nature](dist/demo_nature.svg) | Green meadow with clouds |
+
+```yaml
+background_theme: 'minimal'     # Default - clean look
+background_theme: 'cyberpunk'   # Neon vibes 🌆
+background_theme: 'nature'      # Outdoor feel 🌿
+```
+
+---
+
+#### 📊 Show Level Stats
+Display your coding level and XP progress on the pet.
+
+```yaml
+show_level: 'true'   # Show level (default)
+show_level: 'false'  # Hide level - pet only
+```
+
+**XP Formula**: Every commit = 10 XP. Level up by coding more!
+
+---
+
+#### 📋 Full Example
+
+```yaml
+- name: Generate Pet 👾
+  uses: ThanhNguyxn/Git-Gotchi@main
+  with:
+    github_token: ${{ secrets.GITHUB_TOKEN }}
+    username: ${{ github.repository_owner }}
+    
+    # 🌍 Timezone (for Night Owl & Weekend detection)
+    timezone: 'America/New_York'
+    
+    # 🎨 Theme (minimal, cyberpunk, nature)
+    background_theme: 'cyberpunk'
+    
+    # 📊 Show level stats
+    show_level: 'true'
+```
+
 
 ### Step 2: Check Permissions
 
