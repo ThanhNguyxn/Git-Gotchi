@@ -2068,6 +2068,234 @@ const SPRITES = {
   }
 };
 
+// --- SEASONAL EVENT SYSTEM ---
+
+/**
+ * Lunar New Year (Tet Vietnam) - Pre-calculated dates until 2030
+ * These are the actual Lunar New Year dates (1st day of lunar calendar)
+ * Range: 3 days before to 4 days after (total 8 days celebration)
+ */
+const TET_DATES = {
+  2025: { start: new Date('2025-01-27'), end: new Date('2025-02-03') },
+  2026: { start: new Date('2026-02-15'), end: new Date('2026-02-22') },
+  2027: { start: new Date('2027-02-04'), end: new Date('2027-02-11') },
+  2028: { start: new Date('2028-01-24'), end: new Date('2028-01-31') },
+  2029: { start: new Date('2029-02-11'), end: new Date('2029-02-18') },
+  2030: { start: new Date('2030-02-01'), end: new Date('2030-02-08') }
+};
+
+/**
+ * Get current seasonal event based on date and timezone
+ * @param {string} timezone - IANA timezone string
+ * @returns {string|null} Event key or null if no event
+ */
+function getSeasonalEvent(timezone = 'UTC') {
+  const now = new Date();
+
+  // Get local date parts in specified timezone
+  const formatter = new Intl.DateTimeFormat('en-US', {
+    timeZone: timezone,
+    year: 'numeric',
+    month: 'numeric',
+    day: 'numeric'
+  });
+  const parts = formatter.formatToParts(now);
+  const month = parseInt(parts.find(p => p.type === 'month').value, 10);
+  const day = parseInt(parts.find(p => p.type === 'day').value, 10);
+  const year = parseInt(parts.find(p => p.type === 'year').value, 10);
+
+  // Helper to check date range (month/day only)
+  const inRange = (m1, d1, m2, d2) => {
+    const startDate = m1 * 100 + d1;
+    const endDate = m2 * 100 + d2;
+    const current = month * 100 + day;
+
+    if (startDate <= endDate) {
+      return current >= startDate && current <= endDate;
+    } else {
+      // Wraps around year (e.g., Dec 31 - Jan 2)
+      return current >= startDate || current <= endDate;
+    }
+  };
+
+  // Check Lunar New Year (Tet) first - requires year lookup
+  const tetRange = TET_DATES[year];
+  if (tetRange) {
+    const localDate = new Date(year, month - 1, day);
+    if (localDate >= tetRange.start && localDate <= tetRange.end) {
+      return 'TET';
+    }
+  }
+
+  // Fixed Solar Holidays (Priority Order)
+  if (inRange(12, 31, 1, 2)) return 'NEW_YEAR';      // Dec 31 - Jan 2
+  if (inRange(2, 13, 2, 15)) return 'VALENTINE';     // Feb 13 - Feb 15
+  if (inRange(3, 7, 3, 9)) return 'WOMENS_DAY';      // Mar 7 - Mar 9
+  if (inRange(9, 12, 9, 14)) return 'PROGRAMMER_DAY'; // Sep 12 - Sep 14 (Day 256)
+  if (inRange(10, 25, 10, 31)) return 'HALLOWEEN';   // Oct 25 - Oct 31
+  if (month === 11 && day === 19) return 'MENS_DAY'; // Nov 19 (one day)
+  if (inRange(12, 20, 12, 25)) return 'CHRISTMAS';   // Dec 20 - Dec 25
+
+  return null; // No event
+}
+
+/**
+ * Seasonal Accessories SVG Library
+ * High-fidelity flat vector SVGs for each holiday
+ * Designed for 200x200 viewBox, positioned relative to pet center
+ */
+const SEASONAL_ACCESSORIES = {
+  // 🎉 NEW_YEAR: Party Hat (Striped Cone)
+  NEW_YEAR: `
+    <g transform="translate(85, 5)">
+      <!-- Party Hat Cone -->
+      <polygon points="15,50 30,5 0,5" fill="#FF6B6B"/>
+      <polygon points="15,50 30,5 22,5 15,35 8,5 0,5" fill="#4ECDC4"/>
+      <polygon points="15,50 22,5 15,35" fill="#FFE66D"/>
+      <!-- Pom-pom -->
+      <circle cx="15" cy="3" r="5" fill="#FFE66D"/>
+      <!-- Hat Band -->
+      <rect x="0" y="45" width="30" height="5" rx="2" fill="#2D333B"/>
+    </g>
+  `,
+
+  // 💕 VALENTINE: Floating Pixel Heart
+  VALENTINE: `
+    <g transform="translate(150, 30)">
+      <!-- Pixel Heart -->
+      <rect x="4" y="0" width="8" height="4" fill="#FF6B9D"/>
+      <rect x="16" y="0" width="8" height="4" fill="#FF6B9D"/>
+      <rect x="0" y="4" width="28" height="4" fill="#FF6B9D"/>
+      <rect x="0" y="8" width="28" height="4" fill="#FF8FAB"/>
+      <rect x="4" y="12" width="20" height="4" fill="#FF8FAB"/>
+      <rect x="8" y="16" width="12" height="4" fill="#FFB3C6"/>
+      <rect x="12" y="20" width="4" height="4" fill="#FFB3C6"/>
+      <!-- Sparkle -->
+      <circle cx="8" cy="6" r="2" fill="#FFFFFF" opacity="0.7"/>
+    </g>
+  `,
+
+  // 🌹 WOMENS_DAY: Red Rose Hairpin
+  WOMENS_DAY: `
+    <g transform="translate(130, 15)">
+      <!-- Rose Petals -->
+      <ellipse cx="15" cy="12" rx="8" ry="6" fill="#E63946"/>
+      <ellipse cx="10" cy="15" rx="6" ry="5" fill="#D62839"/>
+      <ellipse cx="20" cy="15" rx="6" ry="5" fill="#D62839"/>
+      <ellipse cx="15" cy="18" rx="7" ry="5" fill="#C1121F"/>
+      <circle cx="15" cy="14" r="4" fill="#780000"/>
+      <!-- Stem -->
+      <rect x="14" y="22" width="2" height="12" fill="#2D6A4F"/>
+      <!-- Leaf -->
+      <ellipse cx="18" cy="28" rx="5" ry="3" fill="#40916C" transform="rotate(30, 18, 28)"/>
+    </g>
+  `,
+
+  // ☕ PROGRAMMER_DAY: Steaming Coffee Mug
+  PROGRAMMER_DAY: `
+    <g transform="translate(155, 60)">
+      <!-- Mug Body -->
+      <rect x="0" y="10" width="25" height="28" rx="3" fill="#8B4513"/>
+      <rect x="3" y="13" width="19" height="22" rx="2" fill="#5C4033"/>
+      <!-- Coffee -->
+      <rect x="4" y="14" width="17" height="12" fill="#3C2415"/>
+      <!-- Handle -->
+      <path d="M25,15 Q35,15 35,24 Q35,33 25,33" stroke="#8B4513" stroke-width="4" fill="none"/>
+      <!-- Steam -->
+      <path d="M7,5 Q9,0 7,-5" stroke="#EEEEEE" stroke-width="2" fill="none" opacity="0.6">
+        <animate attributeName="d" values="M7,5 Q9,0 7,-5;M7,5 Q5,0 7,-5;M7,5 Q9,0 7,-5" dur="2s" repeatCount="indefinite"/>
+      </path>
+      <path d="M14,3 Q16,-2 14,-7" stroke="#EEEEEE" stroke-width="2" fill="none" opacity="0.6">
+        <animate attributeName="d" values="M14,3 Q16,-2 14,-7;M14,3 Q12,-2 14,-7;M14,3 Q16,-2 14,-7" dur="2.5s" repeatCount="indefinite"/>
+      </path>
+    </g>
+  `,
+
+  // 🎃 HALLOWEEN: Cute Jack-o'-lantern Pumpkin
+  HALLOWEEN: `
+    <g transform="translate(150, 110)">
+      <!-- Pumpkin Stem -->
+      <rect x="18" y="0" width="6" height="8" rx="2" fill="#2D6A4F"/>
+      <!-- Pumpkin Body -->
+      <ellipse cx="21" cy="25" rx="20" ry="18" fill="#FF6D00"/>
+      <ellipse cx="21" cy="25" rx="16" ry="15" fill="#FF8500"/>
+      <!-- Left Eye -->
+      <polygon points="10,20 15,15 18,22" fill="#2D333B"/>
+      <!-- Right Eye -->
+      <polygon points="24,22 27,15 32,20" fill="#2D333B"/>
+      <!-- Smile -->
+      <path d="M12,30 Q21,38 30,30" stroke="#2D333B" stroke-width="3" fill="none"/>
+      <!-- Teeth -->
+      <rect x="16" y="30" width="4" height="4" fill="#FF8500"/>
+      <rect x="22" y="30" width="4" height="4" fill="#FF8500"/>
+    </g>
+  `,
+
+  // 🎩 MENS_DAY: Blue Bowtie
+  MENS_DAY: `
+    <g transform="translate(75, 140)">
+      <!-- Left Wing -->
+      <path d="M0,10 Q0,0 15,5 L15,15 Q0,20 0,10" fill="#1E88E5"/>
+      <path d="M2,10 Q2,3 13,6 L13,14 Q2,17 2,10" fill="#42A5F5"/>
+      <!-- Right Wing -->
+      <path d="M35,5 Q50,0 50,10 Q50,20 35,15 L35,5" fill="#1E88E5"/>
+      <path d="M37,6 Q48,3 48,10 Q48,17 37,14 L37,6" fill="#42A5F5"/>
+      <!-- Center Knot -->
+      <rect x="15" y="5" width="20" height="10" rx="2" fill="#0D47A1"/>
+      <rect x="20" y="5" width="10" height="10" rx="1" fill="#1565C0"/>
+    </g>
+  `,
+
+  // 🎅 CHRISTMAS: Santa Hat
+  CHRISTMAS: `
+    <g transform="translate(70, 0)">
+      <!-- Hat Body -->
+      <path d="M0,45 Q-5,25 20,10 Q45,0 60,30 L55,50 Z" fill="#D32F2F"/>
+      <path d="M5,42 Q0,25 22,13 Q42,5 55,30 L52,47 Z" fill="#E53935"/>
+      <!-- White Trim -->
+      <ellipse cx="28" cy="48" rx="32" ry="8" fill="#FAFAFA"/>
+      <ellipse cx="28" cy="48" rx="28" ry="5" fill="#EEEEEE"/>
+      <!-- Pom-pom -->
+      <circle cx="60" cy="28" r="10" fill="#FAFAFA"/>
+      <circle cx="62" cy="26" r="4" fill="#EEEEEE"/>
+    </g>
+  `,
+
+  // 🧧 TET: Red Envelope (Lì Xì)
+  TET: `
+    <g transform="translate(150, 70)">
+      <!-- Envelope Body -->
+      <rect x="0" y="0" width="35" height="50" rx="3" fill="#D32F2F"/>
+      <rect x="2" y="2" width="31" height="46" rx="2" fill="#E53935"/>
+      <!-- Gold Decorative Border -->
+      <rect x="5" y="5" width="25" height="40" rx="1" stroke="#FFD700" stroke-width="2" fill="none"/>
+      <!-- Coin Symbol -->
+      <circle cx="17.5" cy="25" r="10" fill="#FFD700"/>
+      <circle cx="17.5" cy="25" r="7" fill="#FFC107"/>
+      <!-- Chinese Character 福 (Fortune) stylized -->
+      <rect x="14" y="20" width="7" height="2" fill="#D32F2F"/>
+      <rect x="16" y="22" width="3" height="6" fill="#D32F2F"/>
+      <rect x="14" y="25" width="7" height="2" fill="#D32F2F"/>
+      <!-- Sparkle -->
+      <circle cx="10" cy="10" r="2" fill="#FFD700" opacity="0.8"/>
+      <circle cx="28" cy="40" r="1.5" fill="#FFD700" opacity="0.8"/>
+    </g>
+  `
+};
+
+/**
+ * Get accessory SVG for current seasonal event
+ * @param {string} timezone - IANA timezone string
+ * @returns {string} SVG string or empty string
+ */
+function getSeasonalAccessory(timezone = 'UTC') {
+  const event = getSeasonalEvent(timezone);
+  if (event && SEASONAL_ACCESSORIES[event]) {
+    return `<!-- Seasonal: ${event} -->\n${SEASONAL_ACCESSORIES[event]}`;
+  }
+  return '';
+}
+
 // --- GAMIFICATION SYSTEM ---
 
 /**
@@ -2311,7 +2539,8 @@ async function run() {
       theme: backgroundTheme,
       showLevel: showLevel,
       stats: stats,
-      moodInfo: moodInfo
+      moodInfo: moodInfo,
+      timezone: timezone
     });
 
     // 6. Write to File
@@ -2427,7 +2656,7 @@ function renderPixelGrid(grid, baseColor, pixelSize = 10) {
 }
 
 function generateSVG(petType, mood, options = {}) {
-  const { theme = 'minimal', showLevel = true, stats = null, moodInfo = null } = options;
+  const { theme = 'minimal', showLevel = true, stats = null, moodInfo = null, timezone = 'UTC' } = options;
 
   // 1. Select the Sprite Set
   const spriteSet = SPRITES[petType] || SPRITES['cat'];
@@ -2498,6 +2727,9 @@ function generateSVG(petType, mood, options = {}) {
       </text>
   ` : '';
 
+  // Get seasonal accessory (holiday accessories)
+  const seasonalAccessory = getSeasonalAccessory(timezone);
+
   return `<svg xmlns="http://www.w3.org/2000/svg" width="${svgWidth}" height="${svgHeight}" viewBox="0 0 ${svgWidth} ${svgHeight}">
       <style>
         .pet { transform-origin: center; }
@@ -2509,6 +2741,8 @@ function generateSVG(petType, mood, options = {}) {
             ${pixelArt}
             ${animation}
         </g>
+        <!-- Seasonal Accessory (z-index: above pet) -->
+        ${seasonalAccessory}
       </g>
       ${statsDisplay}
       ${moodDisplay}
