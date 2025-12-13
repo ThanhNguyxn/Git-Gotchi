@@ -55,13 +55,16 @@ Your coding habits determine your companion. [View the full Pet Gallery here](GA
 | **Others** | **Cat** | 🐱 |
 | **Star 🌟 or Fork 🍴** | **Unicorn** | 🦄 |
 
-## 🎭 Moods & States
+## 🎭 Moods & States (Priority System)
 
-| State | Condition | Appearance |
-| :--- | :--- | :---: |
-| **Happy** ⚡ | Contributions in the last **24 hours** | Bouncing / Energetic |
-| **Sleeping** 💤 | No contributions today, but active this week | Sleeping / Zzz |
-| **Ghost** 👻 | No contributions for **7+ days** | Spooky / Dead |
+| Priority | State | Condition | Icon |
+| :---: | :--- | :--- | :---: |
+| 1 | **Ghost** | No commits for **7+ days** | 👻 |
+| 2 | **Sleeping** | No commits today (active in last 7 days) | 💤 |
+| 3 | **Hyper** | **10+ commits** in last 24h | 🔥 |
+| 4 | **Night Owl** | Last commit between **00:00-04:00** (local time) | 🦉 |
+| 5 | **Weekend Chill** | Saturday/Sunday + < 3 commits | 🏖️ |
+| 6 | **Happy** | Default active state | ⚡ |
 
 ---
 
@@ -97,6 +100,10 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           username: ${{ github.repository_owner }}
+          # Optional: Advanced Configuration
+          timezone: 'Asia/Ho_Chi_Minh'  # Your timezone for mood detection
+          background_theme: 'minimal'   # Options: 'minimal', 'cyberpunk', 'nature'
+          show_level: 'true'            # Show level stats on pet
           
       - name: Commit & Push 💾
         run: |
@@ -106,6 +113,14 @@ jobs:
           git commit -m "Update Profile-Gotchi 👾" || exit 0
           git push
 ```
+
+### Advanced Configuration Options
+
+| Input | Default | Description |
+| :--- | :---: | :--- |
+| `timezone` | `UTC` | Your timezone (IANA format) for mood detection |
+| `background_theme` | `minimal` | Theme: `minimal`, `cyberpunk`, `nature` |
+| `show_level` | `true` | Display level and XP on pet |
 
 ### Step 2: Check Permissions
 

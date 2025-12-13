@@ -8,6 +8,18 @@ inputs:
   username:
     description: "GitHub Username to track"
     required: true
+  timezone:
+    description: "Timezone for local time calculations (e.g., 'Asia/Ho_Chi_Minh', 'America/New_York')"
+    required: false
+    default: "UTC"
+  background_theme:
+    description: "Background theme: 'minimal', 'cyberpunk', 'nature'"
+    required: false
+    default: "minimal"
+  show_level:
+    description: "Show level stats on pet SVG"
+    required: false
+    default: "true"
 runs:
   using: "node20"
   main: "index.js"

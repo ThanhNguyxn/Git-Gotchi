@@ -1089,6 +1089,147 @@ const SPRITES = {
   }
 };
 
+// --- GAMIFICATION SYSTEM ---
+
+/**
+ * Calculate XP and Level from total commits (RPG Mechanics)
+ * @param {number} totalCommits - Total commit count
+ * @returns {Object} { level, xp, nextLevelXp }
+ */
+function calculateStats(totalCommits) {
+  const xp = totalCommits * 10;
+  const level = Math.floor(Math.sqrt(xp) / 5) + 1;
+  const nextLevelXp = Math.pow(level * 5, 2);
+  return { level, xp, nextLevelXp };
+}
+
+/**
+ * Advanced Mood System with Priority
+ * @param {Array} events - GitHub events array
+ * @param {string} timezone - IANA timezone string
+ * @returns {Object} { mood, icon, moodKey }
+ */
+function getMood(events, timezone = 'UTC') {
+  const now = new Date();
+  const todayStr = now.toISOString().split('T')[0];
+
+  // Parse events for analysis
+  const eventDates = events.map(e => new Date(e.created_at));
+  const todayEvents = events.filter(e => e.created_at.startsWith(todayStr));
+  const last24hEvents = events.filter(e => {
+    const eventTime = new Date(e.created_at);
+    return (now - eventTime) < 24 * 60 * 60 * 1000;
+  });
+
+  // Calculate days since last commit
+  const lastEventDate = eventDates.length > 0 ? eventDates[0] : null;
+  const daysSinceLastCommit = lastEventDate
+    ? Math.floor((now - lastEventDate) / (24 * 60 * 60 * 1000))
+    : 999;
+
+  // Get local time in specified timezone
+  const localTime = new Intl.DateTimeFormat('en-US', {
+    timeZone: timezone,
+    hour: 'numeric',
+    hour12: false
+  }).format(now);
+  const localHour = parseInt(localTime, 10);
+
+  // Get local day of week (0 = Sunday, 6 = Saturday)
+  const localDayOfWeek = new Intl.DateTimeFormat('en-US', {
+    timeZone: timezone,
+    weekday: 'short'
+  }).format(now);
+  const isWeekend = ['Sat', 'Sun'].includes(localDayOfWeek);
+
+  // Check for night owl (last commit between 00:00 - 04:00 local time)
+  let isNightOwl = false;
+  if (lastEventDate) {
+    const lastEventHour = parseInt(new Intl.DateTimeFormat('en-US', {
+      timeZone: timezone,
+      hour: 'numeric',
+      hour12: false
+    }).format(lastEventDate), 10);
+    isNightOwl = lastEventHour >= 0 && lastEventHour < 4;
+  }
+
+  // Priority System (1 = highest)
+  // Priority 1: Ghost (no commits > 7 days)
+  if (daysSinceLastCommit > 7) {
+    return { mood: 'Ghost', icon: '👻', moodKey: 'ghost' };
+  }
+
+  // Priority 2: Sleeping (no commits today, but active within 7 days)
+  if (todayEvents.length === 0 && daysSinceLastCommit <= 7) {
+    return { mood: 'Sleeping', icon: '💤', moodKey: 'sleeping' };
+  }
+
+  // Priority 3: Hyper/On Fire (> 10 commits in 24h)
+  if (last24hEvents.length > 10) {
+    return { mood: 'Hyper', icon: '🔥', moodKey: 'normal' };
+  }
+
+  // Priority 4: Night Owl (commit between 00:00-04:00 local time)
+  if (isNightOwl && todayEvents.length > 0) {
+    return { mood: 'Night Owl', icon: '🦉', moodKey: 'normal' };
+  }
+
+  // Priority 5: Weekend Chill (Sat/Sun AND < 3 commits today)
+  if (isWeekend && todayEvents.length < 3 && todayEvents.length > 0) {
+    return { mood: 'Weekend Chill', icon: '🏖️', moodKey: 'normal' };
+  }
+
+  // Priority 6: Happy (default active state)
+  return { mood: 'Happy', icon: '⚡', moodKey: 'normal' };
+}
+
+/**
+ * Generate Theme Background SVG elements
+ * @param {string} theme - 'minimal', 'cyberpunk', 'nature'
+ * @param {number} width - SVG width
+ * @param {number} height - SVG height
+ * @returns {string} SVG elements for background
+ */
+function getThemeBackground(theme, width, height) {
+  switch (theme) {
+    case 'cyberpunk':
+      // Dark purple with neon grid lines
+      return `
+        <rect x="0" y="0" width="${width}" height="${height}" fill="#1a0a2e" rx="12" ry="12"/>
+        <g stroke="#ff00ff" stroke-opacity="0.3" stroke-width="1">
+          ${Array.from({ length: 10 }, (_, i) =>
+        `<line x1="${i * (width / 10)}" y1="0" x2="${i * (width / 10)}" y2="${height}"/>`
+      ).join('')}
+          ${Array.from({ length: 10 }, (_, i) =>
+        `<line x1="0" y1="${i * (height / 10)}" x2="${width}" y2="${i * (height / 10)}"/>`
+      ).join('')}
+        </g>
+        <rect x="5" y="5" width="${width - 10}" height="${height - 10}" fill="none" stroke="#00ffff" stroke-width="2" rx="8" ry="8" stroke-opacity="0.5"/>
+      `;
+    case 'nature':
+      // Light green with simple cloud shapes
+      return `
+        <rect x="0" y="0" width="${width}" height="${height}" fill="#e8f5e9" rx="12" ry="12"/>
+        <g fill="#a5d6a7" opacity="0.6">
+          <ellipse cx="${width * 0.2}" cy="${height * 0.15}" rx="20" ry="12"/>
+          <ellipse cx="${width * 0.25}" cy="${height * 0.12}" rx="15" ry="10"/>
+          <ellipse cx="${width * 0.8}" cy="${height * 0.2}" rx="18" ry="10"/>
+          <ellipse cx="${width * 0.75}" cy="${height * 0.17}" rx="12" ry="8"/>
+        </g>
+        <g fill="#81c784" opacity="0.4">
+          <ellipse cx="${width * 0.1}" cy="${height * 0.9}" rx="25" ry="8"/>
+          <ellipse cx="${width * 0.9}" cy="${height * 0.85}" rx="20" ry="6"/>
+        </g>
+      `;
+    case 'minimal':
+    default:
+      // Current subtle background
+      return `
+        <rect x="5" y="5" width="${width - 10}" height="${height - 15}" rx="12" ry="12" fill="rgba(45, 51, 59, 0.15)"/>
+      `;
+  }
+}
+
 // --- CORE LOGIC ---
 
 async function checkUserStarredOrForked(octokit, username) {
@@ -1131,7 +1272,12 @@ async function run() {
   try {
     const token = core.getInput('github_token');
     const username = core.getInput('username');
+    const timezone = core.getInput('timezone') || 'UTC';
+    const backgroundTheme = core.getInput('background_theme') || 'minimal';
+    const showLevel = core.getInput('show_level') !== 'false';
     const octokit = github.getOctokit(token);
+
+    console.log(`Config - Timezone: ${timezone}, Theme: ${backgroundTheme}, Show Level: ${showLevel}`);
 
     // 1. Fetch User Activity
     const events = await octokit.rest.activity.listPublicEventsForUser({
@@ -1139,21 +1285,20 @@ async function run() {
       per_page: 100,
     });
 
-    // 2. Determine State (Mood) & Streak
-    const now = new Date();
-    const lastEvent = events.data[0];
-    const lastEventDate = lastEvent ? new Date(lastEvent.created_at) : new Date(0);
-    const hoursSinceLastEvent = (now - lastEventDate) / (1000 * 60 * 60);
+    // 2. Determine Mood using new priority system
+    const moodInfo = getMood(events.data, timezone);
+    console.log(`Mood: ${moodInfo.mood} ${moodInfo.icon}`);
 
-    let mood = 'sleeping';
-    if (hoursSinceLastEvent < 24) mood = 'happy';
-    if (hoursSinceLastEvent > 168) mood = 'ghost';
+    // 3. Calculate Stats (Level & XP)
+    const totalCommits = events.data.filter(e => e.type === 'PushEvent').length;
+    const stats = calculateStats(totalCommits);
+    console.log(`Level: ${stats.level}, XP: ${stats.xp}/${stats.nextLevelXp}`);
 
-    // Calculate Streak
+    // Calculate Streak (keep for logging)
     const streak = calculateStreak(events.data);
     console.log(`Current Streak: ${streak} days`);
 
-    // 3. Determine Pet Type (Species)
+    // 4. Determine Pet Type (Species)
     let petType = 'cat';
 
     // Legendary Status: Unicorn (Star or Fork the repo!)
@@ -1180,12 +1325,17 @@ async function run() {
       console.log(`Top Language: ${topLanguage}`);
     }
 
-    console.log(`User: ${username}, Mood: ${mood}, Type: ${petType}`);
+    console.log(`User: ${username}, Mood: ${moodInfo.mood}, Type: ${petType}, Theme: ${backgroundTheme}`);
 
-    // 4. Generate SVG
-    const svgContent = generateSVG(petType, mood);
+    // 5. Generate SVG with new options
+    const svgContent = generateSVG(petType, moodInfo.moodKey, {
+      theme: backgroundTheme,
+      showLevel: showLevel,
+      stats: stats,
+      moodInfo: moodInfo
+    });
 
-    // 5. Write to File
+    // 6. Write to File
     const fs = require('fs');
     if (!fs.existsSync('dist')) {
       fs.mkdirSync('dist');
@@ -1297,13 +1447,14 @@ function renderPixelGrid(grid, baseColor, pixelSize = 10) {
   return rects;
 }
 
-function generateSVG(petType, mood) {
+function generateSVG(petType, mood, options = {}) {
+  const { theme = 'minimal', showLevel = true, stats = null, moodInfo = null } = options;
+
   // 1. Select the Sprite Set
   const spriteSet = SPRITES[petType] || SPRITES['cat'];
 
   // 2. Select the specific Mood Grid
-  // Map 'happy' to 'normal' if needed, or use 'normal' as default
-  const moodKey = (mood === 'happy') ? 'normal' : mood;
+  const moodKey = moodInfo?.moodKey || ((mood === 'happy') ? 'normal' : mood);
   const spriteGrid = spriteSet[moodKey] || spriteSet['normal'];
 
   const baseColor = PET_COLORS[petType] || '#e5c07b';
@@ -1314,14 +1465,24 @@ function generateSVG(petType, mood) {
   const width = cols * pixelSize;
   const height = rows * pixelSize;
 
+  // Calculate SVG dimensions (extra space for stats if needed)
+  const svgWidth = width + 40;
+  const svgHeight = height + (showLevel && stats ? 55 : 40);
+
   // Ghost Logic: Override Base Color
-  const finalBaseColor = mood === 'ghost' ? '#abb2bf' : baseColor;
-  const groupOpacity = mood === 'ghost' ? '0.7' : '1';
+  const finalBaseColor = moodKey === 'ghost' ? '#abb2bf' : baseColor;
+  const groupOpacity = moodKey === 'ghost' ? '0.7' : '1';
 
   const pixelArt = renderPixelGrid(spriteGrid, finalBaseColor, pixelSize);
 
+  // Get theme background
+  const themeBackground = getThemeBackground(theme, svgWidth, svgHeight);
+
+  // Text color based on theme
+  const textColor = theme === 'cyberpunk' ? '#00ffff' : (theme === 'nature' ? '#388e3c' : '#666');
+
   let animation = '';
-  if (mood === 'happy') {
+  if (moodKey === 'normal') {
     animation = `
         <animateTransform 
             attributeName="transform" 
@@ -1330,7 +1491,7 @@ function generateSVG(petType, mood) {
             dur="0.5s" 
             repeatCount="indefinite" 
         />`;
-  } else if (mood === 'sleeping') {
+  } else if (moodKey === 'sleeping') {
     animation = `
         <animateTransform 
             attributeName="transform" 
@@ -1341,23 +1502,37 @@ function generateSVG(petType, mood) {
         />`;
   }
 
-  return `<svg xmlns="http://www.w3.org/2000/svg" width="${width + 40}" height="${height + 40}" viewBox="0 0 ${width + 40} ${height + 40}">
+  // Build stats display
+  let statsDisplay = '';
+  if (showLevel && stats && moodInfo) {
+    statsDisplay = `
+      <text x="50%" y="${height + 50}" text-anchor="middle" font-family="monospace" font-size="11" fill="${textColor}">
+        Lvl ${stats.level} • ${moodInfo.icon} ${moodInfo.mood.toUpperCase()}
+      </text>
+    `;
+  }
+
+  // Build mood-only display (fallback)
+  const moodDisplay = !statsDisplay ? `
+      <text x="50%" y="${height + 35}" text-anchor="middle" font-family="monospace" font-size="12" fill="${textColor}">
+        ${moodInfo?.icon || ''} ${(moodInfo?.mood || mood).toUpperCase()}
+      </text>
+  ` : '';
+
+  return `<svg xmlns="http://www.w3.org/2000/svg" width="${svgWidth}" height="${svgHeight}" viewBox="0 0 ${svgWidth} ${svgHeight}">
       <style>
         .pet { transform-origin: center; }
       </style>
-      <!-- Subtle background for visibility on light/dark themes -->
-      <rect x="5" y="5" width="${width + 30}" height="${height + 25}" rx="12" ry="12" fill="rgba(45, 51, 59, 0.15)" />
+      <!-- Theme Background -->
+      ${themeBackground}
       <g transform="translate(20, 20)" opacity="${groupOpacity}">
         <g class="pet">
             ${pixelArt}
             ${animation}
         </g>
       </g>
-      
-      <!-- Mood Status Text -->
-      <text x="50%" y="${height + 35}" text-anchor="middle" font-family="monospace" font-size="12" fill="#666">
-        ${mood.toUpperCase()}
-      </text>
+      ${statsDisplay}
+      ${moodDisplay}
     </svg>`;
 }
 

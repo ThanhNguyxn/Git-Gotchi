@@ -26,7 +26,7 @@ function renderPixelGrid(grid, baseColor, pixelSize = 10) {
         'Y': '#FFD700',
         'B': '#00ADD8',
         'P': '#C678DD',
-        'G': '#98c379' // Added Green
+        'G': '#98c379'
     };
 
     grid.forEach((rowString, y) => {
@@ -41,28 +41,57 @@ function renderPixelGrid(grid, baseColor, pixelSize = 10) {
     return rects;
 }
 
-function generateSVG(petType, mood) {
-    // 1. Select the Sprite Set
+function getThemeBackground(theme, width, height) {
+    switch (theme) {
+        case 'cyberpunk':
+            return `
+                <rect x="0" y="0" width="${width}" height="${height}" fill="#1a0a2e" rx="12" ry="12"/>
+                <g stroke="#ff00ff" stroke-opacity="0.3" stroke-width="1">
+                    ${Array.from({ length: 10 }, (_, i) =>
+                `<line x1="${i * (width / 10)}" y1="0" x2="${i * (width / 10)}" y2="${height}"/>`
+            ).join('')}
+                    ${Array.from({ length: 10 }, (_, i) =>
+                `<line x1="0" y1="${i * (height / 10)}" x2="${width}" y2="${i * (height / 10)}"/>`
+            ).join('')}
+                </g>
+                <rect x="5" y="5" width="${width - 10}" height="${height - 10}" fill="none" stroke="#00ffff" stroke-width="2" rx="8" ry="8" stroke-opacity="0.5"/>
+            `;
+        case 'nature':
+            return `
+                <rect x="0" y="0" width="${width}" height="${height}" fill="#e8f5e9" rx="12" ry="12"/>
+                <g fill="#a5d6a7" opacity="0.6">
+                    <ellipse cx="${width * 0.2}" cy="${height * 0.15}" rx="20" ry="12"/>
+                    <ellipse cx="${width * 0.25}" cy="${height * 0.12}" rx="15" ry="10"/>
+                    <ellipse cx="${width * 0.8}" cy="${height * 0.2}" rx="18" ry="10"/>
+                </g>
+            `;
+        case 'minimal':
+        default:
+            return `<rect x="5" y="5" width="${width - 10}" height="${height - 15}" rx="12" ry="12" fill="rgba(45, 51, 59, 0.15)"/>`;
+    }
+}
+
+function generateSVG(petType, mood, options = {}) {
+    const { theme = 'minimal', showLevel = false, stats = null, moodInfo = null } = options;
+
     const spriteSet = SPRITES[petType] || SPRITES['cat'];
-
-    // 2. Select the specific Mood Grid
-    // 2. Select the specific Mood Grid
-    const spriteGrid = spriteSet[mood] || spriteSet['normal'];
-
+    const moodKey = (mood === 'happy') ? 'normal' : mood;
+    const spriteGrid = spriteSet[moodKey] || spriteSet['normal'];
     const baseColor = PET_COLORS[petType] || '#e5c07b';
 
     const pixelSize = 16;
-    // Dynamic Size Logic
     const rows = spriteGrid.length;
     const cols = spriteGrid[0].length;
     const width = cols * pixelSize;
     const height = rows * pixelSize;
+    const svgWidth = width + 40;
+    const svgHeight = height + 40;
 
-    // Ghost Logic: Override Base Color
     const finalBaseColor = mood === 'ghost' ? '#abb2bf' : baseColor;
     const groupOpacity = mood === 'ghost' ? '0.7' : '1';
-
     const pixelArt = renderPixelGrid(spriteGrid, finalBaseColor, pixelSize);
+    const themeBackground = getThemeBackground(theme, svgWidth, svgHeight);
+    const textColor = theme === 'cyberpunk' ? '#00ffff' : (theme === 'nature' ? '#388e3c' : '#666');
 
     let animation = '';
     if (mood === 'happy') {
@@ -71,13 +100,13 @@ function generateSVG(petType, mood) {
         animation = `<animateTransform attributeName="transform" type="scale" values="1 1; 1.02 0.98; 1 1" dur="2s" repeatCount="indefinite" />`;
     }
 
-    return `<svg xmlns="http://www.w3.org/2000/svg" width="${width + 40}" height="${height + 40}" viewBox="0 0 ${width + 40} ${height + 40}">
+    return `<svg xmlns="http://www.w3.org/2000/svg" width="${svgWidth}" height="${svgHeight}" viewBox="0 0 ${svgWidth} ${svgHeight}">
       <style>.pet { transform-origin: center; }</style>
-      <rect x="5" y="5" width="${width + 30}" height="${height + 25}" rx="12" ry="12" fill="rgba(45, 51, 59, 0.15)" />
+      ${themeBackground}
       <g transform="translate(20, 20)" opacity="${groupOpacity}">
         <g class="pet">${pixelArt}${animation}</g>
       </g>
-      <text x="50%" y="${height + 35}" text-anchor="middle" font-family="monospace" font-size="12" fill="#666">${mood.toUpperCase()}</text>
+      <text x="50%" y="${height + 35}" text-anchor="middle" font-family="monospace" font-size="12" fill="${textColor}">${mood.toUpperCase()}</text>
     </svg>`;
 }
 
@@ -85,15 +114,25 @@ function generateSVG(petType, mood) {
 if (!fs.existsSync('dist')) fs.mkdirSync('dist');
 
 const pets = Object.keys(SPRITES);
-console.log(`Generating 3 states for ${pets.length} pets...`);
+const themes = ['minimal', 'cyberpunk', 'nature'];
+console.log(`Generating 3 states for ${pets.length} pets with ${themes.length} themes...`);
 
+// Generate default (minimal theme) gallery
 pets.forEach(pet => {
     ['happy', 'sleeping', 'ghost'].forEach(mood => {
-        const svg = generateSVG(pet, mood);
+        const svg = generateSVG(pet, mood, { theme: 'minimal' });
         const filename = (mood === 'happy') ? `${pet}.svg` : `${pet}_${mood}.svg`;
         fs.writeFileSync(`dist/${filename}`, svg);
         if (mood === 'happy') fs.writeFileSync(`dist/${pet}_happy.svg`, svg);
     });
 });
 
+// Generate theme demo files (first pet only as examples)
+['cyberpunk', 'nature'].forEach(theme => {
+    const svg = generateSVG('unicorn', 'happy', { theme });
+    fs.writeFileSync(`dist/demo_${theme}.svg`, svg);
+    console.log(`Generated demo_${theme}.svg`);
+});
+
 console.log('Done!');
+
