@@ -285,17 +285,6 @@ if (seasonalMatch) {
                 <circle cx="70" cy="5" r="6" fill="#FFD700"/>
                 <rect x="15" y="45" width="60" height="8" rx="3" fill="#E91E63"/>
             </g>
-        `,
-        WEEKEND: `
-            <g transform="translate(55, 55)">
-                <rect x="0" y="0" width="90" height="25" rx="3" fill="#1A1A1A"/>
-                <rect x="5" y="5" width="35" height="15" rx="2" fill="#2D2D2D"/>
-                <rect x="8" y="8" width="12" height="5" fill="#FFFFFF" opacity="0.3"/>
-                <rect x="50" y="5" width="35" height="15" rx="2" fill="#2D2D2D"/>
-                <rect x="53" y="8" width="12" height="5" fill="#FFFFFF" opacity="0.3"/>
-                <circle cx="15" cy="10" r="2" fill="#FFFFFF" opacity="0.8"/>
-                <circle cx="60" cy="10" r="2" fill="#FFFFFF" opacity="0.8"/>
-            </g>
         `
     };
 
@@ -309,8 +298,7 @@ if (seasonalMatch) {
         { name: 'womensday', label: '🌹 WOMENS DAY', event: 'WOMENS_DAY' },
         { name: 'mensday', label: '🎩 MENS DAY', event: 'MENS_DAY' },
         { name: 'friday13', label: '👻 FRIDAY 13TH', event: 'FRIDAY_13' },
-        { name: 'aprilfools', label: '🤡 APRIL FOOLS', event: 'APRIL_FOOLS' },
-        { name: 'weekend', label: '😎 WEEKEND', event: 'WEEKEND' }
+        { name: 'aprilfools', label: '🤡 APRIL FOOLS', event: 'APRIL_FOOLS' }
     ];
 
     seasonalDemos.forEach(({ name, label, event }) => {

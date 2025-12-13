@@ -2249,13 +2249,7 @@ function getSeasonalEvent(timezone = 'UTC') {
   if (month === 4 && day === 1) return 'APRIL_FOOLS';
 
   // ═══════════════════════════════════════════════════════════════════════════
-  // PRIORITY 3: Weekend Mode (The "Vibe")
-  // ═══════════════════════════════════════════════════════════════════════════
-
-  if (dayOfWeek === 0 || dayOfWeek === 6) return 'WEEKEND';
-
-  // ═══════════════════════════════════════════════════════════════════════════
-  // PRIORITY 4: Default
+  // PRIORITY 3: Default (No accessory - let mood sprite handle weekend/etc)
   // ═══════════════════════════════════════════════════════════════════════════
 
   return null;
@@ -2449,28 +2443,6 @@ const SEASONAL_ACCESSORIES = {
       <circle cx="25" cy="30" r="4" fill="#FFEB3B"/>
       <circle cx="45" cy="20" r="4" fill="#FFEB3B"/>
       <circle cx="65" cy="30" r="4" fill="#FFEB3B"/>
-    </g>
-  `,
-
-  // 😎 WEEKEND: Cool Pixel Sunglasses
-  WEEKEND: `
-    <g transform="translate(55, 55)">
-      <!-- Frame -->
-      <rect x="0" y="0" width="90" height="25" rx="3" fill="#1A1A1A"/>
-      <!-- Left Lens -->
-      <rect x="5" y="5" width="35" height="15" rx="2" fill="#2D2D2D"/>
-      <rect x="8" y="8" width="12" height="5" fill="#FFFFFF" opacity="0.3"/>
-      <!-- Right Lens -->
-      <rect x="50" y="5" width="35" height="15" rx="2" fill="#2D2D2D"/>
-      <rect x="53" y="8" width="12" height="5" fill="#FFFFFF" opacity="0.3"/>
-      <!-- Bridge -->
-      <rect x="40" y="8" width="10" height="4" fill="#1A1A1A"/>
-      <!-- Arms -->
-      <rect x="-10" y="8" width="15" height="4" fill="#1A1A1A"/>
-      <rect x="85" y="8" width="15" height="4" fill="#1A1A1A"/>
-      <!-- Glint Effect -->
-      <circle cx="15" cy="10" r="2" fill="#FFFFFF" opacity="0.8"/>
-      <circle cx="60" cy="10" r="2" fill="#FFFFFF" opacity="0.8"/>
     </g>
   `
 };

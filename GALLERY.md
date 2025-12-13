@@ -29,9 +29,9 @@ Your pet automatically wears holiday accessories based on the current date!
 
 ### 🥚 Easter Eggs & Special Events
 
-| 👻 Friday 13th | 🤡 April Fools | 😎 Weekend |
-| :---: | :---: | :---: |
-| ![Friday13](dist/seasonal_friday13.svg) | ![AprilFools](dist/seasonal_aprilfools.svg) | ![Weekend](dist/seasonal_weekend.svg) |
+| 👻 Friday 13th | 🤡 April Fools |
+| :---: | :---: |
+| ![Friday13](dist/seasonal_friday13.svg) | ![AprilFools](dist/seasonal_aprilfools.svg) |
 
 > **Zero Config!** Accessories appear automatically - no setup needed!
 
