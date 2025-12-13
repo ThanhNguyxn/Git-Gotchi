@@ -2171,6 +2171,12 @@ const tetRanges = {
 
 /**
  * Get current seasonal event based on date and timezone
+ * PRIORITY ORDER:
+ * 1. Major Holidays (Solar + Lunar New Year)
+ * 2. Easter Eggs (Friday 13th, April Fools)
+ * 3. Weekend Mode
+ * 4. Default (null)
+ * 
  * @param {string} timezone - IANA timezone string
  * @returns {string|null} Event key or null if no event
  */
@@ -2182,12 +2188,18 @@ function getSeasonalEvent(timezone = 'UTC') {
     timeZone: timezone,
     year: 'numeric',
     month: 'numeric',
-    day: 'numeric'
+    day: 'numeric',
+    weekday: 'short'
   });
   const parts = formatter.formatToParts(now);
   const month = parseInt(parts.find(p => p.type === 'month').value, 10);
   const day = parseInt(parts.find(p => p.type === 'day').value, 10);
   const year = parseInt(parts.find(p => p.type === 'year').value, 10);
+  const weekday = parts.find(p => p.type === 'weekday').value;
+
+  // Map weekday to day number (0 = Sunday, 6 = Saturday)
+  const weekdayMap = { 'Sun': 0, 'Mon': 1, 'Tue': 2, 'Wed': 3, 'Thu': 4, 'Fri': 5, 'Sat': 6 };
+  const dayOfWeek = weekdayMap[weekday];
 
   // Helper to check date range (month/day only)
   const inRange = (m1, d1, m2, d2) => {
@@ -2203,7 +2215,11 @@ function getSeasonalEvent(timezone = 'UTC') {
     }
   };
 
-  // Check Lunar New Year (Tet) first - requires year lookup
+  // ═══════════════════════════════════════════════════════════════════════════
+  // PRIORITY 1: Major Holidays (The "Must-Haves")
+  // ═══════════════════════════════════════════════════════════════════════════
+
+  // Check Lunar New Year (Tet) - requires year lookup
   const tetRange = tetRanges[year];
   if (tetRange) {
     const [startMonth, startDay] = tetRange.start;
@@ -2213,16 +2229,36 @@ function getSeasonalEvent(timezone = 'UTC') {
     }
   }
 
-  // Fixed Solar Holidays (Priority Order)
-  if (inRange(12, 31, 1, 2)) return 'NEW_YEAR';      // Dec 31 - Jan 2
-  if (inRange(2, 13, 2, 15)) return 'VALENTINE';     // Feb 13 - Feb 15
-  if (inRange(3, 7, 3, 9)) return 'WOMENS_DAY';      // Mar 7 - Mar 9
+  // Fixed Solar Holidays
+  if (inRange(12, 31, 1, 2)) return 'NEW_YEAR';       // Dec 31 - Jan 2
+  if (inRange(2, 13, 2, 15)) return 'VALENTINE';      // Feb 13 - Feb 15
+  if (inRange(3, 7, 3, 9)) return 'WOMENS_DAY';       // Mar 7 - Mar 9
   if (inRange(9, 12, 9, 14)) return 'PROGRAMMER_DAY'; // Sep 12 - Sep 14 (Day 256)
-  if (inRange(10, 25, 10, 31)) return 'HALLOWEEN';   // Oct 25 - Oct 31
-  if (month === 11 && day === 19) return 'MENS_DAY'; // Nov 19 (one day)
-  if (inRange(12, 20, 12, 25)) return 'CHRISTMAS';   // Dec 20 - Dec 25
+  if (inRange(10, 25, 10, 31)) return 'HALLOWEEN';    // Oct 25 - Oct 31
+  if (month === 11 && day === 19) return 'MENS_DAY';  // Nov 19 (one day)
+  if (inRange(12, 20, 12, 25)) return 'CHRISTMAS';    // Dec 20 - Dec 25
 
-  return null; // No event
+  // ═══════════════════════════════════════════════════════════════════════════
+  // PRIORITY 2: Easter Eggs (The "Surprises")
+  // ═══════════════════════════════════════════════════════════════════════════
+
+  // Friday the 13th 👻
+  if (day === 13 && dayOfWeek === 5) return 'FRIDAY_13';
+
+  // April Fools' Day 🤡
+  if (month === 4 && day === 1) return 'APRIL_FOOLS';
+
+  // ═══════════════════════════════════════════════════════════════════════════
+  // PRIORITY 3: Weekend Mode (The "Vibe")
+  // ═══════════════════════════════════════════════════════════════════════════
+
+  if (dayOfWeek === 0 || dayOfWeek === 6) return 'WEEKEND';
+
+  // ═══════════════════════════════════════════════════════════════════════════
+  // PRIORITY 4: Default
+  // ═══════════════════════════════════════════════════════════════════════════
+
+  return null;
 }
 
 /**
@@ -2365,6 +2401,76 @@ const SEASONAL_ACCESSORIES = {
       <!-- Sparkle -->
       <circle cx="10" cy="10" r="2" fill="#FFD700" opacity="0.8"/>
       <circle cx="28" cy="40" r="1.5" fill="#FFD700" opacity="0.8"/>
+    </g>
+  `,
+
+  // ═══════════════════════════════════════════════════════════════════════════
+  // EASTER EGG ACCESSORIES
+  // ═══════════════════════════════════════════════════════════════════════════
+
+  // 👻 FRIDAY_13: Jason Voorhees Hockey Mask
+  FRIDAY_13: `
+    <g transform="translate(65, 35)">
+      <!-- Mask Base -->
+      <ellipse cx="35" cy="40" rx="32" ry="38" fill="#F5F5F5"/>
+      <ellipse cx="35" cy="40" rx="28" ry="34" fill="#EEEEEE"/>
+      <!-- Eye Holes -->
+      <ellipse cx="22" cy="32" rx="8" ry="10" fill="#1A1A1A"/>
+      <ellipse cx="48" cy="32" rx="8" ry="10" fill="#1A1A1A"/>
+      <!-- Nose Holes -->
+      <circle cx="32" cy="48" r="3" fill="#1A1A1A"/>
+      <circle cx="38" cy="48" r="3" fill="#1A1A1A"/>
+      <!-- Red Triangles (Classic Jason design) -->
+      <polygon points="35,15 25,35 45,35" fill="#B71C1C"/>
+      <polygon points="10,55 20,70 0,70" fill="#B71C1C"/>
+      <polygon points="60,55 70,70 50,70" fill="#B71C1C"/>
+      <!-- Ventilation Lines -->
+      <line x1="28" y1="58" x2="28" y2="72" stroke="#BDBDBD" stroke-width="2"/>
+      <line x1="35" y1="58" x2="35" y2="72" stroke="#BDBDBD" stroke-width="2"/>
+      <line x1="42" y1="58" x2="42" y2="72" stroke="#BDBDBD" stroke-width="2"/>
+    </g>
+  `,
+
+  // 🤡 APRIL_FOOLS: Colorful Jester Cap
+  APRIL_FOOLS: `
+    <g transform="translate(60, 0)">
+      <!-- Left Horn -->
+      <path d="M20,50 Q5,30 15,5 Q20,0 25,5 L30,50 Z" fill="#9C27B0"/>
+      <circle cx="15" cy="5" r="6" fill="#FFD700"/>
+      <!-- Center Horn -->
+      <path d="M35,50 Q35,25 40,0 Q45,0 50,25 L55,50 Z" fill="#4CAF50"/>
+      <circle cx="42" cy="0" r="6" fill="#FFD700"/>
+      <!-- Right Horn -->
+      <path d="M60,50 Q70,30 65,5 Q70,0 75,5 L70,50 Z" fill="#2196F3"/>
+      <circle cx="70" cy="5" r="6" fill="#FFD700"/>
+      <!-- Hat Band -->
+      <rect x="15" y="45" width="60" height="8" rx="3" fill="#E91E63"/>
+      <!-- Polka Dots -->
+      <circle cx="25" cy="30" r="4" fill="#FFEB3B"/>
+      <circle cx="45" cy="20" r="4" fill="#FFEB3B"/>
+      <circle cx="65" cy="30" r="4" fill="#FFEB3B"/>
+    </g>
+  `,
+
+  // 😎 WEEKEND: Cool Pixel Sunglasses
+  WEEKEND: `
+    <g transform="translate(55, 55)">
+      <!-- Frame -->
+      <rect x="0" y="0" width="90" height="25" rx="3" fill="#1A1A1A"/>
+      <!-- Left Lens -->
+      <rect x="5" y="5" width="35" height="15" rx="2" fill="#2D2D2D"/>
+      <rect x="8" y="8" width="12" height="5" fill="#FFFFFF" opacity="0.3"/>
+      <!-- Right Lens -->
+      <rect x="50" y="5" width="35" height="15" rx="2" fill="#2D2D2D"/>
+      <rect x="53" y="8" width="12" height="5" fill="#FFFFFF" opacity="0.3"/>
+      <!-- Bridge -->
+      <rect x="40" y="8" width="10" height="4" fill="#1A1A1A"/>
+      <!-- Arms -->
+      <rect x="-10" y="8" width="15" height="4" fill="#1A1A1A"/>
+      <rect x="85" y="8" width="15" height="4" fill="#1A1A1A"/>
+      <!-- Glint Effect -->
+      <circle cx="15" cy="10" r="2" fill="#FFFFFF" opacity="0.8"/>
+      <circle cx="60" cy="10" r="2" fill="#FFFFFF" opacity="0.8"/>
     </g>
   `
 };
