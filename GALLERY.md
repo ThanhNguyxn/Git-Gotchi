@@ -1,6 +1,6 @@
 # 🎨 Profile-Gotchi Gallery
 
-Here is the full roster of pixel art mascots available in **Profile-Gotchi v2.0.0**.
+Here is the full roster of pixel art mascots available in **Profile-Gotchi v2.0.1**.
 Now featuring **23 unique pets**, **3 themes**, **6 moods**, **Leveling System**, and a **Legendary Unicorn** (unlock by ⭐ Star or 🍴 Fork)!
 
 ## 🎭 Themes & Moods Demo

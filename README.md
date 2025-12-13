@@ -2,7 +2,7 @@
 
 [![GitHub Action](https://img.shields.io/badge/GitHub-Action-blue?logo=github&style=for-the-badge)](https://github.com/features/actions)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](https://opensource.org/licenses/MIT)
-[![Version](https://img.shields.io/badge/Version-2.0.0-green?style=for-the-badge)](https://github.com/ThanhNguyxn/Git-Gotchi/releases/latest)
+[![Version](https://img.shields.io/github/v/release/ThanhNguyxn/Git-Gotchi?style=for-the-badge&color=green)](https://github.com/ThanhNguyxn/Git-Gotchi/releases/latest)
 
 > **Turn your GitHub Profile into a living, breathing virtual pet habitat!** 🐾
 
