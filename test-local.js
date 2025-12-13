@@ -370,11 +370,24 @@ if (seasonalMatch) {
         const pixelArt = renderPixelGrid(spriteGrid, baseColor, pixelSize);
         const themeBackground = getThemeBackground('cyberpunk', svgWidth, svgHeight);
 
+        // Bounce animation (same as normal pets)
+        const animation = `
+            <animateTransform 
+                attributeName="transform" 
+                type="translate" 
+                values="0 0; 0 -8; 0 0" 
+                dur="0.6s" 
+                repeatCount="indefinite" 
+            />`;
+
         const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${svgWidth}" height="${svgHeight}" viewBox="0 0 ${svgWidth} ${svgHeight}">
           <style>.pet { transform-origin: center; }</style>
           ${themeBackground}
           <g transform="translate(20, 20)">
-            <g class="pet">${pixelArt}</g>
+            <g class="pet">
+              ${pixelArt}
+              ${animation}
+            </g>
           </g>
           <text x="50%" y="${height + 40}" text-anchor="middle" font-family="monospace" font-size="10" fill="#00ffff">${label}</text>
         </svg>`;
