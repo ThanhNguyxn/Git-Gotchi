@@ -136,12 +136,12 @@ pets.forEach(pet => {
 
 // Generate mood demo files with custom labels
 const moodDemos = [
-    { name: 'happy', label: '⚡ HAPPY', sprite: 'happy' },
-    { name: 'sleeping', label: '💤 SLEEPING', sprite: 'sleeping' },
+    { name: 'happy', label: '⚡ HAPPY', sprite: 'normal' },
+    { name: 'sleeping', label: '💤 SLEEPING', sprite: 'sleep' },
     { name: 'ghost', label: '👻 GHOST', sprite: 'ghost' },
-    { name: 'hyper', label: '🔥 HYPER', sprite: 'happy' },
-    { name: 'nightowl', label: '🦉 NIGHT OWL', sprite: 'happy' },
-    { name: 'weekend', label: '🏖️ WEEKEND CHILL', sprite: 'happy' }
+    { name: 'hyper', label: '🔥 HYPER', sprite: 'hyper' },
+    { name: 'nightowl', label: '🦉 NIGHT OWL', sprite: 'nightowl' },
+    { name: 'weekend', label: '🏖️ WEEKEND CHILL', sprite: 'weekend' }
 ];
 
 moodDemos.forEach(({ name, label, sprite }) => {

@@ -687,6 +687,61 @@ const SPRITES = {
       '                ',
       '                ',
       '                '
+    ],
+    // --- NEW MOOD STATES ---
+    hyper: [
+      '                ',
+      '    R Y         ', // Fire spark above
+      '    WWYWW       ',
+      '   WRWWWWR      ', // R = Red Fire Eyes
+      '   WWWWWRO      ',
+      '    WWWWROY     ',
+      '     WWROYG     ',
+      '    WWROYGB     ',
+      '   WWROYGBP     ',
+      '  WWWWWGBP      ',
+      '  WWWWWW        ',
+      ' WW  WW         ',
+      ' WW  WW         ',
+      '                ',
+      '                ',
+      '                '
+    ],
+    nightowl: [
+      '                ',
+      '      Y         ',
+      '    WWYWW       ',
+      '   WOWWWWR      ', // O = Big Orange Eyes (Wide Open)
+      '   WOWWWRO      ', // Double row eyes (Very Awake)
+      '    WWWWROY     ',
+      '     WWROYG     ',
+      '    WWROYGB     ',
+      '   WWROYGBP     ',
+      '  WWWWWGBP      ',
+      '  WWWWWW        ',
+      ' WW  WW         ',
+      ' WW  WW         ',
+      '                ',
+      '                ',
+      '                '
+    ],
+    weekend: [
+      '                ',
+      '      Y         ',
+      '    WWYWW       ',
+      '   WKKKWWR      ', // KKK = Sunglasses
+      '   WWWWWRO      ',
+      '    WWWWROY     ',
+      '     WWROYG     ',
+      '    WWROYGB     ',
+      '   WWROYGBP     ',
+      '  WWWWWGBP      ',
+      '  WWWWWW        ',
+      ' WW  WW         ',
+      ' WW  WW         ',
+      '                ',
+      '                ',
+      '                '
     ]
   },
   // --- NEW PETS ---
@@ -1166,17 +1221,17 @@ function getMood(events, timezone = 'UTC') {
 
   // Priority 3: Hyper/On Fire (> 10 commits in 24h)
   if (last24hEvents.length > 10) {
-    return { mood: 'Hyper', icon: '🔥', moodKey: 'normal' };
+    return { mood: 'Hyper', icon: '🔥', moodKey: 'hyper' };
   }
 
   // Priority 4: Night Owl (commit between 00:00-04:00 local time)
   if (isNightOwl && todayEvents.length > 0) {
-    return { mood: 'Night Owl', icon: '🦉', moodKey: 'normal' };
+    return { mood: 'Night Owl', icon: '🦉', moodKey: 'nightowl' };
   }
 
   // Priority 5: Weekend Chill (Sat/Sun AND < 3 commits today)
   if (isWeekend && todayEvents.length < 3 && todayEvents.length > 0) {
-    return { mood: 'Weekend Chill', icon: '🏖️', moodKey: 'normal' };
+    return { mood: 'Weekend Chill', icon: '🏖️', moodKey: 'weekend' };
   }
 
   // Priority 6: Happy (default active state)
