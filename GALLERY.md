@@ -33,6 +33,7 @@ Your pet automatically wears holiday accessories based on the current date!
 | :---: | :---: |
 | ![Friday13](dist/seasonal_friday13.svg) | ![AprilFools](dist/seasonal_aprilfools.svg) |
 
+> **Priority Logic:** If a Major Holiday overlaps with a Special Event, the **Major Holiday** takes precedence.
 > **Zero Config!** Accessories appear automatically - no setup needed!
 
 ---
