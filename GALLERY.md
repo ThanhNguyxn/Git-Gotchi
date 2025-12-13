@@ -1,7 +1,7 @@
 # 🎨 Profile-Gotchi Gallery
 
 Here is the full roster of pixel art mascots available in **Profile-Gotchi**.
-Now featuring **23 unique pets**, **3 themes**, **6 moods**, **Leveling System**, and a **Legendary Unicorn** (unlock by ⭐ Star or 🍴 Fork)!
+Now featuring **23 unique pets**, **5 Legendary creatures**, **3 themes**, **6 moods**, **Leveling System**, and **Seasonal Events**!
 
 ## 🎭 Themes & Moods Demo
 
@@ -35,6 +35,29 @@ Your pet automatically wears holiday accessories based on the current date!
 
 > **Priority Logic:** If a Major Holiday overlaps with a Special Event, the **Major Holiday** takes precedence.
 > **Zero Config!** Accessories appear automatically - no setup needed!
+
+---
+
+## 🏆 Legendary Pets
+
+Unlock special creatures by achieving milestones! **Harder achievements take priority.**
+
+| 🦖 Mecha-Rex | 🐉 Hydra | 🗿 Cyber Golem | 👻 Void Spirit |
+| :---: | :---: | :---: | :---: |
+| ![MechaRex](dist/legendary_mecha_rex.svg) | ![Hydra](dist/legendary_hydra.svg) | ![Golem](dist/legendary_cyber_golem.svg) | ![VoidSpirit](dist/legendary_void_spirit.svg) |
+| **1000+ commits** | **5+ languages** | **50+ closed issues** | **Night coder (00-04h)** |
+
+### Unlock Requirements (Priority Order)
+
+| Priority | Legendary | Trigger | Difficulty |
+|:---:|:---|:---|:---:|
+| 1 | 🦖 **Mecha-Rex** | `totalCommits > 1000` | 🔥 Hardest |
+| 2 | 🐉 **Hydra** | `languageCount >= 5` | 💪 Hard |
+| 3 | 🗿 **Cyber Golem** | `closedIssues > 50` | 🛠️ Medium |
+| 4 | 👻 **Void Spirit** | Commit 00:00-04:00 | 🌙 Conditional |
+| 5 | 🦄 **Unicorn** | ⭐ Star or 🍴 Fork this repo | ✨ Entry Level |
+
+> **Note:** Unicorn is the easiest legendary - just star or fork this repository!
 
 ---
 
