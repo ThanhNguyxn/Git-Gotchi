@@ -9,7 +9,7 @@ inputs:
     description: "GitHub Username to track"
     required: true
   timezone:
-    description: "Timezone for local time calculations (e.g., 'Asia/Ho_Chi_Minh', 'America/New_York')"
+    description: "Timezone for local time calculations (e.g., 'America/New_York', 'Europe/London')"
     required: false
     default: "UTC"
   background_theme:
