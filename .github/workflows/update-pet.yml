@@ -13,16 +13,20 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Generate Pet
+      - name: Generate Pet 👾
         uses: ./ # Uses the action in the current directory
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           username: ${{ github.repository_owner }}
+          # Advanced Configuration
+          timezone: "America/New_York"
+          background_theme: "minimal"
+          show_level: "true"
 
-      - name: Commit and Push
+      - name: Commit and Push 💾
         run: |
           git config --global user.name 'github-actions[bot]'
           git config --global user.email 'github-actions[bot]@users.noreply.github.com'
           git add dist/pet.svg
-          git commit -m "Update Pet Status" || exit 0
+          git commit -m "Update Profile-Gotchi 👾" || exit 0
           git push
