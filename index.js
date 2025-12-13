@@ -2071,17 +2071,102 @@ const SPRITES = {
 // --- SEASONAL EVENT SYSTEM ---
 
 /**
- * Lunar New Year (Tet Vietnam) - Pre-calculated dates until 2030
- * These are the actual Lunar New Year dates (1st day of lunar calendar)
- * Range: 3 days before to 4 days after (total 8 days celebration)
+ * Lunar New Year (Tet) - Pre-calculated dates 2025-2100
+ * Normalized to cover BOTH Vietnamese (GMT+7) and Chinese (GMT+8) Lunar New Years
+ * Format: { start: [month, day], end: [month, day] }
  */
-const TET_DATES = {
-  2025: { start: new Date('2025-01-27'), end: new Date('2025-02-03') },
-  2026: { start: new Date('2026-02-15'), end: new Date('2026-02-22') },
-  2027: { start: new Date('2027-02-04'), end: new Date('2027-02-11') },
-  2028: { start: new Date('2028-01-24'), end: new Date('2028-01-31') },
-  2029: { start: new Date('2029-02-11'), end: new Date('2029-02-18') },
-  2030: { start: new Date('2030-02-01'), end: new Date('2030-02-08') }
+const tetRanges = {
+  // --- 2025 to 2030 ---
+  2025: { start: [1, 27], end: [2, 3] },
+  2026: { start: [2, 15], end: [2, 22] },
+  2027: { start: [2, 4], end: [2, 11] },
+  2028: { start: [1, 24], end: [1, 31] },
+  2029: { start: [2, 11], end: [2, 18] },
+  2030: { start: [1, 31], end: [2, 8] },   // Expanded for global coverage
+
+  // --- 2031 to 2040 ---
+  2031: { start: [1, 21], end: [1, 28] },
+  2032: { start: [2, 9], end: [2, 16] },
+  2033: { start: [1, 29], end: [2, 5] },
+  2034: { start: [2, 17], end: [2, 24] },
+  2035: { start: [2, 6], end: [2, 13] },
+  2036: { start: [1, 26], end: [2, 2] },
+  2037: { start: [2, 13], end: [2, 20] },
+  2038: { start: [2, 2], end: [2, 9] },
+  2039: { start: [1, 22], end: [1, 29] },
+  2040: { start: [2, 10], end: [2, 17] },
+
+  // --- 2041 to 2050 ---
+  2041: { start: [1, 30], end: [2, 6] },
+  2042: { start: [1, 20], end: [1, 27] },
+  2043: { start: [2, 8], end: [2, 15] },
+  2044: { start: [1, 28], end: [2, 4] },
+  2045: { start: [2, 15], end: [2, 22] },
+  2046: { start: [2, 4], end: [2, 11] },
+  2047: { start: [1, 24], end: [1, 31] },
+  2048: { start: [2, 12], end: [2, 19] },
+  2049: { start: [1, 31], end: [2, 7] },
+  2050: { start: [1, 21], end: [1, 28] },
+
+  // --- 2051 to 2060 ---
+  2051: { start: [2, 9], end: [2, 16] },
+  2052: { start: [1, 30], end: [2, 6] },
+  2053: { start: [2, 16], end: [2, 24] },  // Expanded for global coverage
+  2054: { start: [2, 6], end: [2, 13] },
+  2055: { start: [1, 26], end: [2, 2] },
+  2056: { start: [2, 13], end: [2, 20] },
+  2057: { start: [2, 2], end: [2, 9] },
+  2058: { start: [1, 22], end: [1, 29] },
+  2059: { start: [2, 10], end: [2, 17] },
+  2060: { start: [1, 31], end: [2, 7] },
+
+  // --- 2061 to 2070 ---
+  2061: { start: [1, 19], end: [1, 26] },
+  2062: { start: [2, 7], end: [2, 14] },
+  2063: { start: [1, 27], end: [2, 3] },
+  2064: { start: [2, 15], end: [2, 22] },
+  2065: { start: [2, 3], end: [2, 10] },
+  2066: { start: [1, 24], end: [1, 31] },
+  2067: { start: [2, 12], end: [2, 19] },
+  2068: { start: [2, 1], end: [2, 8] },
+  2069: { start: [1, 21], end: [1, 28] },
+  2070: { start: [2, 9], end: [2, 16] },
+
+  // --- 2071 to 2080 ---
+  2071: { start: [1, 29], end: [2, 5] },
+  2072: { start: [2, 17], end: [2, 24] },
+  2073: { start: [2, 5], end: [2, 12] },
+  2074: { start: [1, 25], end: [2, 1] },
+  2075: { start: [2, 13], end: [2, 20] },
+  2076: { start: [2, 3], end: [2, 10] },
+  2077: { start: [1, 22], end: [1, 29] },
+  2078: { start: [2, 10], end: [2, 17] },
+  2079: { start: [1, 31], end: [2, 7] },
+  2080: { start: [1, 20], end: [1, 27] },
+
+  // --- 2081 to 2090 ---
+  2081: { start: [2, 7], end: [2, 14] },
+  2082: { start: [1, 27], end: [2, 3] },
+  2083: { start: [2, 15], end: [2, 22] },
+  2084: { start: [2, 4], end: [2, 11] },
+  2085: { start: [1, 19], end: [1, 27] },  // Expanded for global coverage
+  2086: { start: [2, 6], end: [2, 13] },
+  2087: { start: [1, 27], end: [2, 3] },
+  2088: { start: [2, 14], end: [2, 21] },
+  2089: { start: [2, 2], end: [2, 9] },
+  2090: { start: [1, 21], end: [1, 28] },
+
+  // --- 2091 to 2100 ---
+  2091: { start: [2, 8], end: [2, 15] },
+  2092: { start: [1, 30], end: [2, 6] },
+  2093: { start: [1, 19], end: [1, 26] },
+  2094: { start: [2, 8], end: [2, 15] },
+  2095: { start: [1, 28], end: [2, 4] },
+  2096: { start: [2, 15], end: [2, 22] },
+  2097: { start: [2, 4], end: [2, 11] },
+  2098: { start: [1, 24], end: [1, 31] },
+  2099: { start: [2, 11], end: [2, 18] },
+  2100: { start: [2, 12], end: [2, 19] }
 };
 
 /**
@@ -2119,10 +2204,11 @@ function getSeasonalEvent(timezone = 'UTC') {
   };
 
   // Check Lunar New Year (Tet) first - requires year lookup
-  const tetRange = TET_DATES[year];
+  const tetRange = tetRanges[year];
   if (tetRange) {
-    const localDate = new Date(year, month - 1, day);
-    if (localDate >= tetRange.start && localDate <= tetRange.end) {
+    const [startMonth, startDay] = tetRange.start;
+    const [endMonth, endDay] = tetRange.end;
+    if (inRange(startMonth, startDay, endMonth, endDay)) {
       return 'TET';
     }
   }
