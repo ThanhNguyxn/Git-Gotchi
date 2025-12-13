@@ -3,52 +3,42 @@
 Here is the full roster of pixel art mascots available in **Profile-Gotchi v2.0.0**.
 Now featuring **23 unique pets**, **3 themes**, **6 moods**, **Leveling System**, and a **Legendary Unicorn** (unlock by ⭐ Star or 🍴 Fork)!
 
-## 🎭 Theme Demos
+## 🎭 Themes & Moods Demo
 
-| Theme | Preview |
-| :--- | :---: |
-| **Minimal** (default) | ![Minimal](dist/unicorn_happy.svg) |
-| **Cyberpunk** 🌆 | ![Cyberpunk](dist/demo_cyberpunk.svg) |
-| **Nature** 🌿 | ![Nature](dist/demo_nature.svg) |
+| Minimal | Cyberpunk 🌆 | Nature 🌿 |
+| :---: | :---: | :---: |
+| ![Minimal](dist/unicorn_happy.svg) | ![Cyberpunk](dist/demo_cyberpunk.svg) | ![Nature](dist/demo_nature.svg) |
 
-## 😊 Mood Demos
-
-| Mood | Preview |
-| :--- | :---: |
-| **Happy** ⚡ | ![Happy](dist/mood_happy.svg) |
-| **Hyper** 🔥 | ![Hyper](dist/mood_hyper.svg) |
-| **Night Owl** 🦉 | ![Night Owl](dist/mood_nightowl.svg) |
-| **Weekend Chill** 🏖️ | ![Weekend](dist/mood_weekend.svg) |
-| **Sleeping** 💤 | ![Sleeping](dist/mood_sleeping.svg) |
-| **Ghost** 👻 | ![Ghost](dist/mood_ghost.svg) |
+| Happy ⚡ | Hyper 🔥 | Night Owl 🦉 | Weekend 🏖️ | Sleeping 💤 | Ghost 👻 |
+| :---: | :---: | :---: | :---: | :---: | :---: |
+| ![Happy](dist/mood_happy.svg) | ![Hyper](dist/mood_hyper.svg) | ![Owl](dist/mood_nightowl.svg) | ![Weekend](dist/mood_weekend.svg) | ![Sleep](dist/mood_sleeping.svg) | ![Ghost](dist/mood_ghost.svg) |
 
 ---
 
 ## 🦁 The Roster
 
-| Pet | Happy ⚡ | Sleeping 💤 | Ghost 👻 |
-| :--- | :---: | :---: | :---: |
-| **Crab** (Rust) | ![Happy](dist/crab_happy.svg) | ![Sleep](dist/crab_sleeping.svg) | ![Ghost](dist/crab_ghost.svg) |
-| **Elephant** (PHP) | ![Happy](dist/elephant_happy.svg) | ![Sleep](dist/elephant_sleeping.svg) | ![Ghost](dist/elephant_ghost.svg) |
-| **Coffee** (Java) | ![Happy](dist/coffee_happy.svg) | ![Sleep](dist/coffee_sleeping.svg) | ![Ghost](dist/coffee_ghost.svg) |
-| **Bird** (Swift) | ![Happy](dist/bird_happy.svg) | ![Sleep](dist/bird_sleeping.svg) | ![Ghost](dist/bird_ghost.svg) |
-| **Robot** (C++/C#) | ![Happy](dist/robot_happy.svg) | ![Sleep](dist/robot_sleeping.svg) | ![Ghost](dist/robot_ghost.svg) |
-| **Whale** (Docker) | ![Happy](dist/whale_happy.svg) | ![Sleep](dist/whale_sleeping.svg) | ![Ghost](dist/whale_ghost.svg) |
-| **Gem** (Ruby) | ![Happy](dist/gem_happy.svg) | ![Sleep](dist/gem_sleeping.svg) | ![Ghost](dist/gem_ghost.svg) |
-| **Chameleon** (HTML) | ![Happy](dist/chameleon_happy.svg) | ![Sleep](dist/chameleon_sleeping.svg) | ![Ghost](dist/chameleon_ghost.svg) |
-| **Spider** (JS/TS) | ![Happy](dist/spider_happy.svg) | ![Sleep](dist/spider_sleeping.svg) | ![Ghost](dist/spider_ghost.svg) |
-| **Snake** (Python) | ![Happy](dist/snake_happy.svg) | ![Sleep](dist/snake_sleeping.svg) | ![Ghost](dist/snake_ghost.svg) |
-| **Gopher** (Go) | ![Happy](dist/gopher_happy.svg) | ![Sleep](dist/gopher_sleeping.svg) | ![Ghost](dist/gopher_ghost.svg) |
-| **Cat** (Default) | ![Happy](dist/cat_happy.svg) | ![Sleep](dist/cat_sleeping.svg) | ![Ghost](dist/cat_ghost.svg) |
-| **Tux** (Shell) | ![Happy](dist/tux_happy.svg) | ![Sleep](dist/tux_sleeping.svg) | ![Ghost](dist/tux_ghost.svg) |
-| **Fox** (Kotlin) | ![Happy](dist/fox_happy.svg) | ![Sleep](dist/fox_sleeping.svg) | ![Ghost](dist/fox_ghost.svg) |
-| **Hummingbird** (Dart) | ![Happy](dist/hummingbird_happy.svg) | ![Sleep](dist/hummingbird_sleeping.svg) | ![Ghost](dist/hummingbird_ghost.svg) |
-| **Gear** (C) | ![Happy](dist/gear_happy.svg) | ![Sleep](dist/gear_sleeping.svg) | ![Ghost](dist/gear_ghost.svg) |
-| **Ladder** (Scala) | ![Happy](dist/ladder_happy.svg) | ![Sleep](dist/ladder_sleeping.svg) | ![Ghost](dist/ladder_ghost.svg) |
-| **Owl** (R) | ![Happy](dist/owl_happy.svg) | ![Sleep](dist/owl_sleeping.svg) | ![Ghost](dist/owl_ghost.svg) |
-| **Camel** (Perl) | ![Happy](dist/camel_happy.svg) | ![Sleep](dist/camel_sleeping.svg) | ![Ghost](dist/camel_ghost.svg) |
-| **Capybara** (Lua) | ![Happy](dist/capybara_happy.svg) | ![Sleep](dist/capybara_sleeping.svg) | ![Ghost](dist/capybara_ghost.svg) |
-| **Alpaca** (Julia) | ![Happy](dist/alpaca_happy.svg) | ![Sleep](dist/alpaca_sleeping.svg) | ![Ghost](dist/alpaca_ghost.svg) |
-| **Phoenix** (Elixir) | ![Happy](dist/phoenix_happy.svg) | ![Sleep](dist/phoenix_sleeping.svg) | ![Ghost](dist/phoenix_ghost.svg) |
-| **Unicorn** (Legendary) | ![Happy](dist/unicorn_happy.svg) | ![Sleep](dist/unicorn_sleeping.svg) | ![Ghost](dist/unicorn_ghost.svg) |
-
+| Pet | Preview |
+| :--- | :---: |
+| **Crab** (Rust) | ![](dist/crab.svg) |
+| **Elephant** (PHP) | ![](dist/elephant.svg) |
+| **Coffee** (Java) | ![](dist/coffee.svg) |
+| **Bird** (Swift) | ![](dist/bird.svg) |
+| **Robot** (C++/C#) | ![](dist/robot.svg) |
+| **Whale** (Docker) | ![](dist/whale.svg) |
+| **Gem** (Ruby) | ![](dist/gem.svg) |
+| **Chameleon** (HTML) | ![](dist/chameleon.svg) |
+| **Spider** (JS/TS) | ![](dist/spider.svg) |
+| **Snake** (Python) | ![](dist/snake.svg) |
+| **Gopher** (Go) | ![](dist/gopher.svg) |
+| **Cat** (Default) | ![](dist/cat.svg) |
+| **Tux** (Shell) | ![](dist/tux.svg) |
+| **Fox** (Kotlin) | ![](dist/fox.svg) |
+| **Hummingbird** (Dart) | ![](dist/hummingbird.svg) |
+| **Gear** (C) | ![](dist/gear.svg) |
+| **Ladder** (Scala) | ![](dist/ladder.svg) |
+| **Owl** (R) | ![](dist/owl.svg) |
+| **Camel** (Perl) | ![](dist/camel.svg) |
+| **Capybara** (Lua) | ![](dist/capybara.svg) |
+| **Alpaca** (Julia) | ![](dist/alpaca.svg) |
+| **Phoenix** (Elixir) | ![](dist/phoenix.svg) |
+| **Unicorn** (Legendary) | ![](dist/unicorn.svg) |
