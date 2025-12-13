@@ -15,6 +15,22 @@ Now featuring **23 unique pets**, **3 themes**, **6 moods**, **Leveling System**
 
 ---
 
+## 🎄 Seasonal Events (Auto-Detect!)
+
+Your pet automatically wears holiday accessories based on the current date!
+
+| 🎅 Christmas | 🎉 New Year | 💕 Valentine | 🎃 Halloween |
+| :---: | :---: | :---: | :---: |
+| ![Christmas](dist/seasonal_christmas.svg) | ![NewYear](dist/seasonal_newyear.svg) | ![Valentine](dist/seasonal_valentine.svg) | ![Halloween](dist/seasonal_halloween.svg) |
+
+| 🧧 Tết | ☕ Programmer Day | 🌹 Women's Day | 🎩 Men's Day |
+| :---: | :---: | :---: | :---: |
+| ![Tet](dist/seasonal_tet.svg) | ![Programmer](dist/seasonal_programmer.svg) | ![Womens](dist/seasonal_womensday.svg) | ![Mens](dist/seasonal_mensday.svg) |
+
+> **Zero Config!** Accessories appear automatically - no setup needed!
+
+---
+
 ## 🦁 The Roster
 
 | Pet | Preview |
