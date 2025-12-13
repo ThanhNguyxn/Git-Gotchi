@@ -101,7 +101,7 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           username: ${{ github.repository_owner }}
           # Optional: Advanced Configuration
-          timezone: 'Asia/Ho_Chi_Minh'  # Your timezone for mood detection
+          timezone: 'America/New_York'  # Your timezone for mood detection
           background_theme: 'minimal'   # Options: 'minimal', 'cyberpunk', 'nature'
           show_level: 'true'            # Show level stats on pet
           
