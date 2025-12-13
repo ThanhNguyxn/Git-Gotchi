@@ -3032,8 +3032,19 @@ async function fetchLegendaryStats(octokit, username, events, timezone, isStarga
     console.log('Warning: Could not fetch legendary stats:', error.message);
   }
 
-  // Count total commits from events (PushEvents in last 100 events)
-  const totalCommits = events.filter(e => e.type === 'PushEvent').length;
+  // Count total commits using GitHub Search API (accurate count)
+  let totalCommits = 0;
+  try {
+    const { data: commitSearch } = await octokit.rest.search.commits({
+      q: `author:${username}`,
+      per_page: 1
+    });
+    totalCommits = commitSearch.total_count || 0;
+  } catch (e) {
+    // Fallback to event-based counting if search fails
+    totalCommits = events.filter(e => e.type === 'PushEvent').length;
+    console.log('Using fallback commit count from events:', totalCommits);
+  }
 
   console.log(`Legendary Stats - Commits: ${totalCommits}, Languages: ${languageCount}, Issues: ${closedIssues}, LastHour: ${lastCommitHour}, Stargazer: ${isStargazer}, Forker: ${isForker}`);
 
