@@ -13,6 +13,14 @@ const colorsMatch = indexContent.match(/const PET_COLORS = ({[\s\S]*?});/);
 if (!colorsMatch) { console.error("Could not parse PET_COLORS"); process.exit(1); }
 const PET_COLORS = eval('(' + colorsMatch[1] + ')');
 
+// Extract LEGENDARY_SPRITES
+const legendarySpritesMatch = indexContent.match(/const LEGENDARY_SPRITES = ({[\s\S]*?});\s*\nconst SPRITES/);
+const LEGENDARY_SPRITES = legendarySpritesMatch ? eval('(' + legendarySpritesMatch[1] + ')') : {};
+
+// Extract LEGENDARY_COLORS
+const legendaryColorsMatch = indexContent.match(/const LEGENDARY_COLORS = ({[\s\S]*?});/);
+const LEGENDARY_COLORS = legendaryColorsMatch ? eval('(' + legendaryColorsMatch[1] + ')') : {};
+
 // --- RENDER ENGINE (Copied/Adapted from index.js) ---
 function renderPixelGrid(grid, baseColor, pixelSize = 10) {
     let rects = '';
@@ -330,6 +338,49 @@ if (seasonalMatch) {
 
         fs.writeFileSync(`dist/seasonal_${name}.svg`, svg);
         console.log(`Generated seasonal_${name}.svg`);
+    });
+}
+
+// --- LEGENDARY PET DEMOS ---
+{
+    const legendaryDemos = [
+        { name: 'mecha_rex', label: '🦖 MECHA-REX', color: '#2e7d32' },
+        { name: 'hydra', label: '🐉 HYDRA', color: '#6a1b9a' },
+        { name: 'void_spirit', label: '👻 VOID SPIRIT', color: '#311b92' },
+        { name: 'cyber_golem', label: '🗿 CYBER GOLEM', color: '#37474f' }
+    ];
+
+    legendaryDemos.forEach(({ name, label, color }) => {
+        const spriteSet = LEGENDARY_SPRITES[name];
+        if (!spriteSet) {
+            console.log(`Skipping ${name} - sprite not found`);
+            return;
+        }
+        const spriteGrid = spriteSet['normal'];
+        const baseColor = color;
+
+        const pixelSize = 16;
+        const rows = spriteGrid.length;
+        const cols = spriteGrid[0].length;
+        const width = cols * pixelSize;
+        const height = rows * pixelSize;
+        const svgWidth = width + 40;
+        const svgHeight = height + 50;
+
+        const pixelArt = renderPixelGrid(spriteGrid, baseColor, pixelSize);
+        const themeBackground = getThemeBackground('cyberpunk', svgWidth, svgHeight);
+
+        const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${svgWidth}" height="${svgHeight}" viewBox="0 0 ${svgWidth} ${svgHeight}">
+          <style>.pet { transform-origin: center; }</style>
+          ${themeBackground}
+          <g transform="translate(20, 20)">
+            <g class="pet">${pixelArt}</g>
+          </g>
+          <text x="50%" y="${height + 40}" text-anchor="middle" font-family="monospace" font-size="10" fill="#00ffff">${label}</text>
+        </svg>`;
+
+        fs.writeFileSync(`dist/legendary_${name}.svg`, svg);
+        console.log(`Generated legendary_${name}.svg`);
     });
 }
 

@@ -42,6 +42,374 @@ const PET_COLORS = {
   phoenix: '#ff4500'   // Orange-Red (Elixir)
 };
 
+// ═══════════════════════════════════════════════════════════════════════════
+// LEGENDARY PET SYSTEM - High-level stats unlock special creatures
+// Priority: Mecha-Rex > Hydra > Cyber Golem > Void Spirit > Unicorn
+// ═══════════════════════════════════════════════════════════════════════════
+
+const LEGENDARY_COLORS = {
+  mecha_rex: '#2e7d32',    // Green metal (T-Rex)
+  hydra: '#6a1b9a',        // Dark purple (3-headed serpent)
+  void_spirit: '#311b92',  // Deep indigo (Spectre)
+  cyber_golem: '#37474f'   // Blue-grey stone (Construct)
+};
+
+// Legendary Sprites (12x12 Pixel Art)
+// Legend: X=Base, K=Black, W=White, R=Red, O=Orange, Y=Yellow, B=Blue, G=Green, P=Purple
+const LEGENDARY_SPRITES = {
+  // 🦖 MECHA-REX: Cybernetic T-Rex (Horizontal posture, distinct from Robot)
+  mecha_rex: {
+    normal: [
+      "      KKKK  ",
+      "     KXXXXK ",
+      "    KXRXXKXK",
+      "    KXXXXXXK",
+      "   KXXXXXXXK",
+      "K KXXXXXXXXK",
+      "KKXXXXXXXXXK",
+      " KXXX KXXXK ",
+      "  KXK  KXK  ",
+      "  KXK  KXK  ",
+      "   K    K   ",
+      "            "
+    ],
+    sleep: [
+      "      KKKK  ",
+      "     KXXXXK ",
+      "    KXKKXKXK",
+      "    KXXXXXXK",
+      "   KXXXXXXXK",
+      "K KXXXXXXXXK",
+      "KKXXXXXXXXXK",
+      " KXXX KXXXK ",
+      "  KXK  KXK  ",
+      "  KK   KK   ",
+      "            ",
+      "            "
+    ],
+    ghost: [
+      "      KKKK  ",
+      "     KXXXXK ",
+      "    KXKKXKXK",
+      "    KXXXXXXK",
+      "   KXXXXXXXK",
+      "K KXXXXXXXXK",
+      "KKXXXXXXXXXK",
+      " KXXX KXXXK ",
+      "  K K  K K  ",
+      "            ",
+      "            ",
+      "            "
+    ],
+    hyper: [
+      "      KKKK  ",
+      "     KXXXXK ",
+      "    KXRXXKXK",
+      "    KXXXXXXK",
+      "   KXXXXXXXK",
+      "K KXXXXXXXXK",
+      "KKXXXXXXXXXK",
+      " KXXX KXXXK ",
+      "  KXK  KXK  ",
+      "  KXK  KXK  ",
+      "   K    K   ",
+      "     RR     "
+    ],
+    nightowl: [
+      "      KKKK  ",
+      "     KXXXXK ",
+      "    KXOXXKXK",
+      "    KXXXXXXK",
+      "   KXXXXXXXK",
+      "K KXXXXXXXXK",
+      "KKXXXXXXXXXK",
+      " KXXX KXXXK ",
+      "  KXK  KXK  ",
+      "  KXK  KXK  ",
+      "   K    K   ",
+      "            "
+    ],
+    weekend: [
+      "      KKKK  ",
+      "     KXXXXK ",
+      "    KXKKXKXK",
+      "    KXXXXXXK",
+      "   KXXXXXXXK",
+      "K KXXXXXXXXK",
+      "KKXXXXXXXXXK",
+      " KXXX KXXXK ",
+      "  KXK  KXK  ",
+      "  KXK  KXK  ",
+      "   K    K   ",
+      "            "
+    ]
+  },
+
+  // 🐉 HYDRA: 3-Headed Serpent (Distinct from single-headed Snake)
+  hydra: {
+    normal: [
+      " K   K   K  ",
+      "KXK KXK KXK ",
+      "KWK KWK KWK ",
+      " KXK K KXK  ",
+      "  KXXXXXK   ",
+      "   KXXXK    ",
+      "   KXXXK    ",
+      "  KXXXXXK   ",
+      "  KXXXXXK   ",
+      "   KXXXK    ",
+      "    KXK     ",
+      "     K      "
+    ],
+    sleep: [
+      "            ",
+      " KK  KK  KK ",
+      "KXXKKXXKKXXK",
+      " KKKKKKKKK  ",
+      "  KXXXXXK   ",
+      "   KXXXK    ",
+      "   KXXXK    ",
+      "  KXXXXXK   ",
+      "  KXXXXXK   ",
+      "   KXXXK    ",
+      "    KXK     ",
+      "     K      "
+    ],
+    ghost: [
+      " K   K   K  ",
+      "KXK KXK KXK ",
+      "KKK KKK KKK ",
+      " KXK K KXK  ",
+      "  KXXXXXK   ",
+      "   KXXXK    ",
+      "   KXXXK    ",
+      "  KXXXXXK   ",
+      "   K K K    ",
+      "    K K     ",
+      "            ",
+      "            "
+    ],
+    hyper: [
+      " K   K   K  ",
+      "KXK KXK KXK ",
+      "KRK KRK KRK ",
+      " KXK K KXK  ",
+      "  KXXXXXK   ",
+      "   KXXXK    ",
+      "   KXXXK    ",
+      "  KXXXXXK   ",
+      "  KXXXXXK   ",
+      "   KXXXK    ",
+      "    KXK     ",
+      "     K      "
+    ],
+    nightowl: [
+      " K   K   K  ",
+      "KXK KXK KXK ",
+      "KOK KOK KOK ",
+      " KXK K KXK  ",
+      "  KXXXXXK   ",
+      "   KXXXK    ",
+      "   KXXXK    ",
+      "  KXXXXXK   ",
+      "  KXXXXXK   ",
+      "   KXXXK    ",
+      "    KXK     ",
+      "     K      "
+    ],
+    weekend: [
+      " K   K   K  ",
+      "KXK KXK KXK ",
+      "KKK KKK KKK ",
+      " KXK K KXK  ",
+      "  KXXXXXK   ",
+      "   KXXXK    ",
+      "   KXXXK    ",
+      "  KXXXXXK   ",
+      "  KXXXXXK   ",
+      "   KXXXK    ",
+      "    KXK     ",
+      "     K      "
+    ]
+  },
+
+  // 👻 VOID SPIRIT: Floating Spectre (Hooded, no legs - supernatural, not bird-like)
+  void_spirit: {
+    normal: [
+      "    KKKK    ",
+      "   KXXXXK   ",
+      "  KXXXXXXK  ",
+      " KXXYYYYXXK ",
+      " KXXXXXXXXK ",
+      " KXXXXXXXXK ",
+      "  KXXXXXXK  ",
+      "   KXXXXK   ",
+      "   KXXXXK   ",
+      "  K K  K K  ",
+      " K K    K K ",
+      "            "
+    ],
+    sleep: [
+      "    KKKK    ",
+      "   KXXXXK   ",
+      "  KXXXXXXK  ",
+      " KXXKKKKXXK ",
+      " KXXXXXXXXK ",
+      " KXXXXXXXXK ",
+      "  KXXXXXXK  ",
+      "   KXXXXK   ",
+      "   KXXXXK   ",
+      "  K K  K K  ",
+      " K K    K K ",
+      "            "
+    ],
+    ghost: [
+      "    KKKK    ",
+      "   KXXXXK   ",
+      "  KXXXXXXK  ",
+      " KXXYYYYXXK ",
+      " KXXXXXXXXK ",
+      " KXXXXXXXXK ",
+      "  KXXXXXXK  ",
+      "   K K K    ",
+      "    K K     ",
+      "            ",
+      "            ",
+      "            "
+    ],
+    hyper: [
+      "    KKKK    ",
+      "   KXXXXK   ",
+      "  KXXXXXXK  ",
+      " KXXRRRRXXK ",
+      " KXXXXXXXXK ",
+      " KXXXXXXXXK ",
+      "  KXXXXXXK  ",
+      "   KXXXXK   ",
+      "   KXXXXK   ",
+      "  K K  K K  ",
+      " K K    K K ",
+      "            "
+    ],
+    nightowl: [
+      "    KKKK    ",
+      "   KXXXXK   ",
+      "  KXXXXXXK  ",
+      " KXXOOOOXXK ",
+      " KXXXXXXXXK ",
+      " KXXXXXXXXK ",
+      "  KXXXXXXK  ",
+      "   KXXXXK   ",
+      "   KXXXXK   ",
+      "  K K  K K  ",
+      " K K    K K ",
+      "            "
+    ],
+    weekend: [
+      "    KKKK    ",
+      "   KXXXXK   ",
+      "  KXXXXXXK  ",
+      " KXXKKKKXXK ",
+      " KXXXXXXXXK ",
+      " KXXXXXXXXK ",
+      "  KXXXXXXK  ",
+      "   KXXXXK   ",
+      "   KXXXXK   ",
+      "  K K  K K  ",
+      " K K    K K ",
+      "            "
+    ]
+  },
+
+  // 🗿 CYBER GOLEM: Stone Construct with Circuit Lines (Blocky, distinct from Robot)
+  cyber_golem: {
+    normal: [
+      "  KKKKKKKK  ",
+      " KXXBXXXXBK ",
+      " KXWKXXKWXK ",
+      " KXBKXXKBXK ",
+      " KXXBXXBXXK ",
+      "  KXXXXXXK  ",
+      " KXBXXXXBXK ",
+      " KXXXXXXXXK ",
+      " KXX    XXK ",
+      " KXK    KXK ",
+      " KXK    KXK ",
+      "  K      K  "
+    ],
+    sleep: [
+      "  KKKKKKKK  ",
+      " KXXBXXXXBK ",
+      " KXKKXXKKXK ",
+      " KXBKXXKBXK ",
+      " KXXBXXBXXK ",
+      "  KXXXXXXK  ",
+      " KXBXXXXBXK ",
+      " KXXXXXXXXK ",
+      " KXX    XXK ",
+      " KXK    KXK ",
+      " KK      KK ",
+      "            "
+    ],
+    ghost: [
+      "  KKKKKKKK  ",
+      " KXXBXXXXBK ",
+      " KXKKXXKKXK ",
+      " KXBKXXKBXK ",
+      " KXXBXXBXXK ",
+      "  KXXXXXXK  ",
+      " KXBXXXXBXK ",
+      " KXXXXXXXXK ",
+      "  K K  K K  ",
+      "            ",
+      "            ",
+      "            "
+    ],
+    hyper: [
+      "  KKKKKKKK  ",
+      " KXXBXXXXBK ",
+      " KXRKXXKRXK ",
+      " KXBKXXKBXK ",
+      " KXXBXXBXXK ",
+      "  KXXXXXXK  ",
+      " KXBXXXXBXK ",
+      " KXXXXXXXXK ",
+      " KXX    XXK ",
+      " KXK    KXK ",
+      " KXK    KXK ",
+      "  K      K  "
+    ],
+    nightowl: [
+      "  KKKKKKKK  ",
+      " KXXBXXXXBK ",
+      " KXOKXXKOXK ",
+      " KXBKXXKBXK ",
+      " KXXBXXBXXK ",
+      "  KXXXXXXK  ",
+      " KXBXXXXBXK ",
+      " KXXXXXXXXK ",
+      " KXX    XXK ",
+      " KXK    KXK ",
+      " KXK    KXK ",
+      "  K      K  "
+    ],
+    weekend: [
+      "  KKKKKKKK  ",
+      " KXXBXXXXBK ",
+      " KXKKXXKKXK ",
+      " KXBKXXKBXK ",
+      " KXXBXXBXXK ",
+      "  KXXXXXXK  ",
+      " KXBXXXXBXK ",
+      " KXXXXXXXXK ",
+      " KXX    XXK ",
+      " KXK    KXK ",
+      " KXK    KXK ",
+      "  K      K  "
+    ]
+  }
+};
+
 const SPRITES = {
   crab: {
     normal: [
@@ -2554,6 +2922,131 @@ function getMood(events, timezone = 'UTC') {
   return { mood: 'Happy', icon: '⚡', moodKey: 'normal' };
 }
 
+// ═══════════════════════════════════════════════════════════════════════════
+// LEGENDARY PET DETECTION - Waterfall Priority System
+// Priority: Mecha-Rex (Hardest) > Hydra > Cyber Golem > Void Spirit > Unicorn (Easiest)
+// ═══════════════════════════════════════════════════════════════════════════
+
+/**
+ * Determine if user qualifies for a Legendary Pet based on stats
+ * Priority Order (Hardest achievement first):
+ * 1. Mecha-Rex (Grinder) - totalCommits > 1000
+ * 2. Hydra (Polyglot) - languageCount >= 5
+ * 3. Cyber Golem (Maintainer) - closedIssues > 50
+ * 4. Void Spirit (Night Owl) - commit between 00:00-04:00
+ * 5. Unicorn (Supporter) - starred/forked THIS repo (easiest/entry level)
+ * 
+ * @param {Object} stats - User statistics object
+ * @returns {string|null} Legendary pet key or null if not qualified
+ */
+function getLegendaryPet(stats) {
+  // Priority 1: Mecha-Rex (The Grinder) - HARDEST
+  if (stats.totalCommits > 1000) {
+    console.log('🦖 Legendary: MECHA-REX unlocked! (1000+ commits - The Grinder)');
+    return 'mecha_rex';
+  }
+
+  // Priority 2: Hydra (The Polyglot)
+  if (stats.languageCount >= 5) {
+    console.log('🐉 Legendary: HYDRA unlocked! (5+ languages - The Polyglot)');
+    return 'hydra';
+  }
+
+  // Priority 3: Cyber Golem (The Maintainer)
+  if (stats.closedIssues > 50) {
+    console.log('🗿 Legendary: CYBER GOLEM unlocked! (50+ closed issues - The Maintainer)');
+    return 'cyber_golem';
+  }
+
+  // Priority 4: Void Spirit (The Night Owl)
+  // Recent commit between 00:00-04:00 local time
+  if (stats.lastCommitHour !== null && stats.lastCommitHour >= 0 && stats.lastCommitHour < 4) {
+    console.log('👻 Legendary: VOID SPIRIT unlocked! (Night coder 00:00-04:00)');
+    return 'void_spirit';
+  }
+
+  // Priority 5: Unicorn (The Supporter) - EASIEST / Entry Level
+  // User starred or forked THIS repository (ThanhNguyxn/Git-Gotchi)
+  if (stats.isStargazer || stats.isForker) {
+    console.log('🦄 Legendary: UNICORN unlocked! (Star/Fork supporter - Entry Level)');
+    return 'unicorn';
+  }
+
+  // No legendary status - fallback to standard language pet
+  return null;
+}
+
+/**
+ * Fetch extended stats for Legendary Pet detection
+ * @param {Object} octokit - GitHub API client
+ * @param {string} username - GitHub username
+ * @param {Array} events - User events array
+ * @param {string} timezone - IANA timezone
+ * @param {boolean} isStargazer - User starred this repo
+ * @param {boolean} isForker - User forked this repo
+ * @returns {Object} Extended stats object
+ */
+async function fetchLegendaryStats(octokit, username, events, timezone, isStargazer, isForker) {
+  let languageCount = 0;
+  let closedIssues = 0;
+  let lastCommitHour = null;
+
+  try {
+    // Fetch user repos to count unique languages
+    const { data: repos } = await octokit.rest.repos.listForUser({
+      username: username,
+      per_page: 100,
+      sort: 'updated'
+    });
+
+    const languages = new Set();
+    repos.forEach(repo => {
+      if (repo.language) languages.add(repo.language);
+    });
+    languageCount = languages.size;
+
+    // Get last commit hour in user's timezone
+    const pushEvents = events.filter(e => e.type === 'PushEvent');
+    if (pushEvents.length > 0) {
+      const lastPush = new Date(pushEvents[0].created_at);
+      const localHour = parseInt(new Intl.DateTimeFormat('en-US', {
+        timeZone: timezone,
+        hour: 'numeric',
+        hour12: false
+      }).format(lastPush), 10);
+      lastCommitHour = localHour;
+    }
+
+    // Fetch closed issues count
+    try {
+      const { data: issueSearch } = await octokit.rest.search.issuesAndPullRequests({
+        q: `author:${username} type:issue is:closed`,
+        per_page: 1
+      });
+      closedIssues = issueSearch.total_count || 0;
+    } catch (e) {
+      console.log('Could not fetch closed issues count:', e.message);
+    }
+
+  } catch (error) {
+    console.log('Warning: Could not fetch legendary stats:', error.message);
+  }
+
+  // Count total commits from events (PushEvents in last 100 events)
+  const totalCommits = events.filter(e => e.type === 'PushEvent').length;
+
+  console.log(`Legendary Stats - Commits: ${totalCommits}, Languages: ${languageCount}, Issues: ${closedIssues}, LastHour: ${lastCommitHour}, Stargazer: ${isStargazer}, Forker: ${isForker}`);
+
+  return {
+    totalCommits,
+    languageCount,
+    closedIssues,
+    lastCommitHour,
+    isStargazer,
+    isForker
+  };
+}
+
 /**
  * Generate Theme Background SVG elements
  * @param {string} theme - 'minimal', 'cyberpunk', 'nature'
@@ -2671,13 +3164,25 @@ async function run() {
 
     // 4. Determine Pet Type (Species)
     let petType = 'cat';
+    let isLegendary = false;
 
-    // Legendary Status: Unicorn (Star or Fork the repo!)
-    const hasStarredOrForked = await checkUserStarredOrForked(octokit, username);
-    if (hasStarredOrForked) {
-      petType = 'unicorn';
-      console.log('Legendary Status Unlocked! 🦄');
+    // Check if user starred/forked THIS repo (for Unicorn entry-level legendary)
+    const starForkResult = await checkUserStarredOrForked(octokit, username);
+    const isStargazer = starForkResult; // checkUserStarredOrForked returns true if starred
+    const isForker = starForkResult;    // or forked (combined check)
+
+    // Fetch extended stats for Legendary Pet detection
+    const legendaryStats = await fetchLegendaryStats(octokit, username, events.data, timezone, isStargazer, isForker);
+
+    // Check for Legendary Pet (waterfall priority)
+    const legendaryPet = getLegendaryPet(legendaryStats);
+
+    if (legendaryPet) {
+      petType = legendaryPet;
+      isLegendary = true;
+      console.log(`🏆 Legendary Pet: ${petType.toUpperCase()}`);
     } else {
+      // Fallback: Language-based standard pet
       const repos = await octokit.rest.repos.listForUser({
         username: username,
         sort: 'updated',
@@ -2696,7 +3201,7 @@ async function run() {
       console.log(`Top Language: ${topLanguage}`);
     }
 
-    console.log(`User: ${username}, Mood: ${moodInfo.mood}, Type: ${petType}, Theme: ${backgroundTheme}`);
+    console.log(`User: ${username}, Mood: ${moodInfo.mood}, Type: ${petType}, Legendary: ${isLegendary}, Theme: ${backgroundTheme}`);
 
     // 5. Generate SVG with new options
     const svgContent = generateSVG(petType, moodInfo.moodKey, {
@@ -2822,14 +3327,15 @@ function renderPixelGrid(grid, baseColor, pixelSize = 10) {
 function generateSVG(petType, mood, options = {}) {
   const { theme = 'minimal', showLevel = true, stats = null, moodInfo = null, timezone = 'UTC' } = options;
 
-  // 1. Select the Sprite Set
-  const spriteSet = SPRITES[petType] || SPRITES['cat'];
+  // 1. Select the Sprite Set (check Legendary first, then Standard)
+  const spriteSet = LEGENDARY_SPRITES[petType] || SPRITES[petType] || SPRITES['cat'];
 
   // 2. Select the specific Mood Grid
   const moodKey = moodInfo?.moodKey || ((mood === 'happy') ? 'normal' : mood);
   const spriteGrid = spriteSet[moodKey] || spriteSet['normal'];
 
-  const baseColor = PET_COLORS[petType] || '#e5c07b';
+  // 3. Get base color (check Legendary first, then Standard)
+  const baseColor = LEGENDARY_COLORS[petType] || PET_COLORS[petType] || '#e5c07b';
 
   const pixelSize = 16;
   const rows = spriteGrid.length;
