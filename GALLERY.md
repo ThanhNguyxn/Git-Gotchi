@@ -1,7 +1,17 @@
 # 🎨 Profile-Gotchi Gallery
 
-Here is the full roster of pixel art mascots available in **Profile-Gotchi v1.13.0**.
-Now featuring **23 unique pets**, **Multi-Color** sprites, unique **Sleep/Ghost** states, and a **Legendary Unicorn** (unlock by ⭐ Star or 🍴 Fork)!
+Here is the full roster of pixel art mascots available in **Profile-Gotchi v2.0.0**.
+Now featuring **23 unique pets**, **3 themes**, **6 moods**, **Leveling System**, and a **Legendary Unicorn** (unlock by ⭐ Star or 🍴 Fork)!
+
+## 🎭 Theme Demos
+
+| Theme | Preview |
+| :--- | :---: |
+| **Minimal** (default) | ![Minimal](dist/unicorn_happy.svg) |
+| **Cyberpunk** 🌆 | ![Cyberpunk](dist/demo_cyberpunk.svg) |
+| **Nature** 🌿 | ![Nature](dist/demo_nature.svg) |
+
+---
 
 ## 🦁 The Roster
 
@@ -30,3 +40,4 @@ Now featuring **23 unique pets**, **Multi-Color** sprites, unique **Sleep/Ghost*
 | **Alpaca** (Julia) | ![Happy](dist/alpaca_happy.svg) | ![Sleep](dist/alpaca_sleeping.svg) | ![Ghost](dist/alpaca_ghost.svg) |
 | **Phoenix** (Elixir) | ![Happy](dist/phoenix_happy.svg) | ![Sleep](dist/phoenix_sleeping.svg) | ![Ghost](dist/phoenix_ghost.svg) |
 | **Unicorn** (Legendary) | ![Happy](dist/unicorn_happy.svg) | ![Sleep](dist/unicorn_sleeping.svg) | ![Ghost](dist/unicorn_ghost.svg) |
+
