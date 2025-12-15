@@ -118,7 +118,7 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           username: ${{ github.repository_owner }}
           # Optional: Advanced Configuration
-          timezone: 'America/New_York'  # Your timezone for mood detection
+          timezone: 'UTC'               # Recommended for international users
           background_theme: 'minimal'   # Options: 'minimal', 'cyberpunk', 'nature'
           show_level: 'true'            # Show level stats on pet
           
@@ -137,6 +137,7 @@ jobs:
 Set your local timezone for accurate mood detection (Night Owl, Weekend Chill).
 
 ```yaml
+timezone: 'UTC'                 # Recommended for international (default)
 timezone: 'America/New_York'    # US Eastern
 timezone: 'Europe/London'       # UK
 timezone: 'Asia/Tokyo'          # Japan
@@ -186,7 +187,7 @@ show_level: 'false'  # Hide level - pet only
     username: ${{ github.repository_owner }}
     
     # 🌍 Timezone (for Night Owl & Weekend detection)
-    timezone: 'America/New_York'
+    timezone: 'UTC'
     
     # 🎨 Theme (minimal, cyberpunk, nature)
     background_theme: 'cyberpunk'
