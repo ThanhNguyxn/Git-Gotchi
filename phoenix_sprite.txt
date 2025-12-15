@@ -1,0 +1,37 @@
+--- ASCII Preview ---
+             R    |  .............R..
+   R        O     |  ...R........o...
+    O  RX   OXR   |  ....o..R#...o#R.
+  R O   GRO OR    |  ..R.o...+Ro.oR..
+    OY  YOOYOR    |  ....o*..*oo*oR..
+    OOOOYOOOORR   |  ....oooo*ooooRR.
+    ROOOOOOOOX    |  ....Roooooooo#..
+     G RGOOO      |  .....+.R+ooo....
+  R       OO      |  ..R.......oo....
+   G  R   XXO     |  ...+..R...##o...
+    R       O     |  ....R.......o...
+ RXXOGR     O     |  .R##o+R.....o...
+   OOOR     O     |  ...oooR.....o...
+    OYO           |  ....o*o.........
+     YOO  OY      |  .....*oo..o*....
+      OOOO        |  ......oooo......
+
+--- JavaScript Format ---
+    normal: [
+      "             R  ",
+      "   R        O   ",
+      "    O  RX   OXR ",
+      "  R O   GRO OR  ",
+      "    OY  YOOYOR  ",
+      "    OOOOYOOOORR ",
+      "    ROOOOOOOOX  ",
+      "     G RGOOO    ",
+      "  R       OO    ",
+      "   G  R   XXO   ",
+      "    R       O   ",
+      " RXXOGR     O   ",
+      "   OOOR     O   ",
+      "    OYO         ",
+      "     YOO  OY    ",
+      "      OOOO      "
+    ],
