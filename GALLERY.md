@@ -23,9 +23,9 @@ Your pet automatically wears holiday accessories based on the current date!
 | :---: | :---: | :---: | :---: |
 | ![Christmas](dist/seasonal_christmas.svg) | ![NewYear](dist/seasonal_newyear.svg) | ![Valentine](dist/seasonal_valentine.svg) | ![Halloween](dist/seasonal_halloween.svg) |
 
-| 🧧 Tết | ☕ Programmer Day | 🌹 Women's Day | 🎩 Men's Day |
+| 🧧 Lunar New Year | ☕ Programmer Day | 🌹 Women's Day | 🎩 Men's Day |
 | :---: | :---: | :---: | :---: |
-| ![Tet](dist/seasonal_tet.svg) | ![Programmer](dist/seasonal_programmer.svg) | ![Womens](dist/seasonal_womensday.svg) | ![Mens](dist/seasonal_mensday.svg) |
+| ![LunarNewYear](dist/seasonal_tet.svg) | ![Programmer](dist/seasonal_programmer.svg) | ![Womens](dist/seasonal_womensday.svg) | ![Mens](dist/seasonal_mensday.svg) |
 
 ### 🥚 Easter Eggs & Special Events
 
@@ -45,19 +45,7 @@ Unlock special creatures by achieving milestones! **Harder achievements take pri
 | 🦖 Mecha-Rex | 🐉 Hydra | 🗿 Cyber Golem | 👻 Void Spirit | 🦄 Unicorn |
 | :---: | :---: | :---: | :---: | :---: |
 | ![MechaRex](dist/legendary_mecha_rex.svg) | ![Hydra](dist/legendary_hydra.svg) | ![Golem](dist/legendary_cyber_golem.svg) | ![VoidSpirit](dist/legendary_void_spirit.svg) | ![Unicorn](dist/legendary_unicorn.svg) |
-| **1000+ commits** | **5+ languages** | **50+ closed issues** | **Night coder (00-04h)** | **⭐ Star/Fork repo** |
-
-### Unlock Requirements (Priority Order)
-
-| Priority | Legendary | Trigger | Difficulty |
-|:---:|:---|:---|:---:|
-| 1 | 🦖 **Mecha-Rex** | `totalCommits > 1000` | 🔥 Hardest |
-| 2 | 🐉 **Hydra** | `languageCount >= 5` | 💪 Hard |
-| 3 | 🗿 **Cyber Golem** | `closedIssues > 50` | 🛠️ Medium |
-| 4 | 👻 **Void Spirit** | Commit 00:00-04:00 | 🌙 Conditional |
-| 5 | 🦄 **Unicorn** | ⭐ Star or 🍴 Fork this repo | ✨ Entry Level |
-
-> **Note:** Unicorn is the easiest legendary - just star or fork this repository!
+| **1000+ commits** | **5+ languages** | **50+ closed issues** | **Night coder (00-04h)** | **⭐ Star/Fork this repo** |
 
 ---
 

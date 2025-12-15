@@ -57,56 +57,57 @@ const LEGENDARY_COLORS = {
 // Legendary Sprites (16x16 Pixel Art - Upgraded!)
 // Legend: X=Base, K=Black, W=White, R=Red, O=Orange, Y=Yellow, B=Blue, G=Green, P=Purple, M=Magenta
 const LEGENDARY_SPRITES = {
-  // 🦖 MECHA-REX: Cybernetic T-Rex (16x16) - Big head, tiny arms, armored
+  // 🦖 REX: T-Rex (16x16) - Renamed from Mecha-Rex
+  // 🦖 MECHA-REX: Cybernetic T-Rex (16x16) - Classic dino silhouette
   mecha_rex: {
     normal: [
       "                ",
-      "     KKKKKK     ",
-      "    KXXXXXXK    ",
-      "   KXXXXXXXXK   ",
-      "   KXRWXXXXXK   ",
-      "   KXXXXXXXXK   ",
-      "    KXXXXXXK    ",
-      "     KXXKKG     ",
-      "    KXXXXXKG    ",
+      "    KKKKKKK     ",
       "   KXXXXXXXK    ",
-      "   KXKXXXXKXK   ",
-      "   KXK  KXXK    ",
-      "   KXK   KXK    ",
-      "    K     K     ",
+      "   KWXKWXXXK    ",
+      "   KXKXXXXXXK   ",
+      "    KXXXXXKRRK  ",
+      "     KXXXKKKKK  ",
+      "    KXXXXK      ",
+      "   KXXXXXKG     ",
+      "  KXXXXXXKG K   ",
+      " KXXXXXXXXKG    ",
+      " KXKXXXXXKXKG   ",
+      "  K KXK KXK     ",
+      "     K   K      ",
       "                ",
       "                "
     ],
     sleeping: [
       "                ",
-      "     KKKKKK     ",
-      "    KXXXXXXK    ",
-      "   KXXXXXXXXK   ",
-      "   KXKKXXXXXK   ",
-      "   KXXXXXXXXK   ",
-      "    KXXXXXXK    ",
-      "     KXXKKG     ",
-      "    KXXXXXKG    ",
-      "   KXXXXXXXK    ",
-      "   KXKXXXXKXK   ",
-      "   KXK  KXXK    ",
-      "    K     K     ",
       "                ",
+      "    KKKKKKK     ",
+      "   KXXXXXXXK    ",
+      "   KKKXXXXXXK   ",
+      "    KXXXXXKRRK  ",
+      "     KXXXKKKKK  ",
+      "    KXXXXK      ",
+      "   KXXXXXK      ",
+      "  KXXXXXXK  K   ",
+      " KXXXXXXXXK     ",
+      " KXKXXXXXKXK    ",
+      "  K KXK KXK     ",
+      "     K   K      ",
       "                ",
       "                "
     ],
     ghost: [
       "                ",
-      "     KKKKKK     ",
-      "    KXXXXXXK    ",
-      "   KXXXXXXXXK   ",
-      "   KXKKXXXXXK   ",
-      "   KXXXXXXXXK   ",
-      "    KXXXXXXK    ",
-      "     KXXKKG     ",
-      "    KXXXXXKG    ",
+      "    KKKKKKK     ",
       "   KXXXXXXXK    ",
-      "    K K  K K    ",
+      "   KKKXXXXXXK   ",
+      "    KXXXXXKRRK  ",
+      "     KXXXKKKKK  ",
+      "    KXXXXK      ",
+      "   KXXXXXK      ",
+      "  KXXXXXXK      ",
+      " KXXXXXXXXK     ",
+      "  K K K K K     ",
       "                ",
       "                ",
       "                ",
@@ -114,56 +115,56 @@ const LEGENDARY_SPRITES = {
       "                "
     ],
     hyper: [
-      "      RR        ",
-      "     KKKKKK     ",
-      "    KXXXXXXK    ",
-      "   KXXXXXXXXK   ",
-      "   KXRWXXXXXK   ",
-      "   KXXXXXXXXK   ",
-      "    KXXXXXXK    ",
-      "     KXXKKG     ",
-      "    KXXXXXKG    ",
+      "   RR           ",
+      "    KKKKKKK     ",
       "   KXXXXXXXK    ",
-      "   KXKXXXXKXK   ",
-      "   KXK  KXXK    ",
-      "   KXK   KXK    ",
-      "    K  R  K     ",
+      "   KWXKWXXXK    ",
+      "   KXKXXXXXXK   ",
+      "    KXXXXXKRRK  ",
+      "     KXXXKKKKK  ",
+      "    KXXXXK      ",
+      "   KXXXXXKG     ",
+      "  KXXXXXXKG K   ",
+      " KXXXXXXXXKG    ",
+      " KXKXXXXXKXKG   ",
+      "  K KXK KXK R   ",
+      "     K   K      ",
       "                ",
       "                "
     ],
     nightowl: [
       "                ",
-      "     KKKKKK     ",
-      "    KXXXXXXK    ",
-      "   KXXXXXXXXK   ",
-      "   KXOWXXXXXK   ",
-      "   KXXXXXXXXK   ",
-      "    KXXXXXXK    ",
-      "     KXXKKG     ",
-      "    KXXXXXKG    ",
+      "    KKKKKKK     ",
       "   KXXXXXXXK    ",
-      "   KXKXXXXKXK   ",
-      "   KXK  KXXK    ",
-      "   KXK   KXK    ",
-      "    K     K     ",
+      "   KOXKXXXXK    ",
+      "   KXKXXXXXXK   ",
+      "    KXXXXXKRRK  ",
+      "     KXXXKKKKK  ",
+      "    KXXXXK      ",
+      "   KXXXXXKG     ",
+      "  KXXXXXXKG K   ",
+      " KXXXXXXXXKG    ",
+      " KXKXXXXXKXKG   ",
+      "  K KXK KXK     ",
+      "     K   K      ",
       "                ",
       "                "
     ],
     weekend: [
       "                ",
-      "     KKKKKK     ",
-      "    KXXXXXXK    ",
-      "   KXXXXXXXXK   ",
-      "   KXKKXXXXXK   ",
-      "   KXXXXXXXXK   ",
-      "    KXXXXXXK    ",
-      "     KXXKKG     ",
-      "    KXXXXXKG    ",
+      "                ",
+      "    KKKKKKK     ",
       "   KXXXXXXXK    ",
-      "   KXKXXXXKXK   ",
-      "   KXK  KXXK    ",
-      "   KXK   KXK    ",
-      "    K     K     ",
+      "   KKKXXXXXXK   ",
+      "    KXXXXXKRRK  ",
+      "     KXXXKKKKK  ",
+      "    KXXXXK      ",
+      "   KXXXXXK      ",
+      "  KXXXXXXK  K   ",
+      " KXXXXXXXXK     ",
+      " KXKXXXXXKXK    ",
+      "  K KXK KXK     ",
+      "     K   K      ",
       "                ",
       "                "
     ]
@@ -505,115 +506,115 @@ const LEGENDARY_SPRITES = {
     ]
   },
 
-  // 🦄 UNICORN: Magical Rainbow Horse (16x16) - White body, rainbow horn
+  // 🦄 UNICORN: Magical Rainbow Horse (16x16) - Final Pixel Perfect
   unicorn: {
     normal: [
-      "       RR       ",
-      "      ROYB      ",
-      "     KKKKK      ",
-      "    KXXXXXK     ",
-      "   KXXXXXXXK    ",
-      "   KWXKXXXXXK   ",
-      "   KXXXXXXXMXK  ",
-      "  KXXXXXXXXXMK  ",
-      "  KXXXXXXXXXXK  ",
-      " KXXXXXXXXXXXXK ",
-      " KXKXXXXXXXXKXK ",
-      "  K KXXXXXXK K  ",
-      "    KXK  KXK    ",
-      "    KXK  KXK    ",
-      "     K    K     ",
-      "                "
+      "                ",
+      "                ",
+      "              W ",
+      "             G  ",
+      "          WWG   ",
+      "         WWWW   ",
+      "         WWKWW  ",
+      "         WPWWW  ",
+      "  PP  WWWWWWW   ",
+      " POOPWWWWWWWW   ",
+      " POGWWWWWWWWW   ",
+      " POGWWWWWWWWW   ",
+      "POGGWWWWWWWW    ",
+      "POGBWWWWWWW     ",
+      "OGGBWWW WWW     ",
+      "    WW  WW      "
     ],
     sleeping: [
-      "       RR       ",
-      "      ROYB      ",
-      "     KKKKK      ",
-      "    KXXXXXK     ",
-      "   KXXXXXXXK    ",
-      "   KKXKXXXXXK   ",
-      "   KXXXXXXXMXK  ",
-      "  KXXXXXXXXXMK  ",
-      "  KXXXXXXXXXXK  ",
-      " KXXXXXXXXXXXXK ",
-      " KXKXXXXXXXXKXK ",
-      "  K KXXXXXXK K  ",
-      "    KXK  KXK    ",
-      "     K    K     ",
       "                ",
-      "                "
+      "                ",
+      "                ",
+      "                ",
+      "              W ",
+      "             G  ",
+      "          WWG   ",
+      "         WWWW   ",
+      "         WWKWW  ",
+      "         WPWWW  ",
+      "  PP  WWWWWWW   ",
+      " POOPWWWWWWWW   ",
+      " POGWWWWWWWWW   ",
+      " POGWWWWWWWWW   ",
+      "POGGWWWWWWWW    ",
+      "POGBWWWWWWW     "
     ],
     ghost: [
-      "       RR       ",
-      "      ROYB      ",
-      "     KKKKK      ",
-      "    KXXXXXK     ",
-      "   KXXXXXXXK    ",
-      "   KKXKXXXXXK   ",
-      "   KXXXXXXXMXK  ",
-      "  KXXXXXXXXXMK  ",
-      "  KXXXXXXXXXXK  ",
-      "  K K K K K K   ",
       "                ",
       "                ",
-      "                ",
-      "                ",
-      "                ",
-      "                "
+      "              W ",
+      "             G  ",
+      "          WWG   ",
+      "         WWWW   ",
+      "         WWKWW  ",
+      "         WPWWW  ",
+      "  PP  WWWWWWW   ",
+      " POOPWWWWWWWW   ",
+      " POGWWWWWWWWW   ",
+      " POGWWWWWWWWW   ",
+      "POGGWWWWWWWW    ",
+      "POGBWWWWWWW     ",
+      "OGGBWWW WWW     ",
+      "    WW  WW      "
     ],
     hyper: [
-      "  R    RR    R  ",
-      "      ROYB      ",
-      "     KKKKK      ",
-      "    KXXXXXK     ",
-      "   KXXXXXXXK    ",
-      "   KWXKXXXXXK   ",
-      "   KXXXXXXXMXK  ",
-      "  KXXXXXXXXXMK  ",
-      "  KXXXXXXXXXXK  ",
-      " KXXXXXXXXXXXXK ",
-      " KXKXXXXXXXXKXK ",
-      "  K KXXXXXXK K  ",
-      "    KXK  KXK    ",
-      "    KXK  KXK    ",
-      "     K RR K     ",
-      "                "
+      "                ",
+      "                ",
+      "              W ",
+      "             G  ",
+      "          WWG   ",
+      "         WWWW   ",
+      "         WWKWW  ",
+      "         WPWWW  ",
+      "  PP  WWWWWWW   ",
+      " POOPWWWWWWWW   ",
+      " POGWWWWWWWWW   ",
+      " POGWWWWWWWWW   ",
+      "POGGWWWWWWWW    ",
+      "POGBWWWWWWW     ",
+      "OGGBWWW WWW     ",
+      "    WW  WW      "
     ],
     nightowl: [
-      "       RR       ",
-      "      ROYB      ",
-      "     KKKKK      ",
-      "    KXXXXXK     ",
-      "   KXXXXXXXK    ",
-      "   KOXKXXXXXK   ",
-      "   KXXXXXXXMXK  ",
-      "  KXXXXXXXXXMK  ",
-      "  KXXXXXXXXXXK  ",
-      " KXXXXXXXXXXXXK ",
-      " KXKXXXXXXXXKXK ",
-      "  K KXXXXXXK K  ",
-      "    KXK  KXK    ",
-      "    KXK  KXK    ",
-      "     K    K     ",
-      "                "
+      "                ",
+      "                ",
+      "              W ",
+      "             G  ",
+      "          WWG   ",
+      "         WWWW   ",
+      "         WWKWW  ",
+      "         WPWWW  ",
+      "  PP  WWWWWWW   ",
+      " POOPWWWWWWWW   ",
+      " POGWWWWWWWWW   ",
+      " POGWWWWWWWWW   ",
+      "POGGWWWWWWWW    ",
+      "POGBWWWWWWW     ",
+      "OGGBWWW WWW     ",
+      "    WW  WW      "
     ],
     weekend: [
-      "       RR       ",
-      "      ROYB      ",
-      "     KKKKK      ",
-      "    KXXXXXK     ",
-      "   KXXXXXXXK    ",
-      "   KKXKXXXXXK   ",
-      "   KXXXXXXXMXK  ",
-      "  KXXXXXXXXXMK  ",
-      "  KXXXXXXXXXXK  ",
-      " KXXXXXXXXXXXXK ",
-      " KXKXXXXXXXXKXK ",
-      "  K KXXXXXXK K  ",
-      "    KXK  KXK    ",
-      "    KXK  KXK    ",
-      "     K    K     ",
-      "                "
+      "                ",
+      "                ",
+      "              W ",
+      "             G  ",
+      "          WWG   ",
+      "         WWWW   ",
+      "         WWKWW  ",
+      "         WPWWW  ",
+      "  PP  WWWWWWW   ",
+      " POOPWWWWWWWW   ",
+      " POGWWWWWWWWW   ",
+      " POGWWWWWWWWW   ",
+      "POGGWWWWWWWW    ",
+      "POGBWWWWWWW     ",
+      "OGGBWWW WWW     ",
+      "    WW  WW      "
     ]
   }
 };
@@ -3329,7 +3330,7 @@ function getSeasonalEvent(timezone = 'UTC') {
     const [startMonth, startDay] = tetRange.start;
     const [endMonth, endDay] = tetRange.end;
     if (inRange(startMonth, startDay, endMonth, endDay)) {
-      return 'TET';
+      return 'LUNAR_NEW_YEAR';
     }
   }
 
@@ -3364,10 +3365,110 @@ function getSeasonalEvent(timezone = 'UTC') {
  * High-fidelity flat vector SVGs for each holiday
  * Designed for 200x200 viewBox, positioned relative to pet center
  */
+/**
+ * Calculate the head position (top-center) of a sprite
+ * @param {Array<string>} spriteGrid - The 16x16 sprite grid
+ * @param {string} petType - Type of pet (for applying head offsets)
+ * @returns {Object} { x, y } coordinates of the head top-center
+ */
+function calculateHeadPosition(spriteGrid, petType = '') {
+  const pixelSize = 16; // Match the rendering pixel size
+
+  // Default center if grid is missing
+  if (!spriteGrid || !Array.isArray(spriteGrid)) {
+    return { x: 100, y: 20 };
+  }
+
+  const headOffset = HEAD_POSITION_OFFSETS[petType] || { x: 0, y: 0 };
+
+  for (let row = 0; row < spriteGrid.length; row++) {
+    const line = spriteGrid[row];
+    // Find first non-space char
+    const firstPixel = line.search(/\S/);
+
+    if (firstPixel !== -1) {
+      // Found the top row of the sprite
+      // Find the last pixel in this row
+      const lastPixel = line.length - 1 - line.split('').reverse().join('').search(/\S/);
+
+      // Calculate center of the top row in SVG coordinates
+      // (first + last) / 2 gives the center index
+      // Multiply by pixelSize to get position, add half pixelSize to center in the pixel
+      const centerX = ((firstPixel + lastPixel) / 2) * pixelSize + (pixelSize / 2) + (headOffset.x || 0);
+      // Apply Y offset for pets with protruding features (e.g., Unicorn horn)
+      const topY = row * pixelSize + (headOffset.y || 0);
+
+      return { x: centerX, y: topY };
+    }
+  }
+
+  // Fallback
+  return { x: 100, y: 20 };
+}
+
+/**
+ * Relative Accessory Offsets
+ * Offsets relative to the detected head position (x: 0, y: 0 is top-center of head)
+ */
+/**
+ * Relative Accessory Offsets
+ * Offsets relative to the detected head position (x: 0, y: 0 is top-center of head)
+ */
+const RELATIVE_ACCESSORY_OFFSETS = {
+  // 🎉 NEW_YEAR: Party Hat (sits on top)
+  NEW_YEAR: { x: -15, y: -45 },
+
+  // 💕 VALENTINE: Floating Heart (floats above)
+  VALENTINE: { x: 0, y: -35 },
+
+  // 🌹 WOMENS_DAY: Hairpin (sits on side of head)
+  WOMENS_DAY: { x: -10, y: -5 },
+
+  // ☕ PROGRAMMER_DAY: Mug (floats to side)
+  PROGRAMMER_DAY: { x: 25, y: 0 },
+
+  // 🎃 HALLOWEEN: Pumpkin (sits on head/face)
+  HALLOWEEN: { x: 0, y: -10 },
+
+  // 🎩 MENS_DAY: Bowtie (sits below head/neck)
+  MENS_DAY: { x: -25, y: 80 }, // Needs to be lower
+
+  // 🎅 CHRISTMAS: Santa Hat (sits on top)
+  CHRISTMAS: { x: -30, y: -45 },
+
+  // 🧧 LUNAR_NEW_YEAR: Red Envelope (floats to side)
+  LUNAR_NEW_YEAR: { x: 20, y: 0 },
+
+  // 👻 FRIDAY_13: Mask (sits on face)
+  FRIDAY_13: { x: -35, y: -5 },
+
+  // 🤡 APRIL_FOOLS: Jester Hat (sits on top)
+  APRIL_FOOLS: { x: -30, y: -45 }
+};
+
+/**
+ * Head Position Offsets
+ * X/Y-axis offsets for pets with protruding features (horns, antennae, etc.)
+ * that cause the "highest pixel" detection to be inaccurate.
+ * Positive Y = move detection point DOWN (skip protruding features)
+ * Negative X = move detection point LEFT
+ */
+const HEAD_POSITION_OFFSETS = {
+  // 🦄 Unicorn: Horn tip is at row 2 (column 14), actual head is at row 5 (column 9-12)
+  // Y: 48px down (3 rows × 16px to skip horn)
+  // X: -48px left (shift from horn column 14 to head center ~column 11)
+  unicorn: { x: -48, y: 48 }
+};
+
+/**
+ * Seasonal Accessories SVG Library
+ * High-fidelity flat vector SVGs for each holiday
+ * Designed for 200x200 viewBox, positioned relative to pet center
+ */
 const SEASONAL_ACCESSORIES = {
   // 🎉 NEW_YEAR: Party Hat (Striped Cone)
-  NEW_YEAR: `
-    <g transform="translate(85, 5)">
+  NEW_YEAR: (x, y) => `
+    <g transform="translate(${x}, ${y})">
       <!-- Party Hat Cone -->
       <polygon points="15,50 30,5 0,5" fill="#FF6B6B"/>
       <polygon points="15,50 30,5 22,5 15,35 8,5 0,5" fill="#4ECDC4"/>
@@ -3380,8 +3481,8 @@ const SEASONAL_ACCESSORIES = {
   `,
 
   // 💕 VALENTINE: Floating Pixel Heart
-  VALENTINE: `
-    <g transform="translate(150, 30)">
+  VALENTINE: (x, y) => `
+    <g transform="translate(${x}, ${y})">
       <!-- Pixel Heart -->
       <rect x="4" y="0" width="8" height="4" fill="#FF6B9D"/>
       <rect x="16" y="0" width="8" height="4" fill="#FF6B9D"/>
@@ -3396,8 +3497,8 @@ const SEASONAL_ACCESSORIES = {
   `,
 
   // 🌹 WOMENS_DAY: Red Rose Hairpin
-  WOMENS_DAY: `
-    <g transform="translate(130, 15)">
+  WOMENS_DAY: (x, y) => `
+    <g transform="translate(${x}, ${y})">
       <!-- Rose Petals -->
       <ellipse cx="15" cy="12" rx="8" ry="6" fill="#E63946"/>
       <ellipse cx="10" cy="15" rx="6" ry="5" fill="#D62839"/>
@@ -3412,8 +3513,8 @@ const SEASONAL_ACCESSORIES = {
   `,
 
   // ☕ PROGRAMMER_DAY: Steaming Coffee Mug
-  PROGRAMMER_DAY: `
-    <g transform="translate(155, 60)">
+  PROGRAMMER_DAY: (x, y) => `
+    <g transform="translate(${x}, ${y})">
       <!-- Mug Body -->
       <rect x="0" y="10" width="25" height="28" rx="3" fill="#8B4513"/>
       <rect x="3" y="13" width="19" height="22" rx="2" fill="#5C4033"/>
@@ -3432,8 +3533,8 @@ const SEASONAL_ACCESSORIES = {
   `,
 
   // 🎃 HALLOWEEN: Cute Jack-o'-lantern Pumpkin
-  HALLOWEEN: `
-    <g transform="translate(150, 110)">
+  HALLOWEEN: (x, y) => `
+    <g transform="translate(${x}, ${y})">
       <!-- Pumpkin Stem -->
       <rect x="18" y="0" width="6" height="8" rx="2" fill="#2D6A4F"/>
       <!-- Pumpkin Body -->
@@ -3452,8 +3553,8 @@ const SEASONAL_ACCESSORIES = {
   `,
 
   // 🎩 MENS_DAY: Blue Bowtie
-  MENS_DAY: `
-    <g transform="translate(75, 140)">
+  MENS_DAY: (x, y) => `
+    <g transform="translate(${x}, ${y})">
       <!-- Left Wing -->
       <path d="M0,10 Q0,0 15,5 L15,15 Q0,20 0,10" fill="#1E88E5"/>
       <path d="M2,10 Q2,3 13,6 L13,14 Q2,17 2,10" fill="#42A5F5"/>
@@ -3467,8 +3568,8 @@ const SEASONAL_ACCESSORIES = {
   `,
 
   // 🎅 CHRISTMAS: Santa Hat
-  CHRISTMAS: `
-    <g transform="translate(70, 0)">
+  CHRISTMAS: (x, y) => `
+    <g transform="translate(${x}, ${y})">
       <!-- Hat Body -->
       <path d="M0,45 Q-5,25 20,10 Q45,0 60,30 L55,50 Z" fill="#D32F2F"/>
       <path d="M5,42 Q0,25 22,13 Q42,5 55,30 L52,47 Z" fill="#E53935"/>
@@ -3481,9 +3582,9 @@ const SEASONAL_ACCESSORIES = {
     </g>
   `,
 
-  // 🧧 TET: Red Envelope (Lì Xì)
-  TET: `
-    <g transform="translate(150, 70)">
+  // 🧧 LUNAR_NEW_YEAR: Red Envelope (Lì Xì)
+  LUNAR_NEW_YEAR: (x, y) => `
+    <g transform="translate(${x}, ${y})">
       <!-- Envelope Body -->
       <rect x="0" y="0" width="35" height="50" rx="3" fill="#D32F2F"/>
       <rect x="2" y="2" width="31" height="46" rx="2" fill="#E53935"/>
@@ -3507,8 +3608,8 @@ const SEASONAL_ACCESSORIES = {
   // ═══════════════════════════════════════════════════════════════════════════
 
   // 👻 FRIDAY_13: Jason Voorhees Hockey Mask
-  FRIDAY_13: `
-    <g transform="translate(65, 35)">
+  FRIDAY_13: (x, y) => `
+    <g transform="translate(${x}, ${y})">
       <!-- Mask Base -->
       <ellipse cx="35" cy="40" rx="32" ry="38" fill="#F5F5F5"/>
       <ellipse cx="35" cy="40" rx="28" ry="34" fill="#EEEEEE"/>
@@ -3530,8 +3631,8 @@ const SEASONAL_ACCESSORIES = {
   `,
 
   // 🤡 APRIL_FOOLS: Colorful Jester Cap
-  APRIL_FOOLS: `
-    <g transform="translate(60, 0)">
+  APRIL_FOOLS: (x, y) => `
+    <g transform="translate(${x}, ${y})">
       <!-- Left Horn -->
       <path d="M20,50 Q5,30 15,5 Q20,0 25,5 L30,50 Z" fill="#9C27B0"/>
       <circle cx="15" cy="5" r="6" fill="#FFD700"/>
@@ -3554,12 +3655,24 @@ const SEASONAL_ACCESSORIES = {
 /**
  * Get accessory SVG for current seasonal event
  * @param {string} timezone - IANA timezone string
+ * @param {string} petType - Type of pet (unused now, kept for compat)
+ * @param {Array<string>} spriteGrid - The sprite grid for head detection
  * @returns {string} SVG string or empty string
  */
-function getSeasonalAccessory(timezone = 'UTC') {
+function getSeasonalAccessory(timezone = 'UTC', petType = 'cat', spriteGrid = []) {
   const event = getSeasonalEvent(timezone);
   if (event && SEASONAL_ACCESSORIES[event]) {
-    return `<!-- Seasonal: ${event} -->\n${SEASONAL_ACCESSORIES[event]}`;
+    // Calculate head position (top-most pixel, with pet-specific offsets)
+    const headPos = calculateHeadPosition(spriteGrid, petType);
+
+    // Get relative offset for the accessory
+    const offset = RELATIVE_ACCESSORY_OFFSETS[event] || { x: 0, y: 0 };
+
+    // Calculate final position
+    const x = headPos.x + offset.x;
+    const y = headPos.y + offset.y;
+
+    return `<!-- Seasonal: ${event} -->\n${SEASONAL_ACCESSORIES[event](x, y)}`;
   }
   return '';
 }
@@ -4056,7 +4169,9 @@ function renderPixelGrid(grid, baseColor, pixelSize = 10) {
     'Y': '#FFD700',
     'B': '#00ADD8',
     'P': '#C678DD',
-    'G': '#98c379'
+    'G': '#98c379',
+    'D': '#1b5e20', // Dark Green for Rex
+    'M': '#ff80ab' // Pink for Unicorn cheek
   };
 
   grid.forEach((rowString, y) => {
@@ -4145,7 +4260,7 @@ function generateSVG(petType, mood, options = {}) {
   ` : '';
 
   // Get seasonal accessory (holiday accessories)
-  const seasonalAccessory = getSeasonalAccessory(timezone);
+  const seasonalAccessory = getSeasonalAccessory(timezone, petType, spriteGrid);
 
   return `<svg xmlns="http://www.w3.org/2000/svg" width="${svgWidth}" height="${svgHeight}" viewBox="0 0 ${svgWidth} ${svgHeight}">
       <style>
