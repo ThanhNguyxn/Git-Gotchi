@@ -19,7 +19,7 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           username: ${{ github.repository_owner }}
           # Advanced Configuration
-          timezone: "Asia/Ho_Chi_Minh"
+          timezone: "UTC"
           background_theme: "minimal"
           show_level: "true"
 
