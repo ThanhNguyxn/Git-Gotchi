@@ -6623,7 +6623,7 @@ async function fetchMythicalStats(octokit, username, totalCommits) {
 
 /**
  * Generate Theme Background SVG elements
- * @param {string} theme - 'minimal', 'cyberpunk', 'nature'
+ * @param {string} theme - 'minimal', 'cyberpunk', 'nature', 'synthwave', 'matrix', 'ocean'
  * @param {number} width - SVG width
  * @param {number} height - SVG height
  * @returns {string} SVG elements for background
@@ -6657,6 +6657,80 @@ function getThemeBackground(theme, width, height) {
         <g fill="#81c784" opacity="0.4">
           <ellipse cx="${width * 0.1}" cy="${height * 0.9}" rx="25" ry="8"/>
           <ellipse cx="${width * 0.9}" cy="${height * 0.85}" rx="20" ry="6"/>
+        </g>
+      `;
+    case 'synthwave':
+      // 80s retro sunset with grid
+      return `
+        <defs>
+          <linearGradient id="synthwaveGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" style="stop-color:#2d1b69"/>
+            <stop offset="40%" style="stop-color:#7c3aed"/>
+            <stop offset="60%" style="stop-color:#f472b6"/>
+            <stop offset="80%" style="stop-color:#fb923c"/>
+            <stop offset="100%" style="stop-color:#1e1b4b"/>
+          </linearGradient>
+        </defs>
+        <rect x="0" y="0" width="${width}" height="${height}" fill="url(#synthwaveGrad)" rx="12" ry="12"/>
+        <!-- Sun -->
+        <circle cx="${width / 2}" cy="${height * 0.4}" r="30" fill="#ff6b9d" opacity="0.8"/>
+        <rect x="${width / 2 - 35}" y="${height * 0.4 - 5}" width="70" height="3" fill="#2d1b69"/>
+        <rect x="${width / 2 - 35}" y="${height * 0.4 + 3}" width="70" height="4" fill="#2d1b69"/>
+        <rect x="${width / 2 - 35}" y="${height * 0.4 + 10}" width="70" height="5" fill="#2d1b69"/>
+        <!-- Grid lines -->
+        <g stroke="#ff00ff" stroke-opacity="0.4" stroke-width="1">
+          ${Array.from({ length: 8 }, (_, i) =>
+        `<line x1="${i * (width / 8)}" y1="${height * 0.6}" x2="${width / 2 + (i - 4) * 20}" y2="${height}"/>`
+      ).join('')}
+          ${Array.from({ length: 5 }, (_, i) =>
+        `<line x1="0" y1="${height * 0.6 + i * (height * 0.1)}" x2="${width}" y2="${height * 0.6 + i * (height * 0.1)}"/>`
+      ).join('')}
+        </g>
+      `;
+    case 'matrix':
+      // Digital rain with dark green
+      return `
+        <rect x="0" y="0" width="${width}" height="${height}" fill="#0d0d0d" rx="12" ry="12"/>
+        <g font-family="monospace" font-size="10" fill="#00ff00" opacity="0.3">
+          ${Array.from({ length: 15 }, (_, i) => {
+        const x = 10 + (i * (width / 15));
+        const chars = ['0', '1', 'ア', 'イ', 'ウ', 'エ', 'オ', '力', '七', '九'];
+        return Array.from({ length: 8 }, (_, j) =>
+          `<text x="${x}" y="${15 + j * 15}" opacity="${0.1 + Math.random() * 0.5}">${chars[Math.floor(Math.random() * chars.length)]}</text>`
+        ).join('');
+      }).join('')}
+        </g>
+        <rect x="5" y="5" width="${width - 10}" height="${height - 10}" fill="none" stroke="#00ff00" stroke-width="1" rx="8" ry="8" stroke-opacity="0.3"/>
+      `;
+    case 'ocean':
+      // Deep sea with waves and bubbles
+      return `
+        <defs>
+          <linearGradient id="oceanGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" style="stop-color:#0077b6"/>
+            <stop offset="50%" style="stop-color:#023e8a"/>
+            <stop offset="100%" style="stop-color:#03045e"/>
+          </linearGradient>
+        </defs>
+        <rect x="0" y="0" width="${width}" height="${height}" fill="url(#oceanGrad)" rx="12" ry="12"/>
+        <!-- Waves -->
+        <g fill="#00b4d8" opacity="0.2">
+          <path d="M0,${height * 0.3} Q${width * 0.25},${height * 0.25} ${width * 0.5},${height * 0.3} T${width},${height * 0.3} V0 H0 Z"/>
+        </g>
+        <!-- Bubbles -->
+        <g fill="#90e0ef" opacity="0.4">
+          <circle cx="${width * 0.15}" cy="${height * 0.7}" r="5"/>
+          <circle cx="${width * 0.2}" cy="${height * 0.6}" r="3"/>
+          <circle cx="${width * 0.8}" cy="${height * 0.75}" r="6"/>
+          <circle cx="${width * 0.85}" cy="${height * 0.65}" r="4"/>
+          <circle cx="${width * 0.5}" cy="${height * 0.8}" r="4"/>
+          <circle cx="${width * 0.45}" cy="${height * 0.85}" r="2"/>
+          <circle cx="${width * 0.7}" cy="${height * 0.5}" r="3"/>
+        </g>
+        <!-- Light rays -->
+        <g stroke="#caf0f8" stroke-opacity="0.15" stroke-width="15">
+          <line x1="${width * 0.3}" y1="0" x2="${width * 0.35}" y2="${height * 0.6}"/>
+          <line x1="${width * 0.6}" y1="0" x2="${width * 0.55}" y2="${height * 0.5}"/>
         </g>
       `;
     case 'minimal':
@@ -6970,7 +7044,17 @@ function generateSVG(petType, mood, options = {}) {
   const themeBackground = getThemeBackground(theme, svgWidth, svgHeight);
 
   // Text color based on theme
-  const textColor = theme === 'cyberpunk' ? '#00ffff' : (theme === 'nature' ? '#388e3c' : '#666');
+  const getTextColor = (t) => {
+    switch(t) {
+      case 'cyberpunk': return '#00ffff';
+      case 'nature': return '#388e3c';
+      case 'synthwave': return '#ff6b9d';
+      case 'matrix': return '#00ff00';
+      case 'ocean': return '#90e0ef';
+      default: return '#666';
+    }
+  };
+  const textColor = getTextColor(theme);
 
   let animation = '';
   if (moodKey === 'normal') {

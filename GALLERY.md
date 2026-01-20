@@ -1,7 +1,7 @@
 # 🎨 Profile-Gotchi Gallery
 
 Here is the full roster of pixel art mascots available in **Profile-Gotchi**.
-Now featuring **23 unique pets**, **5 Legendary creatures**, **5 Mythical beings**, **3 themes**, **6 moods**, **Leveling System**, and **Seasonal Events**!
+Now featuring **23 unique pets**, **5 Legendary creatures**, **5 Mythical beings**, **3 themes**, **6 moods**, **Leveling System**, and **16 Seasonal Events** (including international holidays)!
 
 ## 🎭 Themes & Moods Demo
 
@@ -32,6 +32,18 @@ Your pet automatically wears holiday accessories based on the current date!
 | 👻 Friday 13th | 🤡 April Fools |
 | :---: | :---: |
 | ![Friday13](dist/seasonal_friday13.svg) | ![AprilFools](dist/seasonal_aprilfools.svg) |
+
+### 🌍 International Holidays (New!)
+
+| ☘️ St Patrick's | 🌸 Nowruz | 🐰 Easter |
+| :---: | :---: | :---: |
+| ![StPatricks](dist/seasonal_stpatricks.svg) | ![Nowruz](dist/seasonal_nowruz.svg) | ![Easter](dist/seasonal_easter.svg) |
+
+| 🥮 Mid-Autumn | 🪔 Diwali | 🦃 Thanksgiving |
+| :---: | :---: | :---: |
+| ![MidAutumn](dist/seasonal_midautumn.svg) | ![Diwali](dist/seasonal_diwali.svg) | ![Thanksgiving](dist/seasonal_thanksgiving.svg) |
+
+> **Holiday Dates:** Easter uses the Anonymous Gregorian Algorithm (works for any year!). Lunar holidays (Mid-Autumn, Diwali) use pre-calculated dates to ensure accuracy.
 
 > **Priority Logic:** If a Major Holiday overlaps with a Special Event, the **Major Holiday** takes precedence.
 > **Zero Config!** Accessories appear automatically - no setup needed!
