@@ -177,6 +177,88 @@ function getTextColor(theme) {
     }
 }
 
+function getWeatherEffects(weather, width, height) {
+    switch (weather) {
+        case 'rain':
+            return `
+                <g opacity="0.6">
+                    ${Array.from({ length: 15 }, (_, i) => {
+                const x = 10 + (i * (width / 15));
+                const delay = (i * 0.1) % 1;
+                return `<line x1="${x}" y1="-10" x2="${x - 5}" y2="10" stroke="#4FC3F7" stroke-width="2" stroke-linecap="round">
+                    <animate attributeName="y1" values="-10;${height + 10}" dur="0.7s" begin="${delay}s" repeatCount="indefinite"/>
+                    <animate attributeName="y2" values="10;${height + 30}" dur="0.7s" begin="${delay}s" repeatCount="indefinite"/>
+                </line>`;
+            }).join('')}
+                </g>
+            `;
+        case 'snow':
+            return `
+                <g fill="#ffffff">
+                    ${Array.from({ length: 20 }, (_, i) => {
+                const x = 5 + (i * (width / 20));
+                const size = 2 + Math.random() * 4;
+                const dur = 2 + Math.random() * 3;
+                const delay = Math.random() * 2;
+                return `<circle cx="${x}" cy="0" r="${size}" opacity="0.8">
+                    <animate attributeName="cy" values="0;${height}" dur="${dur}s" begin="${delay}s" repeatCount="indefinite"/>
+                </circle>`;
+            }).join('')}
+                </g>
+            `;
+        case 'stars':
+            return `
+                <g fill="#FFD700">
+                    ${Array.from({ length: 12 }, (_, i) => {
+                const x = 10 + Math.random() * (width - 20);
+                const y = 10 + Math.random() * (height * 0.5);
+                const size = 1 + Math.random() * 2;
+                const dur = 1 + Math.random() * 2;
+                return `<circle cx="${x}" cy="${y}" r="${size}">
+                    <animate attributeName="opacity" values="0.3;1;0.3" dur="${dur}s" repeatCount="indefinite"/>
+                </circle>`;
+            }).join('')}
+                </g>
+            `;
+        case 'fireflies':
+            return `
+                <g>
+                    ${Array.from({ length: 8 }, (_, i) => {
+                const startX = 20 + Math.random() * (width - 40);
+                const startY = 20 + Math.random() * (height - 40);
+                const endX = startX + (Math.random() - 0.5) * 60;
+                const endY = startY + (Math.random() - 0.5) * 60;
+                const dur = 3 + Math.random() * 4;
+                return `<circle cx="${startX}" cy="${startY}" r="3" fill="#FFEB3B" opacity="0.8">
+                    <animate attributeName="cx" values="${startX};${endX};${startX}" dur="${dur}s" repeatCount="indefinite"/>
+                    <animate attributeName="cy" values="${startY};${endY};${startY}" dur="${dur}s" repeatCount="indefinite"/>
+                    <animate attributeName="opacity" values="0.3;0.9;0.3" dur="1.5s" repeatCount="indefinite"/>
+                </circle>`;
+            }).join('')}
+                </g>
+            `;
+        case 'leaves':
+            return `
+                <g>
+                    ${Array.from({ length: 10 }, (_, i) => {
+                const x = 10 + (i * (width / 10));
+                const dur = 4 + Math.random() * 3;
+                const delay = Math.random() * 3;
+                const colors = ['#FF9800', '#F44336', '#795548', '#FFC107'];
+                const color = colors[i % colors.length];
+                return `<g>
+                    <path d="M${x},0 Q${x+5},-5 ${x+10},0 Q${x+5},5 ${x},0" fill="${color}" opacity="0.8">
+                        <animateTransform attributeName="transform" type="translate" values="0,0;${Math.random() * 30},${height}" dur="${dur}s" begin="${delay}s" repeatCount="indefinite"/>
+                    </path>
+                </g>`;
+            }).join('')}
+                </g>
+            `;
+        default:
+            return '';
+    }
+}
+
 function generateSVG(petType, mood, options = {}) {
     const { theme = 'minimal', showLevel = false, stats = null, moodInfo = null } = options;
 
@@ -239,6 +321,48 @@ pets.forEach(pet => {
     const svg = generateSVG('unicorn', 'happy', { theme });
     fs.writeFileSync(`dist/demo_${theme}.svg`, svg);
     console.log(`Generated demo_${theme}.svg`);
+});
+
+// Generate weather effect demo files
+const weatherDemos = [
+    { name: 'rain', label: '🌧️ RAIN', weather: 'rain' },
+    { name: 'snow', label: '❄️ SNOW', weather: 'snow' },
+    { name: 'stars', label: '✨ STARS', weather: 'stars' },
+    { name: 'fireflies', label: '🪲 FIREFLIES', weather: 'fireflies' },
+    { name: 'leaves', label: '🍂 LEAVES', weather: 'leaves' }
+];
+
+weatherDemos.forEach(({ name, label, weather }) => {
+    const spriteSet = LEGENDARY_SPRITES['unicorn'] || SPRITES['cat'];
+    const spriteGrid = spriteSet['normal'];
+    const baseColor = PET_COLORS['unicorn'] || '#e5c07b';
+
+    const pixelSize = 16;
+    const rows = spriteGrid.length;
+    const cols = spriteGrid[0].length;
+    const width = cols * pixelSize;
+    const height = rows * pixelSize;
+    const svgWidth = width + 40;
+    const svgHeight = height + 40;
+
+    const pixelArt = renderPixelGrid(spriteGrid, baseColor, pixelSize);
+    const themeBackground = getThemeBackground('minimal', svgWidth, svgHeight);
+    const weatherEffects = getWeatherEffects(weather, svgWidth, svgHeight);
+
+    const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${svgWidth}" height="${svgHeight}" viewBox="0 0 ${svgWidth} ${svgHeight}">
+      <style>.pet { transform-origin: center; }</style>
+      ${themeBackground}
+      <g class="weather-layer" style="pointer-events: none;">
+        ${weatherEffects}
+      </g>
+      <g transform="translate(20, 20)">
+        <g class="pet">${pixelArt}<animateTransform attributeName="transform" type="translate" values="0 0; 0 -4; 0 0" dur="0.5s" repeatCount="indefinite" /></g>
+      </g>
+      <text x="50%" y="${height + 35}" text-anchor="middle" font-family="monospace" font-size="11" fill="#666">${label}</text>
+    </svg>`;
+
+    fs.writeFileSync(`dist/weather_${name}.svg`, svg);
+    console.log(`Generated weather_${name}.svg`);
 });
 
 // Generate mood demo files with custom labels

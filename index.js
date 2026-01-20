@@ -6622,6 +6622,149 @@ async function fetchMythicalStats(octokit, username, totalCommits) {
 }
 
 /**
+ * Generate Weather Effects SVG elements
+ * @param {string} weather - 'rain', 'snow', 'stars', 'fireflies', 'leaves', 'none'
+ * @param {number} width - SVG width
+ * @param {number} height - SVG height
+ * @returns {string} SVG elements for weather overlay
+ */
+function getWeatherEffects(weather, width, height) {
+  switch (weather) {
+    case 'rain':
+      // Animated rain drops
+      return `
+        <g opacity="0.6">
+          ${Array.from({ length: 20 }, (_, i) => {
+        const x = 10 + (i * (width / 20));
+        const delay = (i * 0.1) % 1;
+        return `<line x1="${x}" y1="-10" x2="${x - 5}" y2="10" stroke="#4FC3F7" stroke-width="2" stroke-linecap="round">
+          <animate attributeName="y1" values="-10;${height + 10}" dur="0.7s" begin="${delay}s" repeatCount="indefinite"/>
+          <animate attributeName="y2" values="10;${height + 30}" dur="0.7s" begin="${delay}s" repeatCount="indefinite"/>
+        </line>`;
+      }).join('')}
+        </g>
+      `;
+    case 'snow':
+      // Animated falling snowflakes
+      return `
+        <g fill="#ffffff">
+          ${Array.from({ length: 25 }, (_, i) => {
+        const x = 5 + (i * (width / 25));
+        const size = 2 + Math.random() * 4;
+        const dur = 2 + Math.random() * 3;
+        const delay = Math.random() * 2;
+        return `<circle cx="${x}" cy="0" r="${size}" opacity="0.8">
+          <animate attributeName="cy" values="0;${height}" dur="${dur}s" begin="${delay}s" repeatCount="indefinite"/>
+          <animate attributeName="cx" values="${x};${x + 20};${x}" dur="${dur}s" begin="${delay}s" repeatCount="indefinite"/>
+        </circle>`;
+      }).join('')}
+        </g>
+      `;
+    case 'stars':
+      // Twinkling stars effect
+      return `
+        <g fill="#FFD700">
+          ${Array.from({ length: 15 }, (_, i) => {
+        const x = 10 + Math.random() * (width - 20);
+        const y = 10 + Math.random() * (height * 0.5);
+        const size = 1 + Math.random() * 2;
+        const dur = 1 + Math.random() * 2;
+        return `<circle cx="${x}" cy="${y}" r="${size}">
+          <animate attributeName="opacity" values="0.3;1;0.3" dur="${dur}s" repeatCount="indefinite"/>
+        </circle>`;
+      }).join('')}
+        </g>
+      `;
+    case 'fireflies':
+      // Floating glowing fireflies
+      return `
+        <g>
+          ${Array.from({ length: 10 }, (_, i) => {
+        const startX = 20 + Math.random() * (width - 40);
+        const startY = 20 + Math.random() * (height - 40);
+        const endX = startX + (Math.random() - 0.5) * 60;
+        const endY = startY + (Math.random() - 0.5) * 60;
+        const dur = 3 + Math.random() * 4;
+        return `<circle cx="${startX}" cy="${startY}" r="3" fill="#FFEB3B" opacity="0.8">
+          <animate attributeName="cx" values="${startX};${endX};${startX}" dur="${dur}s" repeatCount="indefinite"/>
+          <animate attributeName="cy" values="${startY};${endY};${startY}" dur="${dur}s" repeatCount="indefinite"/>
+          <animate attributeName="opacity" values="0.3;0.9;0.3" dur="1.5s" repeatCount="indefinite"/>
+        </circle>`;
+      }).join('')}
+        </g>
+      `;
+    case 'leaves':
+      // Falling autumn leaves
+      return `
+        <g>
+          ${Array.from({ length: 12 }, (_, i) => {
+        const x = 10 + (i * (width / 12));
+        const dur = 4 + Math.random() * 3;
+        const delay = Math.random() * 3;
+        const colors = ['#FF9800', '#F44336', '#795548', '#FFC107'];
+        const color = colors[i % colors.length];
+        return `<g transform="translate(${x}, -20)">
+          <path d="M0,0 Q5,-5 10,0 Q5,5 0,0" fill="${color}" opacity="0.8">
+            <animateTransform attributeName="transform" type="translate" values="0,0;${Math.random() * 30},${height}" dur="${dur}s" begin="${delay}s" repeatCount="indefinite"/>
+            <animateTransform attributeName="transform" type="rotate" values="0;360;0" dur="3s" repeatCount="indefinite" additive="sum"/>
+          </path>
+        </g>`;
+      }).join('')}
+        </g>
+      `;
+    case 'none':
+    default:
+      return '';
+  }
+}
+
+/**
+ * Determine weather based on mood, season, and time
+ * @param {string} mood - Current pet mood
+ * @param {string} seasonalEvent - Current seasonal event (if any)
+ * @param {number} hour - Current hour (0-23)
+ * @returns {string} Weather effect to apply
+ */
+function determineWeather(mood, seasonalEvent, hour) {
+  // Night time (10 PM - 5 AM) = stars
+  if (hour >= 22 || hour < 5) {
+    return 'stars';
+  }
+
+  // Seasonal weather
+  if (seasonalEvent) {
+    switch (seasonalEvent) {
+      case 'CHRISTMAS':
+      case 'NEW_YEAR':
+        return 'snow';
+      case 'HALLOWEEN':
+        return 'fireflies';
+      case 'THANKSGIVING':
+        return Math.random() < 0.5 ? 'leaves' : 'none';
+      case 'LUNAR_NEW_YEAR':
+        return Math.random() < 0.3 ? 'fireflies' : 'none';
+      default:
+        break;
+    }
+  }
+
+  // Mood-based weather
+  if (mood === 'ghost') {
+    return 'fireflies';
+  }
+  if (mood === 'zen') {
+    return 'leaves';
+  }
+
+  // Random chance for rain (15%)
+  if (Math.random() < 0.15) {
+    return 'rain';
+  }
+
+  return 'none';
+}
+
+/**
  * Generate Theme Background SVG elements
  * @param {string} theme - 'minimal', 'cyberpunk', 'nature', 'synthwave', 'matrix', 'ocean'
  * @param {number} width - SVG width
@@ -7043,6 +7186,13 @@ function generateSVG(petType, mood, options = {}) {
   // Get theme background
   const themeBackground = getThemeBackground(theme, svgWidth, svgHeight);
 
+  // Get weather effects based on mood and time
+  const now = timezone ? new Date(new Date().toLocaleString('en-US', { timeZone: timezone })) : new Date();
+  const currentHour = now.getHours();
+  const seasonalEvent = moodInfo?.seasonalEvent || null;
+  const weather = determineWeather(moodKey, seasonalEvent, currentHour);
+  const weatherEffects = getWeatherEffects(weather, svgWidth, svgHeight);
+
   // Text color based on theme
   const getTextColor = (t) => {
     switch(t) {
@@ -7224,6 +7374,10 @@ function generateSVG(petType, mood, options = {}) {
       </style>
       <!-- Theme Background -->
       ${themeBackground}
+      <!-- Weather Effects (behind pet) -->
+      <g class="weather-layer" style="pointer-events: none;">
+        ${weatherEffects}
+      </g>
       <g transform="translate(20, 20)" opacity="${groupOpacity}">
         <g class="pet">
             ${pixelArt}

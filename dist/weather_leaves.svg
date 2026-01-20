@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="296" height="296" viewBox="0 0 296 296">
+      <style>.pet { transform-origin: center; }</style>
+      <rect x="5" y="5" width="286" height="281" rx="12" ry="12" fill="rgba(45, 51, 59, 0.15)"/>
+      <g class="weather-layer" style="pointer-events: none;">
+        
+                <g>
+                    <g>
+                    <path d="M10,0 Q15,-5 20,0 Q15,5 10,0" fill="#FF9800" opacity="0.8">
+                        <animateTransform attributeName="transform" type="translate" values="0,0;13.48105854442265,296" dur="4.394012284099151s" begin="1.4760111368150575s" repeatCount="indefinite"/>
+                    </path>
+                </g><g>
+                    <path d="M39.6,0 Q44.6,-5 49.6,0 Q44.6,5 39.6,0" fill="#F44336" opacity="0.8">
+                        <animateTransform attributeName="transform" type="translate" values="0,0;20.104389941288876,296" dur="6.033992280371129s" begin="2.7009187539386526s" repeatCount="indefinite"/>
+                    </path>
+                </g><g>
+                    <path d="M69.2,0 Q74.2,-5 79.2,0 Q74.2,5 69.2,0" fill="#795548" opacity="0.8">
+                        <animateTransform attributeName="transform" type="translate" values="0,0;15.138387103656967,296" dur="4.102231599348526s" begin="1.1152167266004758s" repeatCount="indefinite"/>
+                    </path>
+                </g><g>
+                    <path d="M98.80000000000001,0 Q103.80000000000001,-5 108.80000000000001,0 Q103.80000000000001,5 98.80000000000001,0" fill="#FFC107" opacity="0.8">
+                        <animateTransform attributeName="transform" type="translate" values="0,0;7.567962956540493,296" dur="5.281861913485928s" begin="2.9543663491617624s" repeatCount="indefinite"/>
+                    </path>
+                </g><g>
+                    <path d="M128.4,0 Q133.4,-5 138.4,0 Q133.4,5 128.4,0" fill="#FF9800" opacity="0.8">
+                        <animateTransform attributeName="transform" type="translate" values="0,0;27.55996426997226,296" dur="6.785242074829911s" begin="1.5992653890326076s" repeatCount="indefinite"/>
+                    </path>
+                </g><g>
+                    <path d="M158,0 Q163,-5 168,0 Q163,5 158,0" fill="#F44336" opacity="0.8">
+                        <animateTransform attributeName="transform" type="translate" values="0,0;25.39722665387073,296" dur="4.197289509001581s" begin="1.5287201910436665s" repeatCount="indefinite"/>
+                    </path>
+                </g><g>
+                    <path d="M187.60000000000002,0 Q192.60000000000002,-5 197.60000000000002,0 Q192.60000000000002,5 187.60000000000002,0" fill="#795548" opacity="0.8">
+                        <animateTransform attributeName="transform" type="translate" values="0,0;29.48853105164668,296" dur="6.035078871136523s" begin="2.210219545583718s" repeatCount="indefinite"/>
+                    </path>
+                </g><g>
+                    <path d="M217.20000000000002,0 Q222.20000000000002,-5 227.20000000000002,0 Q222.20000000000002,5 217.20000000000002,0" fill="#FFC107" opacity="0.8">
+                        <animateTransform attributeName="transform" type="translate" values="0,0;5.251925835922508,296" dur="5.11251739297121s" begin="1.747779317775834s" repeatCount="indefinite"/>
+                    </path>
+                </g><g>
+                    <path d="M246.8,0 Q251.8,-5 256.8,0 Q251.8,5 246.8,0" fill="#FF9800" opacity="0.8">
+                        <animateTransform attributeName="transform" type="translate" values="0,0;16.554161055708665,296" dur="5.094542226625931s" begin="0.7257368439154912s" repeatCount="indefinite"/>
+                    </path>
+                </g><g>
+                    <path d="M276.40000000000003,0 Q281.40000000000003,-5 286.40000000000003,0 Q281.40000000000003,5 276.40000000000003,0" fill="#F44336" opacity="0.8">
+                        <animateTransform attributeName="transform" type="translate" values="0,0;29.428990421762006,296" dur="5.064370959749231s" begin="1.5900980161429055s" repeatCount="indefinite"/>
+                    </path>
+                </g>
+                </g>
+            
+      </g>
+      <g transform="translate(20, 20)">
+        <g class="pet"><rect x="224" y="32" width="16" height="16" fill="#ffffff" /><rect x="208" y="48" width="16" height="16" fill="#98c379" /><rect x="160" y="64" width="16" height="16" fill="#ffffff" /><rect x="176" y="64" width="16" height="16" fill="#ffffff" /><rect x="192" y="64" width="16" height="16" fill="#98c379" /><rect x="144" y="80" width="16" height="16" fill="#ffffff" /><rect x="160" y="80" width="16" height="16" fill="#ffffff" /><rect x="176" y="80" width="16" height="16" fill="#ffffff" /><rect x="192" y="80" width="16" height="16" fill="#ffffff" /><rect x="144" y="96" width="16" height="16" fill="#ffffff" /><rect x="160" y="96" width="16" height="16" fill="#ffffff" /><rect x="176" y="96" width="16" height="16" fill="#2d333b" /><rect x="192" y="96" width="16" height="16" fill="#ffffff" /><rect x="208" y="96" width="16" height="16" fill="#ffffff" /><rect x="144" y="112" width="16" height="16" fill="#ffffff" /><rect x="160" y="112" width="16" height="16" fill="#C678DD" /><rect x="176" y="112" width="16" height="16" fill="#ffffff" /><rect x="192" y="112" width="16" height="16" fill="#ffffff" /><rect x="208" y="112" width="16" height="16" fill="#ffffff" /><rect x="32" y="128" width="16" height="16" fill="#C678DD" /><rect x="48" y="128" width="16" height="16" fill="#C678DD" /><rect x="96" y="128" width="16" height="16" fill="#ffffff" /><rect x="112" y="128" width="16" height="16" fill="#ffffff" /><rect x="128" y="128" width="16" height="16" fill="#ffffff" /><rect x="144" y="128" width="16" height="16" fill="#ffffff" /><rect x="160" y="128" width="16" height="16" fill="#ffffff" /><rect x="176" y="128" width="16" height="16" fill="#ffffff" /><rect x="192" y="128" width="16" height="16" fill="#ffffff" /><rect x="16" y="144" width="16" height="16" fill="#C678DD" /><rect x="32" y="144" width="16" height="16" fill="#FF9F00" /><rect x="48" y="144" width="16" height="16" fill="#FF9F00" /><rect x="64" y="144" width="16" height="16" fill="#C678DD" /><rect x="80" y="144" width="16" height="16" fill="#ffffff" /><rect x="96" y="144" width="16" height="16" fill="#ffffff" /><rect x="112" y="144" width="16" height="16" fill="#ffffff" /><rect x="128" y="144" width="16" height="16" fill="#ffffff" /><rect x="144" y="144" width="16" height="16" fill="#ffffff" /><rect x="160" y="144" width="16" height="16" fill="#ffffff" /><rect x="176" y="144" width="16" height="16" fill="#ffffff" /><rect x="192" y="144" width="16" height="16" fill="#ffffff" /><rect x="16" y="160" width="16" height="16" fill="#C678DD" /><rect x="32" y="160" width="16" height="16" fill="#FF9F00" /><rect x="48" y="160" width="16" height="16" fill="#98c379" /><rect x="64" y="160" width="16" height="16" fill="#ffffff" /><rect x="80" y="160" width="16" height="16" fill="#ffffff" /><rect x="96" y="160" width="16" height="16" fill="#ffffff" /><rect x="112" y="160" width="16" height="16" fill="#ffffff" /><rect x="128" y="160" width="16" height="16" fill="#ffffff" /><rect x="144" y="160" width="16" height="16" fill="#ffffff" /><rect x="160" y="160" width="16" height="16" fill="#ffffff" /><rect x="176" y="160" width="16" height="16" fill="#ffffff" /><rect x="192" y="160" width="16" height="16" fill="#ffffff" /><rect x="16" y="176" width="16" height="16" fill="#C678DD" /><rect x="32" y="176" width="16" height="16" fill="#FF9F00" /><rect x="48" y="176" width="16" height="16" fill="#98c379" /><rect x="64" y="176" width="16" height="16" fill="#ffffff" /><rect x="80" y="176" width="16" height="16" fill="#ffffff" /><rect x="96" y="176" width="16" height="16" fill="#ffffff" /><rect x="112" y="176" width="16" height="16" fill="#ffffff" /><rect x="128" y="176" width="16" height="16" fill="#ffffff" /><rect x="144" y="176" width="16" height="16" fill="#ffffff" /><rect x="160" y="176" width="16" height="16" fill="#ffffff" /><rect x="176" y="176" width="16" height="16" fill="#ffffff" /><rect x="192" y="176" width="16" height="16" fill="#ffffff" /><rect x="0" y="192" width="16" height="16" fill="#C678DD" /><rect x="16" y="192" width="16" height="16" fill="#FF9F00" /><rect x="32" y="192" width="16" height="16" fill="#98c379" /><rect x="48" y="192" width="16" height="16" fill="#98c379" /><rect x="64" y="192" width="16" height="16" fill="#ffffff" /><rect x="80" y="192" width="16" height="16" fill="#ffffff" /><rect x="96" y="192" width="16" height="16" fill="#ffffff" /><rect x="112" y="192" width="16" height="16" fill="#ffffff" /><rect x="128" y="192" width="16" height="16" fill="#ffffff" /><rect x="144" y="192" width="16" height="16" fill="#ffffff" /><rect x="160" y="192" width="16" height="16" fill="#ffffff" /><rect x="176" y="192" width="16" height="16" fill="#ffffff" /><rect x="0" y="208" width="16" height="16" fill="#C678DD" /><rect x="16" y="208" width="16" height="16" fill="#FF9F00" /><rect x="32" y="208" width="16" height="16" fill="#98c379" /><rect x="48" y="208" width="16" height="16" fill="#00ADD8" /><rect x="64" y="208" width="16" height="16" fill="#ffffff" /><rect x="80" y="208" width="16" height="16" fill="#ffffff" /><rect x="96" y="208" width="16" height="16" fill="#ffffff" /><rect x="112" y="208" width="16" height="16" fill="#ffffff" /><rect x="128" y="208" width="16" height="16" fill="#ffffff" /><rect x="144" y="208" width="16" height="16" fill="#ffffff" /><rect x="160" y="208" width="16" height="16" fill="#ffffff" /><rect x="0" y="224" width="16" height="16" fill="#FF9F00" /><rect x="16" y="224" width="16" height="16" fill="#98c379" /><rect x="32" y="224" width="16" height="16" fill="#98c379" /><rect x="48" y="224" width="16" height="16" fill="#00ADD8" /><rect x="64" y="224" width="16" height="16" fill="#ffffff" /><rect x="80" y="224" width="16" height="16" fill="#ffffff" /><rect x="96" y="224" width="16" height="16" fill="#ffffff" /><rect x="128" y="224" width="16" height="16" fill="#ffffff" /><rect x="144" y="224" width="16" height="16" fill="#ffffff" /><rect x="160" y="224" width="16" height="16" fill="#ffffff" /><rect x="64" y="240" width="16" height="16" fill="#ffffff" /><rect x="80" y="240" width="16" height="16" fill="#ffffff" /><rect x="128" y="240" width="16" height="16" fill="#ffffff" /><rect x="144" y="240" width="16" height="16" fill="#ffffff" /><animateTransform attributeName="transform" type="translate" values="0 0; 0 -4; 0 0" dur="0.5s" repeatCount="indefinite" /></g>
+      </g>
+      <text x="50%" y="291" text-anchor="middle" font-family="monospace" font-size="11" fill="#666">🍂 LEAVES</text>
+    </svg>
