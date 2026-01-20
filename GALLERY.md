@@ -1,17 +1,63 @@
 # 🎨 Profile-Gotchi Gallery
 
 Here is the full roster of pixel art mascots available in **Profile-Gotchi**.
-Now featuring **23 unique pets**, **5 Legendary creatures**, **5 Mythical beings**, **3 themes**, **6 moods**, **Leveling System**, and **16 Seasonal Events** (including international holidays)!
+Now featuring **23 unique pets**, **5 Legendary creatures**, **5 Mythical beings**, **6 themes**, **7 moods**, **Evolution System**, **Weather Effects**, **Achievement Badges**, and **20+ Seasonal Events** (including international holidays)!
 
 ## 🎭 Themes & Moods Demo
 
-| Minimal | Cyberpunk 🌆 | Nature 🌿 |
-| :---: | :---: | :---: |
-| ![Minimal](dist/unicorn_happy.svg) | ![Cyberpunk](dist/demo_cyberpunk.svg) | ![Nature](dist/demo_nature.svg) |
+| Minimal | Cyberpunk 🌆 | Nature 🌿 | Synthwave 🌅 | Matrix 💻 | Ocean 🌊 |
+| :---: | :---: | :---: | :---: | :---: | :---: |
+| ![Minimal](dist/unicorn_happy.svg) | ![Cyberpunk](dist/demo_cyberpunk.svg) | ![Nature](dist/demo_nature.svg) | ![Synthwave](dist/demo_synthwave.svg) | ![Matrix](dist/demo_matrix.svg) | ![Ocean](dist/demo_ocean.svg) |
 
 | Happy ⚡ | Hyper 🔥 | Night Owl 🦉 | Weekend 🏖️ | Sleeping 💤 | Ghost 👻 |
 | :---: | :---: | :---: | :---: | :---: | :---: |
 | ![Happy](dist/mood_happy.svg) | ![Hyper](dist/mood_hyper.svg) | ![Owl](dist/mood_nightowl.svg) | ![Weekend](dist/mood_weekend.svg) | ![Sleep](dist/mood_sleeping.svg) | ![Ghost](dist/mood_ghost.svg) |
+
+---
+
+## 🌧️ Weather Effects
+
+Dynamic weather based on mood, time, and season!
+
+| 🌧️ Rain | ❄️ Snow | ✨ Stars | 🌟 Fireflies | 🍂 Leaves |
+| :---: | :---: | :---: | :---: | :---: |
+| ![Rain](dist/weather_rain.svg) | ![Snow](dist/weather_snow.svg) | ![Stars](dist/weather_stars.svg) | ![Fireflies](dist/weather_fireflies.svg) | ![Leaves](dist/weather_leaves.svg) |
+
+---
+
+## 🦋 Evolution System
+
+Your pet grows as you level up! Each evolution stage brings unique visual effects.
+
+| 🥚 Egg (Lv.1-5) | 🐣 Baby (Lv.6-15) | 🌱 Juvenile (Lv.16-30) | ⭐ Adult (Lv.31-50) |
+| :---: | :---: | :---: | :---: |
+| ![Egg](dist/evolution_egg.svg) | ![Baby](dist/evolution_baby.svg) | ![Juvenile](dist/evolution_juvenile.svg) | ![Adult](dist/evolution_adult.svg) |
+
+| 💫 Master (Lv.51-75) | 👑 Legendary (Lv.76-99) | 🌟 Mythical (Lv.100) | ✨ About to Evolve! |
+| :---: | :---: | :---: | :---: |
+| ![Master](dist/evolution_master.svg) | ![Legendary](dist/evolution_legendary.svg) | ![Mythical](dist/evolution_mythical.svg) | ![Ready](dist/evolution_ready.svg) |
+
+> **Evolution Effects:** Higher stages have glowing auras, sparkles, and floating runes. A pulsing ring appears when you're about to evolve!
+
+---
+
+## 🏅 Achievement Badges
+
+Earn badges for your coding accomplishments!
+
+![Achievements](dist/achievements_demo.svg)
+
+| Badge | Name | How to Unlock |
+| :---: | :--- | :--- |
+| 🌟 | First Commit | Make your first commit! |
+| 💯 | Century | Reach 100 commits |
+| 🚀 | Rocket | Reach 500 commits |
+| 🔥 | On Fire | 7-day commit streak |
+| ⚡ | Lightning | 30-day commit streak |
+| 🌙 | Night Owl | Commit between midnight and 5 AM |
+| 🌅 | Early Bird | Commit between 5-7 AM |
+| 🎉 | Weekend Warrior | Commit on weekends |
+| 📊 | Level 10/25/50/100 | Reach leveling milestones |
 
 ---
 

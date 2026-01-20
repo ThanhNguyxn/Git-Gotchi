@@ -6334,27 +6334,49 @@ function calculateStats(totalCommits, isDead = false) {
   const xpNeededForNextLevel = nextLevelXp - currentLevelXp;
   const xpProgress = Math.min(100, Math.floor((xpInCurrentLevel / xpNeededForNextLevel) * 100));
 
-  // Evolution stages based on level
-  let evolutionStage, evolutionIcon;
+  // Evolution stages based on level with pet-appropriate icons
+  let evolutionStage, evolutionIcon, evolutionName, evolutionScale;
   if (level <= 5) {
     evolutionStage = 'egg';
-    evolutionIcon = '🥒';
+    evolutionIcon = '🥚';
+    evolutionName = 'Egg';
+    evolutionScale = 0.7;  // Smaller size
   } else if (level <= 15) {
     evolutionStage = 'baby';
     evolutionIcon = '🐣';
+    evolutionName = 'Baby';
+    evolutionScale = 0.85;
   } else if (level <= 30) {
-    evolutionStage = 'child';
-    evolutionIcon = '🧒';
+    evolutionStage = 'juvenile';
+    evolutionIcon = '🌱';
+    evolutionName = 'Juvenile';
+    evolutionScale = 0.95;
   } else if (level <= 50) {
-    evolutionStage = 'teen';
-    evolutionIcon = '🧑';
-  } else if (level <= 75) {
     evolutionStage = 'adult';
-    evolutionIcon = '👨';
+    evolutionIcon = '⭐';
+    evolutionName = 'Adult';
+    evolutionScale = 1.0;  // Normal size
+  } else if (level <= 75) {
+    evolutionStage = 'master';
+    evolutionIcon = '💫';
+    evolutionName = 'Master';
+    evolutionScale = 1.05;
+  } else if (level <= 99) {
+    evolutionStage = 'legendary';
+    evolutionIcon = '👑';
+    evolutionName = 'Legendary';
+    evolutionScale = 1.1;
   } else {
-    evolutionStage = 'elder';
-    evolutionIcon = '👴';
+    evolutionStage = 'mythical';
+    evolutionIcon = '🌟';
+    evolutionName = 'Mythical';
+    evolutionScale = 1.15;  // Largest size
   }
+
+  // Check if close to evolution (within 10% XP of next stage)
+  const evolutionThresholds = [5, 15, 30, 50, 75, 99];
+  const nextEvolutionLevel = evolutionThresholds.find(t => level < t) || 100;
+  const isCloseToEvolution = level >= nextEvolutionLevel - 2 && level < nextEvolutionLevel;
 
   return {
     level,
@@ -6364,7 +6386,11 @@ function calculateStats(totalCommits, isDead = false) {
     xpProgress,
     maxLevel: 100,
     evolutionStage,
-    evolutionIcon
+    evolutionIcon,
+    evolutionName,
+    evolutionScale,
+    isCloseToEvolution,
+    nextEvolutionLevel
   };
 }
 
@@ -6720,6 +6746,124 @@ async function fetchMythicalStats(octokit, username, totalCommits) {
     activeRepos,
     starsReceived
   };
+}
+
+/**
+ * Generate Evolution Visual Effects
+ * @param {string} evolutionStage - Current evolution stage
+ * @param {boolean} isCloseToEvolution - Whether pet is about to evolve
+ * @param {number} centerX - Center X position
+ * @param {number} centerY - Center Y position
+ * @returns {string} SVG elements for evolution effects
+ */
+function getEvolutionEffects(evolutionStage, isCloseToEvolution, centerX, centerY) {
+  let effects = '';
+  
+  // Glowing aura based on evolution stage
+  const auraColors = {
+    'egg': 'none',
+    'baby': 'none',
+    'juvenile': '#4CAF50',  // Green glow
+    'adult': '#FFD700',     // Gold glow
+    'master': '#9C27B0',    // Purple glow
+    'legendary': '#FF6B35', // Orange glow
+    'mythical': '#00FFFF'   // Cyan glow
+  };
+  
+  const auraColor = auraColors[evolutionStage] || 'none';
+  
+  // Add aura for adult and above
+  if (auraColor !== 'none') {
+    const auraSize = {
+      'juvenile': 35,
+      'adult': 45,
+      'master': 55,
+      'legendary': 65,
+      'mythical': 80
+    }[evolutionStage] || 40;
+    
+    effects += `
+      <defs>
+        <radialGradient id="evolutionAura">
+          <stop offset="0%" stop-color="${auraColor}" stop-opacity="0.6"/>
+          <stop offset="70%" stop-color="${auraColor}" stop-opacity="0.2"/>
+          <stop offset="100%" stop-color="${auraColor}" stop-opacity="0"/>
+        </radialGradient>
+        <filter id="evolutionGlow">
+          <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+          <feMerge>
+            <feMergeNode in="coloredBlur"/>
+            <feMergeNode in="SourceGraphic"/>
+          </feMerge>
+        </filter>
+      </defs>
+      <circle cx="${centerX}" cy="${centerY}" r="${auraSize}" fill="url(#evolutionAura)">
+        <animate attributeName="r" values="${auraSize};${auraSize + 8};${auraSize}" dur="2s" repeatCount="indefinite"/>
+        <animate attributeName="opacity" values="0.7;1;0.7" dur="2s" repeatCount="indefinite"/>
+      </circle>
+    `;
+  }
+  
+  // Sparkle particles for master and above
+  if (['master', 'legendary', 'mythical'].includes(evolutionStage)) {
+    const sparkleCount = evolutionStage === 'mythical' ? 8 : evolutionStage === 'legendary' ? 6 : 4;
+    const sparkleColor = evolutionStage === 'mythical' ? '#FFFFFF' : evolutionStage === 'legendary' ? '#FFD700' : '#E0E0E0';
+    
+    effects += `<g class="evolution-sparkles">`;
+    for (let i = 0; i < sparkleCount; i++) {
+      const angle = (i / sparkleCount) * Math.PI * 2;
+      const radius = 40 + (evolutionStage === 'mythical' ? 20 : 10);
+      const sx = centerX + Math.cos(angle) * radius;
+      const sy = centerY + Math.sin(angle) * radius;
+      const delay = (i * 0.5) % 3;
+      
+      effects += `
+        <circle cx="${sx}" cy="${sy}" r="2" fill="${sparkleColor}">
+          <animate attributeName="opacity" values="0;1;0" dur="1.5s" begin="${delay}s" repeatCount="indefinite"/>
+          <animate attributeName="r" values="1;3;1" dur="1.5s" begin="${delay}s" repeatCount="indefinite"/>
+        </circle>
+      `;
+    }
+    effects += `</g>`;
+  }
+  
+  // Evolution ready effect (pulsing ring)
+  if (isCloseToEvolution) {
+    effects += `
+      <circle cx="${centerX}" cy="${centerY}" r="50" fill="none" stroke="#FFD700" stroke-width="2" stroke-dasharray="8,4">
+        <animate attributeName="r" values="45;55;45" dur="1s" repeatCount="indefinite"/>
+        <animate attributeName="stroke-opacity" values="0.3;1;0.3" dur="1s" repeatCount="indefinite"/>
+      </circle>
+      <text x="${centerX}" y="${centerY - 60}" fill="#FFD700" font-size="10" text-anchor="middle" font-weight="bold">
+        ✨ Evolution Ready! ✨
+        <animate attributeName="opacity" values="0.5;1;0.5" dur="0.8s" repeatCount="indefinite"/>
+      </text>
+    `;
+  }
+  
+  // Mythical special effect: floating runes
+  if (evolutionStage === 'mythical') {
+    const runes = ['⚡', '★', '◆', '✧', '○', '△'];
+    effects += `<g class="mythical-runes">`;
+    for (let i = 0; i < 6; i++) {
+      const angle = (i / 6) * Math.PI * 2;
+      const rx = centerX + Math.cos(angle) * 60;
+      const ry = centerY + Math.sin(angle) * 60;
+      const delay = i * 0.3;
+      
+      effects += `
+        <text x="${rx}" y="${ry}" fill="#00FFFF" font-size="8" text-anchor="middle" opacity="0.8">
+          ${runes[i]}
+          <animateTransform attributeName="transform" type="rotate"
+            values="0 ${rx} ${ry}; 360 ${rx} ${ry}" dur="10s" repeatCount="indefinite"/>
+          <animate attributeName="opacity" values="0.4;1;0.4" dur="2s" begin="${delay}s" repeatCount="indefinite"/>
+        </text>
+      `;
+    }
+    effects += `</g>`;
+  }
+  
+  return effects;
 }
 
 /**
@@ -7428,13 +7572,14 @@ function generateSVG(petType, mood, options = {}) {
     // Streak fire icon (show if streak >= 3)
     const streakDisplay = streak >= 3 ? `🔥${streak}` : (streak > 0 ? `⚡${streak}` : '');
     
-    // Evolution icon
+    // Evolution icon and name
     const evolutionDisplay = stats.evolutionIcon || '';
+    const evolutionName = stats.evolutionName || '';
     
     statsDisplay = `
       <!-- Level & Mood Text -->
       <text x="20" y="${height + 43}" font-family="monospace" font-size="11" fill="${textColor}">
-        ${evolutionDisplay} Lv.${stats.level}
+        ${evolutionDisplay} Lv.${stats.level} ${evolutionName}
       </text>
       <text x="${svgWidth - 20}" y="${height + 43}" text-anchor="end" font-family="monospace" font-size="11" fill="${textColor}">
         ${moodInfo.icon} ${moodInfo.mood.toUpperCase()} ${streakDisplay}
@@ -7482,6 +7627,23 @@ function generateSVG(petType, mood, options = {}) {
   const achievementBadges = earnedAchievements.length > 0 ? 
     `<g transform="translate(15, ${svgHeight - 30})">${generateAchievementBadges(earnedAchievements)}</g>` : '';
 
+  // Evolution visual effects
+  const evolutionScale = stats?.evolutionScale || 1;
+  const petCenterX = width / 2;
+  const petCenterY = height / 2;
+  const evolutionEffects = stats ? getEvolutionEffects(
+    stats.evolutionStage, 
+    stats.isCloseToEvolution, 
+    petCenterX + 20,  // Adjust for translate offset
+    petCenterY + 20
+  ) : '';
+
+  // Calculate pet transform with evolution scale
+  const scaleOffset = ((1 - evolutionScale) * width) / 2;
+  const petTransform = evolutionScale !== 1 
+    ? `translate(${20 + scaleOffset}, ${20 + scaleOffset}) scale(${evolutionScale})`
+    : 'translate(20, 20)';
+
   return `<svg xmlns="http://www.w3.org/2000/svg" width="${svgWidth}" height="${svgHeight}" viewBox="0 0 ${svgWidth} ${svgHeight}">
       <style>
         .pet { transform-origin: center; }
@@ -7492,7 +7654,11 @@ function generateSVG(petType, mood, options = {}) {
       <g class="weather-layer" style="pointer-events: none;">
         ${weatherEffects}
       </g>
-      <g transform="translate(20, 20)" opacity="${groupOpacity}">
+      <!-- Evolution Effects (behind pet) -->
+      <g class="evolution-layer" style="pointer-events: none;">
+        ${evolutionEffects}
+      </g>
+      <g transform="${petTransform}" opacity="${groupOpacity}">
         <g class="pet">
             ${pixelArt}
             ${animation}

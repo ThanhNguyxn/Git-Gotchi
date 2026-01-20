@@ -70,6 +70,28 @@ Your coding habits determine your companion. [View the full Pet Gallery here](GA
 
 ---
 
+## 🦋 Evolution System
+
+Your pet evolves as you level up! Each evolution stage brings visual changes and effects.
+
+| Stage | Levels | Icon | Effects |
+| :---: | :---: | :---: | :--- |
+| **Egg** | 1-5 | 🥚 | 70% size, no effects |
+| **Baby** | 6-15 | 🐣 | 85% size, growing! |
+| **Juvenile** | 16-30 | 🌱 | 95% size, green aura |
+| **Adult** | 31-50 | ⭐ | 100% size, gold aura |
+| **Master** | 51-75 | 💫 | 105% size, purple aura + sparkles |
+| **Legendary** | 76-99 | 👑 | 110% size, orange aura + sparkles |
+| **Mythical** | 100 | 🌟 | 115% size, cyan aura + floating runes |
+
+| 🥚 Egg | 🌱 Juvenile | ⭐ Adult | 👑 Legendary | 🌟 Mythical |
+| :---: | :---: | :---: | :---: | :---: |
+| ![Egg](dist/evolution_egg.svg) | ![Juvenile](dist/evolution_juvenile.svg) | ![Adult](dist/evolution_adult.svg) | ![Legendary](dist/evolution_legendary.svg) | ![Mythical](dist/evolution_mythical.svg) |
+
+> **Pro Tip:** When you're close to evolving (within 2 levels), you'll see a ✨ Evolution Ready! ✨ indicator!
+
+---
+
 ## 🎄 Seasonal Events (Auto-Detect!)
 
 Your pet automatically wears holiday accessories based on the current date!

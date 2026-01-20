@@ -1192,4 +1192,202 @@ function generateAchievementBadges(achievements, maxShow = 6) {
     console.log(`Generated achievements_demo.svg`);
 })();
 
+// Evolution Effects Generator
+function getEvolutionEffects(evolutionStage, isCloseToEvolution, centerX, centerY) {
+    let effects = '';
+    
+    const auraColors = {
+        'egg': 'none',
+        'baby': 'none',
+        'juvenile': '#4CAF50',
+        'adult': '#FFD700',
+        'master': '#9C27B0',
+        'legendary': '#FF6B35',
+        'mythical': '#00FFFF'
+    };
+    
+    const auraColor = auraColors[evolutionStage] || 'none';
+    
+    if (auraColor !== 'none') {
+        const auraSize = {
+            'juvenile': 35,
+            'adult': 45,
+            'master': 55,
+            'legendary': 65,
+            'mythical': 80
+        }[evolutionStage] || 40;
+        
+        effects += `
+            <defs>
+                <radialGradient id="evolutionAura-${evolutionStage}">
+                    <stop offset="0%" stop-color="${auraColor}" stop-opacity="0.6"/>
+                    <stop offset="70%" stop-color="${auraColor}" stop-opacity="0.2"/>
+                    <stop offset="100%" stop-color="${auraColor}" stop-opacity="0"/>
+                </radialGradient>
+            </defs>
+            <circle cx="${centerX}" cy="${centerY}" r="${auraSize}" fill="url(#evolutionAura-${evolutionStage})">
+                <animate attributeName="r" values="${auraSize};${auraSize + 8};${auraSize}" dur="2s" repeatCount="indefinite"/>
+                <animate attributeName="opacity" values="0.7;1;0.7" dur="2s" repeatCount="indefinite"/>
+            </circle>
+        `;
+    }
+    
+    if (['master', 'legendary', 'mythical'].includes(evolutionStage)) {
+        const sparkleCount = evolutionStage === 'mythical' ? 8 : evolutionStage === 'legendary' ? 6 : 4;
+        const sparkleColor = evolutionStage === 'mythical' ? '#FFFFFF' : evolutionStage === 'legendary' ? '#FFD700' : '#E0E0E0';
+        
+        effects += `<g class="evolution-sparkles">`;
+        for (let i = 0; i < sparkleCount; i++) {
+            const angle = (i / sparkleCount) * Math.PI * 2;
+            const radius = 40 + (evolutionStage === 'mythical' ? 20 : 10);
+            const sx = centerX + Math.cos(angle) * radius;
+            const sy = centerY + Math.sin(angle) * radius;
+            const delay = (i * 0.5) % 3;
+            
+            effects += `
+                <circle cx="${sx}" cy="${sy}" r="2" fill="${sparkleColor}">
+                    <animate attributeName="opacity" values="0;1;0" dur="1.5s" begin="${delay}s" repeatCount="indefinite"/>
+                    <animate attributeName="r" values="1;3;1" dur="1.5s" begin="${delay}s" repeatCount="indefinite"/>
+                </circle>
+            `;
+        }
+        effects += `</g>`;
+    }
+    
+    if (isCloseToEvolution) {
+        effects += `
+            <circle cx="${centerX}" cy="${centerY}" r="50" fill="none" stroke="#FFD700" stroke-width="2" stroke-dasharray="8,4">
+                <animate attributeName="r" values="45;55;45" dur="1s" repeatCount="indefinite"/>
+                <animate attributeName="stroke-opacity" values="0.3;1;0.3" dur="1s" repeatCount="indefinite"/>
+            </circle>
+            <text x="${centerX}" y="${centerY - 60}" fill="#FFD700" font-size="10" text-anchor="middle" font-weight="bold">
+                ✨ Evolution Ready! ✨
+                <animate attributeName="opacity" values="0.5;1;0.5" dur="0.8s" repeatCount="indefinite"/>
+            </text>
+        `;
+    }
+    
+    if (evolutionStage === 'mythical') {
+        const runes = ['⚡', '★', '◆', '✧', '○', '△'];
+        effects += `<g class="mythical-runes">`;
+        for (let i = 0; i < 6; i++) {
+            const angle = (i / 6) * Math.PI * 2;
+            const rx = centerX + Math.cos(angle) * 60;
+            const ry = centerY + Math.sin(angle) * 60;
+            const delay = i * 0.3;
+            
+            effects += `
+                <text x="${rx}" y="${ry}" fill="#00FFFF" font-size="8" text-anchor="middle" opacity="0.8">
+                    ${runes[i]}
+                    <animateTransform attributeName="transform" type="rotate"
+                        values="0 ${rx} ${ry}; 360 ${rx} ${ry}" dur="10s" repeatCount="indefinite"/>
+                    <animate attributeName="opacity" values="0.4;1;0.4" dur="2s" begin="${delay}s" repeatCount="indefinite"/>
+                </text>
+            `;
+        }
+        effects += `</g>`;
+    }
+    
+    return effects;
+}
+
+// Generate Evolution Demo
+(() => {
+    console.log('Generating evolution demos...');
+    
+    const evolutionStages = [
+        { stage: 'egg', icon: '🥚', name: 'Egg', level: 3, scale: 0.7, color: '#ccc' },
+        { stage: 'baby', icon: '🐣', name: 'Baby', level: 10, scale: 0.85, color: '#98c379' },
+        { stage: 'juvenile', icon: '🌱', name: 'Juvenile', level: 25, scale: 0.95, color: '#4CAF50' },
+        { stage: 'adult', icon: '⭐', name: 'Adult', level: 45, scale: 1.0, color: '#FFD700' },
+        { stage: 'master', icon: '💫', name: 'Master', level: 65, scale: 1.05, color: '#9C27B0' },
+        { stage: 'legendary', icon: '👑', name: 'Legendary', level: 85, scale: 1.1, color: '#FF6B35' },
+        { stage: 'mythical', icon: '🌟', name: 'Mythical', level: 100, scale: 1.15, color: '#00FFFF' }
+    ];
+    
+    evolutionStages.forEach(evo => {
+        const spriteSet = SPRITES['cat'];
+        const spriteGrid = spriteSet['normal'];
+        const baseColor = evo.color;
+        
+        const pixelSize = 16;
+        const rows = spriteGrid.length;
+        const cols = spriteGrid[0].length;
+        const width = cols * pixelSize;
+        const height = rows * pixelSize;
+        const svgWidth = width + 60;
+        const svgHeight = height + 80;
+        
+        const centerX = svgWidth / 2;
+        const centerY = height / 2 + 20;
+        
+        const pixelArt = renderPixelGrid(spriteGrid, baseColor, pixelSize);
+        const themeBackground = getThemeBackground('minimal', svgWidth, svgHeight);
+        const evolutionEffects = getEvolutionEffects(evo.stage, false, centerX, centerY);
+        
+        const scaleOffset = ((1 - evo.scale) * width) / 2;
+        const petTransform = evo.scale !== 1 
+            ? `translate(${30 + scaleOffset}, ${20 + scaleOffset}) scale(${evo.scale})`
+            : 'translate(30, 20)';
+        
+        const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${svgWidth}" height="${svgHeight}" viewBox="0 0 ${svgWidth} ${svgHeight}">
+      <style>.pet { transform-origin: center; }</style>
+      ${themeBackground}
+      <g class="evolution-layer" style="pointer-events: none;">
+        ${evolutionEffects}
+      </g>
+      <g transform="${petTransform}">
+        <g class="pet">${pixelArt}</g>
+      </g>
+      <text x="50%" y="${height + 40}" text-anchor="middle" font-family="monospace" font-size="12" fill="#333">
+        ${evo.icon} Lv.${evo.level} ${evo.name}
+      </text>
+      <text x="50%" y="${height + 55}" text-anchor="middle" font-family="monospace" font-size="10" fill="#666">
+        Scale: ${(evo.scale * 100).toFixed(0)}%
+      </text>
+    </svg>`;
+        
+        fs.writeFileSync(`dist/evolution_${evo.stage}.svg`, svg);
+        console.log(`Generated evolution_${evo.stage}.svg`);
+    });
+    
+    // Generate "About to Evolve" demo
+    const spriteSet = SPRITES['cat'];
+    const spriteGrid = spriteSet['normal'];
+    const pixelSize = 16;
+    const rows = spriteGrid.length;
+    const cols = spriteGrid[0].length;
+    const width = cols * pixelSize;
+    const height = rows * pixelSize;
+    const svgWidth = width + 60;
+    const svgHeight = height + 100;
+    
+    const centerX = svgWidth / 2;
+    const centerY = height / 2 + 20;
+    
+    const pixelArt = renderPixelGrid(spriteGrid, '#FFD700', pixelSize);
+    const themeBackground = getThemeBackground('minimal', svgWidth, svgHeight);
+    const evolutionEffects = getEvolutionEffects('adult', true, centerX, centerY);
+    
+    const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${svgWidth}" height="${svgHeight}" viewBox="0 0 ${svgWidth} ${svgHeight}">
+      <style>.pet { transform-origin: center; }</style>
+      ${themeBackground}
+      <g class="evolution-layer" style="pointer-events: none;">
+        ${evolutionEffects}
+      </g>
+      <g transform="translate(30, 20)">
+        <g class="pet">${pixelArt}</g>
+      </g>
+      <text x="50%" y="${height + 50}" text-anchor="middle" font-family="monospace" font-size="12" fill="#333">
+        ⭐ Lv.49 Adult
+      </text>
+      <text x="50%" y="${height + 65}" text-anchor="middle" font-family="monospace" font-size="10" fill="#FF9800">
+        Almost Master! (Lv.50)
+      </text>
+    </svg>`;
+    
+    fs.writeFileSync(`dist/evolution_ready.svg`, svg);
+    console.log(`Generated evolution_ready.svg`);
+})();
+
 console.log('Done!');
