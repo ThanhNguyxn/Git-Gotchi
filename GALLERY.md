@@ -1,7 +1,7 @@
 # 🎨 Profile-Gotchi Gallery
 
 Here is the full roster of pixel art mascots available in **Profile-Gotchi**.
-Now featuring **23 unique pets**, **5 Legendary creatures**, **3 themes**, **6 moods**, **Leveling System**, and **Seasonal Events**!
+Now featuring **23 unique pets**, **5 Legendary creatures**, **5 Mythical beings**, **3 themes**, **6 moods**, **Leveling System**, and **Seasonal Events**!
 
 ## 🎭 Themes & Moods Demo
 
@@ -46,6 +46,19 @@ Unlock special creatures by achieving milestones! **Harder achievements take pri
 | :---: | :---: | :---: | :---: | :---: |
 | ![MechaRex](dist/legendary_mecha_rex.svg) | ![Hydra](dist/legendary_hydra.svg) | ![Golem](dist/legendary_cyber_golem.svg) | ![VoidSpirit](dist/legendary_void_spirit.svg) | ![Unicorn](dist/legendary_unicorn.svg) |
 | **1000+ commits** | **5+ languages** | **50+ closed issues** | **Night coder (00-04h)** | **⭐ Star/Fork this repo** |
+
+---
+
+## ✨ Mythical Pets (Ultra-Rare!)
+
+The rarest tier! Unlock these legendary beings by achieving extraordinary feats.
+
+| 🐲 Dragon | ⚡ Thunderbird | 🦊 Kitsune | 🌊 Leviathan | 🌟 Celestial |
+| :---: | :---: | :---: | :---: | :---: |
+| ![Dragon](dist/mythical_dragon.svg) | ![Thunderbird](dist/mythical_thunderbird.svg) | ![Kitsune](dist/mythical_kitsune.svg) | ![Leviathan](dist/mythical_leviathan.svg) | ![Celestial](dist/mythical_celestial.svg) |
+| **2000+ commits** | **100+ PRs merged** | **10+ active repos** | **50K+ lines of code** | **50+ stars received** |
+
+> **Tier Priority:** Mythical > Legendary > Standard pets. Hardest achievements take precedence within each tier.
 
 ---
 

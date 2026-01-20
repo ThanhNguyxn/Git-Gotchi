@@ -13,13 +13,35 @@ const colorsMatch = indexContent.match(/const PET_COLORS = ({[\s\S]*?});/);
 if (!colorsMatch) { console.error("Could not parse PET_COLORS"); process.exit(1); }
 const PET_COLORS = eval('(' + colorsMatch[1] + ')');
 
-// Extract LEGENDARY_SPRITES
-const legendarySpritesMatch = indexContent.match(/const LEGENDARY_SPRITES = ({[\s\S]*?});\s*\nconst SPRITES/);
-const LEGENDARY_SPRITES = legendarySpritesMatch ? eval('(' + legendarySpritesMatch[1] + ')') : {};
+// Extract LEGENDARY_SPRITES using simpler marker approach
+const legSpritesStart = indexContent.indexOf('const LEGENDARY_SPRITES = {');
+const mythicalMarker = '// MYTHICAL PET SPRITES';
+const mythicalIdx = indexContent.indexOf(mythicalMarker);
+const legSpritesEnd = indexContent.lastIndexOf('};', mythicalIdx);
+let LEGENDARY_SPRITES = {};
+if (legSpritesStart !== -1 && legSpritesEnd !== -1) {
+    // Extract just the object part starting from {
+    const legSpritesStr = indexContent.substring(legSpritesStart + 'const LEGENDARY_SPRITES = '.length, legSpritesEnd + 1);
+    try {
+        LEGENDARY_SPRITES = eval('(' + legSpritesStr + ')');
+        console.log('Loaded LEGENDARY_SPRITES with keys:', Object.keys(LEGENDARY_SPRITES).join(', '));
+    } catch (e) {
+        console.error('Could not parse LEGENDARY_SPRITES:', e.message);
+        console.error('Trying to parse:', legSpritesStr.substring(0, 100) + '...');
+    }
+}
 
 // Extract LEGENDARY_COLORS
 const legendaryColorsMatch = indexContent.match(/const LEGENDARY_COLORS = ({[\s\S]*?});/);
 const LEGENDARY_COLORS = legendaryColorsMatch ? eval('(' + legendaryColorsMatch[1] + ')') : {};
+
+// Extract MYTHICAL_SPRITES
+const mythicalSpritesMatch = indexContent.match(/const MYTHICAL_SPRITES = ({[\s\S]*?});\s*\nconst SPRITES/);
+const MYTHICAL_SPRITES = mythicalSpritesMatch ? eval('(' + mythicalSpritesMatch[1] + ')') : {};
+
+// Extract MYTHICAL_COLORS
+const mythicalColorsMatch = indexContent.match(/const MYTHICAL_COLORS = ({[\s\S]*?});/);
+const MYTHICAL_COLORS = mythicalColorsMatch ? eval('(' + mythicalColorsMatch[1] + ')') : {};
 
 // --- RENDER ENGINE (Copied/Adapted from index.js) ---
 function renderPixelGrid(grid, baseColor, pixelSize = 10) {
@@ -444,6 +466,87 @@ seasonalDemos.forEach(({ name, label, event }) => {
 
         fs.writeFileSync(`dist/legendary_${name}.svg`, svg);
         console.log(`Generated legendary_${name}.svg`);
+    });
+}
+
+// --- MYTHICAL PET DEMOS ---
+{
+    const mythicalDemos = [
+        { name: 'dragon', label: '🐉 DRAGON', color: '#b71c1c' },
+        { name: 'thunderbird', label: '⚡ THUNDERBIRD', color: '#1565c0' },
+        { name: 'kitsune', label: '🦊 KITSUNE', color: '#ff6f00' },
+        { name: 'leviathan', label: '🌊 LEVIATHAN', color: '#004d40' },
+        { name: 'celestial', label: '⭐ CELESTIAL', color: '#7c4dff' }
+    ];
+
+    mythicalDemos.forEach(({ name, label, color }) => {
+        const spriteSet = MYTHICAL_SPRITES[name];
+        if (!spriteSet) {
+            console.log(`Skipping mythical ${name} - sprite not found`);
+            return;
+        }
+        const spriteGrid = spriteSet['normal'];
+        const baseColor = color;
+
+        const pixelSize = 16;
+        const rows = spriteGrid.length;
+        const cols = spriteGrid[0].length;
+        const width = cols * pixelSize;
+        const height = rows * pixelSize;
+        const svgWidth = width + 40;
+        const svgHeight = height + 50;
+
+        const pixelArt = renderPixelGrid(spriteGrid, baseColor, pixelSize);
+        
+        // Special mythical background with sparkles
+        const mythicalBackground = `
+            <defs>
+                <radialGradient id="mythical_${name}" cx="50%" cy="50%" r="70%">
+                    <stop offset="0%" style="stop-color:${color};stop-opacity:0.3"/>
+                    <stop offset="100%" style="stop-color:#0a0a1a;stop-opacity:1"/>
+                </radialGradient>
+            </defs>
+            <rect x="0" y="0" width="${svgWidth}" height="${svgHeight}" fill="url(#mythical_${name})" rx="12" ry="12"/>
+            <g fill="#ffffff" opacity="0.6">
+                <circle cx="${svgWidth * 0.1}" cy="${svgHeight * 0.2}" r="1.5">
+                    <animate attributeName="opacity" values="0.3;1;0.3" dur="2s" repeatCount="indefinite"/>
+                </circle>
+                <circle cx="${svgWidth * 0.9}" cy="${svgHeight * 0.15}" r="1">
+                    <animate attributeName="opacity" values="0.5;1;0.5" dur="1.5s" repeatCount="indefinite"/>
+                </circle>
+                <circle cx="${svgWidth * 0.8}" cy="${svgHeight * 0.8}" r="1.5">
+                    <animate attributeName="opacity" values="0.2;1;0.2" dur="2.5s" repeatCount="indefinite"/>
+                </circle>
+                <circle cx="${svgWidth * 0.15}" cy="${svgHeight * 0.75}" r="1">
+                    <animate attributeName="opacity" values="0.6;1;0.6" dur="1.8s" repeatCount="indefinite"/>
+                </circle>
+            </g>
+        `;
+
+        // Mythical float animation
+        const animation = `
+            <animateTransform 
+                attributeName="transform" 
+                type="translate" 
+                values="0 0; 0 -6; 0 0" 
+                dur="1.5s" 
+                repeatCount="indefinite" 
+            />`;
+
+        const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${svgWidth}" height="${svgHeight}" viewBox="0 0 ${svgWidth} ${svgHeight}">
+          <style>.pet { transform-origin: center; }</style>
+          ${mythicalBackground}
+          <g transform="translate(20, 20)">
+            <g class="pet">
+              ${pixelArt}
+              ${animation}
+            </g>
+          </g>
+          <text x="50%" y="${height + 40}" text-anchor="middle" font-family="monospace" font-size="10" fill="${color}">${label}</text>
+        </svg>`;
+
+        fs.writeFileSync(`dist/mythical_${name}.svg`, svg);
+        console.log(`Generated mythical_${name}.svg`);
     });
 }
 

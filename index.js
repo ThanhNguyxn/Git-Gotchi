@@ -54,6 +54,19 @@ const LEGENDARY_COLORS = {
   cyber_golem: '#37474f'   // Blue-grey stone (Construct)
 };
 
+// ═══════════════════════════════════════════════════════════════════════════
+// MYTHICAL PET SYSTEM - Ultra rare pets with extreme achievements
+// Priority: Dragon > Leviathan > Thunderbird > Kitsune > Celestial
+// ═══════════════════════════════════════════════════════════════════════════
+
+const MYTHICAL_COLORS = {
+  dragon: '#b71c1c',       // Deep Red (Ancient Fire Dragon)
+  thunderbird: '#1565c0',  // Electric Blue (Storm Bird)
+  kitsune: '#ff6f00',      // Orange (9-tailed Fox Spirit)
+  leviathan: '#004d40',    // Deep Teal (Sea Monster)
+  celestial: '#7c4dff'     // Violet (Star Deer)
+};
+
 // Legendary Sprites (16x16 Pixel Art - Upgraded!)
 // Legend: X=Base, K=Black, W=White, R=Red, O=Orange, Y=Yellow, B=Blue, G=Green, P=Purple, M=Magenta
 const LEGENDARY_SPRITES = {
@@ -619,166 +632,734 @@ const LEGENDARY_SPRITES = {
   }
 };
 
+// ═══════════════════════════════════════════════════════════════════════════
+// MYTHICAL PET SPRITES - Ultra rare tier above Legendary
+// ═══════════════════════════════════════════════════════════════════════════
+
+const MYTHICAL_SPRITES = {
+  // 🐉 DRAGON: Ancient Fire Dragon (16x16) - 2000+ commits
+  dragon: {
+    normal: [
+      "                ",
+      "    KKK    KKK  ",
+      "   KXXXK  KXXXK ",
+      "    KXXKKKKXXK  ",
+      "     KXXXXXXK   ",
+      "    KXXWXXWXXK  ",
+      "    KXXKXXKXXK  ",
+      "   KXXXXXXXXXXK ",
+      "  KXXXXRRRXXXXK ",
+      " KXXXXXXXRXXXXK ",
+      "KXKXXXXXXXXXXKXK",
+      "K KXXXXXXXXXXK K",
+      "   KXXXXXXXXK   ",
+      "    KXK  KXK    ",
+      "   KK      KK   ",
+      "                "
+    ],
+    sleeping: [
+      "                ",
+      "                ",
+      "    KKK    KKK  ",
+      "   KXXXK  KXXXK ",
+      "    KXXKKKKXXK  ",
+      "     KXXXXXXK   ",
+      "    KXXKKKKXXK  ",
+      "    KXXXXXXXXK  ",
+      "   KXXXXXXXXXXK ",
+      "  KXXXXRRRXXXXK ",
+      " KXXXXXXXXXXXXXK",
+      "KXKXXXXXXXXXXKXK",
+      "   KXXXXXXXXK   ",
+      "    KXXXXXXK    ",
+      "     KKKKKK     ",
+      "                "
+    ],
+    ghost: [
+      "                ",
+      "    K K    K K  ",
+      "   K   K  K   K ",
+      "    K  KKKK  K  ",
+      "     K X X K    ",
+      "    K  K  K  K  ",
+      "    K  K  K  K  ",
+      "   K    X    K  ",
+      "  K   R R R   K ",
+      " K        R    K",
+      "K K          K K",
+      "                ",
+      "                ",
+      "                ",
+      "                ",
+      "                "
+    ],
+    hyper: [
+      "   RRR    RRR   ",
+      "    KKK    KKK  ",
+      "   KXXXK  KXXXK ",
+      "    KXXKKKKXXK  ",
+      "     KXXXXXXK   ",
+      "    KXXRXXRXXK  ",
+      "    KXXKXXKXXK  ",
+      "   KXXXXXXXXXXK ",
+      "  KXXXXRRRXXXXK ",
+      " KXXXXXXXRXXXXK ",
+      "KXKXXXXXXXXXXKXK",
+      "K KXXXXXXXXXXK K",
+      "   KXXXXXXXXK   ",
+      "    KXK  KXK R  ",
+      "   KK      KK   ",
+      "                "
+    ],
+    nightowl: [
+      "                ",
+      "    KKK    KKK  ",
+      "   KXXXK  KXXXK ",
+      "    KXXKKKKXXK  ",
+      "     KXXXXXXK   ",
+      "    KXXOXXOXXK  ",
+      "    KXXKXXKXXK  ",
+      "   KXXXXXXXXXXK ",
+      "  KXXXXRRRXXXXK ",
+      " KXXXXXXXRXXXXK ",
+      "KXKXXXXXXXXXXKXK",
+      "K KXXXXXXXXXXK K",
+      "   KXXXXXXXXK   ",
+      "    KXK  KXK    ",
+      "   KK      KK   ",
+      "                "
+    ],
+    weekend: [
+      "                ",
+      "    KKK    KKK  ",
+      "   KXXXK  KXXXK ",
+      "    KXXKKKKXXK  ",
+      "     KXXXXXXK   ",
+      "    KXXKKKKXXK  ",
+      "    KXXXXXXXXK  ",
+      "   KXXXXXXXXXXK ",
+      "  KXXXXRRRXXXXK ",
+      " KXXXXXXXXXXXXXK",
+      "KXKXXXXXXXXXXKXK",
+      "K KXXXXXXXXXXK K",
+      "   KXXXXXXXXK   ",
+      "    KXK  KXK    ",
+      "   KK      KK   ",
+      "                "
+    ]
+  },
+
+  // ⚡ THUNDERBIRD: Electric Storm Bird (16x16) - 100+ PR merges
+  thunderbird: {
+    normal: [
+      "                ",
+      "       YY       ",
+      "      YYYY      ",
+      "     KYYYYK     ",
+      "    KXXYYXXK    ",
+      "   KXXWXXWXXK   ",
+      "   KXXKXXKXXK   ",
+      "    KXXXXXXK    ",
+      "  KXXXXXXXXXXK  ",
+      " KXXXXXYXXXXXK  ",
+      "KXXXXXYYXXXXXK  ",
+      " KXXXXYXXXXXXK  ",
+      "  KXXXYXXXXXK   ",
+      "   KKXKKXKKK    ",
+      "    KK  KK      ",
+      "                "
+    ],
+    sleeping: [
+      "                ",
+      "                ",
+      "       YY       ",
+      "      YYYY      ",
+      "     KYYYYK     ",
+      "    KXXYYXXK    ",
+      "   KXXKKKKXXK   ",
+      "   KXXXXXXXXK   ",
+      "    KXXXXXXK    ",
+      "  KXXXXXXXXXXK  ",
+      " KXXXXXYXXXXXK  ",
+      "KXXXXXYYXXXXXK  ",
+      " KXXXXYXXXXXXK  ",
+      "  KXXXYXXXXXK   ",
+      "   KKKKKKKKKK   ",
+      "                "
+    ],
+    ghost: [
+      "                ",
+      "       Y        ",
+      "      Y Y       ",
+      "     K   K      ",
+      "    K  Y  K     ",
+      "   K  K  K  K   ",
+      "   K  K  K  K   ",
+      "    K      K    ",
+      "  K          K  ",
+      " K    Y      K  ",
+      "K    YY      K  ",
+      " K   Y       K  ",
+      "  K  Y      K   ",
+      "                ",
+      "                ",
+      "                "
+    ],
+    hyper: [
+      "    YY    YY    ",
+      "       YY       ",
+      "      YYYY      ",
+      "     KYYYYK     ",
+      "    KXXYYXXK    ",
+      "   KXXRXXRXXK   ",
+      "   KXXKXXKXXK   ",
+      "    KXXXXXXK    ",
+      "  KXXXXXXXXXXK  ",
+      " KXXXXXYXXXXXK  ",
+      "KXXXXXYYXXXXXK  ",
+      " KXXXXYXXXXXXK  ",
+      "  KXXXYXXXXXK Y ",
+      "   KKXKKXKKK    ",
+      "    KK  KK      ",
+      "                "
+    ],
+    nightowl: [
+      "                ",
+      "       YY       ",
+      "      YYYY      ",
+      "     KYYYYK     ",
+      "    KXXYYXXK    ",
+      "   KXXOXXOXXK   ",
+      "   KXXKXXKXXK   ",
+      "    KXXXXXXK    ",
+      "  KXXXXXXXXXXK  ",
+      " KXXXXXYXXXXXK  ",
+      "KXXXXXYYXXXXXK  ",
+      " KXXXXYXXXXXXK  ",
+      "  KXXXYXXXXXK   ",
+      "   KKXKKXKKK    ",
+      "    KK  KK      ",
+      "                "
+    ],
+    weekend: [
+      "                ",
+      "       YY       ",
+      "      YYYY      ",
+      "     KYYYYK     ",
+      "    KXXYYXXK    ",
+      "   KXXKKKKXXK   ",
+      "   KXXXXXXXXK   ",
+      "    KXXXXXXK    ",
+      "  KXXXXXXXXXXK  ",
+      " KXXXXXYXXXXXK  ",
+      "KXXXXXYYXXXXXK  ",
+      " KXXXXYXXXXXXK  ",
+      "  KXXXYXXXXXK   ",
+      "   KKXKKXKKK    ",
+      "    KK  KK      ",
+      "                "
+    ]
+  },
+
+  // 🦊 KITSUNE: 9-Tailed Fox Spirit (16x16) - 10+ active repos
+  kitsune: {
+    normal: [
+      " KK KK KK KK KK ",
+      "KXXKXXKXXKXXKXXK",
+      " KXKXKXKXKXKXK  ",
+      "  KXKXKXKXKXK   ",
+      "   KXXXXXK      ",
+      "   KXXXXXXK     ",
+      "  KXXWXXWXXK    ",
+      "  KXXKXXKXXK    ",
+      "  KXXXXXXXXXXK  ",
+      "  KXXKXXXXKXXK  ",
+      "   KXXXXXXXXK   ",
+      "    KXXXXXXK    ",
+      "   KXK    KXK   ",
+      "  KXK      KXK  ",
+      "  KK        KK  ",
+      "                "
+    ],
+    sleeping: [
+      " KK KK KK KK KK ",
+      "KXXKXXKXXKXXKXXK",
+      " KXKXKXKXKXKXK  ",
+      "  KXKXKXKXKXK   ",
+      "   KXXXXXK      ",
+      "   KXXXXXXK     ",
+      "  KXXKKKKXXK    ",
+      "  KXXXXXXXXK    ",
+      "  KXXXXXXXXXXK  ",
+      "  KXXXXXXXXXXK  ",
+      "   KXXXXXXXXK   ",
+      "    KXXXXXXK    ",
+      "     KKKKKK     ",
+      "                ",
+      "                ",
+      "                "
+    ],
+    ghost: [
+      " K  K  K  K  K  ",
+      "K XK XK XK XK X ",
+      " K K K K K K K  ",
+      "  K K K K K K   ",
+      "   K     K      ",
+      "   K      K     ",
+      "  K  K  K  K    ",
+      "  K  K  K  K    ",
+      "  K          K  ",
+      "  K  K    K  K  ",
+      "   K        K   ",
+      "    K      K    ",
+      "                ",
+      "                ",
+      "                ",
+      "                "
+    ],
+    hyper: [
+      " KK KK KK KK KK ",
+      "KXXKXXKXXKXXKXXK",
+      " KRKRKRKRKRKRK  ",
+      "  KXKXKXKXKXK   ",
+      "   KXXXXXK      ",
+      "   KXXXXXXK     ",
+      "  KXXRXXRXXK    ",
+      "  KXXKXXKXXK    ",
+      "  KXXXXXXXXXXK  ",
+      "  KXXKXXXXKXXK  ",
+      "   KXXXXXXXXK   ",
+      "    KXXXXXXK  R ",
+      "   KXK    KXK   ",
+      "  KXK      KXK  ",
+      "  KK        KK  ",
+      "                "
+    ],
+    nightowl: [
+      " KK KK KK KK KK ",
+      "KXXKXXKXXKXXKXXK",
+      " KXKXKXKXKXKXK  ",
+      "  KXKXKXKXKXK   ",
+      "   KXXXXXK      ",
+      "   KXXXXXXK     ",
+      "  KXXOXXOXXK    ",
+      "  KXXKXXKXXK    ",
+      "  KXXXXXXXXXXK  ",
+      "  KXXKXXXXKXXK  ",
+      "   KXXXXXXXXK   ",
+      "    KXXXXXXK    ",
+      "   KXK    KXK   ",
+      "  KXK      KXK  ",
+      "  KK        KK  ",
+      "                "
+    ],
+    weekend: [
+      " KK KK KK KK KK ",
+      "KXXKXXKXXKXXKXXK",
+      " KXKXKXKXKXKXK  ",
+      "  KXKXKXKXKXK   ",
+      "   KXXXXXK      ",
+      "   KXXXXXXK     ",
+      "  KXXKKKKXXK    ",
+      "  KXXXXXXXXK    ",
+      "  KXXXXXXXXXXK  ",
+      "  KXXXXXXXXXXK  ",
+      "   KXXXXXXXXK   ",
+      "    KXXXXXXK    ",
+      "   KXK    KXK   ",
+      "  KXK      KXK  ",
+      "  KK        KK  ",
+      "                "
+    ]
+  },
+
+  // 🌊 LEVIATHAN: Deep Sea Monster (16x16) - 50,000+ lines of code
+  leviathan: {
+    normal: [
+      "     KKKKKK     ",
+      "   KKXXXXXXKK   ",
+      "  KXXXXXXXXXXK  ",
+      " KXXWXXXXXXWXXK ",
+      " KXXKXXXXXXKXXK ",
+      "KXXXXXXXXXXXXXXK",
+      "KXXXXXKKKXXXXXK ",
+      " KXXXK   KXXXK  ",
+      "  KXXK   KXXK   ",
+      " KXXXK   KXXXK  ",
+      "KXXXXK   KXXXXK ",
+      " KXXXXXXXXXXXK  ",
+      "  KXXXXXXXXXK   ",
+      "   KXXXXXXXK    ",
+      "    KKKKKKK     ",
+      "                "
+    ],
+    sleeping: [
+      "     KKKKKK     ",
+      "   KKXXXXXXKK   ",
+      "  KXXXXXXXXXXK  ",
+      " KXXKKXXXXKKXXK ",
+      " KXXXXXXXXXXXX K",
+      "KXXXXXXXXXXXXXXK",
+      "KXXXXXKKKXXXXXK ",
+      " KXXXK   KXXXK  ",
+      "  KXXK   KXXK   ",
+      " KXXXK   KXXXK  ",
+      "KXXXXK   KXXXXK ",
+      " KXXXXXXXXXXXK  ",
+      "  KXXXXXXXXXK   ",
+      "   KXXXXXXXK    ",
+      "    KKKKKKK     ",
+      "                "
+    ],
+    ghost: [
+      "     K K K      ",
+      "   K       K    ",
+      "  K          K  ",
+      " K  K      K  K ",
+      " K  K      K  K ",
+      "K              K",
+      "K     K K     K ",
+      " K   K   K   K  ",
+      "  K  K   K  K   ",
+      " K   K   K   K  ",
+      "K    K   K    K ",
+      " K           K  ",
+      "  K         K   ",
+      "   K       K    ",
+      "    K K K K     ",
+      "                "
+    ],
+    hyper: [
+      "     KKKKKK     ",
+      "   KKXXXXXXKK   ",
+      "  KXXXXXXXXXXK  ",
+      " KXXRXXXXXXRXXK ",
+      " KXXKXXXXXXKXXK ",
+      "KXXXXXXXXXXXXXXK",
+      "KXXXXXKKKXXXXXK ",
+      " KXXXK R KXXXK  ",
+      "  KXXK   KXXK   ",
+      " KXXXK   KXXXK  ",
+      "KXXXXK   KXXXXK ",
+      " KXXXXXXXXXXXK  ",
+      "  KXXXXXXXXXK R ",
+      "   KXXXXXXXK    ",
+      "    KKKKKKK     ",
+      "                "
+    ],
+    nightowl: [
+      "     KKKKKK     ",
+      "   KKXXXXXXKK   ",
+      "  KXXXXXXXXXXK  ",
+      " KXXOXXXXXXOXXK ",
+      " KXXKXXXXXXKXXK ",
+      "KXXXXXXXXXXXXXXK",
+      "KXXXXXKKKXXXXXK ",
+      " KXXXK   KXXXK  ",
+      "  KXXK   KXXK   ",
+      " KXXXK   KXXXK  ",
+      "KXXXXK   KXXXXK ",
+      " KXXXXXXXXXXXK  ",
+      "  KXXXXXXXXXK   ",
+      "   KXXXXXXXK    ",
+      "    KKKKKKK     ",
+      "                "
+    ],
+    weekend: [
+      "     KKKKKK     ",
+      "   KKXXXXXXKK   ",
+      "  KXXXXXXXXXXK  ",
+      " KXXKKXXXXKKXXK ",
+      " KXXXXXXXXXXXX K",
+      "KXXXXXXXXXXXXXXK",
+      "KXXXXXKKKXXXXXK ",
+      " KXXXK   KXXXK  ",
+      "  KXXK   KXXK   ",
+      " KXXXK   KXXXK  ",
+      "KXXXXK   KXXXXK ",
+      " KXXXXXXXXXXXK  ",
+      "  KXXXXXXXXXK   ",
+      "   KXXXXXXXK    ",
+      "    KKKKKKK     ",
+      "                "
+    ]
+  },
+
+  // ⭐ CELESTIAL: Star Deer (16x16) - 50+ GitHub stars received
+  celestial: {
+    normal: [
+      "    Y      Y    ",
+      "   YXY    YXY   ",
+      "    Y  KK  Y    ",
+      "      KXXK      ",
+      "     KXXXXK     ",
+      "    KXXWWXXK    ",
+      "    KXXKKXXK    ",
+      "    KXXXXXXK    ",
+      "   KXXXXXXXXK   ",
+      "  KXXXXXXXXXXK  ",
+      " KYXXXXXXXXXXYK ",
+      "  KXXXXXXXXXXK  ",
+      "   KXK    KXK   ",
+      "   KXK    KXK   ",
+      "    K      K    ",
+      "                "
+    ],
+    sleeping: [
+      "    Y      Y    ",
+      "   YXY    YXY   ",
+      "    Y  KK  Y    ",
+      "      KXXK      ",
+      "     KXXXXK     ",
+      "    KXXKKXXK    ",
+      "    KXXXXXXXXK  ",
+      "    KXXXXXXK    ",
+      "   KXXXXXXXXK   ",
+      "  KXXXXXXXXXXK  ",
+      " KYXXXXXXXXXXYK ",
+      "  KXXXXXXXXXXK  ",
+      "   KXXXXXXXXK   ",
+      "    KKKKKKKK    ",
+      "                ",
+      "                "
+    ],
+    ghost: [
+      "    Y      Y    ",
+      "   Y Y    Y Y   ",
+      "    Y  K   Y    ",
+      "      K  K      ",
+      "     K    K     ",
+      "    K  K  K K   ",
+      "    K  K  K K   ",
+      "    K      K    ",
+      "   K        K   ",
+      "  K          K  ",
+      " KY          YK ",
+      "  K          K  ",
+      "                ",
+      "                ",
+      "                ",
+      "                "
+    ],
+    hyper: [
+      "   RY      YR   ",
+      "   YXY    YXY   ",
+      "    Y  KK  Y    ",
+      "      KXXK      ",
+      "     KXXXXK     ",
+      "    KXXRRXXK    ",
+      "    KXXKKXXK    ",
+      "    KXXXXXXK    ",
+      "   KXXXXXXXXK   ",
+      "  KXXXXXXXXXXK  ",
+      " KYXXXXXXXXXXYK ",
+      "  KXXXXXXXXXXK  ",
+      "   KXK    KXK R ",
+      "   KXK    KXK   ",
+      "    K      K    ",
+      "                "
+    ],
+    nightowl: [
+      "    Y      Y    ",
+      "   YXY    YXY   ",
+      "    Y  KK  Y    ",
+      "      KXXK      ",
+      "     KXXXXK     ",
+      "    KXXOOXXK    ",
+      "    KXXKKXXK    ",
+      "    KXXXXXXK    ",
+      "   KXXXXXXXXK   ",
+      "  KXXXXXXXXXXK  ",
+      " KYXXXXXXXXXXYK ",
+      "  KXXXXXXXXXXK  ",
+      "   KXK    KXK   ",
+      "   KXK    KXK   ",
+      "    K      K    ",
+      "                "
+    ],
+    weekend: [
+      "    Y      Y    ",
+      "   YXY    YXY   ",
+      "    Y  KK  Y    ",
+      "      KXXK      ",
+      "     KXXXXK     ",
+      "    KXXKKXXK    ",
+      "    KXXXXXXXXK  ",
+      "    KXXXXXXK    ",
+      "   KXXXXXXXXK   ",
+      "  KXXXXXXXXXXK  ",
+      " KYXXXXXXXXXXYK ",
+      "  KXXXXXXXXXXK  ",
+      "   KXK    KXK   ",
+      "   KXK    KXK   ",
+      "    K      K    ",
+      "                "
+    ]
+  }
+};
+
 const SPRITES = {
+  // 🦀 CRAB: Rust mascot - Improved pixel art with better claws & shading
   crab: {
     normal: [
       "                ",
-      "   K        K   ",
-      "  KXK      KXK  ",
-      " KXXXK    KXXXK ",
-      " KXXXXK  KXXXXK ",
-      "  KXXXXKKXXXXK  ",
-      "   KXXXXXXXXXK  ",
+      "  KK        KK  ",
+      " KXXK      KXXK ",
+      "KXXXXK    KXXXXK",
+      " KXXK      KXXK ",
+      "  KK KKKKKK KK  ",
+      "    KXXXXXXK    ",
+      "   KXXXXXXXXK   ",
+      "  KXXWKXXKWXXK  ",
+      "  KXXKKXXKKXXK  ",
       "  KXXXXXXXXXXK  ",
-      " KXXXWKXXKWXXXK ",
-      " KXXXKKXXKKXXXK ",
-      " KXXXXXXXXXXXXK ",
-      "  KXXKXXXXKXXK  ",
-      "   KK KKKK KK   ",
-      "                ",
-      "                ",
+      "   KXXKKKXXXK   ",
+      "    KXXXXXXK    ",
+      "   KK  KK  KK   ",
+      "  K   K  K   K  ",
       "                "
     ],
     sleep: [
       "                ",
-      "                ",
-      "   K        K   ",
-      "  KXK      KXK  ",
-      " KXXXK    KXXXK ",
-      " KXXXXKKKKXXXXK ",
+      "  KK        KK  ",
+      " KXXK      KXXK ",
+      "KXXXXK    KXXXXK",
+      " KXXK      KXXK ",
+      "  KK KKKKKK KK  ",
+      "    KXXXXXXK    ",
+      "   KXXXXXXXXK   ",
+      "  KXXKKXXKKXXK  ",
       "  KXXXXXXXXXXK  ",
       "  KXXXXXXXXXXK  ",
-      " KXXXKKXXKKXXXK ",
-      " KXXXXXXXXXXXXK ",
-      " KXXXXXXXXXXXXK ",
-      "  KXXKXXXXKXXK  ",
-      "   KK KKKK KK   ",
-      "                ",
-      "                ",
+      "   KXXXXXXXXK   ",
+      "    KXXXXXXK    ",
+      "   KK  KK  KK   ",
+      "  K   K  K   K  ",
       "                "
     ],
     ghost: [
       "                ",
-      "   K        K   ",
-      "  K K      K K  ",
-      " K   K    K   K ",
-      " K    K  K    K ",
-      "  K    KK    K  ",
-      "   KXXXXXXXXXK  ",
+      "  K          K  ",
+      " K K        K K ",
+      "K   K      K   K",
+      " K K        K K ",
+      "  K  KKKKKK  K  ",
+      "    KXXXXXXK    ",
+      "   KXXXXXXXXK   ",
+      "  KXXKKXXKKXXK  ",
       "  KXXXXXXXXXXK  ",
-      " KXXXKKXXKKXXXK ",
-      " KXXXKKXXKKXXXK ",
-      " KXXXXXXXXXXXXK ",
-      "  K  K    K  K  ",
-      "                ",
+      "  KXXXXXXXXXXK  ",
+      "   K  K  K  K   ",
+      "    K      K    ",
       "                ",
       "                ",
       "                "
     ],
     hyper: [
-      "                ",
-      "   K        K   ",
-      "  KXK      KXK  ",
-      " KXXXK    KXXXK ",
-      " KXXXXK  KXXXXK ",
-      "  KXXXXKKXXXXK  ",
-      "   KXXXXXXXXXK  ",
+      "      RRR       ",
+      "  KK        KK  ",
+      " KXXK      KXXK ",
+      "KXXXXK    KXXXXK",
+      " KXXK      KXXK ",
+      "  KK KKKKKK KK  ",
+      "    KXXXXXXK    ",
+      "   KXXXXXXXXK   ",
+      "  KXXRKXXKRXXK  ",
+      "  KXXKKXXKKXXK  ",
       "  KXXXXXXXXXXK  ",
-      " KXXXRKXXKRXXXK ",
-      " KXXXKKXXKKXXXK ",
-      " KXXXXXXXXXXXXK ",
-      "  KXXKXXXXKXXK  ",
-      "   KK KRRK KK   ",
-      "                ",
-      "                ",
+      "   KXXRRRXXXK   ",
+      "    KXXXXXXK    ",
+      "   KK  KK  KK   ",
+      "  K   K  K   K  ",
       "                "
     ],
     nightowl: [
       "                ",
-      "   K        K   ",
-      "  KXK      KXK  ",
-      " KXXXK    KXXXK ",
-      " KXXXXK  KXXXXK ",
-      "  KXXXXKKXXXXK  ",
-      "   KXXXXXXXXXK  ",
+      "  KK        KK  ",
+      " KXXK      KXXK ",
+      "KXXXXK    KXXXXK",
+      " KXXK      KXXK ",
+      "  KK KKKKKK KK  ",
+      "    KXXXXXXK    ",
+      "   KXXXXXXXXK   ",
+      "  KXXOKXXKOXXK  ",
+      "  KXXOKXXKOXXK  ",
       "  KXXXXXXXXXXK  ",
-      " KXXXOKXXKOXXXK ",
-      " KXXXOKXXKOXXXK ",
-      " KXXXXXXXXXXXXK ",
-      "  KXXKXXXXKXXK  ",
-      "   KK KKKK KK   ",
-      "                ",
-      "                ",
+      "   KXXXXXXXXK   ",
+      "    KXXXXXXK    ",
+      "   KK  KK  KK   ",
+      "  K   K  K   K  ",
       "                "
     ],
     weekend: [
       "                ",
-      "   K        K   ",
-      "  KXK      KXK  ",
-      " KXXXK    KXXXK ",
-      " KXXXXK  KXXXXK ",
-      "  KXXXXKKXXXXK  ",
-      "   KXXXXXXXXXK  ",
+      "  KK        KK  ",
+      " KXXK      KXXK ",
+      "KXXXXK    KXXXXK",
+      " KXXK      KXXK ",
+      "  KK KKKKKK KK  ",
+      "    KXXXXXXK    ",
+      "   KXXXXXXXXK   ",
+      "  KXXKKXXKKXXK  ",
       "  KXXXXXXXXXXK  ",
-      " KXXXKKXXKKXXXK ",
-      " KXXXKKXXKKXXXK ",
-      " KXXXXXXXXXXXXK ",
-      "  KXXKXXXXKXXK  ",
-      "   KK KKKK KK   ",
-      "                ",
-      "                ",
+      "  KXXXXXXXXXXK  ",
+      "   KXXXXXXXXK   ",
+      "    KXXXXXXK    ",
+      "   KK  KK  KK   ",
+      "  K   K  K   K  ",
       "                "
     ]
   },
+  // 🐘 ELEPHANT: PHP mascot - Improved with trunk & big ears
   elephant: {
     normal: [
       "                ",
-      "      KKKKKK    ",
-      "     KXXXXXXK   ",
-      "    KXXXXXXXXK  ",
-      "   KXXXXXXXXXXK ",
-      "  KXXXWKXXKWXXXK",
-      "  KXXXKKXXKKXXXK",
-      " KXXXXXXXXXXXXXXK",
-      " KXXXXXXXXXXXXXXK",
-      " KXXXXXXXXXXXXXXK",
-      "  KXXKXXXXXXKXXK ",
-      "  KXXK      KXXK ",
-      "   KK        KK  ",
-      "                ",
+      "  KKKKK  KKKKK  ",
+      " KXXXXXKKXXXXXK ",
+      " KXXXXXXKXXXXXK ",
+      "  KXXXXXXXXXXK  ",
+      "   KXXXXXXXXK   ",
+      "  KXXWKXXKWXXK  ",
+      "  KXXKKXXKKXXK  ",
+      "  KXXXXXXXXXXK  ",
+      " KXXXK    KXXXK ",
+      " KXXK      KXXK ",
+      " KXK        KXK ",
+      " KXK        KXK ",
+      "  K          K  ",
       "                ",
       "                "
     ],
     sleep: [
       "                ",
-      "      KKKKKK    ",
-      "     KXXXXXXK   ",
-      "    KXXXXXXXXK  ",
-      "   KXXXXXXXXXXK ",
-      "  KXXXKKXXKKXXXK",
-      "  KXXXXXXXXXXXX K",
-      " KXXXXXXXXXXXXXXK",
-      " KXXXXXXXXXXXXXXK",
-      " KXXXXXXXXXXXXXXK",
-      "  KXXKXXXXXXKXXK ",
-      "  KXXK      KXXK ",
-      "   KK        KK  ",
-      "                ",
+      "  KKKKK  KKKKK  ",
+      " KXXXXXKKXXXXXK ",
+      " KXXXXXXKXXXXXK ",
+      "  KXXXXXXXXXXK  ",
+      "   KXXXXXXXXK   ",
+      "  KXXKKXXKKXXK  ",
+      "  KXXXXXXXXXXK  ",
+      "  KXXXXXXXXXXK  ",
+      " KXXXK    KXXXK ",
+      " KXXK      KXXK ",
+      " KXK        KXK ",
+      " KXK        KXK ",
+      "  K          K  ",
       "                ",
       "                "
     ],
     ghost: [
       "                ",
-      "      KKKKKK    ",
-      "     KXXXXXXK   ",
-      "    KXXXXXXXXK  ",
-      "   KXXXXXXXXXXK ",
-      "  KXXXK KX K XXK",
-      "  KXXXXXXXXXXXX K",
-      " KXXXXXXXXXXXXXXK",
-      " KXXXXXXXXXXXXXXK",
-      " KXXXXXXXXXXXXXXK",
-      "  K  K      K  K ",
+      "  K K K  K K K  ",
+      " K     KK     K ",
+      " K      K     K ",
+      "  K          K  ",
+      "   KXXXXXXXXK   ",
+      "  KXXKKXXKKXXK  ",
+      "  KXXXXXXXXXXK  ",
+      "  KXXXXXXXXXXK  ",
+      " K  K      K  K ",
+      "                ",
       "                ",
       "                ",
       "                ",
@@ -786,75 +1367,76 @@ const SPRITES = {
       "                "
     ],
     hyper: [
-      "                ",
-      "      KKKKKK    ",
-      "     KXXXXXXK   ",
-      "    KXXXXXXXXK  ",
-      "   KXXXXXXXXXXK ",
-      "  KXXXRKXXKRXXXK",
-      "  KXXXKKXXKKXXXK",
-      " KXXXXXXXXXXXXXXK",
-      " KXXXXXXXXXXXXXXK",
-      " KXXXXXXXXXXXXXXK",
-      "  KXXKXXXXXXKXXK ",
-      "  KXXK      KXXK ",
-      "   KK   RR   KK  ",
-      "                ",
+      "     RRR        ",
+      "  KKKKK  KKKKK  ",
+      " KXXXXXKKXXXXXK ",
+      " KXXXXXXKXXXXXK ",
+      "  KXXXXXXXXXXK  ",
+      "   KXXXXXXXXK   ",
+      "  KXXRKXXKRXXK  ",
+      "  KXXKKXXKKXXK  ",
+      "  KXXXXXXXXXXK  ",
+      " KXXXK    KXXXK ",
+      " KXXK      KXXK ",
+      " KXK        KXK ",
+      " KXK   RR   KXK ",
+      "  K          K  ",
       "                ",
       "                "
     ],
     nightowl: [
       "                ",
-      "      KKKKKK    ",
-      "     KXXXXXXK   ",
-      "    KXXXXXXXXK  ",
-      "   KXXXXXXXXXXK ",
-      "  KXXXOKXXKOXXXK",
-      "  KXXXOKXXKOXXXK",
-      " KXXXXXXXXXXXXXXK",
-      " KXXXXXXXXXXXXXXK",
-      " KXXXXXXXXXXXXXXK",
-      "  KXXKXXXXXXKXXK ",
-      "  KXXK      KXXK ",
-      "   KK        KK  ",
-      "                ",
+      "  KKKKK  KKKKK  ",
+      " KXXXXXKKXXXXXK ",
+      " KXXXXXXKXXXXXK ",
+      "  KXXXXXXXXXXK  ",
+      "   KXXXXXXXXK   ",
+      "  KXXOKXXKOXXK  ",
+      "  KXXOKXXKOXXK  ",
+      "  KXXXXXXXXXXK  ",
+      " KXXXK    KXXXK ",
+      " KXXK      KXXK ",
+      " KXK        KXK ",
+      " KXK        KXK ",
+      "  K          K  ",
       "                ",
       "                "
     ],
     weekend: [
       "                ",
-      "      KKKKKK    ",
-      "     KXXXXXXK   ",
-      "    KXXXXXXXXK  ",
-      "   KXXXXXXXXXXK ",
-      "  KXXXKKXXKKXXXK",
-      "  KXXXKKXXKKXXXK",
-      " KXXXXXXXXXXXXXXK",
-      " KXXXXXXXXXXXXXXK",
-      " KXXXXXXXXXXXXXXK",
-      "  KXXKXXXXXXKXXK ",
-      "  KXXK      KXXK ",
-      "   KK        KK  ",
-      "                ",
+      "  KKKKK  KKKKK  ",
+      " KXXXXXKKXXXXXK ",
+      " KXXXXXXKXXXXXK ",
+      "  KXXXXXXXXXXK  ",
+      "   KXXXXXXXXK   ",
+      "  KXXKKXXKKXXK  ",
+      "  KXXXXXXXXXXK  ",
+      "  KXXXXXXXXXXK  ",
+      " KXXXK    KXXXK ",
+      " KXXK      KXXK ",
+      " KXK        KXK ",
+      " KXK        KXK ",
+      "  K          K  ",
       "                ",
       "                "
     ]
   },
+  // ☕ COFFEE: Java mascot - Improved steaming mug with face
   coffee: {
     normal: [
-      "      K  K      ",
-      "      W  W      ",
-      "                ",
+      "     KK  KK     ",
+      "      WW WW     ",
+      "       W W      ",
       "    KKKKKKKKK   ",
       "   KXXXXXXXXXK  ",
-      "   KXXXXXXXXXKK ",
-      "   KXXXWWXXXXK K",
-      "   KXXXXXXXXXKK ",
-      "   KXXXXXXXXXK  ",
-      "    KXXXXXXXXK  ",
-      "     KKKKKKKK   ",
-      "    KKKKKKKKKKK ",
-      "                ",
+      "   KXXXXXXXXXK K",
+      "  KXXWKXXKWXXXKK",
+      "  KXXKKXXKKXXK K",
+      "  KXXXXXXXXXK K ",
+      "  KXXK    KXXK  ",
+      "   KXXXXXXXXK   ",
+      "    KKKKKKKK    ",
+      "   KKKKKKKKKKK  ",
       "                ",
       "                ",
       "                "
@@ -865,235 +1447,237 @@ const SPRITES = {
       "                ",
       "    KKKKKKKKK   ",
       "   KXXXXXXXXXK  ",
-      "   KXXXXXXXXXKK ",
-      "   KXXXKKXXXXK K",
-      "   KXXXXXXXXXKK ",
-      "   KXXXXXXXXXK  ",
-      "    KXXXXXXXXK  ",
-      "     KKKKKKKK   ",
-      "    KKKKKKKKKKK ",
-      "                ",
+      "   KXXXXXXXXXK K",
+      "  KXXKKXXKKXXXKK",
+      "  KXXXXXXXXXXK K",
+      "  KXXXXXXXXXK K ",
+      "  KXXK    KXXK  ",
+      "   KXXXXXXXXK   ",
+      "    KKKKKKKK    ",
+      "   KKKKKKKKKKK  ",
       "                ",
       "                ",
       "                "
     ],
     ghost: [
-      "      K  K      ",
+      "     K    K     ",
       "      K  K      ",
       "                ",
       "    KKKKKKKKK   ",
       "   KXXXXXXXXXK  ",
-      "   KXXXK KXXXKK ",
-      "   KXXXK KXXXK K",
-      "   KXXXXXXXXXKK ",
-      "   KXXXXXXXXXK  ",
-      "    KXXXXXXXXK  ",
-      "     KKKKKKKK   ",
-      "    K K K K K K ",
+      "   KXXXXXXXXXK K",
+      "  KXXKKXXKKXXXKK",
+      "  KXXXXXXXXXXK K",
+      "  KXXXXXXXXXK K ",
+      "  K K      K K  ",
+      "   K        K   ",
+      "                ",
       "                ",
       "                ",
       "                ",
       "                "
     ],
     hyper: [
-      "      K  K      ",
-      "      W  W      ",
-      "                ",
+      "     KK  KK     ",
+      "      WW WW     ",
+      "       W W      ",
       "    KKKKKKKKK   ",
       "   KXXXXXXXXXK  ",
-      "   KXXXXXXXXXKK ",
-      "   KXXXRRXXXXK K",
-      "   KXXXXXXXXXKK ",
-      "   KXXXXXXXXXK  ",
-      "    KXXXXXXXXK  ",
-      "     KKKKKKKK   ",
-      "    KKKKKKKKKKK ",
-      "                ",
+      "   KXXXXXXXXXK K",
+      "  KXXRKXXKRXXXKK",
+      "  KXXKKXXKKXXK K",
+      "  KXXRRRRRXXXK  ",
+      "  KXXK    KXXK  ",
+      "   KXXXXXXXXK   ",
+      "    KKKKKKKK    ",
+      "   KKKKKKKKKKK  ",
       "                ",
       "                ",
       "                "
     ],
     nightowl: [
-      "      K  K      ",
-      "      W  W      ",
-      "                ",
+      "     KK  KK     ",
+      "      WW WW     ",
+      "       W W      ",
       "    KKKKKKKKK   ",
       "   KXXXXXXXXXK  ",
-      "   KXXXXXXXXXKK ",
-      "   KXXXOOXXXXK K",
-      "   KXXXOOXXXXKK ",
-      "   KXXXXXXXXXK  ",
-      "    KXXXXXXXXK  ",
-      "     KKKKKKKK   ",
-      "    KKKKKKKKKKK ",
-      "                ",
+      "   KXXXXXXXXXK K",
+      "  KXXOKXXKOXXXKK",
+      "  KXXOKXXKOXXK K",
+      "  KXXXXXXXXXK K ",
+      "  KXXK    KXXK  ",
+      "   KXXXXXXXXK   ",
+      "    KKKKKKKK    ",
+      "   KKKKKKKKKKK  ",
       "                ",
       "                ",
       "                "
     ],
     weekend: [
-      "      K  K      ",
-      "      W  W      ",
-      "                ",
+      "     KK  KK     ",
+      "      WW WW     ",
+      "       W W      ",
       "    KKKKKKKKK   ",
       "   KXXXXXXXXXK  ",
-      "   KXXXXXXXXXKK ",
-      "   KXXKKKKKXXK K",
-      "   KXXXXXXXXXKK ",
-      "   KXXXXXXXXXK  ",
-      "    KXXXXXXXXK  ",
-      "     KKKKKKKK   ",
-      "    KKKKKKKKKKK ",
-      "                ",
+      "   KXXXXXXXXXK K",
+      "  KXXKKXXKKXXXKK",
+      "  KXXXXXXXXXXK K",
+      "  KXXXXXXXXXK K ",
+      "  KXXK    KXXK  ",
+      "   KXXXXXXXXK   ",
+      "    KKKKKKKK    ",
+      "   KKKKKKKKKKK  ",
       "                ",
       "                ",
       "                "
     ]
   },
+  // 🐦 BIRD: Swift mascot - Improved with wing detail & better shape
   bird: {
     normal: [
       "                ",
-      "        KKKKKK  ",
-      "       KXXXXXXK ",
-      "      KXXXXXXXXK",
-      "   K KXXXXXXXXXK",
-      "  KXKXXXWXXKXXXK",
-      " KXXXXXXXXXXXXXK",
-      " KXXXXXXXXXXXXK ",
-      "  KXXXXXXXXXXK  ",
-      "   KXXXXXXXXK   ",
-      "    KXXXXXXK    ",
-      "     KXXXK      ",
-      "      KKK       ",
-      "                ",
+      "       KKKKKK   ",
+      "      KXXXXXXK  ",
+      "     KXXXXXXXXK ",
+      "   KKXXXXXXXXXK ",
+      "  KOKKXWKXXXXXK ",
+      " KOOOKXXKXXXXXK ",
+      " KOOOKXXXXXXXXXK",
+      "  KKXXXXXXXXXXK ",
+      "   KXXXXXXXXXXK ",
+      "    KXXXXXXXXK  ",
+      "     KXXXXXXK   ",
+      "      KKOOKK    ",
+      "       KO OK    ",
       "                ",
       "                "
     ],
     sleep: [
       "                ",
-      "        KKKKKK  ",
-      "       KXXXXXXK ",
-      "      KXXXXXXXXK",
-      "   K KXXXXXXXXXK",
-      "  KXKXXXKXXKXXXK",
-      " KXXXXXXXXXXXXXK",
-      " KXXXXXXXXXXXXK ",
-      "  KXXXXXXXXXXK  ",
-      "   KXXXXXXXXK   ",
-      "    KXXXXXXK    ",
-      "     KXXXK      ",
-      "      KKK       ",
-      "                ",
+      "       KKKKKK   ",
+      "      KXXXXXXK  ",
+      "     KXXXXXXXXK ",
+      "   KKXXXXXXXXXK ",
+      "  KOKKXKKXXXXXK ",
+      " KOOOKXXXXXXXXXK",
+      " KOOOKXXXXXXXXXK",
+      "  KKXXXXXXXXXXK ",
+      "   KXXXXXXXXXXK ",
+      "    KXXXXXXXXK  ",
+      "     KXXXXXXK   ",
+      "      KKOOKK    ",
+      "       KO OK    ",
       "                ",
       "                "
     ],
     ghost: [
       "                ",
-      "        KKKKKK  ",
-      "       KXXXXXXK ",
-      "      KXXXXXXXXK",
-      "   K KXXXXXXXXXK",
-      "  KXKXXXKXXKXXXK",
-      " KXXXXXXXXXXXXXK",
-      " KXXXXXXXXXXXXK ",
-      "  KXXXXXXXXXXK  ",
-      "   KXXXXXXXXK   ",
-      "    KXXXXXXK    ",
-      "     K   K      ",
+      "       KKKKKK   ",
+      "      KXXXXXXK  ",
+      "     KXXXXXXXXK ",
+      "   KKXXXXXXXXXK ",
+      "  K KKX KXXXXXK ",
+      " K   KXXXXXXXXXK",
+      " K   KXXXXXXXXXK",
+      "  KKXXXXXXXXXXK ",
+      "   KXXXXXXXXXXK ",
+      "    KXXXXXXXXK  ",
+      "     K  K  K    ",
       "                ",
       "                ",
       "                ",
       "                "
     ],
     hyper: [
-      "                ",
-      "        KKKKKK  ",
-      "       KXXXXXXK ",
-      "      KXXXXXXXXK",
-      "   K KXXXXXXXXXK",
-      "  KXKXXXRXXKXXXK",
-      " KXXXXXXXXXXXXXK",
-      " KXXXXXXXXXXXXK ",
-      "  KXXXXXXXXXXK  ",
-      "   KXXXXXXXXK   ",
-      "    KXXXXXXK    ",
-      "     KXXXK      ",
-      "      KRK       ",
-      "                ",
+      "        RRR     ",
+      "       KKKKKK   ",
+      "      KXXXXXXK  ",
+      "     KXXXXXXXXK ",
+      "   KKXXXXXXXXXK ",
+      "  KOKKXRKXXXXXK ",
+      " KOOOKXXKXXXXXK ",
+      " KOOOKXXXXXXXXXK",
+      "  KKXXXXXXXXXXK ",
+      "   KXXXXXXXXXXK ",
+      "    KXXXXXXXXK  ",
+      "     KXXXXXXK   ",
+      "      KKOOKK    ",
+      "       KO OK    ",
       "                ",
       "                "
     ],
     nightowl: [
       "                ",
-      "        KKKKKK  ",
-      "       KXXXXXXK ",
-      "      KXXXXXXXXK",
-      "   K KXXXXXXXXXK",
-      "  KXKXXXOXXKXXXK",
-      " KXXXXOXXXXXXXK ",
-      " KXXXXXXXXXXXXK ",
-      "  KXXXXXXXXXXK  ",
-      "   KXXXXXXXXK   ",
-      "    KXXXXXXK    ",
-      "     KXXXK      ",
-      "      KKK       ",
-      "                ",
+      "       KKKKKK   ",
+      "      KXXXXXXK  ",
+      "     KXXXXXXXXK ",
+      "   KKXXXXXXXXXK ",
+      "  KOKKXOKXXXXXK ",
+      " KOOOKXOKXXXXXK ",
+      " KOOOKXXXXXXXXXK",
+      "  KKXXXXXXXXXXK ",
+      "   KXXXXXXXXXXK ",
+      "    KXXXXXXXXK  ",
+      "     KXXXXXXK   ",
+      "      KKOOKK    ",
+      "       KO OK    ",
       "                ",
       "                "
     ],
     weekend: [
       "                ",
-      "        KKKKKK  ",
-      "       KXXXXXXK ",
-      "      KXXXXXXXXK",
-      "   K KXXXXXXXXXK",
-      "  KXKXXXKKKXKXXK",
-      " KXXXXXXXXXXXXXK",
-      " KXXXXXXXXXXXXK ",
-      "  KXXXXXXXXXXK  ",
-      "   KXXXXXXXXK   ",
-      "    KXXXXXXK    ",
-      "     KXXXK      ",
-      "      KKK       ",
-      "                ",
+      "       KKKKKK   ",
+      "      KXXXXXXK  ",
+      "     KXXXXXXXXK ",
+      "   KKXXXXXXXXXK ",
+      "  KOKKXKKXXXXXK ",
+      " KOOOKXXXXXXXXXK",
+      " KOOOKXXXXXXXXXK",
+      "  KKXXXXXXXXXXK ",
+      "   KXXXXXXXXXXK ",
+      "    KXXXXXXXXK  ",
+      "     KXXXXXXK   ",
+      "      KKOOKK    ",
+      "       KO OK    ",
       "                ",
       "                "
     ]
   },
+  // 🤖 ROBOT: C++/C# mascot - Improved with antenna & LED details
   robot: {
     normal: [
-      "       KK       ",
+      "       RR       ",
       "       KK       ",
       "    KKKKKKKK    ",
-      "   KXXXXXXXXK   ",
+      "   KXXBBXXBBXK  ",
       "  KXXXXXXXXXXK  ",
       " KXXXWWXXWWXXXK ",
-      " KXXXWWXXWWXXXK ",
+      " KXXXKKXXKKXXXK ",
       " KXXXXXXXXXXXXK ",
-      " KXXKKKKKKKKXXK ",
-      " KXXKRRRRRRKKXK ",
+      " KXXKKKKKKKXXXK ",
+      " KXXKGGGGGKXXK  ",
       "  KXXXXXXXXXXK  ",
-      "   KXXXXXXXXK   ",
-      "    KKKKKKKK    ",
-      "                ",
+      "   KXXKXXKXXK   ",
+      "   KXK    KXK   ",
+      "   KK      KK   ",
       "                ",
       "                "
     ],
     sleep: [
-      "       KK       ",
+      "                ",
       "       KK       ",
       "    KKKKKKKK    ",
-      "   KXXXXXXXXK   ",
+      "   KXXBBXXBBXK  ",
       "  KXXXXXXXXXXK  ",
-      " KXXXKKXXKKXXXK ",
       " KXXXKKXXKKXXXK ",
       " KXXXXXXXXXXXXK ",
-      " KXXKKKKKKKKXXK ",
-      " KXXK      KXXK ",
+      " KXXXXXXXXXXXXK ",
+      " KXXKKKKKKKXXXK ",
+      " KXXK     KXXK  ",
       "  KXXXXXXXXXXK  ",
-      "   KXXXXXXXXK   ",
-      "    KKKKKKKK    ",
-      "                ",
+      "   KXXKXXKXXK   ",
+      "   KXK    KXK   ",
+      "   KK      KK   ",
       "                ",
       "                "
     ],
@@ -1101,13 +1685,13 @@ const SPRITES = {
       "       KK       ",
       "       KK       ",
       "    KKKKKKKK    ",
-      "   KXXXXXXXXK   ",
+      "   KXX  XX  XK  ",
       "  KXXXXXXXXXXK  ",
-      " KXXXK KX K XXK ",
-      " KXXXK KX K XXK ",
+      " KXXXKKXXKKXXXK ",
       " KXXXXXXXXXXXXK ",
-      " KXXKKKKKKKKXXK ",
-      " KXXKRRRRRRKKXK ",
+      " KXXXXXXXXXXXXK ",
+      " KXXKKKKKKKXXXK ",
+      " KXXKGGGGGKXXK  ",
       "  K  K    K  K  ",
       "                ",
       "                ",
@@ -1116,74 +1700,75 @@ const SPRITES = {
       "                "
     ],
     hyper: [
-      "       KK       ",
+      "   RRR RR RRR   ",
       "       KK       ",
       "    KKKKKKKK    ",
-      "   KXXXXXXXXK   ",
+      "   KXXRRXXRRXK  ",
       "  KXXXXXXXXXXK  ",
       " KXXXRRXXRRXXXK ",
-      " KXXXRRXXRRXXXK ",
+      " KXXXKKXXKKXXXK ",
       " KXXXXXXXXXXXXK ",
-      " KXXKKKKKKKKXXK ",
-      " KXXKRRRRRRKKXK ",
+      " KXXKKKKKKKXXXK ",
+      " KXXKRRRRRKKXK  ",
       "  KXXXXXXXXXXK  ",
-      "   KXXXXXXXXK   ",
-      "    KKKKKKKK    ",
-      "                ",
+      "   KXXKXXKXXK   ",
+      "   KXK    KXK   ",
+      "   KK      KK   ",
       "                ",
       "                "
     ],
     nightowl: [
-      "       KK       ",
+      "       OO       ",
       "       KK       ",
       "    KKKKKKKK    ",
-      "   KXXXXXXXXK   ",
+      "   KXXOOXXOOXK  ",
       "  KXXXXXXXXXXK  ",
       " KXXXOOXXOOXXXK ",
       " KXXXOOXXOOXXXK ",
       " KXXXXXXXXXXXXK ",
-      " KXXKKKKKKKKXXK ",
-      " KXXKRRRRRRKKXK ",
+      " KXXKKKKKKKXXXK ",
+      " KXXKGGGGGKXXK  ",
       "  KXXXXXXXXXXK  ",
-      "   KXXXXXXXXK   ",
-      "    KKKKKKKK    ",
-      "                ",
+      "   KXXKXXKXXK   ",
+      "   KXK    KXK   ",
+      "   KK      KK   ",
       "                ",
       "                "
     ],
     weekend: [
-      "       KK       ",
+      "                ",
       "       KK       ",
       "    KKKKKKKK    ",
-      "   KXXXXXXXXK   ",
+      "   KXXBBXXBBXK  ",
       "  KXXXXXXXXXXK  ",
-      " KXXXKKXXKKXXXK ",
       " KXXXKKXXKKXXXK ",
       " KXXXXXXXXXXXXK ",
-      " KXXKKKKKKKKXXK ",
-      " KXXKRRRRRRKKXK ",
+      " KXXXXXXXXXXXXK ",
+      " KXXKKKKKKKXXXK ",
+      " KXXKGGGGGKXXK  ",
       "  KXXXXXXXXXXK  ",
-      "   KXXXXXXXXK   ",
-      "    KKKKKKKK    ",
-      "                ",
+      "   KXXKXXKXXK   ",
+      "   KXK    KXK   ",
+      "   KK      KK   ",
       "                ",
       "                "
     ]
   },
+  // 🐳 WHALE: Docker mascot - Improved with water spout & container boxes
   whale: {
     normal: [
-      "          B B   ",
-      "         KBKBK  ",
-      "        KBBBBBK ",
-      "       KXXXXXXK ",
-      "      KXXXXXXXK ",
-      "     KXXXXXXXXK ",
-      "   KKXXXWKXXXXXK",
-      "  KXXXXXKKXXXXXK",
-      " KXXXXXXXXXXXXXK",
+      "         BBB    ",
+      "        KBKBK   ",
+      "       KB B BK  ",
+      "    KKKKKKKKKKK ",
+      "   KXXXXXWWWWWK ",
+      "  KXXXXXWWWWWWK ",
+      " KXXWKXWWWWWWWK ",
+      " KXXKKXWWWWWWWK ",
       " KXXXXXXXXXXXXK ",
-      "  KKXXXXXXXKK   ",
-      "    KKKKKKK     ",
+      "  KXXXXXXXXXXK  ",
+      "   KKXXXXXXKK   ",
+      "     KKKKKK     ",
       "                ",
       "                ",
       "                ",
@@ -1193,32 +1778,32 @@ const SPRITES = {
       "                ",
       "                ",
       "                ",
-      "       KXXXXXXK ",
-      "      KXXXXXXXK ",
-      "     KXXXXXXXXK ",
-      "   KKXXXKKXXXXXK",
-      "  KXXXXXXXXXXXX K",
-      " KXXXXXXXXXXXXXK",
+      "    KKKKKKKKKKK ",
+      "   KXXXXXWWWWWK ",
+      "  KXXXXXWWWWWWK ",
+      " KXXKKXWWWWWWWK ",
+      " KXXXXWWWWWWWWK ",
       " KXXXXXXXXXXXXK ",
-      "  KKXXXXXXXKK   ",
-      "    KKKKKKK     ",
+      "  KXXXXXXXXXXK  ",
+      "   KKXXXXXXKK   ",
+      "     KKKKKK     ",
       "                ",
       "                ",
       "                ",
       "                "
     ],
     ghost: [
-      "          K K   ",
-      "         K K K  ",
-      "        K     K ",
-      "       KXXXXXXK ",
-      "      KXXXXXXXK ",
-      "     KXXXXXXXXK ",
-      "   KKXXXK KXXXXK",
-      "  KXXXXK KXXXXX K",
-      " KXXXXXXXXXXXXXK",
+      "         K K    ",
+      "        K K K   ",
+      "       K     K  ",
+      "    KKKKKKKKKKK ",
+      "   KXXXXXWWWWWK ",
+      "  KXXXXXWWWWWWK ",
+      " KXXK XWWWWWWWK ",
+      " KXX  XWWWWWWWK ",
       " KXXXXXXXXXXXXK ",
-      "  KK K   K KK   ",
+      "  K  K    K  K  ",
+      "                ",
       "                ",
       "                ",
       "                ",
@@ -1226,219 +1811,221 @@ const SPRITES = {
       "                "
     ],
     hyper: [
-      "          B B   ",
-      "         KBKBK  ",
-      "        KBBBBBK ",
-      "       KXXXXXXK ",
-      "      KXXXXXXXK ",
-      "     KXXXXXXXXK ",
-      "   KKXXXRKXXXXXK",
-      "  KXXXXXKKXXXXXK",
-      " KXXXXXXXXXXXXXK",
+      "    R    BBB    ",
+      "   R R  KBKBK   ",
+      "    R  KB B BK  ",
+      "    KKKKKKKKKKK ",
+      "   KXXXXXWWWWWK ",
+      "  KXXXXXWWWWWWK ",
+      " KXXRKXWWWWWWWK ",
+      " KXXKKXWWWWWWWK ",
       " KXXXXXXXXXXXXK ",
-      "  KKXXXXXXXKK   ",
-      "    KKKKKKK     ",
+      "  KXXXXXXXXXXK  ",
+      "   KKXXXXXXKK   ",
+      "     KKKKKK     ",
       "                ",
       "                ",
       "                ",
       "                "
     ],
     nightowl: [
-      "          B B   ",
-      "         KBKBK  ",
-      "        KBBBBBK ",
-      "       KXXXXXXK ",
-      "      KXXXXXXXK ",
-      "     KXXXXXXXXK ",
-      "   KKXXXOKXXXXXK",
-      "  KXXXXOXXXXXXX K",
-      " KXXXXXXXXXXXXXK",
+      "         BBB    ",
+      "        KBKBK   ",
+      "       KB B BK  ",
+      "    KKKKKKKKKKK ",
+      "   KXXXXXWWWWWK ",
+      "  KXXXXXWWWWWWK ",
+      " KXXOKXWWWWWWWK ",
+      " KXXOKXWWWWWWWK ",
       " KXXXXXXXXXXXXK ",
-      "  KKXXXXXXXKK   ",
-      "    KKKKKKK     ",
+      "  KXXXXXXXXXXK  ",
+      "   KKXXXXXXKK   ",
+      "     KKKKKK     ",
       "                ",
       "                ",
       "                ",
       "                "
     ],
     weekend: [
-      "          B B   ",
-      "         KBKBK  ",
-      "        KBBBBBK ",
-      "       KXXXXXXK ",
-      "      KXXXXXXXK ",
-      "     KXXXXXXXXK ",
-      "   KKXXXKKXXXXXK",
-      "  KXXXXXKKXXXXXK",
-      " KXXXXXXXXXXXXXK",
+      "         BBB    ",
+      "        KBKBK   ",
+      "       KB B BK  ",
+      "    KKKKKKKKKKK ",
+      "   KXXXXXWWWWWK ",
+      "  KXXXXXWWWWWWK ",
+      " KXXKKXWWWWWWWK ",
+      " KXXXXWWWWWWWWK ",
       " KXXXXXXXXXXXXK ",
-      "  KKXXXXXXXKK   ",
-      "    KKKKKKK     ",
+      "  KXXXXXXXXXXK  ",
+      "   KKXXXXXXKK   ",
+      "     KKKKKK     ",
       "                ",
       "                ",
       "                ",
       "                "
     ]
   },
+  // 💎 GEM: Ruby mascot - Improved faceted gem with sparkle
   gem: {
     normal: [
       "                ",
-      "      KKKK      ",
+      "       WW       ",
+      "      KWWK      ",
       "     KXXXXK     ",
-      "    KXXXXXXK    ",
+      "    KXWXXXXK    ",
       "   KXXWXXXXXK   ",
-      "  KXXXXXXXXXXK  ",
-      " KXXXXXXXXXXXXK ",
-      " KXXXXXXXXXXXXK ",
+      "  KXXXWXXXXXXK  ",
       "  KXXXXXXXXXXK  ",
       "   KXXXXXXXXK   ",
       "    KXXXXXXK    ",
       "     KXXXXK     ",
-      "      KKKK      ",
+      "      KXXK      ",
+      "       KK       ",
       "                ",
       "                ",
       "                "
     ],
     sleep: [
       "                ",
+      "                ",
       "      KKKK      ",
       "     KXXXXK     ",
       "    KXXXXXXK    ",
       "   KXXXXXXXXK   ",
       "  KXXXXXXXXXXK  ",
-      " KXXXXXXXXXXXXK ",
-      " KXXXXXXXXXXXXK ",
       "  KXXXXXXXXXXK  ",
       "   KXXXXXXXXK   ",
       "    KXXXXXXK    ",
       "     KXXXXK     ",
-      "      KKKK      ",
+      "      KXXK      ",
+      "       KK       ",
       "                ",
       "                ",
       "                "
     ],
     ghost: [
       "                ",
-      "      KKKK      ",
+      "       WW       ",
+      "      KWWK      ",
       "     KXXXXK     ",
-      "    KXXXXXXK    ",
-      "   KXXXXXXXXK   ",
-      "  KXXKXXXXKXXK  ",
-      " KXXKXXXXXXKXXK ",
-      " KXXXXXXXXXXXXK ",
+      "    KX  XXXK    ",
+      "   KXX  XXXXK   ",
+      "  KXXXXXXXXXXK  ",
       "  KXXXXXXXXXXK  ",
       "   KXXXXXXXXK   ",
       "    KXXXXXXK    ",
       "     K    K     ",
+      "      K  K      ",
       "                ",
       "                ",
       "                ",
       "                "
     ],
     hyper: [
-      "                ",
-      "      KKKK      ",
+      "    R      R    ",
+      "       WW       ",
+      "      KWWK      ",
       "     KXXXXK     ",
-      "    KXXXXXXK    ",
+      "    KXRXXXXK    ",
       "   KXXRXXXXXK   ",
-      "  KXXXXXXXXXXK  ",
-      " KXXXXXXXXXXXXK ",
-      " KXXXXXXXXXXXXK ",
+      "  KXXXRXXXXXXK  ",
       "  KXXXXXXXXXXK  ",
       "   KXXXXXXXXK   ",
       "    KXXXXXXK    ",
       "     KXXXXK     ",
-      "      KRRK      ",
+      "      KXXK      ",
+      "       RR       ",
       "                ",
       "                ",
       "                "
     ],
     nightowl: [
       "                ",
-      "      KKKK      ",
+      "       OO       ",
+      "      KOOK      ",
       "     KXXXXK     ",
-      "    KXXXXXXK    ",
-      "   KXXOXXXXXK   ",
-      "  KXXXOXXXXXXK  ",
-      " KXXXXXXXXXXXXK ",
-      " KXXXXXXXXXXXXK ",
+      "    KXOXXXXK    ",
+      "   KXXOXXXOXK   ",
+      "  KXXXOXXXXOXK  ",
       "  KXXXXXXXXXXK  ",
       "   KXXXXXXXXK   ",
       "    KXXXXXXK    ",
       "     KXXXXK     ",
-      "      KKKK      ",
+      "      KXXK      ",
+      "       KK       ",
       "                ",
       "                ",
       "                "
     ],
     weekend: [
       "                ",
-      "      KKKK      ",
+      "       WW       ",
+      "      KWWK      ",
       "     KXXXXK     ",
       "    KXXXXXXK    ",
-      "   KXXKXXXXXK   ",
+      "   KXXXXXXXXK   ",
       "  KXXXXXXXXXXK  ",
-      " KXXXXXXXXXXXXK ",
-      " KXXXXXXXXXXXXK ",
       "  KXXXXXXXXXXK  ",
       "   KXXXXXXXXK   ",
       "    KXXXXXXK    ",
       "     KXXXXK     ",
-      "      KKKK      ",
+      "      KXXK      ",
+      "       KK       ",
       "                ",
       "                ",
       "                "
     ]
   },
+  // 🦎 CHAMELEON: HTML mascot - Improved with curly tail & color detail
   chameleon: {
     normal: [
       "                ",
-      "       KKKKK    ",
-      "      KXXXXXK   ",
+      "      KKKKKK    ",
       "     KXXXXXXK   ",
-      "    KXXXXXXXK   ",
-      "   KXXXXWXXXK   ",
-      "  KXXXXXXXXXK   ",
-      " KXXXXRRXXXXXK  ",
-      " KXXXXRRXXXXK   ",
-      "  KXXXXXXXXXK   ",
-      "   KKKKKKKKKK   ",
-      "                ",
-      "                ",
-      "                ",
+      "    KXXXXXXXXK  ",
+      "   KXXWKXXXXXXK ",
+      "   KXXKKXXXXXXK ",
+      "  KXXXXXXXXXXK  ",
+      " KXXXXXXXXXXK   ",
+      " KXXXXXXXXXK    ",
+      "  KXXXXXXXK K   ",
+      "   KXXXXXK  K   ",
+      "    KKKKK KK    ",
+      "         KXK    ",
+      "          K     ",
       "                ",
       "                "
     ],
     sleep: [
       "                ",
-      "       KKKKK    ",
-      "      KXXXXXK   ",
+      "      KKKKKK    ",
       "     KXXXXXXK   ",
-      "    KXXXXXXXK   ",
-      "   KXXXXKXXXK   ",
-      "  KXXXXXXXXXK   ",
-      " KXXXXRRXXXXXK  ",
-      " KXXXXRRXXXXK   ",
-      "  KXXXXXXXXXK   ",
-      "   KKKKKKKKKK   ",
-      "                ",
-      "                ",
-      "                ",
+      "    KXXXXXXXXK  ",
+      "   KXXKKXXXXXXK ",
+      "   KXXXXXXXXXXK ",
+      "  KXXXXXXXXXXK  ",
+      " KXXXXXXXXXXK   ",
+      " KXXXXXXXXXK    ",
+      "  KXXXXXXXK K   ",
+      "   KXXXXXK  K   ",
+      "    KKKKK KK    ",
+      "         KXK    ",
+      "          K     ",
       "                ",
       "                "
     ],
     ghost: [
       "                ",
-      "       KKKKK    ",
-      "      KXXXXXK   ",
+      "      KKKKKK    ",
       "     KXXXXXXK   ",
-      "    KXXXXXXXK   ",
-      "   KXXXXKXXXK   ",
-      "  KXXXXXXXXXK   ",
-      " KXXXXRRXXXXXK  ",
-      " KXXXXRRXXXXK   ",
-      "  KXXXXXXXXXK   ",
-      "   K K K K K    ",
+      "    KXXXXXXXXK  ",
+      "   KXX KXXXXXXK ",
+      "   KXX  XXXXXXK ",
+      "  KXXXXXXXXXXK  ",
+      " KXXXXXXXXXXK   ",
+      " KXXXXXXXXXK    ",
+      "  K  K  K K     ",
+      "                ",
       "                ",
       "                ",
       "                ",
@@ -1446,516 +2033,521 @@ const SPRITES = {
       "                "
     ],
     hyper: [
-      "                ",
-      "       KKKKK    ",
-      "      KXXXXXK   ",
+      "       RRR      ",
+      "      KKKKKK    ",
       "     KXXXXXXK   ",
-      "    KXXXXXXXK   ",
-      "   KXXXXRXXXK   ",
-      "  KXXXXXXXXXK   ",
-      " KXXXXRRXXXXXK  ",
-      " KXXXXRRXXXXK   ",
-      "  KXXXXXXXXXK   ",
-      "   KKKKKKKKKK   ",
-      "                ",
-      "                ",
-      "                ",
+      "    KXXXXXXXXK  ",
+      "   KXXRKXXXXXXK ",
+      "   KXXKKXXXXXXK ",
+      "  KXXXXXXXXXXK  ",
+      " KXXXXXXXXXXK   ",
+      " KXXXXXXXXXK    ",
+      "  KXXXXXXXK K   ",
+      "   KXXXXXK  K   ",
+      "    KKKKK KK    ",
+      "         KRK    ",
+      "          K     ",
       "                ",
       "                "
     ],
     nightowl: [
       "                ",
-      "       KKKKK    ",
-      "      KXXXXXK   ",
+      "      KKKKKK    ",
       "     KXXXXXXK   ",
-      "    KXXXXXXXK   ",
-      "   KXXXXOXXXK   ",
-      "  KXXXXOXXXXK   ",
-      " KXXXXRRXXXXXK  ",
-      " KXXXXRRXXXXK   ",
-      "  KXXXXXXXXXK   ",
-      "   KKKKKKKKKK   ",
-      "                ",
-      "                ",
-      "                ",
+      "    KXXXXXXXXK  ",
+      "   KXXOKXXXXXXK ",
+      "   KXXOKXXXXXXK ",
+      "  KXXXXXXXXXXK  ",
+      " KXXXXXXXXXXK   ",
+      " KXXXXXXXXXK    ",
+      "  KXXXXXXXK K   ",
+      "   KXXXXXK  K   ",
+      "    KKKKK KK    ",
+      "         KXK    ",
+      "          K     ",
       "                ",
       "                "
     ],
     weekend: [
       "                ",
-      "       KKKKK    ",
-      "      KXXXXXK   ",
+      "      KKKKKK    ",
       "     KXXXXXXK   ",
-      "    KXXXXXXXK   ",
-      "   KXXXXKXXXK   ",
-      "  KXXXXKXXXXK   ",
-      " KXXXXRRXXXXXK  ",
-      " KXXXXRRXXXXK   ",
-      "  KXXXXXXXXXK   ",
-      "   KKKKKKKKKK   ",
-      "                ",
-      "                ",
-      "                ",
+      "    KXXXXXXXXK  ",
+      "   KXXKKXXXXXXK ",
+      "   KXXXXXXXXXXK ",
+      "  KXXXXXXXXXXK  ",
+      " KXXXXXXXXXXK   ",
+      " KXXXXXXXXXK    ",
+      "  KXXXXXXXK K   ",
+      "   KXXXXXK  K   ",
+      "    KKKKK KK    ",
+      "         KXK    ",
+      "          K     ",
       "                ",
       "                "
     ]
   },
+  // 🕷️ SPIDER: JS/TS mascot - Improved with 8 legs & web detail
   spider: {
     normal: [
-      "      KK        ",
-      "      KK        ",
-      "     KKKK       ",
-      " K  KXXXXK  K   ",
-      " KK KXXXXK KK   ",
-      "  KKXXXXXXKK    ",
+      "      KYK       ",
+      "     KYXYK      ",
+      "      KYK       ",
+      "    KKKKKK      ",
+      " K KXXXXXXK K   ",
+      " KKXXXXXXXXKK   ",
       "  KXXWKKWXXK    ",
       " KXXXXKKXXXXK   ",
       " KXXXXXXXXXXK   ",
       "  KKXXXXXXKK    ",
-      "  K  KKKK  K    ",
-      " K  K    K  K   ",
-      "K  K      K  K  ",
+      " K  KKKKKK  K   ",
+      " K K      K K   ",
+      "K K        K K  ",
       "                ",
       "                ",
       "                "
     ],
     sleep: [
       "                ",
-      "                ",
-      "     KKKK       ",
-      " K  KXXXXK  K   ",
-      " KK KXXXXK KK   ",
-      "  KKXXXXXXKK    ",
-      "  KXXKKKXXXK    ",
+      "     KYXYK      ",
+      "      KYK       ",
+      "    KKKKKK      ",
+      " K KXXXXXXK K   ",
+      " KKXXXXXXXXKK   ",
+      "  KXXKKKKXXK    ",
       " KXXXXKKXXXXK   ",
       " KXXXXXXXXXXK   ",
       "  KKXXXXXXKK    ",
-      "  K  KKKK  K    ",
-      " K  K    K  K   ",
-      "K  K      K  K  ",
+      " K  KKKKKK  K   ",
+      " K K      K K   ",
+      "K K        K K  ",
       "                ",
       "                ",
       "                "
     ],
     ghost: [
-      "      KK        ",
-      "      KK        ",
-      "     KKKK       ",
-      " K  KXXXXK  K   ",
-      " KK KXXXXK KK   ",
-      "  KKXXXXXXKK    ",
+      "      K K       ",
+      "     K   K      ",
+      "      K K       ",
+      "    KKKKKK      ",
+      "   KXXXXXXK     ",
+      "  KXXXXXXXXK    ",
       "  KXXK KK XK    ",
       " KXXXXKKXXXXK   ",
       " KXXXXXXXXXXK   ",
-      "  KKXXXXXXKK    ",
-      "  K  K  K  K    ",
-      " K  K    K  K   ",
+      "  K K    K K    ",
+      "                ",
+      "                ",
       "                ",
       "                ",
       "                ",
       "                "
     ],
     hyper: [
-      "      KK        ",
-      "      KK        ",
-      "     KKKK       ",
-      " K  KXXXXK  K   ",
-      " KK KXXXXK KK   ",
-      "  KKXXXXXXKK    ",
+      "  R   KYK   R   ",
+      "     KYRYK      ",
+      "      KYK       ",
+      "    KKKKKK      ",
+      " K KXXXXXXK K   ",
+      " KKXXXXXXXXKK   ",
       "  KXXRKKRXXK    ",
       " KXXXXKKXXXXK   ",
       " KXXXXXXXXXXK   ",
       "  KKXXXXXXKK    ",
-      "  K  KRRK  K    ",
-      " K  K    K  K   ",
-      "K  K      K  K  ",
+      " K  KRRRRK  K   ",
+      " K K      K K   ",
+      "K K        K K  ",
       "                ",
       "                ",
       "                "
     ],
     nightowl: [
-      "      KK        ",
-      "      KK        ",
-      "     KKKK       ",
-      " K  KXXXXK  K   ",
-      " KK KXXXXK KK   ",
-      "  KKXXXXXXKK    ",
+      "      KYK       ",
+      "     KYOYK      ",
+      "      KYK       ",
+      "    KKKKKK      ",
+      " K KXXXXXXK K   ",
+      " KKXXXXXXXXKK   ",
       "  KXXOKKOXK     ",
       " KXXXOKKOXK     ",
       " KXXXXXXXXXXK   ",
       "  KKXXXXXXKK    ",
-      "  K  KKKK  K    ",
-      " K  K    K  K   ",
-      "K  K      K  K  ",
+      " K  KKKKKK  K   ",
+      " K K      K K   ",
+      "K K        K K  ",
       "                ",
       "                ",
       "                "
     ],
     weekend: [
-      "      KK        ",
-      "      KK        ",
-      "     KKKK       ",
-      " K  KXXXXK  K   ",
-      " KK KXXXXK KK   ",
-      "  KKXXXXXXKK    ",
-      "  KXXKKKXXXK    ",
+      "      KYK       ",
+      "     KYXYK      ",
+      "      KYK       ",
+      "    KKKKKK      ",
+      " K KXXXXXXK K   ",
+      " KKXXXXXXXXKK   ",
+      "  KXXKKKKXXK    ",
       " KXXXXKKXXXXK   ",
       " KXXXXXXXXXXK   ",
       "  KKXXXXXXKK    ",
-      "  K  KKKK  K    ",
-      " K  K    K  K   ",
-      "K  K      K  K  ",
+      " K  KKKKKK  K   ",
+      " K K      K K   ",
+      "K K        K K  ",
       "                ",
       "                ",
       "                "
     ]
   },
+  // 🐍 SNAKE: Python mascot - Improved coiled snake with pattern
   snake: {
     normal: [
       "                ",
-      "      KKKKK     ",
-      "     KXXXXXK    ",
-      "    KXXXXXXXK   ",
-      "   KXXWKXXXXK   ",
+      "     KKKKKK     ",
+      "    KXXXXXXK    ",
+      "   KXWKXXXXXK   ",
+      "   KXKKXXXXXK   ",
       "   KXXXXXXXXK   ",
       "    KKKKXXXK    ",
-      "    KXXKXXXK    ",
-      "   KXXXXXXK     ",
-      "  KXXXXXXK      ",
-      " KXXXXXXK       ",
-      " KXXXKKXK       ",
-      "  KKK  KK       ",
+      "   KXXXKXXXK    ",
+      "  KXXXXXXXK     ",
+      " KXXXXXXXK      ",
+      " KXXXXXXXK      ",
+      "  KXXXXXK       ",
+      "   KKKKK        ",
       "                ",
       "                ",
       "                "
     ],
     sleep: [
       "                ",
-      "      KKKKK     ",
-      "     KXXXXXK    ",
-      "    KXXXXXXXK   ",
-      "   KXXKKXXXXK   ",
+      "     KKKKKK     ",
+      "    KXXXXXXK    ",
+      "   KXKKXXXXXK   ",
+      "   KXXXXXXXXK   ",
       "   KXXXXXXXXK   ",
       "    KKKKXXXK    ",
-      "    KXXKXXXK    ",
-      "   KXXXXXXK     ",
-      "  KXXXXXXK      ",
-      " KXXXXXXK       ",
-      " KXXXKKXK       ",
-      "  KKK  KK       ",
+      "   KXXXKXXXK    ",
+      "  KXXXXXXXK     ",
+      " KXXXXXXXK      ",
+      " KXXXXXXXK      ",
+      "  KXXXXXK       ",
+      "   KKKKK        ",
       "                ",
       "                ",
       "                "
     ],
     ghost: [
       "                ",
-      "      KKKKK     ",
-      "     KXXXXXK    ",
-      "    KXXXXXXXK   ",
-      "   KXXK KXXXK   ",
+      "     KKKKKK     ",
+      "    KXXXXXXK    ",
+      "   KX KXXXXXK   ",
+      "   KX  XXXXXK   ",
       "   KXXXXXXXXK   ",
       "    KKKKXXXK    ",
-      "    KXXKXXXK    ",
-      "   KXXXXXXK     ",
-      "  KXXXXXXK      ",
-      " KXXXXXXK       ",
-      " K  K  K K      ",
+      "   KXXXKXXXK    ",
+      "  KXXXXXXXK     ",
+      " K   K  K       ",
+      "                ",
+      "                ",
       "                ",
       "                ",
       "                ",
       "                "
     ],
     hyper: [
-      "                ",
-      "      KKKKK     ",
-      "     KXXXXXK    ",
-      "    KXXXXXXXK   ",
-      "   KXXRKXXXXK   ",
+      "      RR        ",
+      "     KKKKKK     ",
+      "    KXXXXXXK    ",
+      "   KXRKXXXXXK   ",
+      "   KXKKXXXXXK   ",
       "   KXXXXXXXXK   ",
       "    KKKKXXXK    ",
-      "    KXXKXXXK    ",
-      "   KXXXXXXK     ",
-      "  KXXXXXXK      ",
-      " KXXXXXXK       ",
-      " KXXXKKXK       ",
-      "  KRK  KK       ",
+      "   KXXXKXXXK    ",
+      "  KXXXXXXXK     ",
+      " KXXXXXXXK      ",
+      " KXXXXXXXK      ",
+      "  KXXXXXK       ",
+      "   KKRRK        ",
       "                ",
       "                ",
       "                "
     ],
     nightowl: [
       "                ",
-      "      KKKKK     ",
-      "     KXXXXXK    ",
-      "    KXXXXXXXK   ",
-      "   KXXOKXXXXK   ",
-      "   KXXOXXXK     ",
+      "     KKKKKK     ",
+      "    KXXXXXXK    ",
+      "   KXOKXXXXXK   ",
+      "   KXOKXXXXXK   ",
+      "   KXXXXXXXXK   ",
       "    KKKKXXXK    ",
-      "    KXXKXXXK    ",
-      "   KXXXXXXK     ",
-      "  KXXXXXXK      ",
-      " KXXXXXXK       ",
-      " KXXXKKXK       ",
-      "  KKK  KK       ",
+      "   KXXXKXXXK    ",
+      "  KXXXXXXXK     ",
+      " KXXXXXXXK      ",
+      " KXXXXXXXK      ",
+      "  KXXXXXK       ",
+      "   KKKKK        ",
       "                ",
       "                ",
       "                "
     ],
     weekend: [
       "                ",
-      "      KKKKK     ",
-      "     KXXXXXK    ",
-      "    KXXXXXXXK   ",
-      "   KXXKKXXXXK   ",
+      "     KKKKKK     ",
+      "    KXXXXXXK    ",
+      "   KXKKXXXXXK   ",
+      "   KXXXXXXXXK   ",
       "   KXXXXXXXXK   ",
       "    KKKKXXXK    ",
-      "    KXXKXXXK    ",
-      "   KXXXXXXK     ",
-      "  KXXXXXXK      ",
-      " KXXXXXXK       ",
-      " KXXXKKXK       ",
-      "  KKK  KK       ",
+      "   KXXXKXXXK    ",
+      "  KXXXXXXXK     ",
+      " KXXXXXXXK      ",
+      " KXXXXXXXK      ",
+      "  KXXXXXK       ",
+      "   KKKKK        ",
       "                ",
       "                ",
       "                "
     ]
   },
+  // 🐹 GOPHER: Go mascot - Improved cute gopher with teeth
   gopher: {
     normal: [
       "                ",
-      "     KKKKKK     ",
-      "    KXXXXXXK    ",
-      "   KXXXXXXXXK   ",
+      "   KKK    KKK   ",
+      "  KXXXK  KXXXK  ",
+      "   KXXXXXXXXXK  ",
       "  KXXWKXXKWXXK  ",
+      "  KXXKKXXKKXXK  ",
       "  KXXXXXXXXXXK  ",
-      "  KXXXXWWXXXXK  ",
-      " KXXXXXWWXXXXXK ",
-      " KXXXXXXXXXXXXXXK",
-      " KXXXXXXXXXXXXXXK",
-      "  KXXXXXXXXXXXXK ",
-      "   KXXK    KXXK  ",
-      "    KK      KK   ",
+      " KXXXWWWWWXXXK  ",
+      " KXXXKWWWKXXXK  ",
+      " KXXXXKKKXXXXK  ",
+      "  KXXXXXXXXXXK  ",
+      "   KXXK  KXXK   ",
+      "    KK    KK    ",
       "                ",
       "                ",
       "                "
     ],
     sleep: [
       "                ",
-      "     KKKKKK     ",
-      "    KXXXXXXK    ",
-      "   KXXXXXXXXK   ",
+      "   KKK    KKK   ",
+      "  KXXXK  KXXXK  ",
+      "   KXXXXXXXXXK  ",
       "  KXXKKXXKKXXK  ",
       "  KXXXXXXXXXXK  ",
-      "  KXXXXWWXXXXK  ",
-      " KXXXXXWWXXXXXK ",
-      " KXXXXXXXXXXXXXXK",
-      " KXXXXXXXXXXXXXXK",
-      "  KXXXXXXXXXXXXK ",
-      "   KXXK    KXXK  ",
-      "    KK      KK   ",
+      "  KXXXXXXXXXXK  ",
+      " KXXXWWWWWXXXK  ",
+      " KXXXKWWWKXXXK  ",
+      " KXXXXKKKXXXXK  ",
+      "  KXXXXXXXXXXK  ",
+      "   KXXK  KXXK   ",
+      "    KK    KK    ",
       "                ",
       "                ",
       "                "
     ],
     ghost: [
       "                ",
-      "     KKKKKK     ",
-      "    KXXXXXXK    ",
-      "   KXXXXXXXXK   ",
-      "  KXXK KXKK XK  ",
+      "   K K    K K   ",
+      "  K   K  K   K  ",
+      "   KXXXXXXXXXK  ",
+      "  KXX KXXK XXK  ",
       "  KXXXXXXXXXXK  ",
-      "  KXXXXWWXXXXK  ",
-      " KXXXXXWWXXXXXK ",
-      " KXXXXXXXXXXXXXXK",
-      " KXXXXXXXXXXXXXXK",
-      "  KXXXXXXXXXXXXK ",
-      "   K  K    K  K  ",
+      "  KXXXXXXXXXXK  ",
+      " KXXXWWWWWXXXK  ",
+      " KXXXKWWWKXXXK  ",
+      " K  K      K  K ",
+      "                ",
+      "                ",
       "                ",
       "                ",
       "                ",
       "                "
     ],
     hyper: [
-      "                ",
-      "     KKKKKK     ",
-      "    KXXXXXXK    ",
-      "   KXXXXXXXXK   ",
+      "      RRR       ",
+      "   KKK    KKK   ",
+      "  KXXXK  KXXXK  ",
+      "   KXXXXXXXXXK  ",
       "  KXXRKXXKRXXK  ",
+      "  KXXKKXXKKXXK  ",
       "  KXXXXXXXXXXK  ",
-      "  KXXXXWWXXXXK  ",
-      " KXXXXXWWXXXXXK ",
-      " KXXXXXXXXXXXXXXK",
-      " KXXXXXXXXXXXXXXK",
-      "  KXXXXXXXXXXXXK ",
-      "   KXXK    KXXK  ",
-      "    KK  RR  KK   ",
+      " KXXXWWWWWXXXK  ",
+      " KXXXKWWWKXXXK  ",
+      " KXXXXKKKXXXXK  ",
+      "  KXXXXXXXXXXK  ",
+      "   KXXK  KXXK   ",
+      "    KK RR KK    ",
       "                ",
       "                ",
       "                "
     ],
     nightowl: [
       "                ",
-      "     KKKKKK     ",
-      "    KXXXXXXK    ",
-      "   KXXXXXXXXK   ",
+      "   KKK    KKK   ",
+      "  KXXXK  KXXXK  ",
+      "   KXXXXXXXXXK  ",
       "  KXXOKXXKOXXK  ",
       "  KXXOKXXKOXXK  ",
-      "  KXXXXWWXXXXK  ",
-      " KXXXXXWWXXXXXK ",
-      " KXXXXXXXXXXXXXXK",
-      " KXXXXXXXXXXXXXXK",
-      "  KXXXXXXXXXXXXK ",
-      "   KXXK    KXXK  ",
-      "    KK      KK   ",
+      "  KXXXXXXXXXXK  ",
+      " KXXXWWWWWXXXK  ",
+      " KXXXKWWWKXXXK  ",
+      " KXXXXKKKXXXXK  ",
+      "  KXXXXXXXXXXK  ",
+      "   KXXK  KXXK   ",
+      "    KK    KK    ",
       "                ",
       "                ",
       "                "
     ],
     weekend: [
       "                ",
-      "     KKKKKK     ",
-      "    KXXXXXXK    ",
-      "   KXXXXXXXXK   ",
+      "   KKK    KKK   ",
+      "  KXXXK  KXXXK  ",
+      "   KXXXXXXXXXK  ",
       "  KXXKKXXKKXXK  ",
       "  KXXXXXXXXXXK  ",
-      "  KXXXXWWXXXXK  ",
-      " KXXXXXWWXXXXXK ",
-      " KXXXXXXXXXXXXXXK",
-      " KXXXXXXXXXXXXXXK",
-      "  KXXXXXXXXXXXXK ",
-      "   KXXK    KXXK  ",
-      "    KK      KK   ",
+      "  KXXXXXXXXXXK  ",
+      " KXXXWWWWWXXXK  ",
+      " KXXXKWWWKXXXK  ",
+      " KXXXXKKKXXXXK  ",
+      "  KXXXXXXXXXXK  ",
+      "   KXXK  KXXK   ",
+      "    KK    KK    ",
       "                ",
       "                ",
       "                "
     ]
   },
+  // 🐱 CAT: Default mascot - Improved cute cat with whiskers
   cat: {
     normal: [
       "                ",
-      "   K        K   ",
-      "  KXK      KXK  ",
-      "  KXXK    KXXK  ",
+      "  KK        KK  ",
+      " KXXK      KXXK ",
+      " KXXXK    KXXXK ",
       "  KXXXKKKKKXXK  ",
       " KXXXXXXXXXXXXK ",
       " KXXWKXXXXKWXXK ",
+      " KXXKKXXXXKKXXK ",
       " KXXXXXXXXXXXXK ",
-      " KXXXXXXXXXXXXK ",
-      " KXXXXX  XXXXXK ",
+      " KXXKXX  XXKXXK ",
       "  KXXXXXXXXXXK  ",
       "   KXXXXXXXXK   ",
-      "    KXK  KXK    ",
-      "     K    K     ",
+      "   KXKK  KKXK   ",
+      "    KK    KK    ",
       "                ",
       "                "
     ],
     sleep: [
       "                ",
-      "   K        K   ",
-      "  KXK      KXK  ",
-      "  KXXK    KXXK  ",
+      "  KK        KK  ",
+      " KXXK      KXXK ",
+      " KXXXK    KXXXK ",
       "  KXXXKKKKKXXK  ",
       " KXXXXXXXXXXXXK ",
       " KXXKKXXXXKKXXK ",
       " KXXXXXXXXXXXXK ",
       " KXXXXXXXXXXXXK ",
-      " KXXXXX  XXXXXK ",
+      " KXXKXXXXXXKXXK ",
       "  KXXXXXXXXXXK  ",
       "   KXXXXXXXXK   ",
-      "    KXK  KXK    ",
-      "     K    K     ",
+      "   KXKK  KKXK   ",
+      "    KK    KK    ",
       "                ",
       "                "
     ],
     ghost: [
       "                ",
-      "   K        K   ",
-      "  KXK      KXK  ",
-      "  KXXK    KXXK  ",
-      "  KXXXKKKKKXXK  ",
+      "  K          K  ",
+      " K K        K K ",
+      " K  K      K  K ",
+      "  K  KKKKKK  K  ",
       " KXXXXXXXXXXXXK ",
       " KXXKKXXXXKKXXK ",
       " KXXXXXXXXXXXXK ",
       " KXXXXXXXXXXXXK ",
-      " KXXXXX  XXXXXK ",
-      "  KXXXXXXXXXXK  ",
-      "   K K    K K   ",
+      " KXXKXXXXXXKXXK ",
+      "  K  K    K  K  ",
+      "                ",
       "                ",
       "                ",
       "                ",
       "                "
     ],
     hyper: [
-      "                ",
-      "   K        K   ",
-      "  KXK      KXK  ",
-      "  KXXK    KXXK  ",
+      "       RRR      ",
+      "  KK        KK  ",
+      " KXXK      KXXK ",
+      " KXXXK    KXXXK ",
       "  KXXXKKKKKXXK  ",
       " KXXXXXXXXXXXXK ",
       " KXXRKXXXXKRXXK ",
+      " KXXKKXXXXKKXXK ",
       " KXXXXXXXXXXXXK ",
-      " KXXXXXXXXXXXXK ",
-      " KXXXXX  XXXXXK ",
+      " KXXKXXRRXXKXXK ",
       "  KXXXXXXXXXXK  ",
       "   KXXXXXXXXK   ",
-      "    KXK  KXK    ",
-      "     K RR K     ",
+      "   KXKK  KKXK   ",
+      "    KK    KK    ",
       "                ",
       "                "
     ],
     nightowl: [
       "                ",
-      "   K        K   ",
-      "  KXK      KXK  ",
-      "  KXXK    KXXK  ",
+      "  KK        KK  ",
+      " KXXK      KXXK ",
+      " KXXXK    KXXXK ",
       "  KXXXKKKKKXXK  ",
       " KXXXXXXXXXXXXK ",
       " KXXOKXXXXKOXXK ",
       " KXXOKXXXXKOXXK ",
       " KXXXXXXXXXXXXK ",
-      " KXXXXX  XXXXXK ",
+      " KXXKXX  XXKXXK ",
       "  KXXXXXXXXXXK  ",
       "   KXXXXXXXXK   ",
-      "    KXK  KXK    ",
-      "     K    K     ",
+      "   KXKK  KKXK   ",
+      "    KK    KK    ",
       "                ",
       "                "
     ],
     weekend: [
       "                ",
-      "   K        K   ",
-      "  KXK      KXK  ",
-      "  KXXK    KXXK  ",
+      "  KK        KK  ",
+      " KXXK      KXXK ",
+      " KXXXK    KXXXK ",
       "  KXXXKKKKKXXK  ",
       " KXXXXXXXXXXXXK ",
       " KXXKKXXXXKKXXK ",
       " KXXXXXXXXXXXXK ",
       " KXXXXXXXXXXXXK ",
-      " KXXXXX  XXXXXK ",
+      " KXXKXXXXXXKXXK ",
       "  KXXXXXXXXXXK  ",
       "   KXXXXXXXXK   ",
-      "    KXK  KXK    ",
-      "     K    K     ",
+      "   KXKK  KKXK   ",
+      "    KK    KK    ",
       "                ",
       "                "
     ]
   },
+  // 🐧 TUX: Shell/Linux mascot - Improved penguin with belly detail
   tux: {
     normal: [
       "                ",
       "      KKKKK     ",
       "     KKKKKKKK   ",
       "    KKKKKKKKK   ",
-      "   KKWKKKKWKKK  ",
+      "   KKWKKKKKWKK  ",
       "   KKKKKKKKKKK  ",
-      "  KKKKKKKKKKKK  ",
-      "  KWWWWWWWWWWK  ",
-      " KWWWWWWWWWWWWK ",
-      " KWWWWWWWWWWWWK ",
-      "  KWWWWWWWWWWK  ",
-      "  KK  OOO  KK   ",
+      "  KKKKKKKKKKKKK ",
+      "  KWWWWWWWWWWWK ",
+      " KWWWWWWWWWWWWWK",
+      " KWWWWWWWWWWWWWK",
+      "  KWWWWWWWWWWWK ",
+      "  KKK  O  KKKK  ",
+      "      OOO       ",
       "      O O       ",
-      "                ",
       "                ",
       "                "
     ],
@@ -1964,16 +2556,16 @@ const SPRITES = {
       "      KKKKK     ",
       "     KKKKKKKK   ",
       "    KKKKKKKKK   ",
+      "   KKKKKKKKKK   ",
       "   KKKKKKKKKKK  ",
-      "   KKKKKKKKKKK  ",
-      "  KKKKKKKKKKKK  ",
-      "  KWWWWWWWWWWK  ",
-      " KWWWWWWWWWWWWK ",
-      " KWWWWWWWWWWWWK ",
-      "  KWWWWWWWWWWK  ",
-      "  KK  OOO  KK   ",
+      "  KKKKKKKKKKKKK ",
+      "  KWWWWWWWWWWWK ",
+      " KWWWWWWWWWWWWWK",
+      " KWWWWWWWWWWWWWK",
+      "  KWWWWWWWWWWWK ",
+      "  KKK  O  KKKK  ",
+      "      OOO       ",
       "      O O       ",
-      "                ",
       "                ",
       "                "
     ],
@@ -1982,34 +2574,34 @@ const SPRITES = {
       "      KKKKK     ",
       "     KKKKKKKK   ",
       "    KKKKKKKKK   ",
-      "   KKK K K KKK  ",
+      "   KK KKKKK KK  ",
       "   KKKKKKKKKKK  ",
-      "  KKKKKKKKKKKK  ",
-      "  KWWWWWWWWWWK  ",
-      " KWWWWWWWWWWWWK ",
-      " KWWWWWWWWWWWWK ",
-      "  KWWWWWWWWWWK  ",
-      "  K   OOO   K   ",
+      "  KKKKKKKKKKKKK ",
+      "  KWWWWWWWWWWWK ",
+      " KWWWWWWWWWWWWWK",
+      " KWWWWWWWWWWWWWK",
+      "  K  K  O  K  K ",
+      "      OOO       ",
       "                ",
       "                ",
       "                ",
       "                "
     ],
     hyper: [
-      "                ",
+      "       RRR      ",
       "      KKKKK     ",
       "     KKKKKKKK   ",
       "    KKKKKKKKK   ",
-      "   KKRKKKKRKKK  ",
+      "   KKRKKKKKRKK  ",
       "   KKKKKKKKKKK  ",
-      "  KKKKKKKKKKKK  ",
-      "  KWWWWWWWWWWK  ",
-      " KWWWWWWWWWWWWK ",
-      " KWWWWWWWWWWWWK ",
-      "  KWWWWWWWWWWK  ",
-      "  KK  OOO  KK   ",
+      "  KKKKKKKKKKKKK ",
+      "  KWWWWWWWWWWWK ",
+      " KWWWWWWWWWWWWWK",
+      " KWWWWWWWWWWWWWK",
+      "  KWWWWWWWWWWWK ",
+      "  KKK  R  KKKK  ",
       "      ORO       ",
-      "                ",
+      "      O O       ",
       "                ",
       "                "
     ],
@@ -2018,16 +2610,16 @@ const SPRITES = {
       "      KKKKK     ",
       "     KKKKKKKK   ",
       "    KKKKKKKKK   ",
-      "   KKOKKKKOKK   ",
-      "   KKOKKKKOKK   ",
-      "  KKKKKKKKKKKK  ",
-      "  KWWWWWWWWWWK  ",
-      " KWWWWWWWWWWWWK ",
-      " KWWWWWWWWWWWWK ",
-      "  KWWWWWWWWWWK  ",
-      "  KK  OOO  KK   ",
+      "   KKOKKKKKOKK  ",
+      "   KKOKKKKKOKK  ",
+      "  KKKKKKKKKKKKK ",
+      "  KWWWWWWWWWWWK ",
+      " KWWWWWWWWWWWWWK",
+      " KWWWWWWWWWWWWWK",
+      "  KWWWWWWWWWWWK ",
+      "  KKK  O  KKKK  ",
+      "      OOO       ",
       "      O O       ",
-      "                ",
       "                ",
       "                "
     ],
@@ -2036,16 +2628,16 @@ const SPRITES = {
       "      KKKKK     ",
       "     KKKKKKKK   ",
       "    KKKKKKKKK   ",
+      "   KKKKKKKKKK   ",
       "   KKKKKKKKKKK  ",
-      "   KKKKKKKKKKK  ",
-      "  KKKKKKKKKKKK  ",
-      "  KWWWWWWWWWWK  ",
-      " KWWWWWWWWWWWWK ",
-      " KWWWWWWWWWWWWK ",
-      "  KWWWWWWWWWWK  ",
-      "  KK  OOO  KK   ",
+      "  KKKKKKKKKKKKK ",
+      "  KWWWWWWWWWWWK ",
+      " KWWWWWWWWWWWWWK",
+      " KWWWWWWWWWWWWWK",
+      "  KWWWWWWWWWWWK ",
+      "  KKK  O  KKKK  ",
+      "      OOO       ",
       "      O O       ",
-      "                ",
       "                ",
       "                "
     ]
@@ -2180,55 +2772,56 @@ const SPRITES = {
     ]
   },
   // --- NEW PETS ---
+  // 🦊 FOX: Kotlin mascot - Improved with fluffy tail & snout
   fox: {
     normal: [
       "                ",
-      "    K      K    ",
-      "   KXK    KXK   ",
-      "  KXXXK  KXXXK  ",
-      "  KXXXXKKXXXXK  ",
+      "  KK        KK  ",
+      " KWXK      KWXK ",
+      " KXXXK    KXXXK ",
+      "  KXXXKKKKKXXK  ",
       " KXXXXXXXXXXXXK ",
-      " KXXXWKXXXXWKXK ",
-      " KXXXKKXXXXKKXK ",
-      "  KXWWWWWWWWXK  ",
+      " KXXWKXXXXKWXXK ",
+      " KXXKKXXXXKKXXK ",
+      "  KXXWWWWWWXXK  ",
       "   KXXXXXXXXK   ",
-      "    KXXXXXXK    ",
-      "     KKKKKK     ",
-      "                ",
-      "                ",
+      "    KXXXXXXK KKK",
+      "     KKKKKKKKWWK",
+      "           KWWWK",
+      "            KKK ",
       "                ",
       "                "
     ],
     sleep: [
       "                ",
-      "    K      K    ",
-      "   KXK    KXK   ",
-      "  KXXXK  KXXXK  ",
-      "  KXXXXKKXXXXK  ",
+      "  KK        KK  ",
+      " KWXK      KWXK ",
+      " KXXXK    KXXXK ",
+      "  KXXXKKKKKXXK  ",
       " KXXXXXXXXXXXXK ",
-      " KXXXKKXXXXKKXK ",
-      " KXXXKKXXXXKKXK ",
-      "  KXWWWWWWWWXK  ",
+      " KXXKKXXXXKKXXK ",
+      " KXXXXXXXXXXXXK ",
+      "  KXXWWWWWWXXK  ",
       "   KXXXXXXXXK   ",
-      "    KXXXXXXK    ",
-      "     KKKKKK     ",
-      "                ",
-      "                ",
+      "    KXXXXXXK KKK",
+      "     KKKKKKKKWWK",
+      "           KWWWK",
+      "            KKK ",
       "                ",
       "                "
     ],
     ghost: [
       "                ",
-      "    K      K    ",
-      "   K K    K K   ",
-      "  KXXXK  KXXXK  ",
-      "  KXXXXKKXXXXK  ",
+      "  K          K  ",
+      " K K        K K ",
+      " K  K      K  K ",
+      "  K  KKKKKK  K  ",
       " KXXXXXXXXXXXXK ",
-      " KXXXKKXXXXKKXK ",
-      " KXXXKKXXXXKKXK ",
-      "  KXXXXXXXXKXK  ",
-      "   KXXXXXXXXK   ",
-      "    K  K  K     ",
+      " KXXKKXXXXKKXXK ",
+      " KXXXXXXXXXXXXK ",
+      "  KXXWWWWWWXXK  ",
+      "   K  K  K  K   ",
+      "                ",
       "                ",
       "                ",
       "                ",
@@ -2236,108 +2829,109 @@ const SPRITES = {
       "                "
     ],
     hyper: [
-      "                ",
-      "    K      K    ",
-      "   KXK    KXK   ",
-      "  KXXXK  KXXXK  ",
-      "  KXXXXKKXXXXK  ",
+      "      RRR       ",
+      "  KK        KK  ",
+      " KWXK      KWXK ",
+      " KXXXK    KXXXK ",
+      "  KXXXKKKKKXXK  ",
       " KXXXXXXXXXXXXK ",
-      " KXXXRKXXXXRKXK ",
-      " KXXXKKXXXXKKXK ",
-      "  KXWWWWWWWWXK  ",
+      " KXXRKXXXXKRXXK ",
+      " KXXKKXXXXKKXXK ",
+      "  KXXWWRRWWXXK  ",
       "   KXXXXXXXXK   ",
-      "    KXXXXXXK    ",
-      "     KRRKKK     ",
-      "                ",
-      "                ",
+      "    KXXXXXXK KKK",
+      "     KKKKKKKKWRK",
+      "           KRRRK",
+      "            KKK ",
       "                ",
       "                "
     ],
     nightowl: [
       "                ",
-      "    K      K    ",
-      "   KXK    KXK   ",
-      "  KXXXK  KXXXK  ",
-      "  KXXXXKKXXXXK  ",
+      "  KK        KK  ",
+      " KWXK      KWXK ",
+      " KXXXK    KXXXK ",
+      "  KXXXKKKKKXXK  ",
       " KXXXXXXXXXXXXK ",
-      " KXXXOKXXXXOKXK ",
-      " KXXXOKXXXXOKXK ",
-      "  KXWWWWWWWWXK  ",
+      " KXXOKXXXXKOXXK ",
+      " KXXOKXXXXKOXXK ",
+      "  KXXWWWWWWXXK  ",
       "   KXXXXXXXXK   ",
-      "    KXXXXXXK    ",
-      "     KKKKKK     ",
-      "                ",
-      "                ",
+      "    KXXXXXXK KKK",
+      "     KKKKKKKKWWK",
+      "           KWWWK",
+      "            KKK ",
       "                ",
       "                "
     ],
     weekend: [
       "                ",
-      "    K      K    ",
-      "   KXK    KXK   ",
-      "  KXXXK  KXXXK  ",
-      "  KXXXXKKXXXXK  ",
+      "  KK        KK  ",
+      " KWXK      KWXK ",
+      " KXXXK    KXXXK ",
+      "  KXXXKKKKKXXK  ",
       " KXXXXXXXXXXXXK ",
-      " KXXXKKXXXXKKXK ",
-      " KXXXKKXXXXKKXK ",
-      "  KXWWWWWWWWXK  ",
+      " KXXKKXXXXKKXXK ",
+      " KXXXXXXXXXXXXK ",
+      "  KXXWWWWWWXXK  ",
       "   KXXXXXXXXK   ",
-      "    KXXXXXXK    ",
-      "     KKKKKK     ",
-      "                ",
-      "                ",
+      "    KXXXXXXK KKK",
+      "     KKKKKKKKWWK",
+      "           KWWWK",
+      "            KKK ",
       "                ",
       "                "
     ]
   },
+  // 🐦 HUMMINGBIRD: Dart/Flutter mascot - Improved with long beak & colorful feathers
   hummingbird: {
     normal: [
       "                ",
-      "       KKKK     ",
-      "      KXXXXK    ",
-      "     KXXXXXXK   ",
-      "    KXWKXXWKK   ",
-      "    KXKKXXKKK   ",
-      "KKKKXXXXXXXXK   ",
-      "   KXXXXXXXXXK  ",
-      "    KXXXXXXK K  ",
-      "     KXXXXK KK  ",
-      "      KXXK      ",
-      "       KK       ",
-      "                ",
+      "      KKKKK     ",
+      "     KXXXXXK    ",
+      "    KXXXXXXXK   ",
+      "   KXXWKXXXXK   ",
+      "   KXXKKXXXXK   ",
+      "  KXXXXXXXXXK   ",
+      " KXXXXXXXXXXXK  ",
+      "KKKKXXXXXXXXXK  ",
+      "   KXXXXXXXXK   ",
+      "    KXXXXXXK    ",
+      "     KKOOKK     ",
+      "      KO OK     ",
       "                ",
       "                ",
       "                "
     ],
     sleep: [
       "                ",
-      "       KKKK     ",
-      "      KXXXXK    ",
-      "     KXXXXXXK   ",
-      "    KXKKXXKKK   ",
-      "    KXKKXXKKK   ",
-      "KKKKXXXXXXXXK   ",
-      "   KXXXXXXXXXK  ",
-      "    KXXXXXXK K  ",
-      "     KXXXXK KK  ",
-      "      KXXK      ",
-      "       KK       ",
-      "                ",
+      "      KKKKK     ",
+      "     KXXXXXK    ",
+      "    KXXXXXXXK   ",
+      "   KXXKKXXXXK   ",
+      "   KXXXXXXXXK   ",
+      "  KXXXXXXXXXK   ",
+      " KXXXXXXXXXXXK  ",
+      "KKKKXXXXXXXXXK  ",
+      "   KXXXXXXXXK   ",
+      "    KXXXXXXK    ",
+      "     KKOOKK     ",
+      "      KO OK     ",
       "                ",
       "                ",
       "                "
     ],
     ghost: [
       "                ",
-      "       KKKK     ",
-      "      KXXXXK    ",
-      "     KXXXXXXK   ",
-      "    KXKKXXKKK   ",
-      "    KXKKXXKKK   ",
-      "KKKKXXXXXXXXK   ",
-      "   KXXXXXXXXXK  ",
-      "    K K  K K K  ",
-      "     K  K K K   ",
+      "      KKKKK     ",
+      "     KXXXXXK    ",
+      "    KXXXXXXXK   ",
+      "   KXX KXXXXK   ",
+      "   KXX  XXXXK   ",
+      "  KXXXXXXXXXK   ",
+      " KXXXXXXXXXXXK  ",
+      "K K KXXXXXXXXK  ",
+      "   K  K  K  K   ",
       "                ",
       "                ",
       "                ",
@@ -2346,109 +2940,110 @@ const SPRITES = {
       "                "
     ],
     hyper: [
-      "                ",
-      "       KKKK     ",
-      "      KXXXXK    ",
-      "     KXXXXXXK   ",
-      "    KXRKXXRKK   ",
-      "    KXKKXXKKK   ",
-      "KKKKXXXXXXXXK   ",
-      "   KXXXXXXXXXK  ",
-      "    KXXXXXXK K  ",
-      "     KXXXXK KK  ",
-      "      KXXK      ",
-      "       RR       ",
-      "                ",
+      "       RRR      ",
+      "      KKKKK     ",
+      "     KXXXXXK    ",
+      "    KXXXXXXXK   ",
+      "   KXXRKXXXXK   ",
+      "   KXXKKXXXXK   ",
+      "  KXXXXXXXXXK   ",
+      " KXXXXXXXXXXXK  ",
+      "KKKKXXXXXXXXXK  ",
+      "   KXXXXXXXXK   ",
+      "    KXXXXXXK    ",
+      "     KKOOKK     ",
+      "      KO OK     ",
       "                ",
       "                ",
       "                "
     ],
     nightowl: [
       "                ",
-      "       KKKK     ",
-      "      KXXXXK    ",
-      "     KXXXXXXK   ",
-      "    KXOKXXOKK   ",
-      "    KXOKXXOKK   ",
-      "KKKKXXXXXXXXK   ",
-      "   KXXXXXXXXXK  ",
-      "    KXXXXXXK K  ",
-      "     KXXXXK KK  ",
-      "      KXXK      ",
-      "       KK       ",
-      "                ",
+      "      KKKKK     ",
+      "     KXXXXXK    ",
+      "    KXXXXXXXK   ",
+      "   KXXOKXXXXK   ",
+      "   KXXOKXXXXK   ",
+      "  KXXXXXXXXXK   ",
+      " KXXXXXXXXXXXK  ",
+      "KKKKXXXXXXXXXK  ",
+      "   KXXXXXXXXK   ",
+      "    KXXXXXXK    ",
+      "     KKOOKK     ",
+      "      KO OK     ",
       "                ",
       "                ",
       "                "
     ],
     weekend: [
       "                ",
-      "       KKKK     ",
-      "      KXXXXK    ",
-      "     KXXXXXXK   ",
-      "    KXKKXXKKK   ",
-      "    KXKKXXKKK   ",
-      "KKKKXXXXXXXXK   ",
-      "   KXXXXXXXXXK  ",
-      "    KXXXXXXK K  ",
-      "     KXXXXK KK  ",
-      "      KXXK      ",
-      "       KK       ",
-      "                ",
+      "      KKKKK     ",
+      "     KXXXXXK    ",
+      "    KXXXXXXXK   ",
+      "   KXXKKXXXXK   ",
+      "   KXXXXXXXXK   ",
+      "  KXXXXXXXXXK   ",
+      " KXXXXXXXXXXXK  ",
+      "KKKKXXXXXXXXXK  ",
+      "   KXXXXXXXXK   ",
+      "    KXXXXXXK    ",
+      "     KKOOKK     ",
+      "      KO OK     ",
       "                ",
       "                ",
       "                "
     ]
   },
+  // ⚙️ GEAR: C mascot - Improved mechanical gear with cogs
   gear: {
     normal: [
       "                ",
-      "      K  K      ",
-      "     KKKKKK     ",
-      "    KXXXXXXK    ",
-      "   KXXXXXXXXK   ",
-      "  KXKXXXXXXKXK  ",
-      " KKXXWK  KWXXKK ",
-      " KKXXKK  KKXXKK ",
-      "  KXKXXXXXXKXK  ",
-      "   KXXXXXXXXK   ",
-      "    KXXXXXXK    ",
-      "     KKKKKK     ",
-      "      K  K      ",
+      "     K K K      ",
+      "    KKKKKKK     ",
+      "   KXXXXXXXK    ",
+      "  KXXXXXXXXXK   ",
+      " KKXXKXXXKXXKK  ",
+      " KXXXKWWWKXXXK  ",
+      " KXXXKKKKXXXXK  ",
+      " KKXXKXXXKXXKK  ",
+      "  KXXXXXXXXXK   ",
+      "   KXXXXXXXK    ",
+      "    KKKKKKK     ",
+      "     K K K      ",
       "                ",
       "                ",
       "                "
     ],
     sleep: [
       "                ",
-      "      K  K      ",
-      "     KKKKKK     ",
-      "    KXXXXXXK    ",
-      "   KXXXXXXXXK   ",
-      "  KXKXXXXXXKXK  ",
-      " KKXXKK  KKXXKK ",
-      " KKXXKK  KKXXKK ",
-      "  KXKXXXXXXKXK  ",
-      "   KXXXXXXXXK   ",
-      "    KXXXXXXK    ",
-      "     KKKKKK     ",
-      "      K  K      ",
+      "     K K K      ",
+      "    KKKKKKK     ",
+      "   KXXXXXXXK    ",
+      "  KXXXXXXXXXK   ",
+      " KKXXKXXXKXXKK  ",
+      " KXXXKKKKKXXXK  ",
+      " KXXXKKKKXXXXK  ",
+      " KKXXKXXXKXXKK  ",
+      "  KXXXXXXXXXK   ",
+      "   KXXXXXXXK    ",
+      "    KKKKKKK     ",
+      "     K K K      ",
       "                ",
       "                ",
       "                "
     ],
     ghost: [
       "                ",
-      "      K  K      ",
-      "     KKKKKK     ",
-      "    KXXXXXXK    ",
-      "   K XXXXXX K   ",
-      "  KXKXXXXXXKXK  ",
-      " KKXXKK  KKXXKK ",
-      " KKXXKK  KKXXKK ",
-      "  K KXXXXXXK K  ",
-      "   KXXXXXXXXK   ",
-      "    K K  K K    ",
+      "     K   K      ",
+      "    K K K K     ",
+      "   KXXXXXXXK    ",
+      "  K XXXXXXX K   ",
+      " K XXKXXXKXX K  ",
+      " KXXXK   KXXXK  ",
+      " KXXXK   KXXXK  ",
+      " K XXKXXXKXX K  ",
+      "  K       K     ",
+      "                ",
       "                ",
       "                ",
       "                ",
@@ -2456,108 +3051,109 @@ const SPRITES = {
       "                "
     ],
     hyper: [
-      "                ",
-      "      K  K      ",
-      "     KKKKKK     ",
-      "    KXXXXXXK    ",
-      "   KXXXXXXXXK   ",
-      "  KXKXXXXXXKXK  ",
-      " KKXXRK  KRXXKK ",
-      " KKXXKK  KKXXKK ",
-      "  KXKXXXXXXKXK  ",
-      "   KXXXXXXXXK   ",
-      "    KXXXXXXK    ",
-      "     KRRKKK     ",
-      "      K  K      ",
+      "    R     R     ",
+      "     K K K      ",
+      "    KKKKKKK     ",
+      "   KXXXXXXXK    ",
+      "  KXXXXXXXXXK   ",
+      " KKXXKXXXKXXKK  ",
+      " KXXXKRRRXXXK   ",
+      " KXXXKKKKXXXXK  ",
+      " KKXXKXXXKXXKK  ",
+      "  KXXXXXXXXXK   ",
+      "   KXXXXXXXK    ",
+      "    KKKKKKK     ",
+      "     K R K      ",
       "                ",
       "                ",
       "                "
     ],
     nightowl: [
       "                ",
-      "      K  K      ",
-      "     KKKKKK     ",
-      "    KXXXXXXK    ",
-      "   KXXXXXXXXK   ",
-      "  KXKXXXXXXKXK  ",
-      " KKXXOK  KOXXKK ",
-      " KKXXOK  KOXXKK ",
-      "  KXKXXXXXXKXK  ",
-      "   KXXXXXXXXK   ",
-      "    KXXXXXXK    ",
-      "     KKKKKK     ",
-      "      K  K      ",
+      "     K K K      ",
+      "    KKKKKKK     ",
+      "   KXXXXXXXK    ",
+      "  KXXXXXXXXXK   ",
+      " KKXXKXXXKXXKK  ",
+      " KXXXKOOOKXXXK  ",
+      " KXXXKKKKXXXXK  ",
+      " KKXXKXXXKXXKK  ",
+      "  KXXXXXXXXXK   ",
+      "   KXXXXXXXK    ",
+      "    KKKKKKK     ",
+      "     K K K      ",
       "                ",
       "                ",
       "                "
     ],
     weekend: [
       "                ",
-      "      K  K      ",
-      "     KKKKKK     ",
-      "    KXXXXXXK    ",
-      "   KXXXXXXXXK   ",
-      "  KXKXXXXXXKXK  ",
-      " KKXXKK  KKXXKK ",
-      " KKXXKK  KKXXKK ",
-      "  KXKXXXXXXKXK  ",
-      "   KXXXXXXXXK   ",
-      "    KXXXXXXK    ",
-      "     KKKKKK     ",
-      "      K  K      ",
+      "     K K K      ",
+      "    KKKKKKK     ",
+      "   KXXXXXXXK    ",
+      "  KXXXXXXXXXK   ",
+      " KKXXKXXXKXXKK  ",
+      " KXXXKKKKKXXXK  ",
+      " KXXXKKKKXXXXK  ",
+      " KKXXKXXXKXXKK  ",
+      "  KXXXXXXXXXK   ",
+      "   KXXXXXXXK    ",
+      "    KKKKKKK     ",
+      "     K K K      ",
       "                ",
       "                ",
       "                "
     ]
   },
+  // 🪜 LADDER: Scala mascot - Improved with 3D perspective
   ladder: {
     normal: [
       "                ",
-      "    K      K    ",
-      "    KXXXXXXK    ",
-      "    K      K    ",
-      "    KXXXXXXK    ",
-      "    K  WW  K    ",
-      "    KXXKKXXK    ",
-      "    K      K    ",
-      "    KXXXXXXK    ",
-      "    K      K    ",
-      "    KXXXXXXK    ",
-      "    K      K    ",
-      "    K      K    ",
+      "   KK      KK   ",
+      "   KXKKKKKKXK   ",
+      "   KXK    KXK   ",
+      "   KXKKKKKKXK   ",
+      "   KXKWWWWKXK   ",
+      "   KXKKKKKKXK   ",
+      "   KXK    KXK   ",
+      "   KXKKKKKKXK   ",
+      "   KXK    KXK   ",
+      "   KXKKKKKKXK   ",
+      "   KXK    KXK   ",
+      "   KK      KK   ",
       "                ",
       "                ",
       "                "
     ],
     sleep: [
       "                ",
-      "    K      K    ",
-      "    KXXXXXXK    ",
-      "    K      K    ",
-      "    KXXXXXXK    ",
-      "    K  KK  K    ",
-      "    KXXXXXXK    ",
-      "    K      K    ",
-      "    KXXXXXXK    ",
-      "    K      K    ",
-      "    KXXXXXXK    ",
-      "    K      K    ",
-      "    K      K    ",
+      "   KK      KK   ",
+      "   KXKKKKKKXK   ",
+      "   KXK    KXK   ",
+      "   KXKKKKKKXK   ",
+      "   KXKKKKKXK    ",
+      "   KXKKKKKKXK   ",
+      "   KXK    KXK   ",
+      "   KXKKKKKKXK   ",
+      "   KXK    KXK   ",
+      "   KXKKKKKKXK   ",
+      "   KXK    KXK   ",
+      "   KK      KK   ",
       "                ",
       "                ",
       "                "
     ],
     ghost: [
       "                ",
-      "    K      K    ",
-      "    K  XX  K    ",
-      "    K      K    ",
-      "    K XXXX K    ",
-      "    K  KK  K    ",
-      "    K XXXX K    ",
-      "    K      K    ",
-      "    K  XX  K    ",
-      "    K      K    ",
+      "   K        K   ",
+      "   K K  K K K   ",
+      "   K K    K K   ",
+      "   K K  K K K   ",
+      "   K K    K K   ",
+      "   K K  K K K   ",
+      "   K K    K K   ",
+      "   K K  K K K   ",
+      "                ",
       "                ",
       "                ",
       "                ",
@@ -2566,109 +3162,110 @@ const SPRITES = {
       "                "
     ],
     hyper: [
-      "                ",
-      "    K      K    ",
-      "    KXXXXXXK    ",
-      "    K      K    ",
-      "    KXXXXXXK    ",
-      "    K  RR  K    ",
-      "    KXXKKXXK    ",
-      "    K      K    ",
-      "    KXXXXXXK    ",
-      "    K      K    ",
-      "    KXXXXXXK    ",
-      "    K      K    ",
-      "    K  RR  K    ",
+      "      RRR       ",
+      "   KK      KK   ",
+      "   KXKKKKKKXK   ",
+      "   KXK    KXK   ",
+      "   KXKKKKKKXK   ",
+      "   KXKRRRRXK    ",
+      "   KXKKKKKKXK   ",
+      "   KXK    KXK   ",
+      "   KXKKKKKKXK   ",
+      "   KXK    KXK   ",
+      "   KXKKKKKKXK   ",
+      "   KXK    KXK   ",
+      "   KK  RR  KK   ",
       "                ",
       "                ",
       "                "
     ],
     nightowl: [
       "                ",
-      "    K      K    ",
-      "    KXXXXXXK    ",
-      "    K      K    ",
-      "    KXXXXXXK    ",
-      "    K  OO  K    ",
-      "    K  OO  K    ",
-      "    K      K    ",
-      "    KXXXXXXK    ",
-      "    K      K    ",
-      "    KXXXXXXK    ",
-      "    K      K    ",
-      "    K      K    ",
+      "   KK      KK   ",
+      "   KXKKKKKKXK   ",
+      "   KXK    KXK   ",
+      "   KXKKKKKKXK   ",
+      "   KXKOOOOKXK   ",
+      "   KXKOOOOKXK   ",
+      "   KXK    KXK   ",
+      "   KXKKKKKKXK   ",
+      "   KXK    KXK   ",
+      "   KXKKKKKKXK   ",
+      "   KXK    KXK   ",
+      "   KK      KK   ",
       "                ",
       "                ",
       "                "
     ],
     weekend: [
       "                ",
-      "    K      K    ",
-      "    KXXXXXXK    ",
-      "    K      K    ",
-      "    KXXXXXXK    ",
-      "    K  KK  K    ",
-      "    KXXXXXXK    ",
-      "    K      K    ",
-      "    KXXXXXXK    ",
-      "    K      K    ",
-      "    KXXXXXXK    ",
-      "    K      K    ",
-      "    K      K    ",
+      "   KK      KK   ",
+      "   KXKKKKKKXK   ",
+      "   KXK    KXK   ",
+      "   KXKKKKKKXK   ",
+      "   KXKKKKKXK    ",
+      "   KXKKKKKKXK   ",
+      "   KXK    KXK   ",
+      "   KXKKKKKKXK   ",
+      "   KXK    KXK   ",
+      "   KXKKKKKKXK   ",
+      "   KXK    KXK   ",
+      "   KK      KK   ",
       "                ",
       "                ",
       "                "
     ]
   },
+  // 🦉 OWL: R mascot - Wise owl with big eyes and ear tufts
   owl: {
     normal: [
       "                ",
-      "     K    K     ",
-      "    KKK  KKK    ",
-      "   KXXXXXXXXXK  ",
-      "  KXXXXXXXXXXK  ",
-      "  KXXWK  KWXXK  ",
-      "  KXXKK  KKXXK  ",
-      "   KXXXXXXXXK   ",
-      "   KXX KK XXK   ",
-      "   KXXXXXXXXK   ",
-      "    KXXXXXXK    ",
-      "    KK    KK    ",
       "                ",
+      "   KK      KK   ",
+      "  KXXK    KXXK  ",
+      "  KXXKKKKKKKXXK ",
+      " KXXXXXXXXXXXXK ",
+      " KXXKWWKKWWKXXK ",
+      " KXXKKKKKKKXXK  ",
+      "  KXXXX  XXXXK  ",
+      "  KXXXYYYYYXXK  ",
+      "   KXXXXXXXXK   ",
+      "   KXKK  KKXK   ",
+      "    KK    KK    ",
       "                ",
       "                ",
       "                "
     ],
     sleep: [
       "                ",
-      "     K    K     ",
-      "    KKK  KKK    ",
-      "   KXXXXXXXXXK  ",
-      "  KXXXXXXXXXXK  ",
-      "  KXXKK  KKXXK  ",
-      "  KXXKK  KKXXK  ",
-      "   KXXXXXXXXK   ",
-      "   KXX KK XXK   ",
-      "   KXXXXXXXXK   ",
-      "    KXXXXXXK    ",
-      "    KK    KK    ",
       "                ",
+      "   KK      KK   ",
+      "  KXXK    KXXK  ",
+      "  KXXKKKKKKKXXK ",
+      " KXXXXXXXXXXXXK ",
+      " KXXKKKKKKKKKXK ",
+      " KXXKKKKKKKXXK  ",
+      "  KXXXX  XXXXK  ",
+      "  KXXXYYYYYXXK  ",
+      "   KXXXXXXXXK   ",
+      "   KXKK  KKXK   ",
+      "    KK    KK    ",
       "                ",
       "                ",
       "                "
     ],
     ghost: [
       "                ",
-      "     K    K     ",
-      "    K K  K K    ",
-      "   KXXXXXXXXXK  ",
-      "  KXXXXXXXXXXK  ",
-      "  KXXK    KXXK  ",
-      "  KXXK    KXXK  ",
-      "   KXXXXXXXXK   ",
-      "   K   KK   K   ",
-      "   KXXXXXXXXK   ",
-      "    K K  K K    ",
+      "                ",
+      "   K        K   ",
+      "  K  K    K  K  ",
+      "  KXXKKKKKKKXXK ",
+      " KXXXXXXXXXXXXK ",
+      " KXX KK  KK XXK ",
+      " KXXKKKKKKKXXK  ",
+      "  KXXXX  XXXXK  ",
+      "  K  XY  YX  K  ",
+      "   K K    K K   ",
       "                ",
       "                ",
       "                ",
@@ -2676,74 +3273,75 @@ const SPRITES = {
       "                "
     ],
     hyper: [
+      "      RRR       ",
       "                ",
-      "     K    K     ",
-      "    KKK  KKK    ",
-      "   KXXXXXXXXXK  ",
-      "  KXXXXXXXXXXK  ",
-      "  KXXRK  KRXXK  ",
-      "  KXXKK  KKXXK  ",
+      "   KK      KK   ",
+      "  KXXK    KXXK  ",
+      "  KXXKKKKKKKXXK ",
+      " KXXXXXXXXXXXXK ",
+      " KXXKRRKKRRKXXK ",
+      " KXXKKKKKKKXXK  ",
+      "  KXXXX  XXXXK  ",
+      "  KXXXRRRRXXXK  ",
       "   KXXXXXXXXK   ",
-      "   KXX KK XXK   ",
-      "   KXXXXXXXXK   ",
-      "    KXXXXXXK    ",
+      "   KXKK  KKXK   ",
       "    KR    RK    ",
-      "                ",
       "                ",
       "                ",
       "                "
     ],
     nightowl: [
       "                ",
-      "     K    K     ",
-      "    KKK  KKK    ",
-      "   KXXXXXXXXXK  ",
-      "  KXXXXXXXXXXK  ",
-      "  KXXOK  KOXXK  ",
-      "  KXXOK  KOXXK  ",
-      "   KXXXXXXXXK   ",
-      "   KXX KK XXK   ",
-      "   KXXXXXXXXK   ",
-      "    KXXXXXXK    ",
-      "    KK    KK    ",
       "                ",
+      "   KK      KK   ",
+      "  KXXK    KXXK  ",
+      "  KXXKKKKKKKXXK ",
+      " KXXXXXXXXXXXXK ",
+      " KXXKOOKKOKKXXK ",
+      " KXXKOOKKOKKXK  ",
+      "  KXXXX  XXXXK  ",
+      "  KXXXYYYYYXXK  ",
+      "   KXXXXXXXXK   ",
+      "   KXKK  KKXK   ",
+      "    KK    KK    ",
       "                ",
       "                ",
       "                "
     ],
     weekend: [
       "                ",
-      "     K    K     ",
-      "    KKK  KKK    ",
-      "   KXXXXXXXXXK  ",
-      "  KXXXXXXXXXXK  ",
-      "  KXXKK  KKXXK  ",
-      "  KXXKK  KKXXK  ",
-      "   KXXXXXXXXK   ",
-      "   KXX KK XXK   ",
-      "   KXXXXXXXXK   ",
-      "    KXXXXXXK    ",
-      "    KK    KK    ",
       "                ",
+      "   KK      KK   ",
+      "  KXXK    KXXK  ",
+      "  KXXKKKKKKKXXK ",
+      " KXXXXXXXXXXXXK ",
+      " KXXKKKKKKKKKXK ",
+      " KXXKKKKKKKXXK  ",
+      "  KXXXX  XXXXK  ",
+      "  KXXXYYYYYXXK  ",
+      "   KXXXXXXXXK   ",
+      "   KXKK  KKXK   ",
+      "    KK    KK    ",
       "                ",
       "                ",
       "                "
     ]
   },
+  // 🐫 CAMEL: Perl mascot - Desert camel with distinctive hump
   camel: {
     normal: [
       "                ",
-      "       KK       ",
-      "      KXXK      ",
-      "     KXXXXK     ",
-      "    KXXXXXXK    ",
-      "   KXXXXXXXXK   ",
-      "  KXXWKXXXXXXK  ",
-      "  KXXKKXXXXXXK  ",
-      "   KXXXXXXXXXK  ",
-      "   KXXXXXXXXXK  ",
-      "   KXXK   KXXK  ",
-      "    KK     KK   ",
+      "     KK         ",
+      "    KXXK        ",
+      "    KXXK   KKK  ",
+      "   KXXXXK KXXXK ",
+      "  KXXXXXXKXXXXK ",
+      " KXXWKXXXXXXXXK ",
+      " KXXKKXXXXXXXXK ",
+      " KXXXXXXXXXXXXK ",
+      "  KXKK    KKXK  ",
+      "   KK      KK   ",
+      "                ",
       "                ",
       "                ",
       "                ",
@@ -2751,17 +3349,17 @@ const SPRITES = {
     ],
     sleep: [
       "                ",
-      "       KK       ",
-      "      KXXK      ",
-      "     KXXXXK     ",
-      "    KXXXXXXK    ",
-      "   KXXXXXXXXK   ",
-      "  KXXKKXXXXXXK  ",
-      "  KXXKKXXXXXXK  ",
-      "   KXXXXXXXXXK  ",
-      "   KXXXXXXXXXK  ",
-      "   KXXK   KXXK  ",
-      "    KK     KK   ",
+      "     KK         ",
+      "    KXXK        ",
+      "    KXXK   KKK  ",
+      "   KXXXXK KXXXK ",
+      "  KXXXXXXKXXXXK ",
+      " KXXKKXXXXXXXXK ",
+      " KXXXXXXXXXXXXK ",
+      " KXXXXXXXXXXXXK ",
+      "  KXKK    KKXK  ",
+      "   KK      KK   ",
+      "                ",
       "                ",
       "                ",
       "                ",
@@ -2769,16 +3367,16 @@ const SPRITES = {
     ],
     ghost: [
       "                ",
-      "       KK       ",
-      "      K  K      ",
-      "     KXXXXK     ",
-      "    KXXXXXXK    ",
-      "   KXXXXXXXXK   ",
-      "  KXXKKXXXXXXK  ",
-      "  KXXKKXXXXXXK  ",
-      "   KXXXXXXXXXK  ",
-      "   K  XX X  K   ",
-      "   K K   K K    ",
+      "     K K        ",
+      "    K   K       ",
+      "    KXXK   KKK  ",
+      "   KXXXXK KXXXK ",
+      "  KXXXXXXKXXXXK ",
+      " KXXKKXXXXXXXXK ",
+      " KXXXXXXXXXXXXK ",
+      " K  X      X  K ",
+      "  K K      K K  ",
+      "                ",
       "                ",
       "                ",
       "                ",
@@ -2786,18 +3384,18 @@ const SPRITES = {
       "                "
     ],
     hyper: [
+      "      RRR       ",
+      "     KXXK       ",
+      "    KXXXK       ",
+      "    KXXK   KKK  ",
+      "   KXXXXK KXXXK ",
+      "  KXXXXXXKXXXXK ",
+      " KXXRKXXXXXXXXK ",
+      " KXXKKXXXXXXXXK ",
+      " KXXXXXXXXXXXXK ",
+      "  KXKR    RKXK  ",
+      "   KK      KK   ",
       "                ",
-      "       KK       ",
-      "      KXXK      ",
-      "     KXXXXK     ",
-      "    KXXXXXXK    ",
-      "   KXXXXXXXXK   ",
-      "  KXXRKXXXXXXK  ",
-      "  KXXKKXXXXXXK  ",
-      "   KXXXXXXXXXK  ",
-      "   KXXXXXXXXXK  ",
-      "   KXXK   KXXK  ",
-      "    KR     RK   ",
       "                ",
       "                ",
       "                ",
@@ -2805,17 +3403,17 @@ const SPRITES = {
     ],
     nightowl: [
       "                ",
-      "       KK       ",
-      "      KXXK      ",
-      "     KXXXXK     ",
-      "    KXXXXXXK    ",
-      "   KXXXXXXXXK   ",
-      "  KXXOKXXXXXXK  ",
-      "  KXXOKXXXXXXK  ",
-      "   KXXXXXXXXXK  ",
-      "   KXXXXXXXXXK  ",
-      "   KXXK   KXXK  ",
-      "    KK     KK   ",
+      "     KK         ",
+      "    KXXK        ",
+      "    KXXK   KKK  ",
+      "   KXXXXK KXXXK ",
+      "  KXXXXXXKXXXXK ",
+      " KXXOKXXXXXXXXK ",
+      " KXXOKXXXXXXXXK ",
+      " KXXXXXXXXXXXXK ",
+      "  KXKK    KKXK  ",
+      "   KK      KK   ",
+      "                ",
       "                ",
       "                ",
       "                ",
@@ -2823,17 +3421,17 @@ const SPRITES = {
     ],
     weekend: [
       "                ",
-      "       KK       ",
-      "      KXXK      ",
-      "     KXXXXK     ",
-      "    KXXXXXXK    ",
-      "   KXXXXXXXXK   ",
-      "  KXXKKXXXXXXK  ",
-      "  KXXKKXXXXXXK  ",
-      "   KXXXXXXXXXK  ",
-      "   KXXXXXXXXXK  ",
-      "   KXXK   KXXK  ",
-      "    KK     KK   ",
+      "     KK         ",
+      "    KXXK        ",
+      "    KXXK   KKK  ",
+      "   KXXXXK KXXXK ",
+      "  KXXXXXXKXXXXK ",
+      " KXXKKXXXXXXXXK ",
+      " KXXXXXXXXXXXXK ",
+      " KXXXXXXXXXXXXK ",
+      "  KXKK    KKXK  ",
+      "   KK      KK   ",
+      "                ",
       "                ",
       "                ",
       "                ",
@@ -2841,20 +3439,21 @@ const SPRITES = {
     ]
   },
   // --- WAVE 2 ---
+  // 🦫 CAPYBARA: Lua mascot - Chill rounded rodent relaxing
   capybara: {
     normal: [
       "                ",
-      "      KKKK      ",
-      "     KXXXXK     ",
-      "    KXXXXXXK    ",
+      "                ",
+      "    KK    KK    ",
+      "   KXXK  KXXK   ",
+      "  KXXXXXXXXXXK  ",
+      "  KXXWKKKWKXXK  ",
+      "  KXXKK  KKXXK  ",
+      "   KXXWWWWXXK   ",
       "   KXXXXXXXXK   ",
-      "  KXXWKXXWXXXK  ",
-      "  KXXKKXXKXXXK  ",
-      "   KXXXXXXXXXK  ",
-      "   KXXXXXXXXXK  ",
-      "   KXXXXXXXXXK  ",
-      "   KXXK   KXXK  ",
-      "    KK     KK   ",
+      "  KXXXXXXXXXXK  ",
+      "  KXXKK  KKXXK  ",
+      "   KKK    KKK   ",
       "                ",
       "                ",
       "                ",
@@ -2862,17 +3461,17 @@ const SPRITES = {
     ],
     sleep: [
       "                ",
-      "      KKKK      ",
-      "     KXXXXK     ",
-      "    KXXXXXXK    ",
+      "                ",
+      "    KK    KK    ",
+      "   KXXK  KXXK   ",
+      "  KXXXXXXXXXXK  ",
+      "  KXXKKKKKXXK   ",
+      "  KXXKK  KKXXK  ",
+      "   KXXWWWWXXK   ",
       "   KXXXXXXXXK   ",
-      "  KXXKKXXKXXXK  ",
-      "  KXXKKXXKXXXK  ",
-      "   KXXXXXXXXXK  ",
-      "   KXXXXXXXXXK  ",
-      "   KXXXXXXXXXK  ",
-      "   KXXK   KXXK  ",
-      "    KK     KK   ",
+      "  KXXXXXXXXXXK  ",
+      "  KXXKK  KKXXK  ",
+      "   KKK    KKK   ",
       "                ",
       "                ",
       "                ",
@@ -2880,16 +3479,16 @@ const SPRITES = {
     ],
     ghost: [
       "                ",
-      "      KKKK      ",
-      "     K    K     ",
-      "    KXXXXXXK    ",
-      "   KXXXXXXXXK   ",
-      "  KXXKKXXKXXXK  ",
-      "  KXXKKXXKXXXK  ",
-      "   KXXXXXXXXXK  ",
-      "   KXXXXXXXXXK  ",
-      "   K  X X   K   ",
-      "   K K   K K    ",
+      "                ",
+      "    K      K    ",
+      "   K  K  K  K   ",
+      "  KXXXXXXXXXXK  ",
+      "  KXX KK K XXK  ",
+      "  KXXKK  KKXXK  ",
+      "   KXXWWWWXXK   ",
+      "   K  X  X  K   ",
+      "  K K      K K  ",
+      "                ",
       "                ",
       "                ",
       "                ",
@@ -2897,18 +3496,18 @@ const SPRITES = {
       "                "
     ],
     hyper: [
+      "      RRR       ",
       "                ",
-      "      KKKK      ",
-      "     KXXXXK     ",
-      "    KXXXXXXK    ",
+      "    KK    KK    ",
+      "   KXXK  KXXK   ",
+      "  KXXXXXXXXXXK  ",
+      "  KXXRKKRKXXK   ",
+      "  KXXKK  KKXXK  ",
+      "   KXXRRRRXXK   ",
       "   KXXXXXXXXK   ",
-      "  KXXRKXXRXXXK  ",
-      "  KXXKKXXKXXXK  ",
-      "   KXXXXXXXXXK  ",
-      "   KXXXXXXXXXK  ",
-      "   KXXXXXXXXXK  ",
-      "   KXXK   KXXK  ",
-      "    KR     RK   ",
+      "  KXXXXXXXXXXK  ",
+      "  KXXKR  RKXXK  ",
+      "   KKK    KKK   ",
       "                ",
       "                ",
       "                ",
@@ -2916,17 +3515,17 @@ const SPRITES = {
     ],
     nightowl: [
       "                ",
-      "      KKKK      ",
-      "     KXXXXK     ",
-      "    KXXXXXXK    ",
+      "                ",
+      "    KK    KK    ",
+      "   KXXK  KXXK   ",
+      "  KXXXXXXXXXXK  ",
+      "  KXXOKKOKOXXK  ",
+      "  KXXOK  KOXXK  ",
+      "   KXXWWWWXXK   ",
       "   KXXXXXXXXK   ",
-      "  KXXOKXXOXXXK  ",
-      "  KXXOKXXOXXXK  ",
-      "   KXXXXXXXXXK  ",
-      "   KXXXXXXXXXK  ",
-      "   KXXXXXXXXXK  ",
-      "   KXXK   KXXK  ",
-      "    KK     KK   ",
+      "  KXXXXXXXXXXK  ",
+      "  KXXKK  KKXXK  ",
+      "   KKK    KKK   ",
       "                ",
       "                ",
       "                ",
@@ -2934,36 +3533,37 @@ const SPRITES = {
     ],
     weekend: [
       "                ",
-      "      KKKK      ",
-      "     KXXXXK     ",
-      "    KXXXXXXK    ",
+      "                ",
+      "    KK    KK    ",
+      "   KXXK  KXXK   ",
+      "  KXXXXXXXXXXK  ",
+      "  KXXKKKKKXXK   ",
+      "  KXXKK  KKXXK  ",
+      "   KXXWWWWXXK   ",
       "   KXXXXXXXXK   ",
-      "  KXXKKXXKXXXK  ",
-      "  KXXKKXXKXXXK  ",
-      "   KXXXXXXXXXK  ",
-      "   KXXXXXXXXXK  ",
-      "   KXXXXXXXXXK  ",
-      "   KXXK   KXXK  ",
-      "    KK     KK   ",
+      "  KXXXXXXXXXXK  ",
+      "  KXXKK  KKXXK  ",
+      "   KKK    KKK   ",
       "                ",
       "                ",
       "                ",
       "                "
     ]
   },
+  // 🦙 ALPACA: Fluffy mascot - Long neck with fluffy wool
   alpaca: {
     normal: [
       "                ",
-      "       KK       ",
-      "      KXXK      ",
+      "      KKKK      ",
+      "     KWWWWK     ",
+      "    KWWWWWWK    ",
+      "    KWWWWWWK    ",
+      "     KXXXXK     ",
+      "    KXWKKWXK    ",
+      "    KXKKKKXK    ",
       "     KXXXXK     ",
       "    KXXXXXXK    ",
-      "    KXWKXWKK    ",
-      "    KXKKXKKK    ",
-      "     KXXXXK     ",
-      "    KXXXXXXK    ",
-      "   KXXXXXXXXK   ",
-      "   KXXKKKKXXK   ",
+      "   KXKK  KKXK   ",
       "    KK    KK    ",
       "                ",
       "                ",
@@ -2972,16 +3572,16 @@ const SPRITES = {
     ],
     sleep: [
       "                ",
-      "       KK       ",
-      "      KXXK      ",
+      "      KKKK      ",
       "     KXXXXK     ",
       "    KXXXXXXK    ",
-      "    KXKKXKKK    ",
-      "    KXKKXKKK    ",
+      "    KXXXXXXK    ",
+      "     KXXXXK     ",
+      "    KXKKKKXK    ",
+      "    KXXXXXXK    ",
       "     KXXXXK     ",
       "    KXXXXXXK    ",
-      "   KXXXXXXXXK   ",
-      "   KXXKKKKXXK   ",
+      "   KXKK  KKXK   ",
       "    KK    KK    ",
       "                ",
       "                ",
@@ -2990,16 +3590,16 @@ const SPRITES = {
     ],
     ghost: [
       "                ",
-      "       KK       ",
       "      K  K      ",
-      "     KXXXXK     ",
+      "     K    K     ",
       "    KXXXXXXK    ",
-      "    KXKKXKKK    ",
-      "    KXKKXKKK    ",
-      "     KXXXXK     ",
       "    KXXXXXXK    ",
-      "   K  X X  K    ",
-      "   K K   K K    ",
+      "     KXXXXK     ",
+      "    KX KK XK    ",
+      "    KXXXXXXK    ",
+      "     K X  K     ",
+      "    K K  K K    ",
+      "                ",
       "                ",
       "                ",
       "                ",
@@ -3007,18 +3607,18 @@ const SPRITES = {
       "                "
     ],
     hyper: [
-      "                ",
-      "       KK       ",
-      "      KXXK      ",
+      "       RRR      ",
+      "      KWWWWK    ",
+      "     KWWWWWK    ",
+      "    KWWWWWWK    ",
+      "    KWWWWWWK    ",
+      "     KXXXXK     ",
+      "    KXRKKRXK    ",
+      "    KXKKKKXK    ",
       "     KXXXXK     ",
       "    KXXXXXXK    ",
-      "    KXRKXRKK    ",
-      "    KXKKXKKK    ",
-      "     KXXXXK     ",
-      "    KXXXXXXK    ",
-      "   KXXXXXXXXK   ",
-      "   KXXKKKKXXK   ",
-      "    KR    RK    ",
+      "   KXKR  RKXK   ",
+      "    KK    KK    ",
       "                ",
       "                ",
       "                ",
@@ -3026,16 +3626,16 @@ const SPRITES = {
     ],
     nightowl: [
       "                ",
-      "       KK       ",
-      "      KXXK      ",
+      "      KKKK      ",
       "     KXXXXK     ",
       "    KXXXXXXK    ",
-      "    KXOKXOKK    ",
-      "    KXOKXOKK    ",
+      "    KXXXXXXK    ",
+      "     KXXXXK     ",
+      "    KXOKKOXK    ",
+      "    KXOKKOXK    ",
       "     KXXXXK     ",
       "    KXXXXXXK    ",
-      "   KXXXXXXXXK   ",
-      "   KXXKKKKXXK   ",
+      "   KXKK  KKXK   ",
       "    KK    KK    ",
       "                ",
       "                ",
@@ -3044,16 +3644,16 @@ const SPRITES = {
     ],
     weekend: [
       "                ",
-      "       KK       ",
-      "      KXXK      ",
+      "      KKKK      ",
       "     KXXXXK     ",
       "    KXXXXXXK    ",
-      "    KXKKXKKK    ",
-      "    KXKKXKKK    ",
+      "    KXXXXXXK    ",
+      "     KXXXXK     ",
+      "    KXKKKKXK    ",
+      "    KXXXXXXK    ",
       "     KXXXXK     ",
       "    KXXXXXXK    ",
-      "   KXXXXXXXXK   ",
-      "   KXXKKKKXXK   ",
+      "   KXKK  KKXK   ",
       "    KK    KK    ",
       "                ",
       "                ",
@@ -3061,117 +3661,121 @@ const SPRITES = {
       "                "
     ]
   },
+  // 🔥 PHOENIX: Legendary fire bird rising from flames
   phoenix: {
     normal: [
-      "             R  ",
-      "   R        O   ",
-      "    O  RX   OXR ",
-      "  R O   GRO OR  ",
-      "    OY  YOOYOR  ",
-      "    OOOOYOOOORR ",
-      "    ROOOOOOOOX  ",
-      "     G RGOOO    ",
-      "  R       OO    ",
-      "   G  R   XXO   ",
-      "    R       O   ",
-      " RXXOGR     O   ",
-      "   OOOR     O   ",
-      "    OYO         ",
-      "     YOO  OY    ",
-      "      OOOO      "
+      "                ",
+      "      RRRR      ",
+      "     RROOORR    ",
+      "    KOOOOOOOK   ",
+      "   KOOWKKWOOOK  ",
+      "   KOOKKKKOOK   ",
+      "    KOOOOOOOK   ",
+      "   KOOYYYYOOOK  ",
+      "    KOOOOOOOK   ",
+      "   RRKOOOOOKRR  ",
+      "  RRR KKKKKK RR ",
+      "   RRR    RRR   ",
+      "     RRRRRR     ",
+      "                ",
+      "                ",
+      "                "
     ],
     sleep: [
-      "             R  ",
-      "   R        O   ",
-      "    O  RX   OXR ",
-      "  R O   GRO OR  ",
-      "    OY  YOOYOR  ",
-      "    OOOOYOOOORR ",
-      "    KOOOOOOOOX  ",
-      "     G RGOOO    ",
-      "  R       OO    ",
-      "   G  R   XXO   ",
-      "    R       O   ",
-      " RXXOGR     O   ",
-      "   OOOR     O   ",
-      "    OYO         ",
-      "     YOO  OY    ",
-      "      OOOO      "
+      "                ",
+      "       RRR      ",
+      "      ROOOR     ",
+      "    KOOOOOOOK   ",
+      "   KOOKKKKOOK   ",
+      "   KOOOOOOOOK   ",
+      "    KOOOOOOOK   ",
+      "   KOOYYYYOOOK  ",
+      "    KOOOOOOOK   ",
+      "     KOOOOK     ",
+      "      KKKKK     ",
+      "                ",
+      "                ",
+      "                ",
+      "                ",
+      "                "
     ],
     ghost: [
       "                ",
-      "              O ",
-      "    O  R    O R ",
-      "  R O    RO OR  ",
-      "    O   YOOYOR  ",
-      "    OOO YOOOO R ",
-      "    R OOOOOOO   ",
-      "      G R OOO   ",
-      "  R       OO    ",
-      "     G R   XO   ",
-      "    R       O   ",
-      "  X O R     O   ",
-      "   OOOR     O   ",
-      "    O O         ",
-      "     YOO  O     ",
-      "      OO O      "
+      "      R  R      ",
+      "     R    R     ",
+      "    KOOOOOOOK   ",
+      "   KOO KK OOK   ",
+      "   KOOOOOOOOK   ",
+      "    KOOOOOOOK   ",
+      "   KOO Y  OOOK  ",
+      "    K  OO  K    ",
+      "   K K    K K   ",
+      "                ",
+      "                ",
+      "                ",
+      "                ",
+      "                ",
+      "                "
     ],
     hyper: [
-      "   R         R  ",
-      "   R  R     O   ",
-      "    O  RX   OXR ",
-      "  R O   GRO OR  ",
-      "    OY  YOOYOR  ",
-      "    OOOOYOOOORR ",
-      "    ROOOOOOOOXR ",
-      "     G RGOOO    ",
-      "  R       OO    ",
-      "   G  R   XXO   ",
-      "    R       O   ",
-      " RXXOGR     O   ",
-      "   OOOR     OR  ",
-      "    OYO         ",
-      "     YOO  OY    ",
-      "      OOOO      "
+      "     RRRRR      ",
+      "    RRRRRRRR    ",
+      "   RRROOOOORRR  ",
+      "    KOOOOOOOK   ",
+      "   KOORKRKOOK   ",
+      "   KOOKKKKOOK   ",
+      "    KOOOOOOOK   ",
+      "   KOORRRROOK   ",
+      "    KOOOOOOOK   ",
+      "  RRRKOOOOOKRRR ",
+      " RRRR KKKKKK RRR",
+      "  RRRR    RRRR  ",
+      "   RRRRRRRRRR   ",
+      "     RRRRRR     ",
+      "                ",
+      "                "
     ],
     nightowl: [
-      "             R  ",
-      "   R        O   ",
-      "    O  RX   OXR ",
-      "  R O   ORO OR  ",
-      "    OY  YOOYOR  ",
-      "    OOOOYOOOORR ",
-      "    ROOOOOOOOX  ",
-      "     G RGOOO    ",
-      "  R       OO    ",
-      "   G  R   XXO   ",
-      "    R       O   ",
-      " RXXOGR     O   ",
-      "   OOOR     O   ",
-      "    OYO         ",
-      "     YOO  OY    ",
-      "      OOOO      "
+      "                ",
+      "      RRRR      ",
+      "     RROOORR    ",
+      "    KOOOOOOOK   ",
+      "   KOOOKKOOOK   ",
+      "   KOOOKKOOOK   ",
+      "    KOOOOOOOK   ",
+      "   KOOYYYYOOOK  ",
+      "    KOOOOOOOK   ",
+      "   RRKOOOOOKRR  ",
+      "  RRR KKKKKK RR ",
+      "   RRR    RRR   ",
+      "     RRRRRR     ",
+      "                ",
+      "                ",
+      "                "
     ],
     weekend: [
-      "             R  ",
-      "   R        O   ",
-      "    O  RX   OXR ",
-      "  R O   GRO OR  ",
-      "    OY  YOOYOR  ",
-      "    OOOOYOOOORR ",
-      "    KOOOOOOOOX  ",
-      "     G RGOOO    ",
-      "  R       OO    ",
-      "   G  R   XXO   ",
-      "    R       O   ",
-      " RXXOGR     O   ",
-      "   OOOR     O   ",
-      "    OYO         ",
-      "     YOO  OY    ",
-      "      OOOO      "
+      "                ",
+      "      RRRR      ",
+      "     RROOORR    ",
+      "    KOOOOOOOK   ",
+      "   KOOKKKKOOK   ",
+      "   KOOOOOOOOK   ",
+      "    KOOOOOOOK   ",
+      "   KOOYYYYOOOK  ",
+      "    KOOOOOOOK   ",
+      "   RRKOOOOOKRR  ",
+      "  RRR KKKKKK RR ",
+      "   RRR    RRR   ",
+      "     RRRRRR     ",
+      "                ",
+      "                ",
+      "                "
     ]
   }
 };
+
+// ====================================
+// LEGENDARY PETS (Special/Elite)
 
 // --- SEASONAL EVENT SYSTEM ---
 
@@ -3480,35 +4084,60 @@ const SEASONAL_ACCESSORIES = {
     </g>
   `,
 
-  // 💕 VALENTINE: Floating Pixel Heart
+  // 💕 VALENTINE: Floating Pixel Heart with pulse animation
   VALENTINE: (x, y) => `
     <g transform="translate(${x}, ${y})">
-      <!-- Pixel Heart -->
-      <rect x="4" y="0" width="8" height="4" fill="#FF6B9D"/>
-      <rect x="16" y="0" width="8" height="4" fill="#FF6B9D"/>
-      <rect x="0" y="4" width="28" height="4" fill="#FF6B9D"/>
-      <rect x="0" y="8" width="28" height="4" fill="#FF8FAB"/>
-      <rect x="4" y="12" width="20" height="4" fill="#FF8FAB"/>
-      <rect x="8" y="16" width="12" height="4" fill="#FFB3C6"/>
-      <rect x="12" y="20" width="4" height="4" fill="#FFB3C6"/>
-      <!-- Sparkle -->
-      <circle cx="8" cy="6" r="2" fill="#FFFFFF" opacity="0.7"/>
+      <g>
+        <!-- Pixel Heart -->
+        <rect x="4" y="0" width="8" height="4" fill="#FF6B9D"/>
+        <rect x="16" y="0" width="8" height="4" fill="#FF6B9D"/>
+        <rect x="0" y="4" width="28" height="4" fill="#FF6B9D"/>
+        <rect x="0" y="8" width="28" height="4" fill="#FF8FAB"/>
+        <rect x="4" y="12" width="20" height="4" fill="#FF8FAB"/>
+        <rect x="8" y="16" width="12" height="4" fill="#FFB3C6"/>
+        <rect x="12" y="20" width="4" height="4" fill="#FFB3C6"/>
+        <!-- Sparkle -->
+        <circle cx="8" cy="6" r="2" fill="#FFFFFF" opacity="0.7"/>
+        <!-- Pulse animation -->
+        <animateTransform 
+          attributeName="transform" 
+          type="scale" 
+          values="1;1.1;1" 
+          dur="1s" 
+          repeatCount="indefinite"
+          additive="sum"
+        />
+      </g>
     </g>
   `,
 
-  // 🌹 WOMENS_DAY: Red Rose Hairpin
+  // 🌹 WOMENS_DAY: Red Rose Hairpin with sway animation
   WOMENS_DAY: (x, y) => `
     <g transform="translate(${x}, ${y})">
-      <!-- Rose Petals -->
-      <ellipse cx="15" cy="12" rx="8" ry="6" fill="#E63946"/>
-      <ellipse cx="10" cy="15" rx="6" ry="5" fill="#D62839"/>
-      <ellipse cx="20" cy="15" rx="6" ry="5" fill="#D62839"/>
-      <ellipse cx="15" cy="18" rx="7" ry="5" fill="#C1121F"/>
-      <circle cx="15" cy="14" r="4" fill="#780000"/>
-      <!-- Stem -->
-      <rect x="14" y="22" width="2" height="12" fill="#2D6A4F"/>
-      <!-- Leaf -->
-      <ellipse cx="18" cy="28" rx="5" ry="3" fill="#40916C" transform="rotate(30, 18, 28)"/>
+      <g>
+        <!-- Rose Petals -->
+        <ellipse cx="15" cy="12" rx="8" ry="6" fill="#E63946"/>
+        <ellipse cx="10" cy="15" rx="6" ry="5" fill="#D62839"/>
+        <ellipse cx="20" cy="15" rx="6" ry="5" fill="#D62839"/>
+        <ellipse cx="15" cy="18" rx="7" ry="5" fill="#C1121F"/>
+        <circle cx="15" cy="14" r="4" fill="#780000"/>
+        <!-- Sparkle on rose -->
+        <circle cx="11" cy="11" r="1.5" fill="#FFFFFF" opacity="0.6">
+          <animate attributeName="opacity" values="0.6;1;0.6" dur="1.5s" repeatCount="indefinite"/>
+        </circle>
+        <!-- Stem -->
+        <rect x="14" y="22" width="2" height="12" fill="#2D6A4F"/>
+        <!-- Leaf -->
+        <ellipse cx="18" cy="28" rx="5" ry="3" fill="#40916C" transform="rotate(30, 18, 28)"/>
+        <!-- Gentle sway -->
+        <animateTransform 
+          attributeName="transform" 
+          type="rotate" 
+          values="0 15 20;3 15 20;0 15 20;-3 15 20;0 15 20" 
+          dur="4s" 
+          repeatCount="indefinite"
+        />
+      </g>
     </g>
   `,
 
@@ -3532,20 +4161,30 @@ const SEASONAL_ACCESSORIES = {
     </g>
   `,
 
-  // 🎃 HALLOWEEN: Cute Jack-o'-lantern Pumpkin
+  // 🎃 HALLOWEEN: Cute Jack-o'-lantern Pumpkin with glow animation
   HALLOWEEN: (x, y) => `
     <g transform="translate(${x}, ${y})">
+      <!-- Glow effect -->
+      <ellipse cx="21" cy="25" rx="24" ry="22" fill="#FF6D00" opacity="0.3">
+        <animate attributeName="opacity" values="0.2;0.4;0.2" dur="1.5s" repeatCount="indefinite"/>
+      </ellipse>
       <!-- Pumpkin Stem -->
       <rect x="18" y="0" width="6" height="8" rx="2" fill="#2D6A4F"/>
       <!-- Pumpkin Body -->
       <ellipse cx="21" cy="25" rx="20" ry="18" fill="#FF6D00"/>
       <ellipse cx="21" cy="25" rx="16" ry="15" fill="#FF8500"/>
-      <!-- Left Eye -->
-      <polygon points="10,20 15,15 18,22" fill="#2D333B"/>
-      <!-- Right Eye -->
-      <polygon points="24,22 27,15 32,20" fill="#2D333B"/>
-      <!-- Smile -->
-      <path d="M12,30 Q21,38 30,30" stroke="#2D333B" stroke-width="3" fill="none"/>
+      <!-- Left Eye with flicker -->
+      <polygon points="10,20 15,15 18,22" fill="#FFEB3B">
+        <animate attributeName="fill" values="#FFEB3B;#FFC107;#FFEB3B" dur="0.8s" repeatCount="indefinite"/>
+      </polygon>
+      <!-- Right Eye with flicker -->
+      <polygon points="24,22 27,15 32,20" fill="#FFEB3B">
+        <animate attributeName="fill" values="#FFEB3B;#FFC107;#FFEB3B" dur="0.8s" repeatCount="indefinite"/>
+      </polygon>
+      <!-- Smile with glow -->
+      <path d="M12,30 Q21,38 30,30" stroke="#FFEB3B" stroke-width="3" fill="none">
+        <animate attributeName="stroke" values="#FFEB3B;#FFC107;#FFEB3B" dur="0.8s" repeatCount="indefinite"/>
+      </path>
       <!-- Teeth -->
       <rect x="16" y="30" width="4" height="4" fill="#FF8500"/>
       <rect x="22" y="30" width="4" height="4" fill="#FF8500"/>
@@ -3567,7 +4206,7 @@ const SEASONAL_ACCESSORIES = {
     </g>
   `,
 
-  // 🎅 CHRISTMAS: Santa Hat
+  // 🎅 CHRISTMAS: Santa Hat with bouncing pom-pom
   CHRISTMAS: (x, y) => `
     <g transform="translate(${x}, ${y})">
       <!-- Hat Body -->
@@ -3576,13 +4215,22 @@ const SEASONAL_ACCESSORIES = {
       <!-- White Trim -->
       <ellipse cx="28" cy="48" rx="32" ry="8" fill="#FAFAFA"/>
       <ellipse cx="28" cy="48" rx="28" ry="5" fill="#EEEEEE"/>
-      <!-- Pom-pom -->
-      <circle cx="60" cy="28" r="10" fill="#FAFAFA"/>
-      <circle cx="62" cy="26" r="4" fill="#EEEEEE"/>
+      <!-- Pom-pom with bounce -->
+      <g>
+        <circle cx="60" cy="28" r="10" fill="#FAFAFA"/>
+        <circle cx="62" cy="26" r="4" fill="#EEEEEE"/>
+        <animateTransform 
+          attributeName="transform" 
+          type="translate" 
+          values="0 0;2 -3;0 0;-2 -3;0 0" 
+          dur="1.5s" 
+          repeatCount="indefinite"
+        />
+      </g>
     </g>
   `,
 
-  // 🧧 LUNAR_NEW_YEAR: Red Envelope (Lì Xì)
+  // 🧧 LUNAR_NEW_YEAR: Red Envelope (Lì Xì) with sparkle animation
   LUNAR_NEW_YEAR: (x, y) => `
     <g transform="translate(${x}, ${y})">
       <!-- Envelope Body -->
@@ -3590,16 +4238,25 @@ const SEASONAL_ACCESSORIES = {
       <rect x="2" y="2" width="31" height="46" rx="2" fill="#E53935"/>
       <!-- Gold Decorative Border -->
       <rect x="5" y="5" width="25" height="40" rx="1" stroke="#FFD700" stroke-width="2" fill="none"/>
-      <!-- Coin Symbol -->
+      <!-- Coin Symbol with shine -->
       <circle cx="17.5" cy="25" r="10" fill="#FFD700"/>
       <circle cx="17.5" cy="25" r="7" fill="#FFC107"/>
       <!-- Chinese Character 福 (Fortune) stylized -->
       <rect x="14" y="20" width="7" height="2" fill="#D32F2F"/>
       <rect x="16" y="22" width="3" height="6" fill="#D32F2F"/>
       <rect x="14" y="25" width="7" height="2" fill="#D32F2F"/>
-      <!-- Sparkle -->
-      <circle cx="10" cy="10" r="2" fill="#FFD700" opacity="0.8"/>
-      <circle cx="28" cy="40" r="1.5" fill="#FFD700" opacity="0.8"/>
+      <!-- Animated Sparkles -->
+      <circle cx="10" cy="10" r="2" fill="#FFD700">
+        <animate attributeName="opacity" values="0.3;1;0.3" dur="1s" repeatCount="indefinite"/>
+        <animate attributeName="r" values="1.5;2.5;1.5" dur="1s" repeatCount="indefinite"/>
+      </circle>
+      <circle cx="28" cy="8" r="1.5" fill="#FFFFFF">
+        <animate attributeName="opacity" values="0.5;1;0.5" dur="1.5s" repeatCount="indefinite"/>
+      </circle>
+      <circle cx="28" cy="40" r="1.5" fill="#FFD700">
+        <animate attributeName="opacity" values="0.5;1;0.5" dur="1.2s" repeatCount="indefinite"/>
+        <animate attributeName="r" values="1;2;1" dur="1.2s" repeatCount="indefinite"/>
+      </circle>
     </g>
   `,
 
@@ -3680,15 +4337,90 @@ function getSeasonalAccessory(timezone = 'UTC', petType = 'cat', spriteGrid = []
 // --- GAMIFICATION SYSTEM ---
 
 /**
- * Calculate XP and Level from total commits (RPG Mechanics)
- * @param {number} totalCommits - Total commit count
- * @returns {Object} { level, xp, nextLevelXp }
+ * RPG-Style Level Curve
+ * Uses exponential curve that scales well from 0 to 10000+ commits
+ * 
+ * Level Thresholds (commits needed):
+ * Lv1: 0     | Lv11: 100   | Lv21: 400   | Lv31: 900   | Lv41: 1600
+ * Lv2: 1     | Lv12: 121   | Lv22: 441   | Lv32: 961   | Lv42: 1681
+ * Lv3: 4     | Lv13: 144   | Lv23: 484   | Lv33: 1024  | Lv43: 1764
+ * Lv4: 9     | Lv14: 169   | Lv24: 529   | Lv34: 1089  | Lv44: 1849
+ * Lv5: 16    | Lv15: 196   | Lv25: 576   | Lv35: 1156  | Lv45: 1936
+ * Lv6: 25    | Lv16: 225   | Lv26: 625   | Lv36: 1225  | Lv46: 2025
+ * Lv7: 36    | Lv17: 256   | Lv27: 676   | Lv37: 1296  | Lv47: 2116
+ * Lv8: 49    | Lv18: 289   | Lv28: 729   | Lv38: 1369  | Lv48: 2209
+ * Lv9: 64    | Lv19: 324   | Lv29: 784   | Lv39: 1444  | Lv49: 2304
+ * Lv10: 81   | Lv20: 361   | Lv30: 841   | Lv40: 1521  | Lv50: 2401
+ * 
+ * Max Level: 100 (at 9801 commits)
+ * 
+ * @param {number} totalCommits - Total commit count (from GitHub Search API)
+ * @param {boolean} isDead - Whether pet is in ghost/dead state
+ * @returns {Object} { level, xp, currentLevelXp, nextLevelXp, xpProgress, maxLevel, evolutionStage }
  */
-function calculateStats(totalCommits) {
+function calculateStats(totalCommits, isDead = false) {
+  // If pet is dead, reset all stats
+  if (isDead) {
+    return {
+      level: 0,
+      xp: 0,
+      currentLevelXp: 0,
+      nextLevelXp: 1,
+      xpProgress: 0,
+      maxLevel: 100,
+      evolutionStage: 'dead',
+      evolutionIcon: '💀'
+    };
+  }
+
+  // 1 commit = 10 XP
   const xp = totalCommits * 10;
-  const level = Math.floor(Math.sqrt(xp) / 5) + 1;
-  const nextLevelXp = Math.pow(level * 5, 2);
-  return { level, xp, nextLevelXp };
+  
+  // Level formula: level = floor(sqrt(totalCommits)) + 1
+  // This gives a nice curve where each level needs more commits
+  const level = Math.min(100, Math.floor(Math.sqrt(totalCommits)) + 1);
+  
+  // XP thresholds for current and next level
+  const currentLevelXp = Math.pow(level - 1, 2) * 10; // XP needed to reach current level
+  const nextLevelXp = Math.pow(level, 2) * 10;        // XP needed to reach next level
+  
+  // Progress percentage within current level (0-100)
+  const xpInCurrentLevel = xp - currentLevelXp;
+  const xpNeededForNextLevel = nextLevelXp - currentLevelXp;
+  const xpProgress = Math.min(100, Math.floor((xpInCurrentLevel / xpNeededForNextLevel) * 100));
+
+  // Evolution stages based on level
+  let evolutionStage, evolutionIcon;
+  if (level <= 5) {
+    evolutionStage = 'egg';
+    evolutionIcon = '🥒';
+  } else if (level <= 15) {
+    evolutionStage = 'baby';
+    evolutionIcon = '🐣';
+  } else if (level <= 30) {
+    evolutionStage = 'child';
+    evolutionIcon = '🧒';
+  } else if (level <= 50) {
+    evolutionStage = 'teen';
+    evolutionIcon = '🧑';
+  } else if (level <= 75) {
+    evolutionStage = 'adult';
+    evolutionIcon = '👨';
+  } else {
+    evolutionStage = 'elder';
+    evolutionIcon = '👴';
+  }
+
+  return {
+    level,
+    xp,
+    currentLevelXp,
+    nextLevelXp,
+    xpProgress,
+    maxLevel: 100,
+    evolutionStage,
+    evolutionIcon
+  };
 }
 
 /**
@@ -3907,6 +4639,118 @@ async function fetchLegendaryStats(octokit, username, events, timezone, isStarga
   };
 }
 
+// ═══════════════════════════════════════════════════════════════════════════
+// MYTHICAL PET DETECTION - Ultra Rare Tier (Higher than Legendary)
+// Priority: Dragon > Leviathan > Thunderbird > Kitsune > Celestial
+// ═══════════════════════════════════════════════════════════════════════════
+
+/**
+ * Determine if user qualifies for a MYTHICAL Pet (Ultra rare tier)
+ * Priority Order (Hardest achievement first):
+ * 1. Dragon (Ancient) - totalCommits > 2000
+ * 2. Leviathan (Coder) - linesOfCode > 50000
+ * 3. Thunderbird (Merger) - prMerges >= 100
+ * 4. Kitsune (Multi-repo) - activeRepos >= 10
+ * 5. Celestial (Star) - starsReceived >= 50
+ * 
+ * @param {Object} stats - Extended user statistics object
+ * @returns {string|null} Mythical pet key or null if not qualified
+ */
+function getMythicalPet(stats) {
+  // Priority 1: Dragon (The Ancient) - HARDEST
+  if (stats.totalCommits > 2000) {
+    console.log('🐉 MYTHICAL: DRAGON unlocked! (2000+ commits - The Ancient Power)');
+    return 'dragon';
+  }
+
+  // Priority 2: Leviathan (The Deep Coder)
+  if (stats.linesOfCode >= 50000) {
+    console.log('🌊 MYTHICAL: LEVIATHAN unlocked! (50,000+ lines of code - The Deep Coder)');
+    return 'leviathan';
+  }
+
+  // Priority 3: Thunderbird (The Merger)
+  if (stats.prMerges >= 100) {
+    console.log('⚡ MYTHICAL: THUNDERBIRD unlocked! (100+ PR merges - The Storm Bringer)');
+    return 'thunderbird';
+  }
+
+  // Priority 4: Kitsune (The Multi-repo)
+  if (stats.activeRepos >= 10) {
+    console.log('🦊 MYTHICAL: KITSUNE unlocked! (10+ active repos - The Spirit Fox)');
+    return 'kitsune';
+  }
+
+  // Priority 5: Celestial (The Star) - Easiest mythical
+  if (stats.starsReceived >= 50) {
+    console.log('⭐ MYTHICAL: CELESTIAL unlocked! (50+ stars received - The Celestial)');
+    return 'celestial';
+  }
+
+  // No mythical status
+  return null;
+}
+
+/**
+ * Fetch extended stats for Mythical Pet detection
+ * @param {Object} octokit - GitHub API client
+ * @param {string} username - GitHub username
+ * @param {number} totalCommits - Already fetched total commits
+ * @returns {Object} Extended stats for mythical detection
+ */
+async function fetchMythicalStats(octokit, username, totalCommits) {
+  let linesOfCode = 0;
+  let prMerges = 0;
+  let activeRepos = 0;
+  let starsReceived = 0;
+
+  try {
+    // Fetch user repos
+    const { data: repos } = await octokit.rest.repos.listForUser({
+      username: username,
+      per_page: 100,
+      sort: 'updated',
+      type: 'owner'
+    });
+
+    // Count active repos (pushed in last 90 days)
+    const ninetyDaysAgo = new Date();
+    ninetyDaysAgo.setDate(ninetyDaysAgo.getDate() - 90);
+    activeRepos = repos.filter(r => new Date(r.pushed_at) > ninetyDaysAgo).length;
+
+    // Count total stars received
+    starsReceived = repos.reduce((sum, r) => sum + (r.stargazers_count || 0), 0);
+
+    // Estimate lines of code (rough estimate based on repo size)
+    // GitHub repo size is in KB, rough estimate: 1KB ≈ 30 lines of code
+    linesOfCode = repos.reduce((sum, r) => sum + ((r.size || 0) * 30), 0);
+
+    // Count merged PRs
+    try {
+      const { data: prSearch } = await octokit.rest.search.issuesAndPullRequests({
+        q: `author:${username} type:pr is:merged`,
+        per_page: 1
+      });
+      prMerges = prSearch.total_count || 0;
+    } catch (e) {
+      console.log('Could not fetch merged PRs:', e.message);
+    }
+
+  } catch (error) {
+    console.log('Warning: Could not fetch mythical stats:', error.message);
+  }
+
+  console.log(`Mythical Stats - Commits: ${totalCommits}, LoC: ${linesOfCode}, PRs: ${prMerges}, ActiveRepos: ${activeRepos}, Stars: ${starsReceived}`);
+
+  return {
+    totalCommits,
+    linesOfCode,
+    prMerges,
+    activeRepos,
+    starsReceived
+  };
+}
+
 /**
  * Generate Theme Background SVG elements
  * @param {string} theme - 'minimal', 'cyberpunk', 'nature'
@@ -4013,16 +4857,14 @@ async function run() {
     const moodInfo = getMood(events.data, timezone);
     console.log(`Mood: ${moodInfo.mood} ${moodInfo.icon}`);
 
-    // 3. Calculate Stats (Level & XP)
-    const totalCommits = events.data.filter(e => e.type === 'PushEvent').length;
-    const stats = calculateStats(totalCommits);
-    console.log(`Level: ${stats.level}, XP: ${stats.xp}/${stats.nextLevelXp}`);
+    // Check if pet is dead (ghost state)
+    const isDead = moodInfo.moodKey === 'ghost';
 
     // Calculate Streak (keep for logging)
     const streak = calculateStreak(events.data);
     console.log(`Current Streak: ${streak} days`);
 
-    // 4. Determine Pet Type (Species)
+    // 3. Determine Pet Type (Species)
     let petType = 'cat';
     let isLegendary = false;
 
@@ -4031,13 +4873,31 @@ async function run() {
     const isStargazer = starForkResult; // checkUserStarredOrForked returns true if starred
     const isForker = starForkResult;    // or forked (combined check)
 
-    // Fetch extended stats for Legendary Pet detection
+    // Fetch extended stats for Legendary Pet detection (includes accurate total commits)
     const legendaryStats = await fetchLegendaryStats(octokit, username, events.data, timezone, isStargazer, isForker);
+
+    // Fetch extended stats for Mythical Pet detection
+    const mythicalStats = await fetchMythicalStats(octokit, username, legendaryStats.totalCommits);
+
+    // 4. Calculate Stats (Level & XP) - Use accurate commit count, apply death penalty
+    const stats = calculateStats(legendaryStats.totalCommits, isDead);
+    console.log(`Level: ${stats.level}, XP: ${stats.xp}/${stats.nextLevelXp}, Evolution: ${stats.evolutionStage} ${stats.evolutionIcon}`);
+    if (isDead) {
+      console.log(`⚠️ Pet is DEAD (Ghost state) - Stats reset! Commit to revive.`);
+    }
+
+    // Check for Mythical Pet FIRST (higher tier than Legendary)
+    const mythicalPet = getMythicalPet(mythicalStats);
+    let isMythical = false;
 
     // Check for Legendary Pet (waterfall priority)
     const legendaryPet = getLegendaryPet(legendaryStats);
 
-    if (legendaryPet) {
+    if (mythicalPet) {
+      petType = mythicalPet;
+      isMythical = true;
+      console.log(`🌟 MYTHICAL Pet: ${petType.toUpperCase()}`);
+    } else if (legendaryPet) {
       petType = legendaryPet;
       isLegendary = true;
       console.log(`🏆 Legendary Pet: ${petType.toUpperCase()}`);
@@ -4069,7 +4929,8 @@ async function run() {
       showLevel: showLevel,
       stats: stats,
       moodInfo: moodInfo,
-      timezone: timezone
+      timezone: timezone,
+      streak: streak
     });
 
     // 6. Write to File
@@ -4187,17 +5048,17 @@ function renderPixelGrid(grid, baseColor, pixelSize = 10) {
 }
 
 function generateSVG(petType, mood, options = {}) {
-  const { theme = 'minimal', showLevel = true, stats = null, moodInfo = null, timezone = 'UTC' } = options;
+  const { theme = 'minimal', showLevel = true, stats = null, moodInfo = null, timezone = 'UTC', streak = 0 } = options;
 
-  // 1. Select the Sprite Set (check Legendary first, then Standard)
-  const spriteSet = LEGENDARY_SPRITES[petType] || SPRITES[petType] || SPRITES['cat'];
+  // 1. Select the Sprite Set (check Mythical first, then Legendary, then Standard)
+  const spriteSet = MYTHICAL_SPRITES[petType] || LEGENDARY_SPRITES[petType] || SPRITES[petType] || SPRITES['cat'];
 
   // 2. Select the specific Mood Grid
   const moodKey = moodInfo?.moodKey || ((mood === 'happy') ? 'normal' : mood);
   const spriteGrid = spriteSet[moodKey] || spriteSet['normal'];
 
-  // 3. Get base color (check Legendary first, then Standard)
-  const baseColor = LEGENDARY_COLORS[petType] || PET_COLORS[petType] || '#e5c07b';
+  // 3. Get base color (check Mythical first, then Legendary, then Standard)
+  const baseColor = MYTHICAL_COLORS[petType] || LEGENDARY_COLORS[petType] || PET_COLORS[petType] || '#e5c07b';
 
   const pixelSize = 16;
   const rows = spriteGrid.length;
@@ -4207,7 +5068,7 @@ function generateSVG(petType, mood, options = {}) {
 
   // Calculate SVG dimensions (extra space for stats if needed)
   const svgWidth = width + 40;
-  const svgHeight = height + (showLevel && stats ? 55 : 40);
+  const svgHeight = height + (showLevel && stats ? 85 : 40); // Increased for XP bar
 
   // Ghost Logic: Override Base Color
   const finalBaseColor = moodKey === 'ghost' ? '#abb2bf' : baseColor;
@@ -4223,6 +5084,7 @@ function generateSVG(petType, mood, options = {}) {
 
   let animation = '';
   if (moodKey === 'normal') {
+    // Happy bounce animation
     animation = `
         <animateTransform 
             attributeName="transform" 
@@ -4232,6 +5094,7 @@ function generateSVG(petType, mood, options = {}) {
             repeatCount="indefinite" 
         />`;
   } else if (moodKey === 'sleeping') {
+    // Breathing/sleeping animation
     animation = `
         <animateTransform 
             attributeName="transform" 
@@ -4240,14 +5103,97 @@ function generateSVG(petType, mood, options = {}) {
             dur="2s" 
             repeatCount="indefinite" 
         />`;
+  } else if (moodKey === 'hyper') {
+    // Fast shake animation for hyper mode
+    animation = `
+        <animateTransform 
+            attributeName="transform" 
+            type="translate" 
+            values="0 0; -2 -2; 2 -4; -2 -2; 0 0" 
+            dur="0.3s" 
+            repeatCount="indefinite" 
+        />`;
+  } else if (moodKey === 'ghost') {
+    // Floating/fading ghost animation
+    animation = `
+        <animateTransform 
+            attributeName="transform" 
+            type="translate" 
+            values="0 0; 0 -8; 0 0" 
+            dur="3s" 
+            repeatCount="indefinite" 
+        />
+        <animate
+            attributeName="opacity"
+            values="0.7; 0.4; 0.7"
+            dur="2s"
+            repeatCount="indefinite"
+        />`;
+  } else if (moodKey === 'nightowl') {
+    // Subtle glow/pulse for night owl
+    animation = `
+        <animateTransform 
+            attributeName="transform" 
+            type="scale" 
+            values="1 1; 1.01 1.01; 1 1" 
+            dur="1.5s" 
+            repeatCount="indefinite" 
+        />`;
+  } else if (moodKey === 'weekend') {
+    // Relaxed sway animation
+    animation = `
+        <animateTransform 
+            attributeName="transform" 
+            type="rotate" 
+            values="0; 2; 0; -2; 0" 
+            dur="2s" 
+            repeatCount="indefinite" 
+        />`;
   }
 
-  // Build stats display
+  // Build stats display with XP progress bar
   let statsDisplay = '';
   if (showLevel && stats && moodInfo) {
+    const barWidth = svgWidth - 40; // Full width minus margins
+    const barHeight = 8;
+    const barY = height + 50;
+    const xpProgress = stats.xpProgress || 0;
+    const progressWidth = (xpProgress / 100) * barWidth;
+    
+    // Progress bar colors based on theme
+    const barBgColor = theme === 'cyberpunk' ? '#1a0a2e' : (theme === 'nature' ? '#c8e6c9' : '#e0e0e0');
+    const barFillColor = theme === 'cyberpunk' ? '#ff00ff' : (theme === 'nature' ? '#4caf50' : '#4fc3f7');
+    const barBorderColor = theme === 'cyberpunk' ? '#00ffff' : (theme === 'nature' ? '#2e7d32' : '#0288d1');
+    
+    // Death state: Red/grey colors
+    const isDead = moodKey === 'ghost';
+    const actualBarFill = isDead ? '#e53935' : barFillColor;
+    const actualProgress = isDead ? 0 : progressWidth;
+
+    // Streak fire icon (show if streak >= 3)
+    const streakDisplay = streak >= 3 ? `🔥${streak}` : (streak > 0 ? `⚡${streak}` : '');
+    
+    // Evolution icon
+    const evolutionDisplay = stats.evolutionIcon || '';
+    
     statsDisplay = `
-      <text x="50%" y="${height + 50}" text-anchor="middle" font-family="monospace" font-size="11" fill="${textColor}">
-        Lvl ${stats.level} • ${moodInfo.icon} ${moodInfo.mood.toUpperCase()}
+      <!-- Level & Mood Text -->
+      <text x="20" y="${height + 43}" font-family="monospace" font-size="11" fill="${textColor}">
+        ${evolutionDisplay} Lv.${stats.level}
+      </text>
+      <text x="${svgWidth - 20}" y="${height + 43}" text-anchor="end" font-family="monospace" font-size="11" fill="${textColor}">
+        ${moodInfo.icon} ${moodInfo.mood.toUpperCase()} ${streakDisplay}
+      </text>
+      
+      <!-- XP Progress Bar -->
+      <rect x="20" y="${barY}" width="${barWidth}" height="${barHeight}" rx="4" fill="${barBgColor}" stroke="${barBorderColor}" stroke-width="1"/>
+      <rect x="20" y="${barY}" width="${actualProgress}" height="${barHeight}" rx="4" fill="${actualBarFill}">
+        ${!isDead ? `<animate attributeName="width" from="0" to="${actualProgress}" dur="0.5s" fill="freeze"/>` : ''}
+      </rect>
+      
+      <!-- XP Text -->
+      <text x="50%" y="${barY + barHeight + 15}" text-anchor="middle" font-family="monospace" font-size="9" fill="${textColor}">
+        ${isDead ? '💀 DEAD - Commit to revive!' : `XP: ${stats.xp} / ${stats.nextLevelXp} (${xpProgress}%)`}
       </text>
     `;
   }
