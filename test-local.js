@@ -254,7 +254,24 @@ const RELATIVE_ACCESSORY_OFFSETS = {
     CHRISTMAS: { x: -30, y: -45 },
     LUNAR_NEW_YEAR: { x: 20, y: 0 },
     FRIDAY_13: { x: -35, y: -5 },
-    APRIL_FOOLS: { x: -30, y: -45 }
+    APRIL_FOOLS: { x: -30, y: -45 },
+    ST_PATRICKS: { x: -15, y: -50 },
+    NOWRUZ: { x: -10, y: -20 },
+    EASTER: { x: -15, y: -55 },
+    MID_AUTUMN: { x: -5, y: -60 },
+    DIWALI: { x: -10, y: -30 },
+    THANKSGIVING: { x: -15, y: -50 },
+    HOLI: { x: -10, y: -30 },
+    EID: { x: -10, y: -40 },
+    EARTH_DAY: { x: -10, y: -30 },
+    LABOR_DAY: { x: -15, y: -45 },
+    PRIDE: { x: -15, y: -50 },
+    HANUKKAH: { x: -15, y: -40 },
+    PI_DAY: { x: -15, y: -45 },
+    STAR_WARS_DAY: { x: 20, y: -5 },
+    PIRATE_DAY: { x: -15, y: -50 },
+    SINGLES_DAY: { x: -15, y: -35 },
+    SYSADMIN_DAY: { x: -10, y: -30 }
 };
 
 // Accessory SVG generators
@@ -354,6 +371,194 @@ const SEASONAL_ACCESSORIES_FN = {
             <path d="M60,50 Q70,30 65,5 Q70,0 75,5 L70,50 Z" fill="#2196F3"/>
             <circle cx="70" cy="5" r="6" fill="#FFD700"/>
             <rect x="15" y="45" width="60" height="8" rx="3" fill="#E91E63"/>
+        </g>
+    `,
+    ST_PATRICKS: (x, y) => `
+        <g transform="translate(${x}, ${y})">
+            <!-- Leprechaun Hat -->
+            <ellipse cx="25" cy="50" rx="30" ry="6" fill="#1B5E20"/>
+            <rect x="8" y="15" width="34" height="35" rx="3" fill="#2E7D32"/>
+            <rect x="5" y="45" width="40" height="8" fill="#1B5E20"/>
+            <!-- Gold buckle -->
+            <rect x="15" y="35" width="20" height="15" rx="2" fill="#FFD700"/>
+            <rect x="19" y="39" width="12" height="7" fill="#2E7D32"/>
+            <!-- Shamrock -->
+            <g transform="translate(35, 5)">
+                <ellipse cx="0" cy="-5" rx="5" ry="4" fill="#4CAF50"/>
+                <ellipse cx="-5" cy="0" rx="4" ry="5" fill="#4CAF50"/>
+                <ellipse cx="5" cy="0" rx="4" ry="5" fill="#4CAF50"/>
+                <rect x="-1" y="3" width="2" height="8" fill="#2E7D32"/>
+            </g>
+        </g>
+    `,
+    NOWRUZ: (x, y) => `
+        <g transform="translate(${x}, ${y})">
+            <!-- Haft-sin table simplified -->
+            <ellipse cx="25" cy="45" rx="28" ry="8" fill="#8D6E63"/>
+            <!-- Sabzeh (sprouts) -->
+            <g fill="#4CAF50">
+                <rect x="8" y="30" width="2" height="15"/>
+                <rect x="12" y="28" width="2" height="17"/>
+                <rect x="16" y="32" width="2" height="13"/>
+            </g>
+            <!-- Goldfish bowl -->
+            <ellipse cx="35" cy="38" rx="8" ry="6" fill="#81D4FA"/>
+            <ellipse cx="36" cy="39" rx="3" ry="2" fill="#FF9800"/>
+            <!-- Candle -->
+            <rect x="22" y="25" width="6" height="20" fill="#FFECB3"/>
+            <ellipse cx="25" cy="22" rx="4" ry="6" fill="#FF9800"/>
+            <ellipse cx="25" cy="20" rx="2" ry="4" fill="#FFEB3B"/>
+        </g>
+    `,
+    EASTER: (x, y) => `
+        <g transform="translate(${x}, ${y})">
+            <!-- Easter Bunny Ears -->
+            <ellipse cx="12" cy="25" rx="8" ry="25" fill="#FFCCBC"/>
+            <ellipse cx="12" cy="25" rx="5" ry="20" fill="#FFAB91"/>
+            <ellipse cx="38" cy="25" rx="8" ry="25" fill="#FFCCBC"/>
+            <ellipse cx="38" cy="25" rx="5" ry="20" fill="#FFAB91"/>
+            <!-- Easter Egg -->
+            <ellipse cx="25" cy="55" rx="12" ry="15" fill="#E1BEE7"/>
+            <path d="M15,50 Q25,45 35,50" stroke="#7B1FA2" stroke-width="3" fill="none"/>
+            <path d="M15,55 Q25,60 35,55" stroke="#7B1FA2" stroke-width="3" fill="none"/>
+            <circle cx="20" cy="52" r="2" fill="#FFEB3B"/>
+            <circle cx="30" cy="58" r="2" fill="#4CAF50"/>
+        </g>
+    `,
+    MID_AUTUMN: (x, y) => `
+        <g transform="translate(${x}, ${y})">
+            <!-- Lantern -->
+            <rect x="22" y="0" width="6" height="8" fill="#D84315"/>
+            <ellipse cx="25" cy="30" rx="18" ry="22" fill="#FF5722"/>
+            <ellipse cx="25" cy="30" rx="14" ry="18" fill="#FF7043"/>
+            <!-- Lantern lines -->
+            <line x1="25" y1="8" x2="25" y2="52" stroke="#BF360C" stroke-width="2"/>
+            <path d="M10,20 Q25,15 40,20" stroke="#BF360C" stroke-width="1.5" fill="none"/>
+            <path d="M10,40 Q25,45 40,40" stroke="#BF360C" stroke-width="1.5" fill="none"/>
+            <!-- Glow effect -->
+            <ellipse cx="25" cy="30" rx="10" ry="12" fill="#FFEB3B" opacity="0.3"/>
+            <!-- Tassel -->
+            <rect x="23" y="52" width="4" height="5" fill="#D84315"/>
+            <line x1="22" y1="57" x2="22" y2="65" stroke="#FF5722" stroke-width="2"/>
+            <line x1="25" y1="57" x2="25" y2="68" stroke="#FF5722" stroke-width="2"/>
+            <line x1="28" y1="57" x2="28" y2="65" stroke="#FF5722" stroke-width="2"/>
+        </g>
+    `,
+    DIWALI: (x, y) => `
+        <g transform="translate(${x}, ${y})">
+            <!-- Diya (oil lamp) -->
+            <ellipse cx="25" cy="45" rx="20" ry="8" fill="#8D6E63"/>
+            <ellipse cx="25" cy="42" rx="16" ry="6" fill="#A1887F"/>
+            <ellipse cx="25" cy="40" rx="12" ry="4" fill="#FFB300"/>
+            <!-- Flame -->
+            <ellipse cx="25" cy="30" rx="6" ry="12" fill="#FF9800"/>
+            <ellipse cx="25" cy="28" rx="4" ry="8" fill="#FFEB3B"/>
+            <ellipse cx="25" cy="26" rx="2" ry="5" fill="#FFFFFF"/>
+            <!-- Sparkles around -->
+            <circle cx="8" cy="20" r="2" fill="#FFD700">
+                <animate attributeName="opacity" values="0.3;1;0.3" dur="1s" repeatCount="indefinite"/>
+            </circle>
+            <circle cx="42" cy="25" r="2" fill="#FFD700">
+                <animate attributeName="opacity" values="0.5;1;0.5" dur="0.8s" repeatCount="indefinite"/>
+            </circle>
+            <circle cx="15" cy="55" r="1.5" fill="#FFD700">
+                <animate attributeName="opacity" values="0.4;1;0.4" dur="1.2s" repeatCount="indefinite"/>
+            </circle>
+            <circle cx="38" cy="50" r="1.5" fill="#FFD700">
+                <animate attributeName="opacity" values="0.6;1;0.6" dur="0.9s" repeatCount="indefinite"/>
+            </circle>
+        </g>
+    `,
+    THANKSGIVING: (x, y) => `
+        <g transform="translate(${x}, ${y})">
+            <!-- Pilgrim Hat -->
+            <ellipse cx="25" cy="50" rx="28" ry="6" fill="#212121"/>
+            <rect x="8" y="20" width="34" height="30" rx="2" fill="#424242"/>
+            <rect x="5" y="45" width="40" height="8" fill="#212121"/>
+            <!-- Buckle -->
+            <rect x="17" y="35" width="16" height="12" rx="1" fill="#FFD700"/>
+            <rect x="20" y="38" width="10" height="6" fill="#424242"/>
+        </g>
+    `,
+    HOLI: (x, y) => `
+        <g transform="translate(${x}, ${y})">
+            <!-- Color powder splashes -->
+            <circle cx="15" cy="20" r="12" fill="#E91E63" opacity="0.8"/>
+            <circle cx="35" cy="15" r="10" fill="#2196F3" opacity="0.8"/>
+            <circle cx="25" cy="35" r="14" fill="#FFEB3B" opacity="0.8"/>
+            <circle cx="40" cy="40" r="8" fill="#4CAF50" opacity="0.8"/>
+            <circle cx="10" cy="40" r="9" fill="#9C27B0" opacity="0.8"/>
+            <!-- Powder particles -->
+            <circle cx="20" cy="10" r="3" fill="#FF9800"/>
+            <circle cx="45" cy="25" r="2" fill="#E91E63"/>
+            <circle cx="5" cy="30" r="2" fill="#2196F3"/>
+        </g>
+    `,
+    EID: (x, y) => `
+        <g transform="translate(${x}, ${y})">
+            <!-- Crescent moon -->
+            <circle cx="25" cy="25" r="18" fill="#1A237E"/>
+            <circle cx="32" cy="20" r="14" fill="#0D1B2A"/>
+            <!-- Star -->
+            <polygon points="40,30 42,36 48,36 43,40 45,46 40,42 35,46 37,40 32,36 38,36" fill="#FFD700"/>
+            <!-- Mosque silhouette -->
+            <rect x="10" y="45" width="30" height="15" fill="#1A237E"/>
+            <ellipse cx="25" cy="45" rx="10" ry="8" fill="#1A237E"/>
+            <rect x="8" y="40" width="4" height="20" fill="#1A237E"/>
+            <rect x="38" y="40" width="4" height="20" fill="#1A237E"/>
+        </g>
+    `,
+    EARTH_DAY: (x, y) => `
+        <g transform="translate(${x}, ${y})">
+            <!-- Earth Globe -->
+            <circle cx="25" cy="25" r="22" fill="#4169E1"/>
+            <ellipse cx="20" cy="18" rx="10" ry="6" fill="#228B22" transform="rotate(-20 20 18)"/>
+            <ellipse cx="32" cy="30" rx="8" ry="10" fill="#228B22" transform="rotate(30 32 30)"/>
+            <ellipse cx="15" cy="35" rx="5" ry="4" fill="#228B22"/>
+            <!-- Leaf -->
+            <ellipse cx="40" cy="5" rx="8" ry="12" fill="#32CD32" transform="rotate(30 40 5)"/>
+        </g>
+    `,
+    LABOR_DAY: (x, y) => `
+        <g transform="translate(${x}, ${y})">
+            <!-- Hard Hat -->
+            <ellipse cx="25" cy="40" rx="28" ry="8" fill="#FFA000"/>
+            <ellipse cx="25" cy="30" rx="24" ry="18" fill="#FFD700"/>
+            <rect x="22" y="10" width="6" height="20" rx="3" fill="#FFC107"/>
+            <ellipse cx="15" cy="25" rx="6" ry="8" fill="#FFEB3B" opacity="0.4"/>
+        </g>
+    `,
+    PRIDE: (x, y) => `
+        <g transform="translate(${x}, ${y})">
+            <!-- Rainbow stripes -->
+            <rect x="0" y="15" width="50" height="5" fill="#E40303"/>
+            <rect x="0" y="20" width="50" height="5" fill="#FF8C00"/>
+            <rect x="0" y="25" width="50" height="5" fill="#FFED00"/>
+            <rect x="0" y="30" width="50" height="5" fill="#008026"/>
+            <rect x="0" y="35" width="50" height="5" fill="#004DFF"/>
+            <rect x="0" y="40" width="50" height="5" fill="#750787"/>
+            <!-- Crown spikes -->
+            <polygon points="5,15 10,0 15,15" fill="#FFD700"/>
+            <polygon points="20,15 25,-5 30,15" fill="#FFD700"/>
+            <polygon points="35,15 40,0 45,15" fill="#FFD700"/>
+        </g>
+    `,
+    HANUKKAH: (x, y) => `
+        <g transform="translate(${x}, ${y})">
+            <!-- Menorah base -->
+            <rect x="20" y="50" width="20" height="5" rx="2" fill="#FFD700"/>
+            <rect x="25" y="40" width="10" height="12" fill="#FFD700"/>
+            <!-- Center shamash -->
+            <rect x="28" y="15" width="4" height="25" fill="#FFD700"/>
+            <ellipse cx="30" cy="10" rx="4" ry="6" fill="#FF6347"/>
+            <ellipse cx="30" cy="8" rx="2" ry="4" fill="#FFEB3B"/>
+            <!-- Candles -->
+            <rect x="10" y="25" width="3" height="15" fill="#87CEEB"/>
+            <ellipse cx="11.5" cy="22" rx="2" ry="4" fill="#FF6347"/>
+            <rect x="47" y="25" width="3" height="15" fill="#87CEEB"/>
+            <ellipse cx="48.5" cy="22" rx="2" ry="4" fill="#FF6347"/>
+            <!-- Arms -->
+            <path d="M12,40 Q12,35 22,35 L38,35 Q48,35 48,40" stroke="#FFD700" stroke-width="3" fill="none"/>
         </g>
     `
 };
