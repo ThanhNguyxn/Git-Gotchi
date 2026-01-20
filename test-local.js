@@ -368,7 +368,13 @@ const seasonalDemos = [
     { name: 'womensday', label: '🌹 WOMENS DAY', event: 'WOMENS_DAY' },
     { name: 'mensday', label: '🎩 MENS DAY', event: 'MENS_DAY' },
     { name: 'friday13', label: '👻 FRIDAY 13TH', event: 'FRIDAY_13' },
-    { name: 'aprilfools', label: '🤡 APRIL FOOLS', event: 'APRIL_FOOLS' }
+    { name: 'aprilfools', label: '🤡 APRIL FOOLS', event: 'APRIL_FOOLS' },
+    { name: 'stpatricks', label: '☘️ ST PATRICKS', event: 'ST_PATRICKS' },
+    { name: 'nowruz', label: '🌸 NOWRUZ', event: 'NOWRUZ' },
+    { name: 'easter', label: '🐰 EASTER', event: 'EASTER' },
+    { name: 'midautumn', label: '🥮 MID AUTUMN', event: 'MID_AUTUMN' },
+    { name: 'diwali', label: '🪔 DIWALI', event: 'DIWALI' },
+    { name: 'thanksgiving', label: '🦃 THANKSGIVING', event: 'THANKSGIVING' }
 ];
 
 seasonalDemos.forEach(({ name, label, event }) => {
@@ -549,5 +555,154 @@ seasonalDemos.forEach(({ name, label, event }) => {
         console.log(`Generated mythical_${name}.svg`);
     });
 }
+
+// --- WAVE 3 PETS DEMO ---
+const wave3Pets = [
+    { name: 'salamander', label: '🦎 Salamander (Zig)', color: '#f7a41d' },
+    { name: 'hedgehog', label: '🦔 Hedgehog (Haskell)', color: '#5e5086' },
+    { name: 'octopus', label: '🐙 Octopus (Clojure)', color: '#5881d8' },
+    { name: 'ant', label: '🐜 Ant (Assembly)', color: '#4d4d4d' },
+    { name: 'dino', label: '🦕 Dino (COBOL)', color: '#4b6c8c' },
+    { name: 'lion', label: '🦁 Lion (Nim)', color: '#ffe953' }
+];
+
+wave3Pets.forEach(({ name, label, color }) => {
+    const spriteSet = SPRITES[name];
+    if (!spriteSet) {
+        console.log(`Skipping ${name} - no sprite found`);
+        return;
+    }
+    
+    const spriteGrid = spriteSet['normal'];
+    const pixelSize = 16;
+    const rows = spriteGrid.length;
+    const cols = spriteGrid[0].length;
+    const width = cols * pixelSize;
+    const height = rows * pixelSize;
+    const svgWidth = width + 40;
+    const svgHeight = height + 50;
+
+    const pixelArt = renderPixelGrid(spriteGrid, color, pixelSize);
+    const themeBackground = getThemeBackground('minimal', svgWidth, svgHeight);
+
+    const animation = `<animateTransform attributeName="transform" type="translate" values="0 0; 0 -4; 0 0" dur="0.5s" repeatCount="indefinite" />`;
+
+    const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${svgWidth}" height="${svgHeight}" viewBox="0 0 ${svgWidth} ${svgHeight}">
+      <style>.pet { transform-origin: center; }</style>
+      ${themeBackground}
+      <g transform="translate(20, 20)">
+        <g class="pet">${pixelArt}${animation}</g>
+      </g>
+      <text x="50%" y="${height + 40}" text-anchor="middle" font-family="monospace" font-size="9" fill="#666">${label}</text>
+    </svg>`;
+
+    fs.writeFileSync(`dist/wave3_${name}.svg`, svg);
+    console.log(`Generated wave3_${name}.svg`);
+});
+
+// --- NEW HOLIDAYS DEMO ---
+const newHolidayAccessories = {
+    PI_DAY: (x, y) => `
+        <g transform="translate(${x}, ${y})">
+            <path d="M25,30 L45,30 A20,20 0 0,0 25,10 Z" fill="#8B4513"/>
+            <path d="M25,30 L43,28 A18,18 0 0,0 25,12 Z" fill="#FFA726"/>
+            <path d="M25,30 L45,30 A20,20 0 0,0 25,10" stroke="#D2691E" stroke-width="3" fill="none"/>
+            <text x="15" y="25" font-family="serif" font-size="24" font-weight="bold" fill="#1565C0">π</text>
+            <circle cx="35" cy="22" r="4" fill="#FFFAF0"/>
+        </g>
+    `,
+    STAR_WARS: (x, y) => `
+        <g transform="translate(${x}, ${y})">
+            <rect x="22" y="40" width="8" height="20" rx="2" fill="#424242"/>
+            <rect x="20" y="55" width="12" height="5" rx="2" fill="#616161"/>
+            <circle cx="26" cy="50" r="2" fill="#F44336"/>
+            <rect x="23" y="5" width="6" height="35" rx="3" fill="#4FC3F7">
+                <animate attributeName="opacity" values="0.9;1;0.9" dur="0.1s" repeatCount="indefinite"/>
+            </rect>
+            <rect x="24" y="7" width="4" height="31" rx="2" fill="#FFFFFF"/>
+        </g>
+    `,
+    PIRATE_DAY: (x, y) => `
+        <g transform="translate(${x}, ${y})">
+            <ellipse cx="25" cy="45" rx="30" ry="8" fill="#212121"/>
+            <path d="M5,45 Q5,20 25,15 Q45,20 45,45" fill="#212121"/>
+            <circle cx="25" cy="32" r="8" fill="#FFFDE7"/>
+            <circle cx="22" cy="30" r="2" fill="#212121"/>
+            <circle cx="28" cy="30" r="2" fill="#212121"/>
+            <line x1="15" y1="38" x2="35" y2="44" stroke="#FFFDE7" stroke-width="3"/>
+            <line x1="35" y1="38" x2="15" y2="44" stroke="#FFFDE7" stroke-width="3"/>
+            <path d="M5,45 Q25,38 45,45" stroke="#FFD700" stroke-width="2" fill="none"/>
+        </g>
+    `,
+    SINGLES_DAY: (x, y) => `
+        <g transform="translate(${x}, ${y})">
+            <rect x="10" y="20" width="35" height="35" rx="3" fill="#FF5722"/>
+            <path d="M18,20 Q18,10 27.5,10 Q37,10 37,20" stroke="#D84315" stroke-width="4" fill="none"/>
+            <text x="15" y="42" font-family="Arial" font-size="12" font-weight="bold" fill="#FFFFFF">11.11</text>
+            <polygon points="45,15 47,20 52,20 48,24 50,29 45,26 40,29 42,24 38,20 43,20" fill="#FFD700">
+                <animate attributeName="transform" values="rotate(0 45 22);rotate(360 45 22)" dur="4s" repeatCount="indefinite"/>
+            </polygon>
+        </g>
+    `,
+    SYSADMIN_DAY: (x, y) => `
+        <g transform="translate(${x}, ${y})">
+            <rect x="10" y="10" width="35" height="45" rx="3" fill="#37474F"/>
+            <rect x="13" y="15" width="29" height="8" fill="#263238"/>
+            <rect x="13" y="26" width="29" height="8" fill="#263238"/>
+            <rect x="13" y="37" width="29" height="8" fill="#263238"/>
+            <circle cx="17" cy="19" r="2" fill="#4CAF50">
+                <animate attributeName="fill" values="#4CAF50;#8BC34A;#4CAF50" dur="1s" repeatCount="indefinite"/>
+            </circle>
+            <circle cx="17" cy="30" r="2" fill="#4CAF50"/>
+            <circle cx="17" cy="41" r="2" fill="#FF9800"/>
+            <rect x="48" y="40" width="10" height="12" rx="2" fill="#795548"/>
+        </g>
+    `
+};
+
+const newHolidays = [
+    { name: 'pi_day', label: '🥧 Pi Day (Mar 14)', event: 'PI_DAY' },
+    { name: 'star_wars', label: '⚔️ Star Wars Day (May 4)', event: 'STAR_WARS' },
+    { name: 'pirate_day', label: '🏴‍☠️ Pirate Day (Sep 19)', event: 'PIRATE_DAY' },
+    { name: 'singles_day', label: '🛒 Singles Day (Nov 11)', event: 'SINGLES_DAY' },
+    { name: 'sysadmin_day', label: '🖥️ SysAdmin Day (Jul)', event: 'SYSADMIN_DAY' }
+];
+
+newHolidays.forEach(({ name, label, event }) => {
+    const spriteSet = SPRITES['cat'];
+    const spriteGrid = spriteSet['normal'];
+    const petColor = PET_COLORS['cat'];
+    const petType = 'cat';
+    
+    const pixelSize = 16;
+    const rows = spriteGrid.length;
+    const cols = spriteGrid[0].length;
+    const width = cols * pixelSize;
+    const height = rows * pixelSize;
+    const svgWidth = width + 80;
+    const svgHeight = height + 60;
+
+    const pixelArt = renderPixelGrid(spriteGrid, petColor, pixelSize);
+    const themeBackground = getThemeBackground('minimal', svgWidth, svgHeight);
+    
+    const headPos = calculateHeadPosition(spriteGrid, petType);
+    const accessoryOffset = { x: -10, y: -40 };
+    const accessoryX = headPos.x + accessoryOffset.x;
+    const accessoryY = headPos.y + accessoryOffset.y;
+    const accessorySvg = newHolidayAccessories[event](accessoryX, accessoryY);
+
+    const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${svgWidth}" height="${svgHeight}" viewBox="0 0 ${svgWidth} ${svgHeight}">
+      <style>.pet { transform-origin: center; }</style>
+      ${themeBackground}
+      <g transform="translate(30, 30)">
+        <g class="pet">${pixelArt}</g>
+        ${accessorySvg}
+      </g>
+      <text x="50%" y="${height + 52}" text-anchor="middle" font-family="monospace" font-size="9" fill="#666">${label}</text>
+    </svg>`;
+
+    fs.writeFileSync(`dist/holiday_${name}.svg`, svg);
+    console.log(`Generated holiday_${name}.svg`);
+});
 
 console.log('Done!');

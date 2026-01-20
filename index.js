@@ -39,7 +39,14 @@ const PET_COLORS = {
   // Wave 2
   capybara: '#8b7355', // Tan/Brown (Lua)
   alpaca: '#f5f5dc',   // Beige/Cream (Julia)
-  phoenix: '#ff4500'   // Orange-Red (Elixir)
+  phoenix: '#ff4500',  // Orange-Red (Elixir)
+  // Wave 3 - More Languages
+  salamander: '#f7a41d', // Orange-Gold (Zig)
+  hedgehog: '#5e5086',   // Purple-Grey (Haskell)
+  octopus: '#5881d8',    // Blue (Clojure)
+  ant: '#4d4d4d',        // Dark Grey (Assembly)
+  dino: '#4b6c8c',       // Slate Blue (COBOL)
+  lion: '#ffe953'        // Golden Yellow (Nim)
 };
 
 // ═══════════════════════════════════════════════════════════════════════════
@@ -66,6 +73,192 @@ const MYTHICAL_COLORS = {
   leviathan: '#004d40',    // Deep Teal (Sea Monster)
   celestial: '#7c4dff'     // Violet (Star Deer)
 };
+
+// ═══════════════════════════════════════════════════════════════════════════
+// PET PHRASES SYSTEM - Speech bubbles with personality
+// ═══════════════════════════════════════════════════════════════════════════
+
+const MOOD_PHRASES = {
+  normal: [
+    "Ship it! 🚀",
+    "LGTM!",
+    "Compiling...",
+    "*happy beeps*",
+    "Ready to code!",
+    "Let's gooo!",
+    "Merge time!"
+  ],
+  sleeping: [
+    "zzZ...",
+    "💤 BRB napping...",
+    "404: Energy not found",
+    "*snore*",
+    "Do not disturb...",
+    "Recharging..."
+  ],
+  ghost: [
+    "👻 Boo! Commit something!",
+    "I'm fading away...",
+    "Remember me?",
+    "Hello? Anyone there?",
+    "So lonely...",
+    "*fading sounds*"
+  ],
+  hyper: [
+    "LET'S GOOO!!!",
+    "MAXIMUM OVERDRIVE!",
+    "Can't stop won't stop!",
+    "Another one! 🔥",
+    "ON FIRE!!!",
+    "UNSTOPPABLE!"
+  ],
+  nightowl: [
+    "Who needs sleep?",
+    "Midnight oil burning...",
+    "🦉 Hoot hoot!",
+    "The night is young!",
+    "Best ideas at 3AM",
+    "Coffee? More coffee!"
+  ],
+  weekend: [
+    "Chill vibes only~",
+    "No rush today",
+    "Weekend mode: ON",
+    "Taking it easy",
+    "🏖️ Relaxing...",
+    "Side project time!"
+  ],
+  caffeinated: [
+    "COFFEE COFFEE COFFEE",
+    "I CAN SEE SOUNDS!",
+    "Sleep is for the weak!",
+    "☕☕☕ MORE!!!",
+    "Typing at 9000 WPM!",
+    "MAXIMUM CAFFEINE!"
+  ],
+  debugging: [
+    "Why... why?!",
+    "console.log('here')",
+    "It works on MY machine!",
+    "undefined is not a function 😭",
+    "One more fix...",
+    "🔍 Found it! ...maybe",
+    "Stack Overflow time"
+  ],
+  zen: [
+    "Peaceful coding~",
+    "Om... compile... om...",
+    "🧘 Inner peace",
+    "No bugs, only features",
+    "Mindful commits",
+    "Balance in code"
+  ]
+};
+
+const PET_PHRASES = {
+  spider: ["Spinning up webpack...", "Caught in my web!", "npm install *"],
+  snake: ["Ssssliding in~", "No dependencies 🐍", "import this"],
+  gopher: ["Go fast or go home!", "Concurrency is fun!", "go run ."],
+  crab: ["Memory safe! 🦀", "Fearless refactoring!", "cargo build"],
+  coffee: ["☕ Brewing code...", "public static void main", "Exception in thread"],
+  elephant: ["<?php echo 'hi'; ?>", "Composer update!", "Laravel magic~"],
+  robot: ["Beep boop!", "Compiling C++...", "Segfault? Never!"],
+  whale: ["🐳 Container ready!", "docker compose up", "Pods are healthy"],
+  gem: ["Ruby is beautiful!", "rails new magic", "💎 Polished code"],
+  bird: ["Swift and elegant!", "let code = awesome", "🐦 Flying high"],
+  tux: ["chmod +x life", "sudo make me happy", "🐧 Open source!"],
+  cat: ["*pushes code off table*", "Meow~", "😺 Purrfect code"],
+  fox: ["Kotlin is fun!", "val life = awesome", "🦊 Clever solution"],
+  phoenix: ["Rising from ashes!", "|> Elixir magic", "🔥 Functional!"],
+  dragon: ["🔥 LEGACY ELIMINATED!", "Ancient wisdom...", "I AM FIRE!"],
+  octopus: ["(((lisp intensifies)))", "Functional FTW!", "🐙 8 parallel tasks"],
+  hedgehog: ["λ Haskell beauty", "Purely functional!", "🦔 Type safe!"],
+  salamander: ["⚡ Zig zag!", "No hidden control flow", "Comptime magic"],
+  ant: ["mov eax, awesome", "Close to the metal!", "🐜 Tiny but mighty"],
+  dino: ["COBOL lives!", "🦕 Still running!", "Legacy but reliable"],
+  lion: ["👑 Nim is king!", "Efficient & elegant", "Roar of power!"]
+};
+
+const HOLIDAY_PHRASES = {
+  CHRISTMAS: ["Ho ho ho! 🎄", "Merry Commits!", "'Tis the season!"],
+  HALLOWEEN: ["Trick or treat? 🎃", "Spoooky bugs! 👻", "Boo!"],
+  LUNAR_NEW_YEAR: ["Chúc Mừng Năm Mới! 🧧", "恭喜发财!", "Lucky commits!"],
+  VALENTINE: ["❤️ Love your code!", "Merge with love~", "💕 Paired!"],
+  PROGRAMMER_DAY: ["Day 256! 🎉", "We're #1 (base 256)", "0xFF vibes!"],
+  PI_DAY: ["3.14159... 🥧", "π day!", "Infinite digits!"],
+  STAR_WARS: ["May the Force... ⚔️", "Use the Source, Luke!", "This is the way."],
+  PIRATE_DAY: ["Arrr! 🏴‍☠️", "Ahoy, matey!", "Shiver me repos!"],
+  SYSADMIN_DAY: ["sudo give raise 💻", "Have you tried...?", "Ticket closed!"],
+  SINGLES_DAY: ["11.11 deals! 🛒", "Solo coder!", "Independent dev!"]
+};
+
+/**
+ * Get a random phrase for the pet based on mood, type, and holiday
+ * @param {string} moodKey - Current mood key
+ * @param {string} petType - Type of pet
+ * @param {string} holiday - Current holiday (optional)
+ * @returns {string} A random phrase
+ */
+function getPetPhrase(moodKey, petType, holiday = null) {
+  const phrases = [];
+  
+  // Add mood phrases
+  if (MOOD_PHRASES[moodKey]) {
+    phrases.push(...MOOD_PHRASES[moodKey]);
+  }
+  
+  // Add pet-specific phrases
+  if (PET_PHRASES[petType]) {
+    phrases.push(...PET_PHRASES[petType]);
+  }
+  
+  // Add holiday phrases (higher priority)
+  if (holiday && HOLIDAY_PHRASES[holiday]) {
+    // Holiday phrases get extra weight
+    phrases.push(...HOLIDAY_PHRASES[holiday]);
+    phrases.push(...HOLIDAY_PHRASES[holiday]); // Double weight
+  }
+  
+  // Pick a random phrase
+  if (phrases.length === 0) return '';
+  
+  // Use date-based seed for consistency during the same hour
+  const now = new Date();
+  const seed = now.getFullYear() * 10000 + (now.getMonth() + 1) * 100 + now.getDate() + now.getHours();
+  const index = seed % phrases.length;
+  
+  return phrases[index];
+}
+
+/**
+ * Generate speech bubble SVG
+ * @param {string} text - Text to display
+ * @param {number} x - X position
+ * @param {number} y - Y position
+ * @returns {string} SVG string for speech bubble
+ */
+function generateSpeechBubble(text, x, y) {
+  if (!text) return '';
+  
+  const bubbleWidth = Math.max(text.length * 7 + 20, 60);
+  const bubbleHeight = 24;
+  
+  return `
+    <g transform="translate(${x}, ${y})">
+      <!-- Speech bubble -->
+      <rect x="0" y="0" width="${bubbleWidth}" height="${bubbleHeight}" rx="10" ry="10" 
+            fill="#FFFFFF" stroke="#2d333b" stroke-width="1.5"/>
+      <!-- Bubble tail -->
+      <polygon points="15,${bubbleHeight} 20,${bubbleHeight + 8} 25,${bubbleHeight}" 
+               fill="#FFFFFF" stroke="#2d333b" stroke-width="1.5"/>
+      <line x1="16" y1="${bubbleHeight}" x2="24" y2="${bubbleHeight}" stroke="#FFFFFF" stroke-width="2"/>
+      <!-- Text -->
+      <text x="${bubbleWidth / 2}" y="${bubbleHeight / 2 + 4}" 
+            font-family="'Segoe UI', Arial, sans-serif" font-size="10" 
+            fill="#2d333b" text-anchor="middle">${text}</text>
+    </g>
+  `;
+}
 
 // Legendary Sprites (16x16 Pixel Art - Upgraded!)
 // Legend: X=Base, K=Black, W=White, R=Red, O=Orange, Y=Yellow, B=Blue, G=Green, P=Purple, M=Magenta
@@ -638,561 +831,571 @@ const LEGENDARY_SPRITES = {
 
 const MYTHICAL_SPRITES = {
   // 🐉 DRAGON: Ancient Fire Dragon (16x16) - 2000+ commits
+  // Design: Western dragon with wings spread, fire breath, detailed scales
+  // Colors: R=body, O=belly/highlight, Y=fire, K=outline
   dragon: {
     normal: [
-      "                ",
-      "    KKK    KKK  ",
-      "   KXXXK  KXXXK ",
-      "    KXXKKKKXXK  ",
-      "     KXXXXXXK   ",
-      "    KXXWXXWXXK  ",
-      "    KXXKXXKXXK  ",
-      "   KXXXXXXXXXXK ",
-      "  KXXXXRRRXXXXK ",
-      " KXXXXXXXRXXXXK ",
-      "KXKXXXXXXXXXXKXK",
-      "K KXXXXXXXXXXK K",
-      "   KXXXXXXXXK   ",
-      "    KXK  KXK    ",
-      "   KK      KK   ",
-      "                "
+      "    KK    KK    ",
+      "   KRRK  KRRK   ",
+      "  KRRRKKKKRRRK  ",
+      "  KRRRRRRRRRRK  ",
+      " KRORWKKWRORK   ",
+      " KRORKKKKORRRK  ",
+      " KRORRRRRORRK   ",
+      "  KROOOOORRK    ",
+      " KKRRRRRRRRKK   ",
+      "KRRRRRRRRRRRRK  ",
+      "KRRKRRRRRRKRRK  ",
+      " KK KRORORK KK  ",
+      "    KRRRRRKYO   ",
+      "   KRKK KKRKYOY ",
+      "   KK     KKYO  ",
+      "            Y   "
     ],
     sleeping: [
       "                ",
       "                ",
-      "    KKK    KKK  ",
-      "   KXXXK  KXXXK ",
-      "    KXXKKKKXXK  ",
-      "     KXXXXXXK   ",
-      "    KXXKKKKXXK  ",
-      "    KXXXXXXXXK  ",
-      "   KXXXXXXXXXXK ",
-      "  KXXXXRRRXXXXK ",
-      " KXXXXXXXXXXXXXK",
-      "KXKXXXXXXXXXXKXK",
-      "   KXXXXXXXXK   ",
-      "    KXXXXXXK    ",
-      "     KKKKKK     ",
+      "   KKKKKKKKKK   ",
+      "  KRRRRRRRRRRK  ",
+      " KRRKKKKKKKRRK  ",
+      " KRROOOOOOORRKK ",
+      " KRRRRRRRRRRRKRK",
+      "KRRRRRRRRRRRRRRK",
+      "KRRRRRRRRRRRRRRK",
+      " KRRRRRRRRRRRK  ",
+      "  KKRRRRRRRKK   ",
+      "   KKKKKKKK     ",
+      "                ",
+      "                ",
+      "                ",
       "                "
     ],
     ghost: [
-      "                ",
-      "    K K    K K  ",
-      "   K   K  K   K ",
-      "    K  KKKK  K  ",
-      "     K X X K    ",
-      "    K  K  K  K  ",
-      "    K  K  K  K  ",
-      "   K    X    K  ",
-      "  K   R R R   K ",
-      " K        R    K",
-      "K K          K K",
-      "                ",
-      "                ",
-      "                ",
+      "    K     K     ",
+      "   K R   K R    ",
+      "  K R R K R R K ",
+      "  K R R R R R K ",
+      " K R O K K R O  ",
+      " K R O K K O R K",
+      " K R O R R O R  ",
+      "  K O O O O R   ",
+      " K K R R R R K  ",
+      "K R R R R R R K ",
+      "K R K R R R K R ",
+      " K   K R R K    ",
+      "    K R R R     ",
+      "   K K   K K    ",
       "                ",
       "                "
     ],
     hyper: [
-      "   RRR    RRR   ",
-      "    KKK    KKK  ",
-      "   KXXXK  KXXXK ",
-      "    KXXKKKKXXK  ",
-      "     KXXXXXXK   ",
-      "    KXXRXXRXXK  ",
-      "    KXXKXXKXXK  ",
-      "   KXXXXXXXXXXK ",
-      "  KXXXXRRRXXXXK ",
-      " KXXXXXXXRXXXXK ",
-      "KXKXXXXXXXXXXKXK",
-      "K KXXXXXXXXXXK K",
-      "   KXXXXXXXXK   ",
-      "    KXK  KXK R  ",
-      "   KK      KK   ",
-      "                "
+      " Y  KK    KK  Y ",
+      "   KRRK  KRRK   ",
+      "  KRYRKKKKRYRKOY",
+      "  KRRRRRRRRRRK O",
+      " KRORYKYKYRORKY ",
+      " KRORKKKKORRRK  ",
+      " KYORRRRRORYKY  ",
+      "  KROOOOORRK    ",
+      " KKYRRRRRRRYKK  ",
+      "KRRRRRRRRRRRRK  ",
+      "KRRKRYRYRYKRRKY ",
+      " KK KRORORK KK  ",
+      "    KRRRRRKYO   ",
+      "   KRKK KKRKYOY ",
+      "   KK     KKYO  ",
+      "  Y          Y  "
     ],
     nightowl: [
-      "                ",
-      "    KKK    KKK  ",
-      "   KXXXK  KXXXK ",
-      "    KXXKKKKXXK  ",
-      "     KXXXXXXK   ",
-      "    KXXOXXOXXK  ",
-      "    KXXKXXKXXK  ",
-      "   KXXXXXXXXXXK ",
-      "  KXXXXRRRXXXXK ",
-      " KXXXXXXXRXXXXK ",
-      "KXKXXXXXXXXXXKXK",
-      "K KXXXXXXXXXXK K",
-      "   KXXXXXXXXK   ",
-      "    KXK  KXK    ",
-      "   KK      KK   ",
+      "    KK    KK    ",
+      "   KRRK  KRRK   ",
+      "  KRRRKKKKRRRK  ",
+      "  KRRRRRRRRRRK  ",
+      " KROROKORORORK  ",
+      " KRORKKKKORRRK  ",
+      " KRORRRRRORRK   ",
+      "  KROOOOORRK    ",
+      " KKRRRRRRRRKK   ",
+      "KRRRRRRRRRRRRK  ",
+      "KRRKRRRRRRKRRK  ",
+      " KK KRORORK KK  ",
+      "    KRRRRRK     ",
+      "   KRKK KKRK    ",
+      "   KK     KK    ",
       "                "
     ],
     weekend: [
-      "                ",
-      "    KKK    KKK  ",
-      "   KXXXK  KXXXK ",
-      "    KXXKKKKXXK  ",
-      "     KXXXXXXK   ",
-      "    KXXKKKKXXK  ",
-      "    KXXXXXXXXK  ",
-      "   KXXXXXXXXXXK ",
-      "  KXXXXRRRXXXXK ",
-      " KXXXXXXXXXXXXXK",
-      "KXKXXXXXXXXXXKXK",
-      "K KXXXXXXXXXXK K",
-      "   KXXXXXXXXK   ",
-      "    KXK  KXK    ",
-      "   KK      KK   ",
+      "    KK    KK    ",
+      "   KRRK  KRRK   ",
+      "  KRRRKKKKRRRK  ",
+      "  KRRKKKKKRRRK  ",
+      " KRORRRRRRRORK  ",
+      " KRORRRRRORRRK  ",
+      " KRORRRRRORRK   ",
+      "  KROOOOORRK    ",
+      " KKRRRRRRRRKK   ",
+      "KRRRRRRRRRRRRK  ",
+      "KRRKRRRRRRKRRK  ",
+      " KK KRORORK KK  ",
+      "    KRRRRRK     ",
+      "   KRKK KKRK    ",
+      "   KK     KK    ",
       "                "
     ]
   },
 
   // ⚡ THUNDERBIRD: Electric Storm Bird (16x16) - 100+ PR merges
+  // Design: Majestic eagle with spread wings, lightning bolts
+  // Colors: B=body, Y=lightning/glow, W=eyes, K=outline
   thunderbird: {
     normal: [
-      "                ",
-      "       YY       ",
-      "      YYYY      ",
-      "     KYYYYK     ",
-      "    KXXYYXXK    ",
-      "   KXXWXXWXXK   ",
-      "   KXXKXXKXXK   ",
-      "    KXXXXXXK    ",
-      "  KXXXXXXXXXXK  ",
-      " KXXXXXYXXXXXK  ",
-      "KXXXXXYYXXXXXK  ",
-      " KXXXXYXXXXXXK  ",
-      "  KXXXYXXXXXK   ",
-      "   KKXKKXKKK    ",
-      "    KK  KK      ",
-      "                "
+      "  Y         Y   ",
+      "   Y  KKK  Y    ",
+      "     KBBBK      ",
+      "    KBWKWBK     ",
+      "    KBKKKBK     ",
+      "  KKBBBYBBKKK   ",
+      " KYBBBBBBBBBYK  ",
+      "KBBBBBBBBBBBBYK ",
+      "KYBBBBBBBBBBBYK ",
+      " KYBBBYBBBYBYK  ",
+      "  KKBBBBBBBKK   ",
+      "    KBBBBBK     ",
+      "    KBKKKBK     ",
+      "   KYBK KBK     ",
+      "   KKK  KYK     ",
+      "         K      "
     ],
     sleeping: [
       "                ",
+      "      KKKK      ",
+      "    KBBBBBBK    ",
+      "   KBBKKKKBBK   ",
+      "   KBBBBBBBBK   ",
+      "  KBBBBBBBBBBK  ",
+      " KBBBBBBBBBBBBK ",
+      "KBBBBBBBBBBBBBBK",
+      " KBBBBBBBBBBBBK ",
+      "  KBBBBBBBBBBK  ",
+      "   KKKKKKKKKKK  ",
       "                ",
-      "       YY       ",
-      "      YYYY      ",
-      "     KYYYYK     ",
-      "    KXXYYXXK    ",
-      "   KXXKKKKXXK   ",
-      "   KXXXXXXXXK   ",
-      "    KXXXXXXK    ",
-      "  KXXXXXXXXXXK  ",
-      " KXXXXXYXXXXXK  ",
-      "KXXXXXYYXXXXXK  ",
-      " KXXXXYXXXXXXK  ",
-      "  KXXXYXXXXXK   ",
-      "   KKKKKKKKKK   ",
+      "                ",
+      "                ",
+      "                ",
       "                "
     ],
     ghost: [
-      "                ",
-      "       Y        ",
-      "      Y Y       ",
-      "     K   K      ",
-      "    K  Y  K     ",
-      "   K  K  K  K   ",
-      "   K  K  K  K   ",
-      "    K      K    ",
-      "  K          K  ",
-      " K    Y      K  ",
-      "K    YY      K  ",
-      " K   Y       K  ",
-      "  K  Y      K   ",
-      "                ",
+      "  Y         Y   ",
+      "   Y   K   Y    ",
+      "      K B K     ",
+      "     K B B K    ",
+      "     K K K K    ",
+      "  K K B B B K K ",
+      " K Y B B B B Y  ",
+      "K B B B B B B Y ",
+      "K Y B B B B B Y ",
+      " K Y B B B B Y  ",
+      "  K K B B B K   ",
+      "     K B B K    ",
+      "     K   K K    ",
+      "    K     K     ",
       "                ",
       "                "
     ],
     hyper: [
-      "    YY    YY    ",
-      "       YY       ",
-      "      YYYY      ",
-      "     KYYYYK     ",
-      "    KXXYYXXK    ",
-      "   KXXRXXRXXK   ",
-      "   KXXKXXKXXK   ",
-      "    KXXXXXXK    ",
-      "  KXXXXXXXXXXK  ",
-      " KXXXXXYXXXXXK  ",
-      "KXXXXXYYXXXXXK  ",
-      " KXXXXYXXXXXXK  ",
-      "  KXXXYXXXXXK Y ",
-      "   KKXKKXKKK    ",
-      "    KK  KK      ",
-      "                "
+      " YY    Y    YY  ",
+      "  YY  KKK  YY   ",
+      "  Y  KBBBK  Y   ",
+      "    KBYKYBYKY   ",
+      "    KBKKKBK     ",
+      "  KKYBYYYBYKKY  ",
+      " KYBBBBBBBBBYK  ",
+      "KYBBBYBBBYBBBYKY",
+      "KYBBBBBBBBBBBYK ",
+      " KYBBBYYBYYBBYK ",
+      "  KKYBBBBBBYKKKY",
+      "    KBBBBBK   Y ",
+      "    KBKKKBK     ",
+      "   KYBK KBK     ",
+      "   KKK  KYK     ",
+      "         K      "
     ],
     nightowl: [
-      "                ",
-      "       YY       ",
-      "      YYYY      ",
-      "     KYYYYK     ",
-      "    KXXYYXXK    ",
-      "   KXXOXXOXXK   ",
-      "   KXXKXXKXXK   ",
-      "    KXXXXXXK    ",
-      "  KXXXXXXXXXXK  ",
-      " KXXXXXYXXXXXK  ",
-      "KXXXXXYYXXXXXK  ",
-      " KXXXXYXXXXXXK  ",
-      "  KXXXYXXXXXK   ",
-      "   KKXKKXKKK    ",
-      "    KK  KK      ",
-      "                "
+      "  Y         Y   ",
+      "   Y  KKK  Y    ",
+      "     KBBBK      ",
+      "    KBOOBK      ",
+      "    KBKKKBK     ",
+      "  KKBBBYBBKKK   ",
+      " KYBBBBBBBBBYK  ",
+      "KBBBBBBBBBBBBYK ",
+      "KYBBBBBBBBBBBYK ",
+      " KYBBBYBBBYBYK  ",
+      "  KKBBBBBBBKK   ",
+      "    KBBBBBK     ",
+      "    KBKKKBK     ",
+      "   KYBK KBK     ",
+      "   KKK  KYK     ",
+      "         K      "
     ],
     weekend: [
       "                ",
-      "       YY       ",
-      "      YYYY      ",
-      "     KYYYYK     ",
-      "    KXXYYXXK    ",
-      "   KXXKKKKXXK   ",
-      "   KXXXXXXXXK   ",
-      "    KXXXXXXK    ",
-      "  KXXXXXXXXXXK  ",
-      " KXXXXXYXXXXXK  ",
-      "KXXXXXYYXXXXXK  ",
-      " KXXXXYXXXXXXK  ",
-      "  KXXXYXXXXXK   ",
-      "   KKXKKXKKK    ",
-      "    KK  KK      ",
+      "      KKKK      ",
+      "    KBBBBBBK    ",
+      "   KBBKKKKBBK   ",
+      "   KBBBBBBBBK   ",
+      "  KBBBBBBBBBBK  ",
+      " KBBBBBBBBBBBBK ",
+      "KBBBBBBBBBBBBBBK",
+      " KBBBBBBBBBBBBK ",
+      "  KBBBBBBBBBBK  ",
+      "   KKKKKKKKKK   ",
+      "                ",
+      "                ",
+      "                ",
+      "                ",
       "                "
     ]
   },
 
   // 🦊 KITSUNE: 9-Tailed Fox Spirit (16x16) - 10+ active repos
+  // Design: Elegant fox with big ears, multiple tails, spirit flames
+  // Colors: O=fur, R=darker fur, Y=spirit fire, W=face, K=outline
   kitsune: {
     normal: [
-      " KK KK KK KK KK ",
-      "KXXKXXKXXKXXKXXK",
-      " KXKXKXKXKXKXK  ",
-      "  KXKXKXKXKXK   ",
-      "   KXXXXXK      ",
-      "   KXXXXXXK     ",
-      "  KXXWXXWXXK    ",
-      "  KXXKXXKXXK    ",
-      "  KXXXXXXXXXXK  ",
-      "  KXXKXXXXKXXK  ",
-      "   KXXXXXXXXK   ",
-      "    KXXXXXXK    ",
-      "   KXK    KXK   ",
-      "  KXK      KXK  ",
-      "  KK        KK  ",
+      "KK          KK  ",
+      "KOKK      KKOKK ",
+      " KOKK    KKOK   ",
+      "  KKKKKKKKKKK   ",
+      "  KOOWKKWOOKK   ",
+      "  KOKKKKKKOKK   ",
+      "   KOOOOOOOK KKK",
+      "   KOOOOOOK KOKK",
+      "  KOOOOOOOOKKOKK",
+      " KOOOOOOOOOKKOK ",
+      " KOOKOOOOKOOK K ",
+      " KOOKKKKKKOOK   ",
+      "  KOKK  KKOKK   ",
+      "  KRKK   KKRK   ",
+      "  KKK     KKK   ",
       "                "
     ],
     sleeping: [
-      " KK KK KK KK KK ",
-      "KXXKXXKXXKXXKXXK",
-      " KXKXKXKXKXKXK  ",
-      "  KXKXKXKXKXK   ",
-      "   KXXXXXK      ",
-      "   KXXXXXXK     ",
-      "  KXXKKKKXXK    ",
-      "  KXXXXXXXXK    ",
-      "  KXXXXXXXXXXK  ",
-      "  KXXXXXXXXXXK  ",
-      "   KXXXXXXXXK   ",
-      "    KXXXXXXK    ",
-      "     KKKKKK     ",
+      "KK          KK  ",
+      "KOKK      KKOKK ",
+      " KOKK    KKOK   ",
+      "  KKKKKKKKKKK   ",
+      "  KOKKKKKKOKK   ",
+      "  KOOOOOOOOKK   ",
+      "   KOOOOOOOK    ",
+      "  KOOOOOOOOOK KK",
+      " KOOOOOOOOOOOKOK",
+      "KOOOOOOOOOOOOOOK",
+      " KOOOOOOOOOOOK  ",
+      "  KKKKKKKKKKKK  ",
+      "                ",
       "                ",
       "                ",
       "                "
     ],
     ghost: [
-      " K  K  K  K  K  ",
-      "K XK XK XK XK X ",
-      " K K K K K K K  ",
+      "K           K   ",
+      "K O K     K O K ",
+      " K O K   K O    ",
       "  K K K K K K   ",
-      "   K     K      ",
-      "   K      K     ",
-      "  K  K  K  K    ",
-      "  K  K  K  K    ",
-      "  K          K  ",
-      "  K  K    K  K  ",
-      "   K        K   ",
-      "    K      K    ",
-      "                ",
+      "  K O K K O K   ",
+      "  K O K K K O K ",
+      "   K O O O O    ",
+      "   K O O O O K K",
+      "  K O O O O O K ",
+      " K O O O O O O K",
+      " K O K O O K O  ",
+      " K O K K K K O  ",
+      "  K O     K O   ",
       "                ",
       "                ",
       "                "
     ],
     hyper: [
-      " KK KK KK KK KK ",
-      "KXXKXXKXXKXXKXXK",
-      " KRKRKRKRKRKRK  ",
-      "  KXKXKXKXKXK   ",
-      "   KXXXXXK      ",
-      "   KXXXXXXK     ",
-      "  KXXRXXRXXK    ",
-      "  KXXKXXKXXK    ",
-      "  KXXXXXXXXXXK  ",
-      "  KXXKXXXXKXXK  ",
-      "   KXXXXXXXXK   ",
-      "    KXXXXXXK  R ",
-      "   KXK    KXK   ",
-      "  KXK      KXK  ",
-      "  KK        KK  ",
+      "KKY        YKK  ",
+      "KOYKK    KKYOKKY",
+      " KOKK    KKOK Y ",
+      "  KKKKKKKKKKK   ",
+      "  KOOYKKYKOOKKY ",
+      "  KOKKKKKKOKK   ",
+      "   KOYOYOYOK KKK",
+      "   KOOOOOOK KOKK",
+      "  KYOOOOOOYKKOKK",
+      " KOOOOOOOOOKKOK ",
+      " KOYKOOOOKOYKY Y",
+      " KOOKKKKKKOOK   ",
+      "  KOKK  KKOKK   ",
+      "  KRKK   KKRK   ",
+      "  KKK     KKK Y ",
       "                "
     ],
     nightowl: [
-      " KK KK KK KK KK ",
-      "KXXKXXKXXKXXKXXK",
-      " KXKXKXKXKXKXK  ",
-      "  KXKXKXKXKXK   ",
-      "   KXXXXXK      ",
-      "   KXXXXXXK     ",
-      "  KXXOXXOXXK    ",
-      "  KXXKXXKXXK    ",
-      "  KXXXXXXXXXXK  ",
-      "  KXXKXXXXKXXK  ",
-      "   KXXXXXXXXK   ",
-      "    KXXXXXXK    ",
-      "   KXK    KXK   ",
-      "  KXK      KXK  ",
-      "  KK        KK  ",
+      "KK          KK  ",
+      "KOKK      KKOKK ",
+      " KOKK    KKOK   ",
+      "  KKKKKKKKKKK   ",
+      "  KOOOKOOKOOKK  ",
+      "  KOKKKKKKOKK   ",
+      "   KOOOOOOOK KKK",
+      "   KOOOOOOK KOKK",
+      "  KOOOOOOOOKKOKK",
+      " KOOOOOOOOOKKOK ",
+      " KOOKOOOOKOOK K ",
+      " KOOKKKKKKOOK   ",
+      "  KOKK  KKOKK   ",
+      "  KRKK   KKRK   ",
+      "  KKK     KKK   ",
       "                "
     ],
     weekend: [
-      " KK KK KK KK KK ",
-      "KXXKXXKXXKXXKXXK",
-      " KXKXKXKXKXKXK  ",
-      "  KXKXKXKXKXK   ",
-      "   KXXXXXK      ",
-      "   KXXXXXXK     ",
-      "  KXXKKKKXXK    ",
-      "  KXXXXXXXXK    ",
-      "  KXXXXXXXXXXK  ",
-      "  KXXXXXXXXXXK  ",
-      "   KXXXXXXXXK   ",
-      "    KXXXXXXK    ",
-      "   KXK    KXK   ",
-      "  KXK      KXK  ",
-      "  KK        KK  ",
+      "KK          KK  ",
+      "KOKK      KKOKK ",
+      " KOKK    KKOK   ",
+      "  KKKKKKKKKKK   ",
+      "  KOKKKKKKOKK   ",
+      "  KOOOOOOOOKK   ",
+      "   KOOOOOOOK    ",
+      "  KOOOOOOOOOK KK",
+      " KOOOOOOOOOOOKOK",
+      "KOOOOOOOOOOOOOOK",
+      " KOOOOOOOOOOOK  ",
+      "  KKKKKKKKKKKK  ",
+      "                ",
+      "                ",
+      "                ",
       "                "
     ]
   },
 
   // 🌊 LEVIATHAN: Deep Sea Monster (16x16) - 50,000+ lines of code
+  // Design: Serpentine sea dragon, coiled body, fins and spines
+  // Colors: B=body, C=belly highlight, Y=bioluminescent, K=outline
   leviathan: {
     normal: [
-      "     KKKKKK     ",
-      "   KKXXXXXXKK   ",
-      "  KXXXXXXXXXXK  ",
-      " KXXWXXXXXXWXXK ",
-      " KXXKXXXXXXKXXK ",
-      "KXXXXXXXXXXXXXXK",
-      "KXXXXXKKKXXXXXK ",
-      " KXXXK   KXXXK  ",
-      "  KXXK   KXXK   ",
-      " KXXXK   KXXXK  ",
-      "KXXXXK   KXXXXK ",
-      " KXXXXXXXXXXXK  ",
-      "  KXXXXXXXXXK   ",
-      "   KXXXXXXXK    ",
-      "    KKKKKKK     ",
+      "     KKKKK      ",
+      "   KKBBBBBKK    ",
+      "  KBBBBBBBBK    ",
+      " KBBWKKWBBBK    ",
+      " KBBKKKKBBBK K  ",
+      "KBBBBBBBBBK KBK ",
+      "KBBBBKBBBBKKBBK ",
+      " KBBBKBBBBKBBBK ",
+      "  KBBKBBBKBBBBK ",
+      "  KBKBBBBKBBBBK ",
+      " KBKBBBBBKBBBK  ",
+      "KBKBBBBBBKBBK   ",
+      " KKBBBBBBBKK    ",
+      "  KKKKKKKKKK    ",
+      "                ",
       "                "
     ],
     sleeping: [
-      "     KKKKKK     ",
-      "   KKXXXXXXKK   ",
-      "  KXXXXXXXXXXK  ",
-      " KXXKKXXXXKKXXK ",
-      " KXXXXXXXXXXXX K",
-      "KXXXXXXXXXXXXXXK",
-      "KXXXXXKKKXXXXXK ",
-      " KXXXK   KXXXK  ",
-      "  KXXK   KXXK   ",
-      " KXXXK   KXXXK  ",
-      "KXXXXK   KXXXXK ",
-      " KXXXXXXXXXXXK  ",
-      "  KXXXXXXXXXK   ",
-      "   KXXXXXXXK    ",
-      "    KKKKKKK     ",
+      "                ",
+      "    KKKKKKKK    ",
+      "  KKBBBBBBBBKK  ",
+      " KBBKKKKKKBBBBK ",
+      " KBBBBBBBBBBBK  ",
+      "KBBBBBBBBBBBBBK ",
+      "KBBBBKBBBBBBBBK ",
+      " KBBBKBBBBBBK   ",
+      "  KBBKBBBBBK    ",
+      "  KBKBBBBBBK    ",
+      "   KKBBBBBK     ",
+      "    KKKKKK      ",
+      "                ",
+      "                ",
+      "                ",
       "                "
     ],
     ghost: [
       "     K K K      ",
-      "   K       K    ",
-      "  K          K  ",
-      " K  K      K  K ",
-      " K  K      K  K ",
-      "K              K",
-      "K     K K     K ",
-      " K   K   K   K  ",
-      "  K  K   K  K   ",
-      " K   K   K   K  ",
-      "K    K   K    K ",
-      " K           K  ",
-      "  K         K   ",
-      "   K       K    ",
-      "    K K K K     ",
+      "   K B B B B K  ",
+      "  K B B B B B   ",
+      " K B K K B B K  ",
+      " K B K K B B K  ",
+      "K B B B B B K K ",
+      "K B B B K B B K ",
+      " K B B K B B B K",
+      "  K B K B B B K ",
+      "  K B K B B B K ",
+      " K B K B B B K  ",
+      "K B K B B B K   ",
+      " K K B B B K    ",
+      "  K K K K K     ",
+      "                ",
       "                "
     ],
     hyper: [
-      "     KKKKKK     ",
-      "   KKXXXXXXKK   ",
-      "  KXXXXXXXXXXK  ",
-      " KXXRXXXXXXRXXK ",
-      " KXXKXXXXXXKXXK ",
-      "KXXXXXXXXXXXXXXK",
-      "KXXXXXKKKXXXXXK ",
-      " KXXXK R KXXXK  ",
-      "  KXXK   KXXK   ",
-      " KXXXK   KXXXK  ",
-      "KXXXXK   KXXXXK ",
-      " KXXXXXXXXXXXK  ",
-      "  KXXXXXXXXXK R ",
-      "   KXXXXXXXK    ",
-      "    KKKKKKK     ",
+      "     KKKKK   Y  ",
+      "   KKBYBYBKK    ",
+      "  KBBBBBBBYBKY  ",
+      " KBBYKKYBBBK    ",
+      " KBBKKKKYBBK K  ",
+      "KYBBBBYBBBK KBK ",
+      "KBBYBKBBYBKKBBKY",
+      " KBYBKBYBYKBBBK ",
+      "  KBBKBBBKBYBYK ",
+      "  KBKBYBYKBBBBK ",
+      " KBKBBBBBKBYYK  ",
+      "KBKBBBYBBKBBK Y ",
+      " KKBBBBBBBKK    ",
+      "  KKKKKKKKKKK   ",
+      "                ",
       "                "
     ],
     nightowl: [
-      "     KKKKKK     ",
-      "   KKXXXXXXKK   ",
-      "  KXXXXXXXXXXK  ",
-      " KXXOXXXXXXOXXK ",
-      " KXXKXXXXXXKXXK ",
-      "KXXXXXXXXXXXXXXK",
-      "KXXXXXKKKXXXXXK ",
-      " KXXXK   KXXXK  ",
-      "  KXXK   KXXK   ",
-      " KXXXK   KXXXK  ",
-      "KXXXXK   KXXXXK ",
-      " KXXXXXXXXXXXK  ",
-      "  KXXXXXXXXXK   ",
-      "   KXXXXXXXK    ",
-      "    KKKKKKK     ",
+      "     KKKKK      ",
+      "   KKBBBBBKK    ",
+      "  KBBBBBBBBK    ",
+      " KBBOKKOBBK     ",
+      " KBBKKKKBBBK K  ",
+      "KBBBBBBBBBK KBK ",
+      "KBBBBKBBBBKKBBK ",
+      " KBBBKBBBBKBBBK ",
+      "  KBBKBBBKBBBBK ",
+      "  KBKBBBBKBBBBK ",
+      " KBKBBBBBKBBBK  ",
+      "KBKBBBBBBKBBK   ",
+      " KKBBBBBBBKK    ",
+      "  KKKKKKKKKK    ",
+      "                ",
       "                "
     ],
     weekend: [
-      "     KKKKKK     ",
-      "   KKXXXXXXKK   ",
-      "  KXXXXXXXXXXK  ",
-      " KXXKKXXXXKKXXK ",
-      " KXXXXXXXXXXXX K",
-      "KXXXXXXXXXXXXXXK",
-      "KXXXXXKKKXXXXXK ",
-      " KXXXK   KXXXK  ",
-      "  KXXK   KXXK   ",
-      " KXXXK   KXXXK  ",
-      "KXXXXK   KXXXXK ",
-      " KXXXXXXXXXXXK  ",
-      "  KXXXXXXXXXK   ",
-      "   KXXXXXXXK    ",
-      "    KKKKKKK     ",
+      "                ",
+      "    KKKKKKKK    ",
+      "  KKBBBBBBBBKK  ",
+      " KBBKKKKKKBBBBK ",
+      " KBBBBBBBBBBBK  ",
+      "KBBBBBBBBBBBBBK ",
+      "KBBBBKBBBBBBBBK ",
+      " KBBBKBBBBBBK   ",
+      "  KBBKBBBBBK    ",
+      "  KBKBBBBBBK    ",
+      "   KKBBBBBK     ",
+      "    KKKKKK      ",
+      "                ",
+      "                ",
+      "                ",
       "                "
     ]
   },
 
   // ⭐ CELESTIAL: Star Deer (16x16) - 50+ GitHub stars received
+  // Design: Elegant deer with crystal antlers and starry glow
+  // Colors: P=purple body, p=light purple, Y=stars, K=outline, W=eyes
   celestial: {
     normal: [
-      "    Y      Y    ",
-      "   YXY    YXY   ",
-      "    Y  KK  Y    ",
-      "      KXXK      ",
-      "     KXXXXK     ",
-      "    KXXWWXXK    ",
-      "    KXXKKXXK    ",
-      "    KXXXXXXK    ",
-      "   KXXXXXXXXK   ",
-      "  KXXXXXXXXXXK  ",
-      " KYXXXXXXXXXXYK ",
-      "  KXXXXXXXXXXK  ",
-      "   KXK    KXK   ",
-      "   KXK    KXK   ",
-      "    K      K    ",
+      "  Y       Y     ",
+      " YKY     YKY    ",
+      "  KYK   KYK     ",
+      "   KKKKKKK      ",
+      "  KPPPPPPPK     ",
+      " KPPPWKWPPPK    ",
+      " KPPPKKPPPPK    ",
+      "  KPPPPPPPK     ",
+      "   KPPPPPPK     ",
+      "  KPPPPPPPPK    ",
+      " KPPPPPPPPPPK   ",
+      " KPPKPPPPKPPK   ",
+      "  KPK    KPK    ",
+      "  KPK    KPK    ",
+      "   KK    KK     ",
       "                "
     ],
     sleeping: [
-      "    Y      Y    ",
-      "   YXY    YXY   ",
-      "    Y  KK  Y    ",
-      "      KXXK      ",
-      "     KXXXXK     ",
-      "    KXXKKXXK    ",
-      "    KXXXXXXXXK  ",
-      "    KXXXXXXK    ",
-      "   KXXXXXXXXK   ",
-      "  KXXXXXXXXXXK  ",
-      " KYXXXXXXXXXXYK ",
-      "  KXXXXXXXXXXK  ",
-      "   KXXXXXXXXK   ",
-      "    KKKKKKKK    ",
+      "  Y       Y     ",
+      " YKY     YKY    ",
+      "  KYK   KYK     ",
+      "   KKKKKKK      ",
+      "  KPPPPPPPK     ",
+      " KPPKKKKPPPK    ",
+      " KPPPPPPPPPK    ",
+      "  KPPPPPPPK     ",
+      " KPPPPPPPPPPK   ",
+      "KPPPPPPPPPPPPK  ",
+      "KPPPPPPPPPPPPK  ",
+      " KKKKKKKKKKKK   ",
+      "                ",
+      "                ",
       "                ",
       "                "
     ],
     ghost: [
-      "    Y      Y    ",
-      "   Y Y    Y Y   ",
-      "    Y  K   Y    ",
-      "      K  K      ",
-      "     K    K     ",
-      "    K  K  K K   ",
-      "    K  K  K K   ",
-      "    K      K    ",
-      "   K        K   ",
-      "  K          K  ",
-      " KY          YK ",
-      "  K          K  ",
+      "  Y       Y     ",
+      " Y Y     Y Y    ",
+      "  K K   K K     ",
+      "   K K K K      ",
+      "  K P P P P     ",
+      " K P K K P P    ",
+      " K P K K P P    ",
+      "  K P P P P     ",
+      "   K P P P P    ",
+      "  K P P P P P   ",
+      " K P P P P P    ",
+      " K P     K P    ",
       "                ",
       "                ",
       "                ",
       "                "
     ],
     hyper: [
-      "   RY      YR   ",
-      "   YXY    YXY   ",
-      "    Y  KK  Y    ",
-      "      KXXK      ",
-      "     KXXXXK     ",
-      "    KXXRRXXK    ",
-      "    KXXKKXXK    ",
-      "    KXXXXXXK    ",
-      "   KXXXXXXXXK   ",
-      "  KXXXXXXXXXXK  ",
-      " KYXXXXXXXXXXYK ",
-      "  KXXXXXXXXXXK  ",
-      "   KXK    KXK R ",
-      "   KXK    KXK   ",
-      "    K      K    ",
+      " YY   Y   YY  Y ",
+      " YKY     YKY    ",
+      "  KYK   KYK  Y  ",
+      "   KKKKKKK      ",
+      "  KPYPYPYPK     ",
+      " KPPPRYRPPPK    ",
+      " KPPPKKPPPPK    ",
+      "  KYPPPPPYK     ",
+      "   KPPYPPPK     ",
+      "  KYPPPPPYPK    ",
+      " KPPPPPPPPPPK Y ",
+      " KPPKPPPPKPPK   ",
+      "  KPK    KPK    ",
+      "  KYK    KYK    ",
+      "   KK    KK     ",
       "                "
     ],
     nightowl: [
-      "    Y      Y    ",
-      "   YXY    YXY   ",
-      "    Y  KK  Y    ",
-      "      KXXK      ",
-      "     KXXXXK     ",
-      "    KXXOOXXK    ",
-      "    KXXKKXXK    ",
-      "    KXXXXXXK    ",
-      "   KXXXXXXXXK   ",
-      "  KXXXXXXXXXXK  ",
-      " KYXXXXXXXXXXYK ",
-      "  KXXXXXXXXXXK  ",
-      "   KXK    KXK   ",
-      "   KXK    KXK   ",
-      "    K      K    ",
+      "  Y       Y     ",
+      " YKY     YKY    ",
+      "  KYK   KYK     ",
+      "   KKKKKKK      ",
+      "  KPPPPPPPK     ",
+      " KPPOKOPPPPK    ",
+      " KPPPKKPPPPK    ",
+      "  KPPPPPPPK     ",
+      "   KPPPPPPK     ",
+      "  KPPPPPPPPK    ",
+      " KPPPPPPPPPPK   ",
+      " KPPKPPPPKPPK   ",
+      "  KPK    KPK    ",
+      "  KPK    KPK    ",
+      "   KK    KK     ",
       "                "
     ],
     weekend: [
-      "    Y      Y    ",
-      "   YXY    YXY   ",
-      "    Y  KK  Y    ",
-      "      KXXK      ",
-      "     KXXXXK     ",
-      "    KXXKKXXK    ",
-      "    KXXXXXXXXK  ",
-      "    KXXXXXXK    ",
-      "   KXXXXXXXXK   ",
-      "  KXXXXXXXXXXK  ",
-      " KYXXXXXXXXXXYK ",
-      "  KXXXXXXXXXXK  ",
-      "   KXK    KXK   ",
-      "   KXK    KXK   ",
-      "    K      K    ",
+      "  Y       Y     ",
+      " YKY     YKY    ",
+      "  KYK   KYK     ",
+      "   KKKKKKK      ",
+      "  KPPPPPPPK     ",
+      " KPPKKKKPPPK    ",
+      " KPPPPPPPPPK    ",
+      "  KPPPPPPPK     ",
+      " KPPPPPPPPPPK   ",
+      "KPPPPPPPPPPPPK  ",
+      "KPPPPPPPPPPPPK  ",
+      " KKKKKKKKKKKK   ",
+      "                ",
+      "                ",
+      "                ",
       "                "
     ]
   }
@@ -3771,119 +3974,1224 @@ const SPRITES = {
       "                ",
       "                "
     ]
+  },
+
+  // ═══════════════════════════════════════════════════════════════════════════
+  // WAVE 3: NEW LANGUAGE PETS
+  // ═══════════════════════════════════════════════════════════════════════════
+
+  // 🦎 SALAMANDER: Zig language mascot (16x16)
+  // Design: Lizard with zig-zag pattern, vibrant orange-gold
+  salamander: {
+    normal: [
+      "                ",
+      "     KKKK       ",
+      "    KXXXXK      ",
+      "   KXWKXWXK     ",
+      "   KXKKXXKK     ",
+      "    KXXXXK      ",
+      "     KXXK       ",
+      " KKKKKXXKKKKK   ",
+      "KXXXXXXXXXXXXXK ",
+      " KKXKXKXKXKXKK  ",
+      "   KXXXXXXXK    ",
+      "   KXK   KXK    ",
+      "   KK     KK    ",
+      "                ",
+      "                ",
+      "                "
+    ],
+    sleeping: [
+      "                ",
+      "                ",
+      "     KKKK       ",
+      "    KXXXXK      ",
+      "   KXKKXXKK     ",
+      "    KXXXXK      ",
+      "KKKKKXXXXXXXXKKK",
+      "KXXXXXXXXXXXXXXXK",
+      " KKXKXKXKXKXKXKK",
+      "   KXXXXXXXXXK  ",
+      "    KKKKKKKKK   ",
+      "                ",
+      "                ",
+      "                ",
+      "                ",
+      "                "
+    ],
+    ghost: [
+      "                ",
+      "     K  K       ",
+      "    K X X K     ",
+      "   K X K X K    ",
+      "   K X K X K    ",
+      "    K X X K     ",
+      "     K X K      ",
+      " K K K X K K K  ",
+      "K X X X X X X K ",
+      " K K X K X K K  ",
+      "   K X X X K    ",
+      "   K K   K K    ",
+      "                ",
+      "                ",
+      "                ",
+      "                "
+    ],
+    hyper: [
+      "       Y  Y     ",
+      "     KKKK       ",
+      "    KXYXYK      ",
+      "   KXRKKRXK     ",
+      "   KXKKXXKK     ",
+      "    KXYXYK      ",
+      "     KXXK   Y   ",
+      " KKKKKXXKKKKK   ",
+      "KXYXYXYXYXYXYK  ",
+      " KKXKXKXKXKXKK  ",
+      "   KXXXXXXXK    ",
+      "   KXK   KXK    ",
+      "   KK     KK    ",
+      "                ",
+      "                ",
+      "                "
+    ],
+    nightowl: [
+      "                ",
+      "     KKKK       ",
+      "    KXXXXK      ",
+      "   KXOKKOXK     ",
+      "   KXKKXXKK     ",
+      "    KXXXXK      ",
+      "     KXXK       ",
+      " KKKKKXXKKKKK   ",
+      "KXXXXXXXXXXXXXK ",
+      " KKXKXKXKXKXKK  ",
+      "   KXXXXXXXK    ",
+      "   KXK   KXK    ",
+      "   KK     KK    ",
+      "                ",
+      "                ",
+      "                "
+    ],
+    weekend: [
+      "                ",
+      "                ",
+      "     KKKK       ",
+      "    KXXXXK      ",
+      "   KXKKXXKK     ",
+      "    KXXXXK      ",
+      "KKKKKXXXXXXXXKKK",
+      "KXXXXXXXXXXXXXXXK",
+      " KKXKXKXKXKXKXKK",
+      "   KXXXXXXXXXK  ",
+      "    KKKKKKKKK   ",
+      "                ",
+      "                ",
+      "                ",
+      "                ",
+      "                "
+    ]
+  },
+
+  // 🦔 HEDGEHOG: Haskell language mascot (16x16)
+  // Design: Cute hedgehog with spiky back, purple-grey
+  hedgehog: {
+    normal: [
+      "                ",
+      "    KKKKKKK     ",
+      "   KKKKKKKKK    ",
+      "  KKXKXKXKXKK   ",
+      " KKXXXXXXXXXKK  ",
+      " KXXXWKWXXXXK   ",
+      " KXXXXKXXXXXK   ",
+      " KXXXKKKXXXK    ",
+      "  KXXXXXXXK     ",
+      "   KXXXXXK      ",
+      "   KXK KXK      ",
+      "   KK   KK      ",
+      "                ",
+      "                ",
+      "                ",
+      "                "
+    ],
+    sleeping: [
+      "                ",
+      "                ",
+      "    KKKKKKK     ",
+      "   KKKKKKKKK    ",
+      "  KKXKXKXKXKK   ",
+      " KKXXXXXXXXXKK  ",
+      " KXXXKKXXXXXXK  ",
+      " KXXXXXXXXXXXK  ",
+      "  KXXXXXXXXXK   ",
+      "   KKKKKKKKK    ",
+      "                ",
+      "                ",
+      "                ",
+      "                ",
+      "                ",
+      "                "
+    ],
+    ghost: [
+      "                ",
+      "    K K K K     ",
+      "   K K K K K    ",
+      "  K X X X X K   ",
+      " K X X X X X K  ",
+      " K X K K X X    ",
+      " K X X X X X    ",
+      " K X K K X X    ",
+      "  K X X X X     ",
+      "   K X X X      ",
+      "   K K K K      ",
+      "                ",
+      "                ",
+      "                ",
+      "                ",
+      "                "
+    ],
+    hyper: [
+      "      Y   Y     ",
+      "    KKKKKKK     ",
+      "   KKYKYKYKKK   ",
+      "  KKXKXKXKXKK   ",
+      " KKXXXXXXXXXKK  ",
+      " KXXRWKWRXXXK   ",
+      " KXXXXKXXXXXK   ",
+      " KXXXKKKXXXK    ",
+      "  KXXXXXXXK   Y ",
+      "   KXXXXXK      ",
+      "   KXK KXK      ",
+      "   KK   KK      ",
+      "                ",
+      "                ",
+      "                ",
+      "                "
+    ],
+    nightowl: [
+      "                ",
+      "    KKKKKKK     ",
+      "   KKKKKKKKK    ",
+      "  KKXKXKXKXKK   ",
+      " KKXXXXXXXXXKK  ",
+      " KXXXOKOXXXXK   ",
+      " KXXXXKXXXXXK   ",
+      " KXXXKKKXXXK    ",
+      "  KXXXXXXXK     ",
+      "   KXXXXXK      ",
+      "   KXK KXK      ",
+      "   KK   KK      ",
+      "                ",
+      "                ",
+      "                ",
+      "                "
+    ],
+    weekend: [
+      "                ",
+      "                ",
+      "    KKKKKKK     ",
+      "   KKKKKKKKK    ",
+      "  KKXKXKXKXKK   ",
+      " KKXXXXXXXXXKK  ",
+      " KXXXKKXXXXXXK  ",
+      " KXXXXXXXXXXXK  ",
+      "  KXXXXXXXXXK   ",
+      "   KKKKKKKKK    ",
+      "                ",
+      "                ",
+      "                ",
+      "                ",
+      "                ",
+      "                "
+    ]
+  },
+
+  // 🐙 OCTOPUS: Clojure language mascot (16x16)
+  // Design: Cute octopus with 8 tentacles, blue
+  octopus: {
+    normal: [
+      "                ",
+      "     KKKKKK     ",
+      "   KKXXXXXXKK   ",
+      "  KXXWKXXKWXXK  ",
+      "  KXXKKXXKKXXK  ",
+      "  KXXXXXXXXXXK  ",
+      "   KXXXXXXXXK   ",
+      "  KXXXXXXXXXXK  ",
+      " KXKXKXXXXKXKXK ",
+      " XKXK KXXK KXKX ",
+      "  KK   KK   KK  ",
+      "                ",
+      "                ",
+      "                ",
+      "                ",
+      "                "
+    ],
+    sleeping: [
+      "                ",
+      "                ",
+      "     KKKKKK     ",
+      "   KKXXXXXXKK   ",
+      "  KXXKKXXKKXXK  ",
+      "  KXXXXXXXXXXK  ",
+      "   KXXXXXXXXK   ",
+      "  KXXXXXXXXXXK  ",
+      " KXXXXXXXXXXKXK ",
+      "  KKKKKKKKKKKK  ",
+      "                ",
+      "                ",
+      "                ",
+      "                ",
+      "                ",
+      "                "
+    ],
+    ghost: [
+      "                ",
+      "     K K K K    ",
+      "   K X X X X K  ",
+      "  K X K X K X K ",
+      "  K X K X K X K ",
+      "  K X X X X X K ",
+      "   K X X X X K  ",
+      "  K X X X X X K ",
+      " K X K X X K X K",
+      " X K K K K K K X",
+      "  K     K   K   ",
+      "                ",
+      "                ",
+      "                ",
+      "                ",
+      "                "
+    ],
+    hyper: [
+      "   Y        Y   ",
+      "     KKKKKK     ",
+      "   KKXYXYXYKK   ",
+      "  KXXRKXXKRXXK  ",
+      "  KXXKKXXKKXXK  ",
+      "  KXXXXXXXXXXK  ",
+      "   KXXXYYXXXK   ",
+      "  KXXXXXXXXXXK  ",
+      " KXKXKXXXXKXKXK ",
+      " XKXK KXXK KXKX ",
+      "  KK   KK   KK  ",
+      "                ",
+      "                ",
+      "                ",
+      "                ",
+      "                "
+    ],
+    nightowl: [
+      "                ",
+      "     KKKKKK     ",
+      "   KKXXXXXXKK   ",
+      "  KXXOKXXKOXXK  ",
+      "  KXXKKXXKKXXK  ",
+      "  KXXXXXXXXXXK  ",
+      "   KXXXXXXXXK   ",
+      "  KXXXXXXXXXXK  ",
+      " KXKXKXXXXKXKXK ",
+      " XKXK KXXK KXKX ",
+      "  KK   KK   KK  ",
+      "                ",
+      "                ",
+      "                ",
+      "                ",
+      "                "
+    ],
+    weekend: [
+      "                ",
+      "                ",
+      "     KKKKKK     ",
+      "   KKXXXXXXKK   ",
+      "  KXXKKXXKKXXK  ",
+      "  KXXXXXXXXXXK  ",
+      "   KXXXXXXXXK   ",
+      "  KXXXXXXXXXXK  ",
+      " KXXXXXXXXXXKXK ",
+      "  KKKKKKKKKKKK  ",
+      "                ",
+      "                ",
+      "                ",
+      "                ",
+      "                ",
+      "                "
+    ]
+  },
+
+  // 🐜 ANT: Assembly language mascot (16x16)
+  // Design: Strong ant carrying a bit, dark grey
+  ant: {
+    normal: [
+      "  K         K   ",
+      "   K       K    ",
+      "    KK   KK     ",
+      "     KKKKK      ",
+      "    KWKXKWK     ",
+      "    KKKXKKK     ",
+      "     KXXXK      ",
+      "      KXK       ",
+      "    KKXXXKK     ",
+      "   KXXXXXXXK    ",
+      "  KX  KXK  XK   ",
+      " KX    X    XK  ",
+      "       K        ",
+      "      K K       ",
+      "                ",
+      "                "
+    ],
+    sleeping: [
+      "                ",
+      "    K       K   ",
+      "     KK   KK    ",
+      "      KKKKK     ",
+      "     KKXXXKK    ",
+      "     KKKXKKK    ",
+      "      KXXXK     ",
+      "       KXK      ",
+      "   KKXXXXXXXKK  ",
+      "  KXXXXXXXXXXXK ",
+      "   KKKKKKKKKKK  ",
+      "                ",
+      "                ",
+      "                ",
+      "                ",
+      "                "
+    ],
+    ghost: [
+      "  K         K   ",
+      "   K       K    ",
+      "    K   K K     ",
+      "     K K K      ",
+      "    K K X K     ",
+      "    K K X K     ",
+      "     K X X      ",
+      "      K X       ",
+      "    K X X X K   ",
+      "   K X X X X K  ",
+      "  K   K X K  K  ",
+      " K    X     K   ",
+      "       K        ",
+      "      K K       ",
+      "                ",
+      "                "
+    ],
+    hyper: [
+      "  K    Y    K   ",
+      "   K       K    ",
+      "    KK   KK     ",
+      "     KKKKK      ",
+      "    KRKKRKK     ",
+      "    KKKXKKK     ",
+      "     KYXYK      ",
+      "      KXK       ",
+      "    KKXXXKK     ",
+      "   KXXXXXXXK    ",
+      "  KX  KXK  XK   ",
+      " KX    X    XK  ",
+      "       K     Y  ",
+      "      K K       ",
+      "                ",
+      "                "
+    ],
+    nightowl: [
+      "  K         K   ",
+      "   K       K    ",
+      "    KK   KK     ",
+      "     KKKKK      ",
+      "    KOKXKOK     ",
+      "    KKKXKKK     ",
+      "     KXXXK      ",
+      "      KXK       ",
+      "    KKXXXKK     ",
+      "   KXXXXXXXK    ",
+      "  KX  KXK  XK   ",
+      " KX    X    XK  ",
+      "       K        ",
+      "      K K       ",
+      "                ",
+      "                "
+    ],
+    weekend: [
+      "                ",
+      "    K       K   ",
+      "     KK   KK    ",
+      "      KKKKK     ",
+      "     KKXXXKK    ",
+      "     KKKXKKK    ",
+      "      KXXXK     ",
+      "       KXK      ",
+      "   KKXXXXXXXKK  ",
+      "  KXXXXXXXXXXXK ",
+      "   KKKKKKKKKKK  ",
+      "                ",
+      "                ",
+      "                ",
+      "                ",
+      "                "
+    ]
+  },
+
+  // 🦕 DINO: COBOL language mascot (16x16)
+  // Design: Friendly brontosaurus, ancient but alive!
+  dino: {
+    normal: [
+      "                ",
+      "        KKKK    ",
+      "       KXXXXK   ",
+      "      KXWKWXK   ",
+      "      KXKKXK    ",
+      "       KXXK     ",
+      "        KXK     ",
+      "  KK    KXKK    ",
+      " KXXK   KXXK    ",
+      " KXXXKKKXXXK    ",
+      " KXXXXXXXXXK    ",
+      "  KXXXXXXXK     ",
+      "  KXK   KXK     ",
+      "  KK     KK     ",
+      "                ",
+      "                "
+    ],
+    sleeping: [
+      "                ",
+      "                ",
+      "        KKKK    ",
+      "       KXXXXK   ",
+      "      KKKKXXK   ",
+      "       KXXK     ",
+      "        KXK     ",
+      "  KK    KXKKKKK ",
+      " KXXKKKKXXXXXK  ",
+      " KXXXXXXXXXXXK  ",
+      "  KXXXXXXXXXK   ",
+      "   KKKKKKKKK    ",
+      "                ",
+      "                ",
+      "                ",
+      "                "
+    ],
+    ghost: [
+      "                ",
+      "        K K K   ",
+      "       K X X K  ",
+      "      K X K X K ",
+      "      K X K X   ",
+      "       K X K    ",
+      "        K X     ",
+      "  K     K X K   ",
+      " K X K  K X X   ",
+      " K X X K X X K  ",
+      " K X X X X X K  ",
+      "  K X X X X K   ",
+      "  K X   K X     ",
+      "  K     K       ",
+      "                ",
+      "                "
+    ],
+    hyper: [
+      "                ",
+      "        KKKK  Y ",
+      "       KXYYXK   ",
+      "      KXRKRXK   ",
+      "      KXKKXK    ",
+      "       KXXK     ",
+      "        KXK     ",
+      "  KK    KXKK    ",
+      " KXXK   KXXK    ",
+      " KXXXKKKXXXK    ",
+      " KXXXXXXXXXK    ",
+      "  KXXXXXXXK     ",
+      "  KXK   KXK     ",
+      "  KK     KK   Y ",
+      "                ",
+      "                "
+    ],
+    nightowl: [
+      "                ",
+      "        KKKK    ",
+      "       KXXXXK   ",
+      "      KXOKOXK   ",
+      "      KXKKXK    ",
+      "       KXXK     ",
+      "        KXK     ",
+      "  KK    KXKK    ",
+      " KXXK   KXXK    ",
+      " KXXXKKKXXXK    ",
+      " KXXXXXXXXXK    ",
+      "  KXXXXXXXK     ",
+      "  KXK   KXK     ",
+      "  KK     KK     ",
+      "                ",
+      "                "
+    ],
+    weekend: [
+      "                ",
+      "                ",
+      "        KKKK    ",
+      "       KXXXXK   ",
+      "      KKKKXXK   ",
+      "       KXXK     ",
+      "        KXK     ",
+      "  KK    KXKKKKK ",
+      " KXXKKKKXXXXXK  ",
+      " KXXXXXXXXXXXK  ",
+      "  KXXXXXXXXXK   ",
+      "   KKKKKKKKK    ",
+      "                ",
+      "                ",
+      "                ",
+      "                "
+    ]
+  },
+
+  // 🦁 LION: Nim language mascot (16x16)
+  // Design: Majestic lion with golden mane
+  lion: {
+    normal: [
+      "                ",
+      "   KKKKKKKKK    ",
+      "  KXXXXXXXXXK   ",
+      " KXXKXXXXXXKXK  ",
+      " KXXXWKXKWXXK   ",
+      " KXXXKKXKKXXK   ",
+      " KXXXKXXXKXXK   ",
+      "  KXKKXKKXKK    ",
+      "   KXXXXXXXK    ",
+      "    KXXXXXK     ",
+      "    KXKXKXK     ",
+      "    KKXKXKK     ",
+      "     K K K      ",
+      "                ",
+      "                ",
+      "                "
+    ],
+    sleeping: [
+      "                ",
+      "                ",
+      "   KKKKKKKKK    ",
+      "  KXXXXXXXXXK   ",
+      " KXXKKXXXKKXK   ",
+      " KXXXXXXXXXXXK  ",
+      " KXXXXXXXXXXXK  ",
+      "  KXXXXXXXXXK   ",
+      "   KXXXXXXXK    ",
+      "    KXXXXXK     ",
+      "     KKKKK      ",
+      "                ",
+      "                ",
+      "                ",
+      "                ",
+      "                "
+    ],
+    ghost: [
+      "                ",
+      "   K K K K K    ",
+      "  K X X X X K   ",
+      " K X K X X K K  ",
+      " K X X K K X K  ",
+      " K X X K K X K  ",
+      " K X X K X X K  ",
+      "  K X K X K K   ",
+      "   K X X X X    ",
+      "    K X X X     ",
+      "    K X K X     ",
+      "    K K K K     ",
+      "                ",
+      "                ",
+      "                ",
+      "                "
+    ],
+    hyper: [
+      "      Y   Y     ",
+      "   KKKKKKKKK    ",
+      "  KXYXYXYXYK    ",
+      " KXXKXXXXXXKXK  ",
+      " KXXRWKXKWRXK   ",
+      " KXXXKKXKKXXK   ",
+      " KXXXKXXXKXXK   ",
+      "  KXKKXKKXKK    ",
+      "   KXXXXXXXK    ",
+      "    KXXXXXK   Y ",
+      "    KXKXKXK     ",
+      "    KKXKXKK     ",
+      "     K K K      ",
+      "                ",
+      "                ",
+      "                "
+    ],
+    nightowl: [
+      "                ",
+      "   KKKKKKKKK    ",
+      "  KXXXXXXXXXK   ",
+      " KXXKXXXXXXKXK  ",
+      " KXXXOKXKOXK    ",
+      " KXXXKKXKKXXK   ",
+      " KXXXKXXXKXXK   ",
+      "  KXKKXKKXKK    ",
+      "   KXXXXXXXK    ",
+      "    KXXXXXK     ",
+      "    KXKXKXK     ",
+      "    KKXKXKK     ",
+      "     K K K      ",
+      "                ",
+      "                ",
+      "                "
+    ],
+    weekend: [
+      "                ",
+      "                ",
+      "   KKKKKKKKK    ",
+      "  KXXXXXXXXXK   ",
+      " KXXKKXXXKKXK   ",
+      " KXXXXXXXXXXXK  ",
+      " KXXXXXXXXXXXK  ",
+      "  KXXXXXXXXXK   ",
+      "   KXXXXXXXK    ",
+      "    KXXXXXK     ",
+      "     KKKKK      ",
+      "                ",
+      "                ",
+      "                ",
+      "                ",
+      "                "
+    ]
   }
 };
-
-// ====================================
-// LEGENDARY PETS (Special/Elite)
 
 // --- SEASONAL EVENT SYSTEM ---
 
 /**
- * Lunar New Year (Tet) - Pre-calculated dates 2025-2100
- * Normalized to cover BOTH Vietnamese (GMT+7) and Chinese (GMT+8) Lunar New Years
- * Format: { start: [month, day], end: [month, day] }
+ * ═══════════════════════════════════════════════════════════════════════════════
+ * VIETNAMESE/CHINESE LUNAR CALENDAR - Complete Algorithm
+ * Based on Hồ Ngọc Đức's algorithm (https://www.informatik.uni-leipzig.de/~duc/amlich/)
+ * Handles leap months correctly - Works for ANY year!
+ * Accuracy: ~99% for years 2000-2100 (1-day error possible due to astronomical precision)
+ * ═══════════════════════════════════════════════════════════════════════════════
  */
-const tetRanges = {
-  // --- 2025 to 2030 ---
-  2025: { start: [1, 27], end: [2, 3] },
-  2026: { start: [2, 15], end: [2, 22] },
-  2027: { start: [2, 4], end: [2, 11] },
-  2028: { start: [1, 24], end: [1, 31] },
-  2029: { start: [2, 11], end: [2, 18] },
-  2030: { start: [1, 31], end: [2, 8] },   // Expanded for global coverage
 
-  // --- 2031 to 2040 ---
-  2031: { start: [1, 21], end: [1, 28] },
-  2032: { start: [2, 9], end: [2, 16] },
-  2033: { start: [1, 29], end: [2, 5] },
-  2034: { start: [2, 17], end: [2, 24] },
-  2035: { start: [2, 6], end: [2, 13] },
-  2036: { start: [1, 26], end: [2, 2] },
-  2037: { start: [2, 13], end: [2, 20] },
-  2038: { start: [2, 2], end: [2, 9] },
-  2039: { start: [1, 22], end: [1, 29] },
-  2040: { start: [2, 10], end: [2, 17] },
+const PI = Math.PI;
 
-  // --- 2041 to 2050 ---
-  2041: { start: [1, 30], end: [2, 6] },
-  2042: { start: [1, 20], end: [1, 27] },
-  2043: { start: [2, 8], end: [2, 15] },
-  2044: { start: [1, 28], end: [2, 4] },
-  2045: { start: [2, 15], end: [2, 22] },
-  2046: { start: [2, 4], end: [2, 11] },
-  2047: { start: [1, 24], end: [1, 31] },
-  2048: { start: [2, 12], end: [2, 19] },
-  2049: { start: [1, 31], end: [2, 7] },
-  2050: { start: [1, 21], end: [1, 28] },
+/**
+ * Convert Gregorian date to Julian Day Number
+ * @param {number} dd - Day
+ * @param {number} mm - Month (1-12)
+ * @param {number} yy - Year
+ * @returns {number} Julian Day Number
+ */
+function jdFromDate(dd, mm, yy) {
+  const a = Math.floor((14 - mm) / 12);
+  const y = yy + 4800 - a;
+  const m = mm + 12 * a - 3;
+  let jd = dd + Math.floor((153 * m + 2) / 5) + 365 * y + Math.floor(y / 4) - Math.floor(y / 100) + Math.floor(y / 400) - 32045;
+  if (jd < 2299161) {
+    jd = dd + Math.floor((153 * m + 2) / 5) + 365 * y + Math.floor(y / 4) - 32083;
+  }
+  return jd;
+}
 
-  // --- 2051 to 2060 ---
-  2051: { start: [2, 9], end: [2, 16] },
-  2052: { start: [1, 30], end: [2, 6] },
-  2053: { start: [2, 16], end: [2, 24] },  // Expanded for global coverage
-  2054: { start: [2, 6], end: [2, 13] },
-  2055: { start: [1, 26], end: [2, 2] },
-  2056: { start: [2, 13], end: [2, 20] },
-  2057: { start: [2, 2], end: [2, 9] },
-  2058: { start: [1, 22], end: [1, 29] },
-  2059: { start: [2, 10], end: [2, 17] },
-  2060: { start: [1, 31], end: [2, 7] },
+/**
+ * Convert Julian Day Number to Gregorian date
+ * @param {number} jd - Julian Day Number
+ * @returns {[number, number, number]} [day, month, year]
+ */
+function jdToDate(jd) {
+  let a, b, c;
+  if (jd > 2299160) {
+    a = jd + 32044;
+    b = Math.floor((4 * a + 3) / 146097);
+    c = a - Math.floor((b * 146097) / 4);
+  } else {
+    b = 0;
+    c = jd + 32082;
+  }
+  const d = Math.floor((4 * c + 3) / 1461);
+  const e = c - Math.floor((1461 * d) / 4);
+  const m = Math.floor((5 * e + 2) / 153);
+  const day = e - Math.floor((153 * m + 2) / 5) + 1;
+  const month = m + 3 - 12 * Math.floor(m / 10);
+  const year = b * 100 + d - 4800 + Math.floor(m / 10);
+  return [day, month, year];
+}
 
-  // --- 2061 to 2070 ---
-  2061: { start: [1, 19], end: [1, 26] },
-  2062: { start: [2, 7], end: [2, 14] },
-  2063: { start: [1, 27], end: [2, 3] },
-  2064: { start: [2, 15], end: [2, 22] },
-  2065: { start: [2, 3], end: [2, 10] },
-  2066: { start: [1, 24], end: [1, 31] },
-  2067: { start: [2, 12], end: [2, 19] },
-  2068: { start: [2, 1], end: [2, 8] },
-  2069: { start: [1, 21], end: [1, 28] },
-  2070: { start: [2, 9], end: [2, 16] },
+/**
+ * Calculate the Julian Day of a New Moon (Sóc)
+ * Using Hồ Ngọc Đức's algorithm (1900 reference)
+ * @param {number} k - Lunation number
+ * @returns {number} Julian Day of New Moon
+ */
+function NewMoon(k) {
+  const T = k / 1236.85; // Time in Julian centuries from 1900 January 0.5
+  const T2 = T * T;
+  const T3 = T2 * T;
+  const dr = PI / 180;
+  
+  // Mean new moon
+  let Jd1 = 2415020.75933 + 29.53058868 * k + 0.0001178 * T2 - 0.000000155 * T3;
+  Jd1 += 0.00033 * Math.sin((166.56 + 132.87 * T - 0.009173 * T2) * dr);
+  
+  // Sun's mean anomaly
+  const M = 359.2242 + 29.10535608 * k - 0.0000333 * T2 - 0.00000347 * T3;
+  // Moon's mean anomaly
+  const Mpr = 306.0253 + 385.81691806 * k + 0.0107306 * T2 + 0.00001236 * T3;
+  // Moon's argument of latitude
+  const F = 21.2964 + 390.67050646 * k - 0.0016528 * T2 - 0.00000239 * T3;
+  
+  // Corrections
+  let C1 = (0.1734 - 0.000393 * T) * Math.sin(M * dr) + 0.0021 * Math.sin(2 * dr * M);
+  C1 -= 0.4068 * Math.sin(Mpr * dr) + 0.0161 * Math.sin(dr * 2 * Mpr);
+  C1 -= 0.0004 * Math.sin(dr * 3 * Mpr);
+  C1 += 0.0104 * Math.sin(dr * 2 * F) - 0.0051 * Math.sin(dr * (M + Mpr));
+  C1 -= 0.0074 * Math.sin(dr * (M - Mpr)) + 0.0004 * Math.sin(dr * (2 * F + M));
+  C1 -= 0.0004 * Math.sin(dr * (2 * F - M)) - 0.0006 * Math.sin(dr * (2 * F + Mpr));
+  C1 += 0.0010 * Math.sin(dr * (2 * F - Mpr)) + 0.0005 * Math.sin(dr * (2 * Mpr + M));
+  
+  // Delta T correction
+  let deltat;
+  if (T < -11) {
+    deltat = 0.001 + 0.000839 * T + 0.0002261 * T2 - 0.00000845 * T3 - 0.000000081 * T * T3;
+  } else {
+    deltat = -0.000278 + 0.000265 * T + 0.000262 * T2;
+  }
+  
+  return Jd1 + C1 - deltat;
+}
 
-  // --- 2071 to 2080 ---
-  2071: { start: [1, 29], end: [2, 5] },
-  2072: { start: [2, 17], end: [2, 24] },
-  2073: { start: [2, 5], end: [2, 12] },
-  2074: { start: [1, 25], end: [2, 1] },
-  2075: { start: [2, 13], end: [2, 20] },
-  2076: { start: [2, 3], end: [2, 10] },
-  2077: { start: [1, 22], end: [1, 29] },
-  2078: { start: [2, 10], end: [2, 17] },
-  2079: { start: [1, 31], end: [2, 7] },
-  2080: { start: [1, 20], end: [1, 27] },
+/**
+ * Calculate Sun's longitude at a given Julian Day
+ * @param {number} jdn - Julian Day Number
+ * @returns {number} Sun longitude in radians (0-2π)
+ */
+function SunLongitude(jdn) {
+  const T = (jdn - 2451545.0) / 36525; // Time from J2000.0
+  const T2 = T * T;
+  const dr = PI / 180;
+  
+  // Mean anomaly
+  const M = 357.52910 + 35999.05030 * T - 0.0001559 * T2 - 0.00000048 * T * T2;
+  // Mean longitude
+  const L0 = 280.46645 + 36000.76983 * T + 0.0003032 * T2;
+  // Equation of center
+  let DL = (1.914600 - 0.004817 * T - 0.000014 * T2) * Math.sin(dr * M);
+  DL += (0.019993 - 0.000101 * T) * Math.sin(dr * 2 * M) + 0.000290 * Math.sin(dr * 3 * M);
+  // True longitude
+  let L = L0 + DL;
+  L = L * dr;
+  // Normalize to 0-2π
+  L = L - PI * 2 * Math.floor(L / (PI * 2));
+  return L;
+}
 
-  // --- 2081 to 2090 ---
-  2081: { start: [2, 7], end: [2, 14] },
-  2082: { start: [1, 27], end: [2, 3] },
-  2083: { start: [2, 15], end: [2, 22] },
-  2084: { start: [2, 4], end: [2, 11] },
-  2085: { start: [1, 19], end: [1, 27] },  // Expanded for global coverage
-  2086: { start: [2, 6], end: [2, 13] },
-  2087: { start: [1, 27], end: [2, 3] },
-  2088: { start: [2, 14], end: [2, 21] },
-  2089: { start: [2, 2], end: [2, 9] },
-  2090: { start: [1, 21], end: [1, 28] },
+/**
+ * Get Sun longitude sector (0-11, each sector = 30° = π/6)
+ * @param {number} dayNumber - Julian Day Number
+ * @param {number} timeZone - Timezone offset
+ * @returns {number} Sector 0-11
+ */
+function getSunLongitude(dayNumber, timeZone) {
+  return Math.floor(SunLongitude(dayNumber - 0.5 - timeZone / 24.0) / PI * 6);
+}
 
-  // --- 2091 to 2100 ---
-  2091: { start: [2, 8], end: [2, 15] },
-  2092: { start: [1, 30], end: [2, 6] },
-  2093: { start: [1, 19], end: [1, 26] },
-  2094: { start: [2, 8], end: [2, 15] },
-  2095: { start: [1, 28], end: [2, 4] },
-  2096: { start: [2, 15], end: [2, 22] },
-  2097: { start: [2, 4], end: [2, 11] },
-  2098: { start: [1, 24], end: [1, 31] },
-  2099: { start: [2, 11], end: [2, 18] },
-  2100: { start: [2, 12], end: [2, 19] }
-};
+/**
+ * Get the Julian Day of a New Moon adjusted for timezone
+ * @param {number} k - Lunation number
+ * @param {number} timeZone - Timezone offset
+ * @returns {number} Julian Day Number (integer, local date)
+ */
+function getNewMoonDay(k, timeZone) {
+  return Math.floor(NewMoon(k) + 0.5 + timeZone / 24.0);
+}
+
+/**
+ * Find the lunar month 11 (tháng 11 âm) of a given year
+ * Month 11 is the month containing Winter Solstice
+ * @param {number} yy - Gregorian year
+ * @param {number} timeZone - Timezone offset
+ * @returns {number} Julian Day of the start of lunar month 11
+ */
+function getLunarMonth11(yy, timeZone) {
+  const off = jdFromDate(31, 12, yy) - 2415021;
+  const k = Math.floor(off / 29.530588853);
+  let nm = getNewMoonDay(k, timeZone);
+  const sunLong = getSunLongitude(nm, timeZone);
+  // Month 11 must contain Winter Solstice (sun longitude sector 9)
+  if (sunLong >= 9) {
+    nm = getNewMoonDay(k - 1, timeZone);
+  }
+  return nm;
+}
+
+/**
+ * Determine the offset of leap month (if any) in a lunar year
+ * @param {number} a11 - Julian Day of month 11 of previous year
+ * @param {number} timeZone - Timezone offset
+ * @returns {number} Leap month offset
+ */
+function getLeapMonthOffset(a11, timeZone) {
+  const k = Math.floor((a11 - 2415021.076998695) / 29.530588853 + 0.5);
+  let last = 0;
+  let i = 1;
+  let arc = getSunLongitude(getNewMoonDay(k + i, timeZone), timeZone);
+  
+  do {
+    last = arc;
+    i++;
+    arc = getSunLongitude(getNewMoonDay(k + i, timeZone), timeZone);
+  } while (arc !== last && i < 14);
+  
+  return i - 1;
+}
+
+/**
+ * Convert Lunar date to Solar (Gregorian) date
+ * @param {number} lunarDay - Lunar day (1-30)
+ * @param {number} lunarMonth - Lunar month (1-12)
+ * @param {number} lunarYear - Lunar year
+ * @param {number} lunarLeap - Is this a leap month? (0 or 1)
+ * @param {number} timeZone - Timezone offset
+ * @returns {[number, number, number]} [day, month, year] in Gregorian
+ */
+function convertLunar2Solar(lunarDay, lunarMonth, lunarYear, lunarLeap, timeZone) {
+  let a11, b11;
+  if (lunarMonth < 11) {
+    a11 = getLunarMonth11(lunarYear - 1, timeZone);
+    b11 = getLunarMonth11(lunarYear, timeZone);
+  } else {
+    a11 = getLunarMonth11(lunarYear, timeZone);
+    b11 = getLunarMonth11(lunarYear + 1, timeZone);
+  }
+  
+  const k = Math.floor(0.5 + (a11 - 2415021.076998695) / 29.530588853);
+  let off = lunarMonth - 11;
+  if (off < 0) off += 12;
+  
+  if (b11 - a11 > 365) {
+    const leapOff = getLeapMonthOffset(a11, timeZone);
+    let leapMonth = leapOff - 2;
+    if (leapMonth < 0) leapMonth += 12;
+    if (lunarLeap !== 0 && lunarMonth !== leapMonth) {
+      return [0, 0, 0]; // Invalid leap month
+    } else if (lunarLeap !== 0 || off >= leapOff) {
+      off += 1;
+    }
+  }
+  
+  const monthStart = getNewMoonDay(k + off, timeZone);
+  return jdToDate(monthStart + lunarDay - 1);
+}
+
+/**
+ * Calculate Lunar New Year (Tết) for a given Gregorian year
+ * Returns the date range for celebration (2 days before to 6 days after)
+ * 
+ * @param {number} year - Gregorian year
+ * @returns {{ start: [number, number], end: [number, number] }}
+ */
+function calculateLunarNewYear(year) {
+  const timeZone = 7; // Vietnam timezone (use 8 for China)
+  
+  // Tết is lunar day 1, month 1 of the lunar year
+  const [day, month, solarYear] = convertLunar2Solar(1, 1, year, 0, timeZone);
+  
+  // Calculate celebration range
+  // Start: 2 days before (New Year's Eve preparations)
+  const startDate = new Date(solarYear, month - 1, day);
+  startDate.setDate(startDate.getDate() - 2);
+  
+  // End: 6 days after (week of celebration)
+  const endDate = new Date(solarYear, month - 1, day);
+  endDate.setDate(endDate.getDate() + 6);
+  
+  return {
+    start: [startDate.getMonth() + 1, startDate.getDate()],
+    end: [endDate.getMonth() + 1, endDate.getDate()]
+  };
+}
+
+/**
+ * Calculate Mid-Autumn Festival (Tết Trung Thu) for a given year
+ * Mid-Autumn is the 15th day of the 8th lunar month
+ * 
+ * @param {number} year - Gregorian year
+ * @returns {[number, number]} [month, day]
+ */
+function calculateMidAutumn(year) {
+  const timeZone = 7; // Vietnam timezone
+  const [day, month] = convertLunar2Solar(15, 8, year, 0, timeZone);
+  return [month, day];
+}
+
+/**
+ * Calculate Diwali date using lunar calendar
+ * Diwali falls on the new moon (Amavasya) of Hindu month Kartik
+ * This is typically the new moon between mid-October and mid-November
+ * 
+ * @param {number} year - Gregorian year
+ * @returns {[number, number]} [month, day]
+ */
+function calculateDiwali(year) {
+  const timeZone = 5.5; // India timezone (IST = UTC+5:30)
+  
+  // Find new moons around October-November
+  const oct15JD = jdFromDate(15, 10, year);
+  const k = Math.floor((oct15JD - 2415021.076998695) / 29.530588853 + 0.5);
+  
+  // Check new moons around this period
+  const candidates = [];
+  for (let i = -1; i <= 1; i++) {
+    const nmJD = getNewMoonDay(k + i, timeZone);
+    const [d, m, y] = jdToDate(nmJD);
+    candidates.push({ jd: nmJD, day: d, month: m, year: y });
+  }
+  
+  // Diwali is the new moon between Oct 15 and Nov 15
+  for (const c of candidates) {
+    if ((c.month === 10 && c.day >= 15) || (c.month === 11 && c.day <= 15)) {
+      return [c.month, c.day];
+    }
+  }
+  
+  // Fallback: closest to Nov 1
+  const nov1JD = jdFromDate(1, 11, year);
+  let closest = candidates[0];
+  let minDiff = Math.abs(candidates[0].jd - nov1JD);
+  for (const c of candidates) {
+    const diff = Math.abs(c.jd - nov1JD);
+    if (diff < minDiff) {
+      minDiff = diff;
+      closest = c;
+    }
+  }
+  
+  return [closest.month, closest.day];
+}
+
+/**
+ * Calculate Easter Sunday (Western/Gregorian) using the Anonymous Gregorian Algorithm
+ * This algorithm works for any year from 1583 onwards (after Gregorian calendar adoption)
+ * Reference: https://en.wikipedia.org/wiki/Date_of_Easter#Anonymous_Gregorian_algorithm
+ * 
+ * @param {number} year - The year to calculate Easter for
+ * @returns {[number, number]} [month, day] where month is 3 (March) or 4 (April)
+ */
+function calculateEaster(year) {
+  // Anonymous Gregorian Algorithm (Meeus/Jones/Butcher)
+  const a = year % 19;
+  const b = Math.floor(year / 100);
+  const c = year % 100;
+  const d = Math.floor(b / 4);
+  const e = b % 4;
+  const f = Math.floor((b + 8) / 25);
+  const g = Math.floor((b - f + 1) / 3);
+  const h = (19 * a + b - d - g + 15) % 30;
+  const i = Math.floor(c / 4);
+  const k = c % 4;
+  const l = (32 + 2 * e + 2 * i - h - k) % 7;
+  const m = Math.floor((a + 11 * h + 22 * l) / 451);
+  const month = Math.floor((h + l - 7 * m + 114) / 31); // 3 = March, 4 = April
+  const day = ((h + l - 7 * m + 114) % 31) + 1;
+  
+  return [month, day];
+}
+
+/**
+ * Calculate US Thanksgiving (4th Thursday of November)
+ * @param {number} year
+ * @returns {number} Day of month
+ */
+function getThanksgivingDay(year) {
+  // November 1st of the given year
+  const nov1 = new Date(year, 10, 1); // Month is 0-indexed
+  const dayOfWeek = nov1.getDay(); // 0 = Sunday, 4 = Thursday
+  // Calculate first Thursday
+  const firstThursday = dayOfWeek <= 4 ? (4 - dayOfWeek + 1) : (11 - dayOfWeek + 4 + 1);
+  // 4th Thursday
+  return firstThursday + 21;
+}
+
+/**
+ * Calculate Holi (Festival of Colors) - Hindu lunar calendar
+ * Holi falls on the full moon day (Purnima) in the Hindu month of Phalguna
+ * This is typically in late February or March
+ * Uses lunar calculation: Full moon closest to spring equinox
+ * 
+ * @param {number} year - Gregorian year
+ * @returns {[number, number]|null} [month, day] or null if cannot calculate
+ */
+function calculateHoli(year) {
+  // Holi is on the full moon (Purnima) of Phalguna month
+  // This is approximately 15 days after the new moon in Feb/Mar
+  // We can calculate by finding new moon, then adding ~15 days for full moon
+  
+  // Find new moon in February or March using our lunar algorithm
+  const timeZone = 5.5; // India Standard Time (+5:30)
+  
+  // Get lunar month 11 of previous year to establish reference
+  const jd = jdFromDate(1, 1, year);
+  
+  // Find new moons from January to March
+  const candidates = [];
+  for (let month = 1; month <= 3; month++) {
+    const off = jdFromDate(15, month, year) - 2415021;
+    const k = Math.floor(off / 29.530588853);
+    
+    // Check this new moon and nearby ones
+    for (let dk = -1; dk <= 1; dk++) {
+      const newMoonJd = getNewMoonDay(k + dk);
+      const fullMoonJd = newMoonJd + 15; // Full moon is ~15 days after new moon
+      const [d, m, y] = jdToDate(fullMoonJd);
+      
+      // Holi typically falls in February-March, around day 15-30 of lunar month Phalguna
+      if (y === year && m >= 2 && m <= 3) {
+        candidates.push({ month: m, day: d, jd: fullMoonJd });
+      }
+    }
+  }
+  
+  // Holi is typically the last full moon before spring equinox (Mar 21) or closest to it
+  // Filter for unique dates and find the one closest to but before late March
+  const unique = [...new Map(candidates.map(c => [`${c.month}-${c.day}`, c])).values()];
+  
+  // Find full moon in March (preferably) or late February
+  const marchFullMoon = unique.find(c => c.month === 3 && c.day <= 20);
+  if (marchFullMoon) {
+    return [marchFullMoon.month, marchFullMoon.day];
+  }
+  
+  // Fall back to any March full moon or late Feb
+  const anyFullMoon = unique.find(c => c.month === 3 || (c.month === 2 && c.day >= 20));
+  if (anyFullMoon) {
+    return [anyFullMoon.month, anyFullMoon.day];
+  }
+  
+  // Last resort: return first candidate in Feb/Mar
+  if (unique.length > 0) {
+    return [unique[0].month, unique[0].day];
+  }
+  
+  return null;
+}
+
+/**
+ * Calculate Hanukkah start date (Jewish Festival of Lights)
+ * Hanukkah starts on 25 Kislev in the Hebrew calendar
+ * Falls between late November and late December
+ * 
+ * Uses approximation based on lunar cycles from Rosh Hashanah
+ * 
+ * @param {number} year - Gregorian year
+ * @returns {[number, number]|null} [month, day] start date
+ */
+function calculateHanukkah(year) {
+  // Hanukkah starts 25 Kislev, which is approximately 85 days after Rosh Hashanah
+  // Rosh Hashanah (1 Tishrei) typically falls in September/October
+  
+  // Jewish calendar approximation using molad (new moon) calculations
+  // The Jewish year starting in fall of Gregorian year Y is Hebrew year Y+3761
+  const hebrewYear = year + 3761;
+  
+  // Calculate the molad of Tishrei (approximately)
+  // Reference: Molad of year 1 was Oct 7, 3761 BCE (Julian) = JD 347997.5
+  // Each Hebrew year is approximately 12.368 lunar months
+  
+  // Simplified calculation: Find new moon in September/October
+  const off = jdFromDate(1, 9, year) - 2415021;
+  const k = Math.floor(off / 29.530588853);
+  
+  // Find the new moon closest to early September
+  let roshHashanahJd = null;
+  for (let dk = 0; dk <= 2; dk++) {
+    const nmJd = getNewMoonDay(k + dk);
+    const [d, m, y] = jdToDate(nmJd);
+    if (y === year && m >= 9 && m <= 10 && d >= 5) {
+      roshHashanahJd = nmJd;
+      break;
+    }
+  }
+  
+  if (!roshHashanahJd) {
+    // Fallback: approximate to mid-September
+    roshHashanahJd = jdFromDate(15, 9, year);
+  }
+  
+  // Kislev is the 3rd month after Tishrei, 25 Kislev is approximately:
+  // 30 (rest of Tishrei) + 29 (Cheshvan) + 25 (Kislev) = ~84 days after 1 Tishrei
+  // But we need to account for variable month lengths
+  
+  // Approximate: 2 lunar months (59 days) + 25 days = 84 days
+  const hanukkahJd = roshHashanahJd + 84;
+  const [d, m, y] = jdToDate(hanukkahJd);
+  
+  // Adjust if year is wrong
+  if (y !== year) {
+    return [12, 15]; // Default fallback
+  }
+  
+  return [m, d];
+}
+
+/**
+ * Calculate Eid al-Fitr (End of Ramadan) - Islamic lunar calendar
+ * Eid al-Fitr is on 1 Shawwal, the 10th month of the Islamic calendar
+ * The Islamic calendar is purely lunar (no leap months)
+ * 
+ * @param {number} year - Gregorian year
+ * @returns {[number, number]|null} [month, day]
+ */
+function calculateEidAlFitr(year) {
+  // Islamic calendar is purely lunar: 12 months × 29.53 days = ~354.36 days/year
+  // The calendar shifts ~10-11 days earlier each Gregorian year
+  
+  // Reference: Eid al-Fitr 2024 was approximately April 10
+  // We can calculate by finding the appropriate new moon
+  
+  // Islamic month starts at new moon sighting
+  // Ramadan is the 9th month, Shawwal (Eid) is the 10th
+  
+  // Approximate: Count lunations from a known reference
+  // Reference: 1 Muharram 1445 AH = July 19, 2023 (new moon)
+  const refJd = jdFromDate(19, 7, 2023); // Reference Islamic new year
+  const refLunation = Math.floor((refJd - 2415021) / 29.530588853);
+  
+  // Calculate which Islamic year falls in this Gregorian year
+  // Islamic year 1445 started July 2023
+  // Each Islamic year is ~354 days, so advances ~11 days per Gregorian year
+  
+  // Find Shawwal (month 10) new moon for the Islamic year containing most of this Gregorian year
+  const targetJd = jdFromDate(1, 4, year); // Eid typically falls around March-May
+  const off = targetJd - 2415021;
+  const approxK = Math.floor(off / 29.530588853);
+  
+  // Search for new moons in the March-May period
+  const candidates = [];
+  for (let dk = -2; dk <= 3; dk++) {
+    const nmJd = getNewMoonDay(approxK + dk);
+    const [d, m, y] = jdToDate(nmJd);
+    if (y === year && m >= 3 && m <= 5) {
+      candidates.push({ month: m, day: d, jd: nmJd });
+    }
+  }
+  
+  // Eid al-Fitr is typically around April in 2024-2030
+  // The new moon marking start of Shawwal
+  if (candidates.length > 0) {
+    // Return the most likely candidate (first in April, or closest to early April)
+    const april = candidates.find(c => c.month === 4);
+    if (april) {
+      return [april.month, april.day];
+    }
+    return [candidates[0].month, candidates[0].day];
+  }
+  
+  return null;
+}
 
 /**
  * Get current seasonal event based on date and timezone
  * PRIORITY ORDER:
- * 1. Major Holidays (Solar + Lunar New Year)
- * 2. Easter Eggs (Friday 13th, April Fools)
- * 3. Weekend Mode
+ * 1. Major Holidays (Solar + Lunar + Religious)
+ * 2. Cultural Celebrations
+ * 3. Easter Eggs (Friday 13th, April Fools)
  * 4. Default (null)
  * 
  * @param {string} timezone - IANA timezone string
@@ -3929,7 +5237,7 @@ function getSeasonalEvent(timezone = 'UTC') {
   // ═══════════════════════════════════════════════════════════════════════════
 
   // Check Lunar New Year (Tet) - requires year lookup
-  const tetRange = tetRanges[year];
+  const tetRange = calculateLunarNewYear(year);
   if (tetRange) {
     const [startMonth, startDay] = tetRange.start;
     const [endMonth, endDay] = tetRange.end;
@@ -3948,8 +5256,109 @@ function getSeasonalEvent(timezone = 'UTC') {
   if (inRange(12, 20, 12, 25)) return 'CHRISTMAS';    // Dec 20 - Dec 25
 
   // ═══════════════════════════════════════════════════════════════════════════
-  // PRIORITY 2: Easter Eggs (The "Surprises")
+  // PRIORITY 2: Cultural & Religious Celebrations
   // ═══════════════════════════════════════════════════════════════════════════
+
+  // Holi 🎨 (Festival of Colors - Hindu, Feb-Mar)
+  const holiDate = calculateHoli(year);
+  if (holiDate) {
+    const [hMonth, hDay] = holiDate;
+    // Holi is celebrated for 2 days
+    if (inRange(hMonth, hDay - 1, hMonth, hDay)) {
+      return 'HOLI';
+    }
+  }
+
+  // St. Patrick's Day ☘️ (Mar 16-18)
+  if (inRange(3, 16, 3, 18)) return 'ST_PATRICKS';
+
+  // Nowruz / Persian New Year 🌸 (Mar 20-22)
+  if (inRange(3, 20, 3, 22)) return 'NOWRUZ';
+
+  // Eid al-Fitr 🌙 (End of Ramadan - Islamic, calculated)
+  const eidDate = calculateEidAlFitr(year);
+  if (eidDate) {
+    const [eMonth, eDay] = eidDate;
+    // Eid is celebrated for 3 days
+    if (inRange(eMonth, eDay, eMonth, eDay + 2)) {
+      return 'EID';
+    }
+  }
+
+  // Earth Day 🌍 (Apr 21-23)
+  if (inRange(4, 21, 4, 23)) return 'EARTH_DAY';
+
+  // Labor Day / May Day 👷 (May 1st - International Workers' Day)
+  if (month === 5 && day === 1) return 'LABOR_DAY';
+
+  // Pride Month 🏳️‍🌈 (June - First week emphasis)
+  if (month === 6 && day <= 7) return 'PRIDE';
+
+  // Easter 🐰 (Western - calculated using Anonymous Gregorian Algorithm)
+  const easterDate = calculateEaster(year);
+  if (easterDate) {
+    const [easterMonth, easterDay] = easterDate;
+    // Easter weekend: Friday before to Sunday
+    if (inRange(easterMonth, easterDay - 2, easterMonth, easterDay)) {
+      return 'EASTER';
+    }
+  }
+
+  // Mid-Autumn Festival 🥮 (Sep-Oct, varies)
+  const midAutumnDate = calculateMidAutumn(year);
+  if (midAutumnDate) {
+    const [maMonth, maDay] = midAutumnDate;
+    if (inRange(maMonth, maDay - 1, maMonth, maDay + 1)) {
+      return 'MID_AUTUMN';
+    }
+  }
+
+  // Diwali 🪔 (Festival of Lights, Oct-Nov)
+  const diwaliDate = calculateDiwali(year);
+  if (diwaliDate) {
+    const [dMonth, dDay] = diwaliDate;
+    // Diwali is celebrated for 5 days, main day ±2
+    if (inRange(dMonth, dDay - 2, dMonth, dDay + 2)) {
+      return 'DIWALI';
+    }
+  }
+
+  // Hanukkah 🕎 (Jewish Festival of Lights, Nov-Dec)
+  const hanukkahDate = calculateHanukkah(year);
+  if (hanukkahDate) {
+    const [hkMonth, hkDay] = hanukkahDate;
+    // Hanukkah is 8 days
+    if (inRange(hkMonth, hkDay, hkMonth, hkDay + 7) || 
+        (hkMonth === 12 && hkDay + 7 > 31 && month === 1 && day <= (hkDay + 7 - 31))) {
+      return 'HANUKKAH';
+    }
+  }
+
+  // Thanksgiving 🦃 (US - 4th Thursday of November)
+  const thanksgivingDay = getThanksgivingDay(year);
+  if (month === 11 && day >= thanksgivingDay && day <= thanksgivingDay + 1) {
+    return 'THANKSGIVING';
+  }
+
+  // ═══════════════════════════════════════════════════════════════════════════
+  // PRIORITY 3: Easter Eggs (The "Surprises")
+  // ═══════════════════════════════════════════════════════════════════════════
+
+  // Pi Day 🥧 (Mar 14 = 3.14)
+  if (month === 3 && day === 14) return 'PI_DAY';
+
+  // Star Wars Day ⚔️ (May 4 = "May the Fourth")
+  if (month === 5 && day === 4) return 'STAR_WARS';
+
+  // Talk Like a Pirate Day 🏴‍☠️ (Sep 19)
+  if (month === 9 && day === 19) return 'PIRATE_DAY';
+
+  // Singles' Day 🛒 (Nov 11 = 11.11)
+  if (month === 11 && day === 11) return 'SINGLES_DAY';
+
+  // System Administrator Day 🖥️ (Last Friday of July)
+  const lastFriJuly = getLastFridayOfMonth(year, 7);
+  if (month === 7 && day === lastFriJuly) return 'SYSADMIN_DAY';
 
   // Friday the 13th 👻
   if (day === 13 && dayOfWeek === 5) return 'FRIDAY_13';
@@ -3958,10 +5367,27 @@ function getSeasonalEvent(timezone = 'UTC') {
   if (month === 4 && day === 1) return 'APRIL_FOOLS';
 
   // ═══════════════════════════════════════════════════════════════════════════
-  // PRIORITY 3: Default (No accessory - let mood sprite handle weekend/etc)
+  // PRIORITY 4: Default (No accessory - let mood sprite handle weekend/etc)
   // ═══════════════════════════════════════════════════════════════════════════
 
   return null;
+}
+
+/**
+ * Get the last Friday of a given month
+ * @param {number} year - Year
+ * @param {number} month - Month (1-12)
+ * @returns {number} Day of the last Friday
+ */
+function getLastFridayOfMonth(year, month) {
+  // Get the last day of the month
+  const lastDay = new Date(year, month, 0).getDate();
+  const lastDayDate = new Date(year, month - 1, lastDay);
+  const dayOfWeek = lastDayDate.getDay(); // 0=Sun, 5=Fri
+  
+  // Calculate days to subtract to get Friday
+  const daysToFriday = (dayOfWeek >= 5) ? (dayOfWeek - 5) : (dayOfWeek + 2);
+  return lastDay - daysToFriday;
 }
 
 /**
@@ -4047,7 +5473,43 @@ const RELATIVE_ACCESSORY_OFFSETS = {
   FRIDAY_13: { x: -35, y: -5 },
 
   // 🤡 APRIL_FOOLS: Jester Hat (sits on top)
-  APRIL_FOOLS: { x: -30, y: -45 }
+  APRIL_FOOLS: { x: -30, y: -45 },
+
+  // ☘️ ST_PATRICKS: Shamrock (sits on top)
+  ST_PATRICKS: { x: -15, y: -40 },
+
+  // 🌸 NOWRUZ: Spring Flower (sits on side)
+  NOWRUZ: { x: -5, y: -15 },
+
+  // 🐰 EASTER: Bunny Ears (sits on top)
+  EASTER: { x: -25, y: -50 },
+
+  // 🥮 MID_AUTUMN: Lantern (floats to side)
+  MID_AUTUMN: { x: 25, y: -10 },
+
+  // 🪔 DIWALI: Diya Lamp (floats to side)
+  DIWALI: { x: 25, y: 0 },
+
+  // 🦃 THANKSGIVING: Pilgrim Hat (sits on top)
+  THANKSGIVING: { x: -20, y: -45 },
+
+  // 🎨 HOLI: Color Splashes (around head)
+  HOLI: { x: -20, y: -20 },
+
+  // 🌙 EID: Crescent Moon (floats above)
+  EID: { x: -15, y: -45 },
+
+  // 🌍 EARTH_DAY: Earth Globe (floats to side)
+  EARTH_DAY: { x: 25, y: -10 },
+
+  // 👷 LABOR_DAY: Hard Hat (sits on top)
+  LABOR_DAY: { x: -25, y: -40 },
+
+  // 🏳️‍🌈 PRIDE: Rainbow Crown (sits on top)
+  PRIDE: { x: -25, y: -50 },
+
+  // 🕎 HANUKKAH: Menorah (floats to side)
+  HANUKKAH: { x: 25, y: -15 }
 };
 
 /**
@@ -4306,6 +5768,388 @@ const SEASONAL_ACCESSORIES = {
       <circle cx="45" cy="20" r="4" fill="#FFEB3B"/>
       <circle cx="65" cy="30" r="4" fill="#FFEB3B"/>
     </g>
+  `,
+
+  // ☘️ ST_PATRICKS: Four-Leaf Clover/Shamrock
+  ST_PATRICKS: (x, y) => `
+    <g transform="translate(${x}, ${y})">
+      <!-- Stem -->
+      <path d="M20,50 Q18,35 20,25" stroke="#228B22" stroke-width="3" fill="none"/>
+      <!-- Shamrock Leaves -->
+      <ellipse cx="12" cy="18" rx="10" ry="12" fill="#2E8B57" transform="rotate(-30 12 18)"/>
+      <ellipse cx="28" cy="18" rx="10" ry="12" fill="#2E8B57" transform="rotate(30 28 18)"/>
+      <ellipse cx="20" cy="8" rx="10" ry="12" fill="#2E8B57"/>
+      <!-- Center -->
+      <circle cx="20" cy="18" r="4" fill="#1B5E20"/>
+      <!-- Sparkle -->
+      <circle cx="8" cy="5" r="2" fill="#FFD700">
+        <animate attributeName="opacity" values="0;1;0" dur="1.5s" repeatCount="indefinite"/>
+      </circle>
+    </g>
+  `,
+
+  // 🌸 NOWRUZ: Spring Flower (Haft-Seen inspired)
+  NOWRUZ: (x, y) => `
+    <g transform="translate(${x}, ${y})">
+      <!-- Flower Petals -->
+      <ellipse cx="20" cy="10" rx="8" ry="15" fill="#FF69B4"/>
+      <ellipse cx="10" cy="20" rx="8" ry="15" fill="#FF69B4" transform="rotate(-72 20 20)"/>
+      <ellipse cx="6" cy="35" rx="8" ry="15" fill="#FF69B4" transform="rotate(-144 20 20)"/>
+      <ellipse cx="34" cy="35" rx="8" ry="15" fill="#FF69B4" transform="rotate(144 20 20)"/>
+      <ellipse cx="30" cy="20" rx="8" ry="15" fill="#FF69B4" transform="rotate(72 20 20)"/>
+      <!-- Center -->
+      <circle cx="20" cy="23" r="8" fill="#FFD700"/>
+      <circle cx="20" cy="23" r="4" fill="#FF8C00"/>
+      <!-- Leaves -->
+      <ellipse cx="8" cy="45" rx="6" ry="10" fill="#228B22" transform="rotate(-20 8 45)"/>
+      <ellipse cx="32" cy="45" rx="6" ry="10" fill="#228B22" transform="rotate(20 32 45)"/>
+    </g>
+  `,
+
+  // 🐰 EASTER: Bunny Ears with Bow
+  EASTER: (x, y) => `
+    <g transform="translate(${x}, ${y})">
+      <!-- Left Ear -->
+      <ellipse cx="15" cy="25" rx="12" ry="30" fill="#FFF5EE"/>
+      <ellipse cx="15" cy="25" rx="6" ry="20" fill="#FFB6C1"/>
+      <!-- Right Ear -->
+      <ellipse cx="45" cy="25" rx="12" ry="30" fill="#FFF5EE"/>
+      <ellipse cx="45" cy="25" rx="6" ry="20" fill="#FFB6C1"/>
+      <!-- Headband -->
+      <rect x="5" y="50" width="50" height="8" rx="4" fill="#DDA0DD"/>
+      <!-- Bow -->
+      <path d="M25,58 Q20,50 15,55 Q20,60 25,58" fill="#FF69B4"/>
+      <path d="M35,58 Q40,50 45,55 Q40,60 35,58" fill="#FF69B4"/>
+      <circle cx="30" cy="55" r="5" fill="#FF1493"/>
+      <!-- Easter Egg decorations on ears -->
+      <circle cx="15" cy="35" r="3" fill="#87CEEB"/>
+      <circle cx="45" cy="35" r="3" fill="#98FB98"/>
+    </g>
+  `,
+
+  // 🥮 MID_AUTUMN: Chinese Lantern
+  MID_AUTUMN: (x, y) => `
+    <g transform="translate(${x}, ${y})">
+      <!-- String -->
+      <line x1="20" y1="0" x2="20" y2="15" stroke="#8B4513" stroke-width="2"/>
+      <!-- Top Cap -->
+      <rect x="12" y="12" width="16" height="5" rx="2" fill="#FFD700"/>
+      <!-- Lantern Body -->
+      <ellipse cx="20" cy="35" rx="18" ry="22" fill="#FF4500"/>
+      <ellipse cx="20" cy="35" rx="14" ry="18" fill="#FF6347"/>
+      <!-- Decorative Lines -->
+      <path d="M8,25 Q20,35 32,25" stroke="#FFD700" stroke-width="2" fill="none"/>
+      <path d="M8,45 Q20,35 32,45" stroke="#FFD700" stroke-width="2" fill="none"/>
+      <!-- Bottom Tassel -->
+      <rect x="15" y="55" width="10" height="4" rx="1" fill="#FFD700"/>
+      <line x1="17" y1="59" x2="17" y2="70" stroke="#FF4500" stroke-width="2"/>
+      <line x1="20" y1="59" x2="20" y2="72" stroke="#FF4500" stroke-width="2"/>
+      <line x1="23" y1="59" x2="23" y2="70" stroke="#FF4500" stroke-width="2"/>
+      <!-- Glow effect -->
+      <ellipse cx="20" cy="35" rx="12" ry="15" fill="#FFFF00" opacity="0.3">
+        <animate attributeName="opacity" values="0.2;0.4;0.2" dur="2s" repeatCount="indefinite"/>
+      </ellipse>
+    </g>
+  `,
+
+  // 🪔 DIWALI: Diya Oil Lamp with Flame
+  DIWALI: (x, y) => `
+    <g transform="translate(${x}, ${y})">
+      <!-- Diya Base -->
+      <ellipse cx="25" cy="45" rx="22" ry="8" fill="#CD853F"/>
+      <ellipse cx="25" cy="42" rx="20" ry="7" fill="#DEB887"/>
+      <!-- Oil -->
+      <ellipse cx="25" cy="40" rx="15" ry="5" fill="#FFD700"/>
+      <!-- Wick -->
+      <rect x="23" y="32" width="4" height="10" fill="#4A4A4A"/>
+      <!-- Flame -->
+      <ellipse cx="25" cy="22" rx="8" ry="14" fill="#FF4500">
+        <animate attributeName="ry" values="14;16;14" dur="0.5s" repeatCount="indefinite"/>
+      </ellipse>
+      <ellipse cx="25" cy="20" rx="5" ry="10" fill="#FFD700">
+        <animate attributeName="ry" values="10;12;10" dur="0.5s" repeatCount="indefinite"/>
+      </ellipse>
+      <ellipse cx="25" cy="18" rx="3" ry="6" fill="#FFFACD"/>
+      <!-- Decorative dots on diya -->
+      <circle cx="12" cy="45" r="2" fill="#FF6347"/>
+      <circle cx="38" cy="45" r="2" fill="#FF6347"/>
+      <circle cx="25" cy="50" r="2" fill="#FF6347"/>
+      <!-- Sparkles -->
+      <circle cx="35" cy="15" r="2" fill="#FFD700">
+        <animate attributeName="opacity" values="0;1;0" dur="1s" repeatCount="indefinite"/>
+      </circle>
+      <circle cx="15" cy="12" r="1.5" fill="#FFD700">
+        <animate attributeName="opacity" values="0;1;0" dur="1.2s" repeatCount="indefinite" begin="0.3s"/>
+      </circle>
+    </g>
+  `,
+
+  // 🦃 THANKSGIVING: Pilgrim Hat
+  THANKSGIVING: (x, y) => `
+    <g transform="translate(${x}, ${y})">
+      <!-- Hat Brim -->
+      <ellipse cx="25" cy="48" rx="28" ry="6" fill="#1A1A1A"/>
+      <ellipse cx="25" cy="46" rx="26" ry="5" fill="#2F2F2F"/>
+      <!-- Hat Crown -->
+      <rect x="8" y="15" width="34" height="33" rx="3" fill="#1A1A1A"/>
+      <rect x="10" y="17" width="30" height="29" rx="2" fill="#2F2F2F"/>
+      <!-- Hat Band -->
+      <rect x="8" y="38" width="34" height="8" fill="#8B4513"/>
+      <!-- Buckle -->
+      <rect x="18" y="36" width="14" height="12" rx="2" fill="#FFD700"/>
+      <rect x="21" y="39" width="8" height="6" rx="1" fill="#2F2F2F"/>
+      <!-- Subtle highlights -->
+      <line x1="12" y1="20" x2="12" y2="35" stroke="#4A4A4A" stroke-width="2"/>
+    </g>
+  `,
+
+  // 🎨 HOLI: Color Splash / Gulal Powder
+  HOLI: (x, y) => `
+    <g transform="translate(${x}, ${y})">
+      <!-- Color powder splashes around head -->
+      <circle cx="5" cy="15" r="8" fill="#FF1493" opacity="0.8">
+        <animate attributeName="opacity" values="0.6;0.9;0.6" dur="1.5s" repeatCount="indefinite"/>
+      </circle>
+      <circle cx="35" cy="10" r="10" fill="#00BFFF" opacity="0.8">
+        <animate attributeName="opacity" values="0.7;1;0.7" dur="1.8s" repeatCount="indefinite"/>
+      </circle>
+      <circle cx="40" cy="35" r="7" fill="#FFD700" opacity="0.8">
+        <animate attributeName="opacity" values="0.5;0.8;0.5" dur="1.2s" repeatCount="indefinite"/>
+      </circle>
+      <circle cx="0" cy="40" r="6" fill="#32CD32" opacity="0.7">
+        <animate attributeName="opacity" values="0.6;0.9;0.6" dur="2s" repeatCount="indefinite"/>
+      </circle>
+      <circle cx="20" cy="5" r="5" fill="#FF6347" opacity="0.9"/>
+      <!-- Powder particles -->
+      <circle cx="25" cy="25" r="3" fill="#9400D3" opacity="0.6"/>
+      <circle cx="10" cy="30" r="2" fill="#FF69B4" opacity="0.7"/>
+      <circle cx="30" cy="45" r="2" fill="#00CED1" opacity="0.6"/>
+    </g>
+  `,
+
+  // 🌙 EID: Crescent Moon and Star
+  EID: (x, y) => `
+    <g transform="translate(${x}, ${y})">
+      <!-- Crescent Moon -->
+      <path d="M25,5 A20,20 0 1,1 25,45 A15,15 0 1,0 25,5" fill="#FFD700"/>
+      <!-- Inner glow -->
+      <path d="M27,10 A15,15 0 1,1 27,40 A12,12 0 1,0 27,10" fill="#FFC107" opacity="0.5"/>
+      <!-- Star -->
+      <polygon points="42,18 44,24 50,24 45,28 47,34 42,30 37,34 39,28 34,24 40,24" fill="#FFD700">
+        <animate attributeName="opacity" values="0.8;1;0.8" dur="1s" repeatCount="indefinite"/>
+      </polygon>
+      <!-- Sparkles -->
+      <circle cx="38" cy="10" r="1.5" fill="#FFFFFF">
+        <animate attributeName="opacity" values="0;1;0" dur="2s" repeatCount="indefinite"/>
+      </circle>
+      <circle cx="48" cy="35" r="1" fill="#FFFFFF">
+        <animate attributeName="opacity" values="0;1;0" dur="1.5s" repeatCount="indefinite" begin="0.5s"/>
+      </circle>
+    </g>
+  `,
+
+  // 🌍 EARTH_DAY: Earth Globe with Leaf
+  EARTH_DAY: (x, y) => `
+    <g transform="translate(${x}, ${y})">
+      <!-- Earth Globe -->
+      <circle cx="22" cy="25" r="20" fill="#4169E1"/>
+      <!-- Continents (simplified) -->
+      <ellipse cx="18" cy="18" rx="8" ry="5" fill="#228B22" transform="rotate(-20 18 18)"/>
+      <ellipse cx="28" cy="28" rx="6" ry="8" fill="#228B22" transform="rotate(30 28 28)"/>
+      <ellipse cx="12" cy="32" rx="4" ry="3" fill="#228B22"/>
+      <!-- Ocean highlights -->
+      <ellipse cx="30" cy="15" rx="3" ry="2" fill="#87CEEB" opacity="0.5"/>
+      <!-- Leaf sprouting from top -->
+      <ellipse cx="22" cy="2" rx="6" ry="10" fill="#32CD32" transform="rotate(-15 22 2)"/>
+      <ellipse cx="28" cy="0" rx="5" ry="8" fill="#228B22" transform="rotate(15 28 0)"/>
+      <line x1="22" y1="5" x2="25" y2="-5" stroke="#1B5E20" stroke-width="2"/>
+    </g>
+  `,
+
+  // 👷 LABOR_DAY: Hard Hat / Construction Helmet
+  LABOR_DAY: (x, y) => `
+    <g transform="translate(${x}, ${y})">
+      <!-- Hard Hat Dome -->
+      <ellipse cx="25" cy="30" rx="25" ry="15" fill="#FFD700"/>
+      <ellipse cx="25" cy="25" rx="22" ry="20" fill="#FFD700"/>
+      <!-- Top ridge -->
+      <rect x="22" y="5" width="6" height="25" rx="3" fill="#FFC107"/>
+      <!-- Brim -->
+      <ellipse cx="25" cy="40" rx="28" ry="5" fill="#FFA000"/>
+      <!-- Shine -->
+      <ellipse cx="15" cy="20" rx="6" ry="8" fill="#FFEB3B" opacity="0.4"/>
+      <!-- Hard hat band line -->
+      <ellipse cx="25" cy="32" rx="22" ry="3" stroke="#E65100" stroke-width="2" fill="none"/>
+    </g>
+  `,
+
+  // 🏳️‍🌈 PRIDE: Rainbow Flag / Pride Crown
+  PRIDE: (x, y) => `
+    <g transform="translate(${x}, ${y})">
+      <!-- Rainbow stripes as a headband/crown -->
+      <rect x="0" y="25" width="50" height="5" fill="#E40303"/>
+      <rect x="0" y="30" width="50" height="5" fill="#FF8C00"/>
+      <rect x="0" y="35" width="50" height="5" fill="#FFED00"/>
+      <rect x="0" y="40" width="50" height="5" fill="#008026"/>
+      <rect x="0" y="45" width="50" height="5" fill="#004DFF"/>
+      <rect x="0" y="50" width="50" height="5" fill="#750787"/>
+      <!-- Crown spikes -->
+      <polygon points="5,25 10,10 15,25" fill="#FFD700"/>
+      <polygon points="20,25 25,5 30,25" fill="#FFD700"/>
+      <polygon points="35,25 40,10 45,25" fill="#FFD700"/>
+      <!-- Sparkles -->
+      <circle cx="10" cy="15" r="2" fill="#FFFFFF">
+        <animate attributeName="opacity" values="0.5;1;0.5" dur="1s" repeatCount="indefinite"/>
+      </circle>
+      <circle cx="40" cy="12" r="1.5" fill="#FFFFFF">
+        <animate attributeName="opacity" values="0.5;1;0.5" dur="1.2s" repeatCount="indefinite" begin="0.3s"/>
+      </circle>
+    </g>
+  `,
+
+  // 🕎 HANUKKAH: Menorah
+  HANUKKAH: (x, y) => `
+    <g transform="translate(${x}, ${y})">
+      <!-- Menorah base -->
+      <rect x="20" y="50" width="20" height="5" rx="2" fill="#FFD700"/>
+      <rect x="25" y="40" width="10" height="12" fill="#FFD700"/>
+      <!-- Center shamash (taller) -->
+      <rect x="28" y="15" width="4" height="25" fill="#FFD700"/>
+      <ellipse cx="30" cy="10" rx="4" ry="6" fill="#FF6347">
+        <animate attributeName="ry" values="6;7;6" dur="0.5s" repeatCount="indefinite"/>
+      </ellipse>
+      <ellipse cx="30" cy="8" rx="2" ry="4" fill="#FFEB3B"/>
+      <!-- Left candles -->
+      <rect x="8" y="25" width="3" height="15" fill="#87CEEB"/>
+      <ellipse cx="9.5" cy="22" rx="2" ry="4" fill="#FF6347"/>
+      <rect x="15" y="25" width="3" height="15" fill="#87CEEB"/>
+      <ellipse cx="16.5" cy="22" rx="2" ry="4" fill="#FF6347"/>
+      <!-- Right candles -->
+      <rect x="42" y="25" width="3" height="15" fill="#87CEEB"/>
+      <ellipse cx="43.5" cy="22" rx="2" ry="4" fill="#FF6347"/>
+      <rect x="49" y="25" width="3" height="15" fill="#87CEEB"/>
+      <ellipse cx="50.5" cy="22" rx="2" ry="4" fill="#FF6347"/>
+      <!-- Menorah arms -->
+      <path d="M10,40 Q10,35 20,35 L40,35 Q50,35 50,40" stroke="#FFD700" stroke-width="3" fill="none"/>
+    </g>
+  `,
+
+  // 🥧 PI_DAY: Pi Symbol with Pie Slice
+  PI_DAY: (x, y) => `
+    <g transform="translate(${x}, ${y})">
+      <!-- Pie slice background -->
+      <path d="M25,30 L45,30 A20,20 0 0,0 25,10 Z" fill="#8B4513"/>
+      <path d="M25,30 L43,28 A18,18 0 0,0 25,12 Z" fill="#FFA726"/>
+      <!-- Crust edge -->
+      <path d="M25,30 L45,30 A20,20 0 0,0 25,10" stroke="#D2691E" stroke-width="3" fill="none"/>
+      <!-- Pi symbol -->
+      <text x="15" y="25" font-family="serif" font-size="24" font-weight="bold" fill="#1565C0">π</text>
+      <!-- Whipped cream dollops -->
+      <circle cx="35" cy="22" r="4" fill="#FFFAF0"/>
+      <circle cx="30" cy="18" r="3" fill="#FFFAF0"/>
+      <!-- Steam -->
+      <path d="M38,8 Q40,5 38,2" stroke="#FFFFFF" stroke-width="1.5" fill="none" opacity="0.7">
+        <animate attributeName="d" values="M38,8 Q40,5 38,2;M38,8 Q36,5 38,2;M38,8 Q40,5 38,2" dur="2s" repeatCount="indefinite"/>
+      </path>
+    </g>
+  `,
+
+  // ⚔️ STAR_WARS: Lightsaber
+  STAR_WARS: (x, y) => `
+    <g transform="translate(${x}, ${y})">
+      <!-- Lightsaber hilt -->
+      <rect x="22" y="40" width="8" height="20" rx="2" fill="#424242"/>
+      <rect x="20" y="55" width="12" height="5" rx="2" fill="#616161"/>
+      <rect x="24" y="45" width="4" height="3" fill="#B0BEC5"/>
+      <circle cx="26" cy="50" r="2" fill="#F44336"/>
+      <!-- Blade -->
+      <rect x="23" y="5" width="6" height="35" rx="3" fill="#4FC3F7">
+        <animate attributeName="opacity" values="0.9;1;0.9" dur="0.1s" repeatCount="indefinite"/>
+      </rect>
+      <!-- Blade glow -->
+      <rect x="21" y="5" width="10" height="35" rx="5" fill="#4FC3F7" opacity="0.3">
+        <animate attributeName="opacity" values="0.2;0.4;0.2" dur="0.5s" repeatCount="indefinite"/>
+      </rect>
+      <!-- Blade core -->
+      <rect x="24" y="7" width="4" height="31" rx="2" fill="#FFFFFF"/>
+    </g>
+  `,
+
+  // 🏴‍☠️ PIRATE_DAY: Pirate Hat with Skull
+  PIRATE_DAY: (x, y) => `
+    <g transform="translate(${x}, ${y})">
+      <!-- Hat base -->
+      <ellipse cx="25" cy="45" rx="30" ry="8" fill="#212121"/>
+      <!-- Hat dome -->
+      <path d="M5,45 Q5,20 25,15 Q45,20 45,45" fill="#212121"/>
+      <!-- Hat brim curve -->
+      <path d="M-5,45 Q25,35 55,45" stroke="#212121" stroke-width="10" fill="none"/>
+      <!-- Skull -->
+      <circle cx="25" cy="32" r="8" fill="#FFFDE7"/>
+      <circle cx="22" cy="30" r="2" fill="#212121"/>
+      <circle cx="28" cy="30" r="2" fill="#212121"/>
+      <ellipse cx="25" cy="36" rx="1" ry="2" fill="#212121"/>
+      <!-- Crossbones -->
+      <line x1="15" y1="38" x2="35" y2="44" stroke="#FFFDE7" stroke-width="3" stroke-linecap="round"/>
+      <line x1="35" y1="38" x2="15" y2="44" stroke="#FFFDE7" stroke-width="3" stroke-linecap="round"/>
+      <!-- Gold trim -->
+      <path d="M5,45 Q25,38 45,45" stroke="#FFD700" stroke-width="2" fill="none"/>
+    </g>
+  `,
+
+  // 🛒 SINGLES_DAY: Shopping Bag with 11.11
+  SINGLES_DAY: (x, y) => `
+    <g transform="translate(${x}, ${y})">
+      <!-- Shopping bag -->
+      <rect x="10" y="20" width="35" height="35" rx="3" fill="#FF5722"/>
+      <!-- Bag handles -->
+      <path d="M18,20 Q18,10 27.5,10 Q37,10 37,20" stroke="#D84315" stroke-width="4" fill="none"/>
+      <!-- 11.11 text -->
+      <text x="15" y="42" font-family="Arial" font-size="12" font-weight="bold" fill="#FFFFFF">11.11</text>
+      <!-- Sale star burst -->
+      <polygon points="45,15 47,20 52,20 48,24 50,29 45,26 40,29 42,24 38,20 43,20" fill="#FFD700">
+        <animate attributeName="transform" values="rotate(0 45 22);rotate(360 45 22)" dur="4s" repeatCount="indefinite"/>
+      </polygon>
+      <!-- Sparkles -->
+      <circle cx="8" cy="25" r="2" fill="#FFEB3B">
+        <animate attributeName="opacity" values="0;1;0" dur="1s" repeatCount="indefinite"/>
+      </circle>
+    </g>
+  `,
+
+  // 🖥️ SYSADMIN_DAY: Server Rack / Terminal
+  SYSADMIN_DAY: (x, y) => `
+    <g transform="translate(${x}, ${y})">
+      <!-- Server tower -->
+      <rect x="10" y="10" width="35" height="45" rx="3" fill="#37474F"/>
+      <!-- Server units -->
+      <rect x="13" y="15" width="29" height="8" fill="#263238"/>
+      <rect x="13" y="26" width="29" height="8" fill="#263238"/>
+      <rect x="13" y="37" width="29" height="8" fill="#263238"/>
+      <!-- LED lights -->
+      <circle cx="17" cy="19" r="2" fill="#4CAF50">
+        <animate attributeName="fill" values="#4CAF50;#8BC34A;#4CAF50" dur="1s" repeatCount="indefinite"/>
+      </circle>
+      <circle cx="17" cy="30" r="2" fill="#4CAF50">
+        <animate attributeName="fill" values="#4CAF50;#8BC34A;#4CAF50" dur="1.2s" repeatCount="indefinite" begin="0.3s"/>
+      </circle>
+      <circle cx="17" cy="41" r="2" fill="#FF9800">
+        <animate attributeName="fill" values="#FF9800;#FFC107;#FF9800" dur="0.8s" repeatCount="indefinite"/>
+      </circle>
+      <!-- Vents -->
+      <line x1="25" y1="17" x2="38" y2="17" stroke="#455A64" stroke-width="1"/>
+      <line x1="25" y1="20" x2="38" y2="20" stroke="#455A64" stroke-width="1"/>
+      <line x1="25" y1="28" x2="38" y2="28" stroke="#455A64" stroke-width="1"/>
+      <line x1="25" y1="31" x2="38" y2="31" stroke="#455A64" stroke-width="1"/>
+      <!-- Coffee mug (essential!) -->
+      <rect x="48" y="40" width="10" height="12" rx="2" fill="#795548"/>
+      <ellipse cx="53" cy="40" rx="5" ry="2" fill="#5D4037"/>
+      <path d="M58,44 Q63,44 63,49 Q63,52 58,52" stroke="#795548" stroke-width="2" fill="none"/>
+      <!-- Steam from coffee -->
+      <path d="M52,36 Q54,33 52,30" stroke="#FFFFFF" stroke-width="1" fill="none" opacity="0.6">
+        <animate attributeName="opacity" values="0.3;0.8;0.3" dur="2s" repeatCount="indefinite"/>
+      </path>
+    </g>
   `
 };
 
@@ -4484,22 +6328,48 @@ function getMood(events, timezone = 'UTC') {
     return { mood: 'Sleeping', icon: '💤', moodKey: 'sleeping' };
   }
 
-  // Priority 3: Hyper/On Fire (> 10 commits in 24h)
+  // Priority 3: Caffeinated (5+ commits in the last hour)
+  const lastHourEvents = events.filter(e => {
+    const eventTime = new Date(e.created_at);
+    return (now - eventTime) < 60 * 60 * 1000;
+  });
+  if (lastHourEvents.length >= 5) {
+    return { mood: 'Caffeinated', icon: '☕', moodKey: 'caffeinated' };
+  }
+
+  // Priority 4: Debugging (3+ commits with "fix" in message in last 24h)
+  const fixCommits = last24hEvents.filter(e => {
+    const payload = e.payload || {};
+    const commits = payload.commits || [];
+    return commits.some(c => 
+      c.message && c.message.toLowerCase().includes('fix')
+    );
+  });
+  if (fixCommits.length >= 3) {
+    return { mood: 'Debugging', icon: '🔍', moodKey: 'debugging' };
+  }
+
+  // Priority 5: Hyper/On Fire (> 10 commits in 24h)
   if (last24hEvents.length > 10) {
     return { mood: 'Hyper', icon: '🔥', moodKey: 'hyper' };
   }
 
-  // Priority 4: Night Owl (commit between 00:00-04:00 local time)
+  // Priority 6: Night Owl (commit between 00:00-04:00 local time)
   if (isNightOwl && todayEvents.length > 0) {
     return { mood: 'Night Owl', icon: '🦉', moodKey: 'nightowl' };
   }
 
-  // Priority 5: Weekend Chill (Sat/Sun AND < 3 commits today)
+  // Priority 7: Zen (active but low activity - 1-2 commits, weekend or chill)
+  if (isWeekend && todayEvents.length >= 1 && todayEvents.length <= 2) {
+    return { mood: 'Zen', icon: '🧘', moodKey: 'zen' };
+  }
+
+  // Priority 8: Weekend Chill (Sat/Sun AND < 3 commits today)
   if (isWeekend && todayEvents.length < 3 && todayEvents.length > 0) {
     return { mood: 'Weekend Chill', icon: '🏖️', moodKey: 'weekend' };
   }
 
-  // Priority 6: Happy (default active state)
+  // Priority 9: Happy (default active state)
   return { mood: 'Happy', icon: '⚡', moodKey: 'normal' };
 }
 
@@ -5013,6 +6883,13 @@ function getPetType(language) {
     'Lua': 'capybara',
     'Julia': 'alpaca',
     'Elixir': 'phoenix',
+    // Wave 3
+    'Zig': 'salamander',
+    'Haskell': 'hedgehog',
+    'Clojure': 'octopus',
+    'Assembly': 'ant',
+    'COBOL': 'dino',
+    'Nim': 'lion',
   };
   return map[language] || 'cat';
 }
@@ -5053,8 +6930,21 @@ function generateSVG(petType, mood, options = {}) {
   // 1. Select the Sprite Set (check Mythical first, then Legendary, then Standard)
   const spriteSet = MYTHICAL_SPRITES[petType] || LEGENDARY_SPRITES[petType] || SPRITES[petType] || SPRITES['cat'];
 
-  // 2. Select the specific Mood Grid
-  const moodKey = moodInfo?.moodKey || ((mood === 'happy') ? 'normal' : mood);
+  // 2. Select the specific Mood Grid with fallbacks for new moods
+  let moodKey = moodInfo?.moodKey || ((mood === 'happy') ? 'normal' : mood);
+  
+  // Fallback mapping for new moods that might not have dedicated sprites
+  const moodFallbacks = {
+    caffeinated: 'hyper',    // Caffeinated falls back to hyper
+    debugging: 'normal',     // Debugging falls back to normal
+    zen: 'weekend'           // Zen falls back to weekend/chill
+  };
+  
+  // If mood sprite doesn't exist, use fallback
+  if (!spriteSet[moodKey] && moodFallbacks[moodKey]) {
+    moodKey = moodFallbacks[moodKey];
+  }
+  
   const spriteGrid = spriteSet[moodKey] || spriteSet['normal'];
 
   // 3. Get base color (check Mythical first, then Legendary, then Standard)
@@ -5149,6 +7039,36 @@ function generateSVG(petType, mood, options = {}) {
             dur="2s" 
             repeatCount="indefinite" 
         />`;
+  } else if (moodKey === 'caffeinated' || moodInfo?.moodKey === 'caffeinated') {
+    // Super fast shake - caffeine jitters!
+    animation = `
+        <animateTransform 
+            attributeName="transform" 
+            type="translate" 
+            values="0 0; -3 -1; 3 -2; -2 -3; 2 -1; -1 -2; 0 0" 
+            dur="0.15s" 
+            repeatCount="indefinite" 
+        />`;
+  } else if (moodKey === 'debugging' || moodInfo?.moodKey === 'debugging') {
+    // Head scratch/thinking animation
+    animation = `
+        <animateTransform 
+            attributeName="transform" 
+            type="rotate" 
+            values="0; -3; 0; 3; 0" 
+            dur="0.8s" 
+            repeatCount="indefinite" 
+        />`;
+  } else if (moodKey === 'zen' || moodInfo?.moodKey === 'zen') {
+    // Slow peaceful breathing
+    animation = `
+        <animateTransform 
+            attributeName="transform" 
+            type="scale" 
+            values="1 1; 1.03 1.03; 1 1" 
+            dur="4s" 
+            repeatCount="indefinite" 
+        />`;
   }
 
   // Build stats display with XP progress bar
@@ -5207,6 +7127,12 @@ function generateSVG(petType, mood, options = {}) {
 
   // Get seasonal accessory (holiday accessories)
   const seasonalAccessory = getSeasonalAccessory(timezone, petType, spriteGrid);
+  
+  // Get pet phrase and speech bubble
+  const currentHoliday = getSeasonalEvent(timezone);
+  const actualMoodKey = moodInfo?.moodKey || moodKey;
+  const phrase = getPetPhrase(actualMoodKey, petType, currentHoliday);
+  const speechBubble = generateSpeechBubble(phrase, width - 30, -25);
 
   return `<svg xmlns="http://www.w3.org/2000/svg" width="${svgWidth}" height="${svgHeight}" viewBox="0 0 ${svgWidth} ${svgHeight}">
       <style>
@@ -5219,6 +7145,8 @@ function generateSVG(petType, mood, options = {}) {
             ${pixelArt}
             ${animation}
         </g>
+        <!-- Speech Bubble -->
+        ${speechBubble}
         <!-- Seasonal Accessory (z-index: above pet) -->
         ${seasonalAccessory}
       </g>
