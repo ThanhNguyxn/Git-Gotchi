@@ -6,43 +6,43 @@
                 <g>
                     <g>
                     <path d="M10,0 Q15,-5 20,0 Q15,5 10,0" fill="#FF9800" opacity="0.8">
-                        <animateTransform attributeName="transform" type="translate" values="0,0;13.48105854442265,296" dur="4.394012284099151s" begin="1.4760111368150575s" repeatCount="indefinite"/>
+                        <animateTransform attributeName="transform" type="translate" values="0,0;20.671095137325132,296" dur="6.423890341669794s" begin="1.0872241994759886s" repeatCount="indefinite"/>
                     </path>
                 </g><g>
                     <path d="M39.6,0 Q44.6,-5 49.6,0 Q44.6,5 39.6,0" fill="#F44336" opacity="0.8">
-                        <animateTransform attributeName="transform" type="translate" values="0,0;20.104389941288876,296" dur="6.033992280371129s" begin="2.7009187539386526s" repeatCount="indefinite"/>
+                        <animateTransform attributeName="transform" type="translate" values="0,0;21.799534220023723,296" dur="6.757507931335603s" begin="2.287044022248938s" repeatCount="indefinite"/>
                     </path>
                 </g><g>
                     <path d="M69.2,0 Q74.2,-5 79.2,0 Q74.2,5 69.2,0" fill="#795548" opacity="0.8">
-                        <animateTransform attributeName="transform" type="translate" values="0,0;15.138387103656967,296" dur="4.102231599348526s" begin="1.1152167266004758s" repeatCount="indefinite"/>
+                        <animateTransform attributeName="transform" type="translate" values="0,0;1.3044228043711037,296" dur="4.744911769500066s" begin="0.6779958256140204s" repeatCount="indefinite"/>
                     </path>
                 </g><g>
                     <path d="M98.80000000000001,0 Q103.80000000000001,-5 108.80000000000001,0 Q103.80000000000001,5 98.80000000000001,0" fill="#FFC107" opacity="0.8">
-                        <animateTransform attributeName="transform" type="translate" values="0,0;7.567962956540493,296" dur="5.281861913485928s" begin="2.9543663491617624s" repeatCount="indefinite"/>
+                        <animateTransform attributeName="transform" type="translate" values="0,0;4.003706299076917,296" dur="4.141971556804287s" begin="0.7792333139940575s" repeatCount="indefinite"/>
                     </path>
                 </g><g>
                     <path d="M128.4,0 Q133.4,-5 138.4,0 Q133.4,5 128.4,0" fill="#FF9800" opacity="0.8">
-                        <animateTransform attributeName="transform" type="translate" values="0,0;27.55996426997226,296" dur="6.785242074829911s" begin="1.5992653890326076s" repeatCount="indefinite"/>
+                        <animateTransform attributeName="transform" type="translate" values="0,0;16.62027058981314,296" dur="6.440721042556797s" begin="0.41039007354094736s" repeatCount="indefinite"/>
                     </path>
                 </g><g>
                     <path d="M158,0 Q163,-5 168,0 Q163,5 158,0" fill="#F44336" opacity="0.8">
-                        <animateTransform attributeName="transform" type="translate" values="0,0;25.39722665387073,296" dur="4.197289509001581s" begin="1.5287201910436665s" repeatCount="indefinite"/>
+                        <animateTransform attributeName="transform" type="translate" values="0,0;21.86610645373405,296" dur="5.702091663945021s" begin="2.060650599044671s" repeatCount="indefinite"/>
                     </path>
                 </g><g>
                     <path d="M187.60000000000002,0 Q192.60000000000002,-5 197.60000000000002,0 Q192.60000000000002,5 187.60000000000002,0" fill="#795548" opacity="0.8">
-                        <animateTransform attributeName="transform" type="translate" values="0,0;29.48853105164668,296" dur="6.035078871136523s" begin="2.210219545583718s" repeatCount="indefinite"/>
+                        <animateTransform attributeName="transform" type="translate" values="0,0;20.45852538745648,296" dur="6.3290825467514775s" begin="0.6931122341947429s" repeatCount="indefinite"/>
                     </path>
                 </g><g>
                     <path d="M217.20000000000002,0 Q222.20000000000002,-5 227.20000000000002,0 Q222.20000000000002,5 217.20000000000002,0" fill="#FFC107" opacity="0.8">
-                        <animateTransform attributeName="transform" type="translate" values="0,0;5.251925835922508,296" dur="5.11251739297121s" begin="1.747779317775834s" repeatCount="indefinite"/>
+                        <animateTransform attributeName="transform" type="translate" values="0,0;2.4738543885195075,296" dur="5.404753643688759s" begin="2.0642521662076883s" repeatCount="indefinite"/>
                     </path>
                 </g><g>
                     <path d="M246.8,0 Q251.8,-5 256.8,0 Q251.8,5 246.8,0" fill="#FF9800" opacity="0.8">
-                        <animateTransform attributeName="transform" type="translate" values="0,0;16.554161055708665,296" dur="5.094542226625931s" begin="0.7257368439154912s" repeatCount="indefinite"/>
+                        <animateTransform attributeName="transform" type="translate" values="0,0;14.785470446559998,296" dur="6.8777861529819395s" begin="2.201631673588518s" repeatCount="indefinite"/>
                     </path>
                 </g><g>
                     <path d="M276.40000000000003,0 Q281.40000000000003,-5 286.40000000000003,0 Q281.40000000000003,5 276.40000000000003,0" fill="#F44336" opacity="0.8">
-                        <animateTransform attributeName="transform" type="translate" values="0,0;29.428990421762006,296" dur="5.064370959749231s" begin="1.5900980161429055s" repeatCount="indefinite"/>
+                        <animateTransform attributeName="transform" type="translate" values="0,0;8.653587530535349,296" dur="5.037167530680272s" begin="1.1562796589061413s" repeatCount="indefinite"/>
                     </path>
                 </g>
                 </g>

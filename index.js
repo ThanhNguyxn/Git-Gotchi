@@ -75,6 +75,107 @@ const MYTHICAL_COLORS = {
 };
 
 // ═══════════════════════════════════════════════════════════════════════════
+// ACHIEVEMENT SYSTEM - Badges for milestones
+// ═══════════════════════════════════════════════════════════════════════════
+
+const ACHIEVEMENTS = {
+  // Commit milestones
+  FIRST_COMMIT: { icon: '🌱', name: 'First Sprout', desc: 'First commit ever', check: (stats) => stats.totalCommits >= 1 },
+  COMMIT_10: { icon: '📝', name: 'Note Taker', desc: '10 commits', check: (stats) => stats.totalCommits >= 10 },
+  COMMIT_50: { icon: '📚', name: 'Bookworm', desc: '50 commits', check: (stats) => stats.totalCommits >= 50 },
+  COMMIT_100: { icon: '💯', name: 'Centurion', desc: '100 commits', check: (stats) => stats.totalCommits >= 100 },
+  COMMIT_500: { icon: '🔥', name: 'On Fire', desc: '500 commits', check: (stats) => stats.totalCommits >= 500 },
+  COMMIT_1000: { icon: '🏆', name: 'Git Master', desc: '1,000 commits', check: (stats) => stats.totalCommits >= 1000 },
+  COMMIT_5000: { icon: '👑', name: 'Commit King', desc: '5,000 commits', check: (stats) => stats.totalCommits >= 5000 },
+  COMMIT_10000: { icon: '⭐', name: 'Legend', desc: '10,000 commits', check: (stats) => stats.totalCommits >= 10000 },
+  
+  // Streak milestones
+  STREAK_3: { icon: '⚡', name: 'Spark', desc: '3 day streak', check: (stats) => stats.streak >= 3 },
+  STREAK_7: { icon: '🔥', name: 'Weekly Warrior', desc: '7 day streak', check: (stats) => stats.streak >= 7 },
+  STREAK_14: { icon: '💪', name: 'Fortnight Fighter', desc: '14 day streak', check: (stats) => stats.streak >= 14 },
+  STREAK_30: { icon: '🌙', name: 'Month Master', desc: '30 day streak', check: (stats) => stats.streak >= 30 },
+  STREAK_100: { icon: '💎', name: 'Diamond Hands', desc: '100 day streak', check: (stats) => stats.streak >= 100 },
+  STREAK_365: { icon: '🎖️', name: 'Year Champion', desc: '365 day streak', check: (stats) => stats.streak >= 365 },
+  
+  // Level milestones
+  LEVEL_5: { icon: '🌟', name: 'Rising Star', desc: 'Level 5', check: (stats) => stats.level >= 5 },
+  LEVEL_10: { icon: '✨', name: 'Shining', desc: 'Level 10', check: (stats) => stats.level >= 10 },
+  LEVEL_25: { icon: '🌈', name: 'Rainbow', desc: 'Level 25', check: (stats) => stats.level >= 25 },
+  LEVEL_50: { icon: '🚀', name: 'Rocket', desc: 'Level 50', check: (stats) => stats.level >= 50 },
+  LEVEL_100: { icon: '🏅', name: 'Olympian', desc: 'Level 100', check: (stats) => stats.level >= 100 },
+  
+  // Special achievements
+  NIGHT_OWL: { icon: '🦉', name: 'Night Owl', desc: 'Late night commit', check: (stats) => stats.hasNightCommit },
+  EARLY_BIRD: { icon: '🐦', name: 'Early Bird', desc: 'Early morning commit', check: (stats) => stats.hasEarlyCommit },
+  WEEKEND_WARRIOR: { icon: '🏖️', name: 'Weekend Warrior', desc: 'Weekend commit', check: (stats) => stats.hasWeekendCommit },
+  REVIEWER: { icon: '👀', name: 'Code Reviewer', desc: 'Reviewed 10 PRs', check: (stats) => stats.prsReviewed >= 10 },
+  MERGER: { icon: '🔀', name: 'Merge Master', desc: 'Merged 50 PRs', check: (stats) => stats.prsMerged >= 50 },
+  STARGAZER: { icon: '⭐', name: 'Stargazer', desc: 'Received 100 stars', check: (stats) => stats.starsReceived >= 100 },
+  FORKER: { icon: '🍴', name: 'Open Source', desc: 'Forked 10 repos', check: (stats) => stats.reposForked >= 10 },
+  POLYGLOT: { icon: '🌐', name: 'Polyglot', desc: 'Used 5+ languages', check: (stats) => stats.languagesUsed >= 5 },
+  
+  // Rare achievements
+  PERFECT_WEEK: { icon: '💯', name: 'Perfect Week', desc: '7 days, 7+ commits each', check: (stats) => stats.perfectWeeks >= 1 },
+  BUG_SLAYER: { icon: '🐛', name: 'Bug Slayer', desc: '50 bug fix commits', check: (stats) => stats.bugFixes >= 50 },
+  DOCUMENTOR: { icon: '📖', name: 'Documentor', desc: '20 doc commits', check: (stats) => stats.docCommits >= 20 }
+};
+
+/**
+ * Get earned achievements for a user based on their stats
+ * @param {Object} stats - User statistics
+ * @returns {Array} Array of earned achievement objects
+ */
+function getEarnedAchievements(stats) {
+  const earned = [];
+  for (const [key, achievement] of Object.entries(ACHIEVEMENTS)) {
+    try {
+      if (achievement.check(stats)) {
+        earned.push({ key, ...achievement });
+      }
+    } catch (e) {
+      // Skip if check fails (missing stat)
+    }
+  }
+  return earned;
+}
+
+/**
+ * Generate achievement badges SVG
+ * @param {Array} achievements - Array of earned achievements
+ * @param {number} maxShow - Maximum badges to show
+ * @returns {string} SVG string with badges
+ */
+function generateAchievementBadges(achievements, maxShow = 6) {
+  if (!achievements || achievements.length === 0) return '';
+  
+  const toShow = achievements.slice(-maxShow); // Show most recent
+  const badgeWidth = 22;
+  const startX = 5;
+  
+  const badges = toShow.map((ach, i) => {
+    const x = startX + (i * (badgeWidth + 3));
+    return `
+      <g transform="translate(${x}, 0)">
+        <title>${ach.name}: ${ach.desc}</title>
+        <circle cx="10" cy="10" r="10" fill="rgba(255,255,255,0.9)" stroke="#ddd" stroke-width="1"/>
+        <text x="10" y="14" text-anchor="middle" font-size="11">${ach.icon}</text>
+      </g>
+    `;
+  }).join('');
+  
+  const moreCount = achievements.length - toShow.length;
+  const moreText = moreCount > 0 ? 
+    `<text x="${startX + toShow.length * (badgeWidth + 3) + 5}" y="14" font-family="monospace" font-size="9" fill="#666">+${moreCount}</text>` : '';
+  
+  return `
+    <g class="achievements">
+      ${badges}
+      ${moreText}
+    </g>
+  `;
+}
+
+// ═══════════════════════════════════════════════════════════════════════════
 // PET PHRASES SYSTEM - Speech bubbles with personality
 // ═══════════════════════════════════════════════════════════════════════════
 
@@ -7368,6 +7469,19 @@ function generateSVG(petType, mood, options = {}) {
   const phrase = getPetPhrase(actualMoodKey, petType, currentHoliday);
   const speechBubble = generateSpeechBubble(phrase, width - 30, -25);
 
+  // Get achievement badges
+  const achievementStats = {
+    totalCommits: stats?.totalCommits || 0,
+    streak: streak || 0,
+    level: stats?.level || 1,
+    hasNightCommit: currentHour >= 22 || currentHour < 5,
+    hasWeekendCommit: now.getDay() === 0 || now.getDay() === 6,
+    hasEarlyCommit: currentHour >= 5 && currentHour < 7
+  };
+  const earnedAchievements = getEarnedAchievements(achievementStats);
+  const achievementBadges = earnedAchievements.length > 0 ? 
+    `<g transform="translate(15, ${svgHeight - 30})">${generateAchievementBadges(earnedAchievements)}</g>` : '';
+
   return `<svg xmlns="http://www.w3.org/2000/svg" width="${svgWidth}" height="${svgHeight}" viewBox="0 0 ${svgWidth} ${svgHeight}">
       <style>
         .pet { transform-origin: center; }
@@ -7390,6 +7504,8 @@ function generateSVG(petType, mood, options = {}) {
       </g>
       ${statsDisplay}
       ${moodDisplay}
+      <!-- Achievement Badges -->
+      ${achievementBadges}
     </svg>`;
 }
 

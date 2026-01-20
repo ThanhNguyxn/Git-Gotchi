@@ -1110,4 +1110,86 @@ newHolidays.forEach(({ name, label, event }) => {
     console.log(`Generated holiday_${name}.svg`);
 });
 
+// --- ACHIEVEMENT BADGE DEMOS ---
+const ACHIEVEMENTS = {
+    FIRST_COMMIT: { icon: '🌱', name: 'First Sprout', desc: 'First commit ever' },
+    COMMIT_100: { icon: '💯', name: 'Centurion', desc: '100 commits' },
+    COMMIT_1000: { icon: '🏆', name: 'Git Master', desc: '1,000 commits' },
+    STREAK_7: { icon: '🔥', name: 'Weekly Warrior', desc: '7 day streak' },
+    STREAK_30: { icon: '🌙', name: 'Month Master', desc: '30 day streak' },
+    LEVEL_10: { icon: '✨', name: 'Shining', desc: 'Level 10' },
+    NIGHT_OWL: { icon: '🦉', name: 'Night Owl', desc: 'Late night commit' },
+    POLYGLOT: { icon: '🌐', name: 'Polyglot', desc: 'Used 5+ languages' }
+};
+
+function generateAchievementBadges(achievements, maxShow = 6) {
+    if (!achievements || achievements.length === 0) return '';
+    
+    const toShow = achievements.slice(-maxShow);
+    const badgeWidth = 22;
+    const startX = 5;
+    
+    const badges = toShow.map((ach, i) => {
+        const x = startX + (i * (badgeWidth + 3));
+        return `
+            <g transform="translate(${x}, 0)">
+                <title>${ach.name}: ${ach.desc}</title>
+                <circle cx="10" cy="10" r="10" fill="rgba(255,255,255,0.9)" stroke="#ddd" stroke-width="1"/>
+                <text x="10" y="14" text-anchor="middle" font-size="11">${ach.icon}</text>
+            </g>
+        `;
+    }).join('');
+    
+    const moreCount = achievements.length - toShow.length;
+    const moreText = moreCount > 0 ? 
+        `<text x="${startX + toShow.length * (badgeWidth + 3) + 5}" y="14" font-family="monospace" font-size="9" fill="#666">+${moreCount}</text>` : '';
+    
+    return `<g class="achievements">${badges}${moreText}</g>`;
+}
+
+// Generate achievement demo
+(() => {
+    const spriteSet = LEGENDARY_SPRITES['unicorn'] || SPRITES['cat'];
+    const spriteGrid = spriteSet['normal'];
+    const baseColor = PET_COLORS['unicorn'] || '#e5c07b';
+
+    const pixelSize = 16;
+    const rows = spriteGrid.length;
+    const cols = spriteGrid[0].length;
+    const width = cols * pixelSize;
+    const height = rows * pixelSize;
+    const svgWidth = width + 40;
+    const svgHeight = height + 70;
+
+    const pixelArt = renderPixelGrid(spriteGrid, baseColor, pixelSize);
+    const themeBackground = getThemeBackground('minimal', svgWidth, svgHeight);
+    
+    // Demo achievements
+    const demoAchievements = [
+        ACHIEVEMENTS.FIRST_COMMIT,
+        ACHIEVEMENTS.COMMIT_100,
+        ACHIEVEMENTS.STREAK_7,
+        ACHIEVEMENTS.LEVEL_10,
+        ACHIEVEMENTS.NIGHT_OWL,
+        ACHIEVEMENTS.POLYGLOT
+    ];
+    
+    const achievementBadges = generateAchievementBadges(demoAchievements);
+
+    const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${svgWidth}" height="${svgHeight}" viewBox="0 0 ${svgWidth} ${svgHeight}">
+      <style>.pet { transform-origin: center; }</style>
+      ${themeBackground}
+      <g transform="translate(20, 20)">
+        <g class="pet">${pixelArt}</g>
+      </g>
+      <text x="50%" y="${height + 38}" text-anchor="middle" font-family="monospace" font-size="11" fill="#666">🏅 ACHIEVEMENTS</text>
+      <g transform="translate(15, ${height + 45})">
+        ${achievementBadges}
+      </g>
+    </svg>`;
+
+    fs.writeFileSync(`dist/achievements_demo.svg`, svg);
+    console.log(`Generated achievements_demo.svg`);
+})();
+
 console.log('Done!');
