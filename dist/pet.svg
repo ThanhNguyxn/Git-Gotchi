@@ -10,36 +10,36 @@
       <g class="weather-layer" style="pointer-events: none;">
         
         <g fill="#FFD700">
-          <circle cx="190.19080653757274" cy="120.71165482937064" r="1.0395584144015504">
-          <animate attributeName="opacity" values="0.3;1;0.3" dur="2.740518448770819s" repeatCount="indefinite"/>
-        </circle><circle cx="227.92631618803418" cy="47.168138075902995" r="2.742106947181424">
-          <animate attributeName="opacity" values="0.3;1;0.3" dur="2.459245044720405s" repeatCount="indefinite"/>
-        </circle><circle cx="146.7647725390446" cy="57.728379575798265" r="2.617186538455889">
-          <animate attributeName="opacity" values="0.3;1;0.3" dur="1.3447054971816388s" repeatCount="indefinite"/>
-        </circle><circle cx="152.28174932971288" cy="146.11939028354726" r="1.4715925341197518">
-          <animate attributeName="opacity" values="0.3;1;0.3" dur="1.6154670109761367s" repeatCount="indefinite"/>
-        </circle><circle cx="111.72044804843497" cy="170.8371612959623" r="1.663887973753699">
-          <animate attributeName="opacity" values="0.3;1;0.3" dur="1.5114276157172406s" repeatCount="indefinite"/>
-        </circle><circle cx="90.51743919481224" cy="42.19123419074417" r="2.342770294419354">
-          <animate attributeName="opacity" values="0.3;1;0.3" dur="2.944136473653472s" repeatCount="indefinite"/>
-        </circle><circle cx="27.707639298564793" cy="144.25011850383015" r="2.8464415573053596">
-          <animate attributeName="opacity" values="0.3;1;0.3" dur="2.003561889515932s" repeatCount="indefinite"/>
-        </circle><circle cx="202.4169468528843" cy="156.20447260580585" r="2.7422847067909655">
-          <animate attributeName="opacity" values="0.3;1;0.3" dur="1.407391831872284s" repeatCount="indefinite"/>
-        </circle><circle cx="253.335755278144" cy="20.19982471556624" r="2.9530415750281658">
-          <animate attributeName="opacity" values="0.3;1;0.3" dur="1.5640591966172157s" repeatCount="indefinite"/>
-        </circle><circle cx="127.99358439371885" cy="146.58029469546645" r="2.3750145587957587">
-          <animate attributeName="opacity" values="0.3;1;0.3" dur="1.3595476924382117s" repeatCount="indefinite"/>
-        </circle><circle cx="280.87865604599534" cy="23.789656688131434" r="2.7608859678124213">
-          <animate attributeName="opacity" values="0.3;1;0.3" dur="1.0529458402535092s" repeatCount="indefinite"/>
-        </circle><circle cx="105.81071787407542" cy="140.96126950406813" r="1.581385096618702">
-          <animate attributeName="opacity" values="0.3;1;0.3" dur="1.203052899994855s" repeatCount="indefinite"/>
-        </circle><circle cx="183.09900785580678" cy="39.88559313836631" r="1.7264263189089957">
-          <animate attributeName="opacity" values="0.3;1;0.3" dur="1.7101929586038245s" repeatCount="indefinite"/>
-        </circle><circle cx="169.14568676761266" cy="34.96084859149906" r="2.8169053480644832">
-          <animate attributeName="opacity" values="0.3;1;0.3" dur="1.57154739346195s" repeatCount="indefinite"/>
-        </circle><circle cx="222.18059317935877" cy="118.11329499076581" r="2.1203729900967705">
-          <animate attributeName="opacity" values="0.3;1;0.3" dur="1.4617235866813174s" repeatCount="indefinite"/>
+          <circle cx="246.84330800637363" cy="105.80217345755821" r="1.3877397532083586">
+          <animate attributeName="opacity" values="0.3;1;0.3" dur="2.922767229770808s" repeatCount="indefinite"/>
+        </circle><circle cx="247.71468853023902" cy="18.315178022597287" r="2.467899184577599">
+          <animate attributeName="opacity" values="0.3;1;0.3" dur="1.7572671989556001s" repeatCount="indefinite"/>
+        </circle><circle cx="20.14985928673986" cy="129.79815512053102" r="2.1126325622881983">
+          <animate attributeName="opacity" values="0.3;1;0.3" dur="2.989043894388155s" repeatCount="indefinite"/>
+        </circle><circle cx="153.6554828884912" cy="16.04073505448653" r="1.8863265489795946">
+          <animate attributeName="opacity" values="0.3;1;0.3" dur="1.3553841906825084s" repeatCount="indefinite"/>
+        </circle><circle cx="144.1313160580568" cy="171.82776518847032" r="1.7464153329827896">
+          <animate attributeName="opacity" values="0.3;1;0.3" dur="1.2774690528908552s" repeatCount="indefinite"/>
+        </circle><circle cx="246.73548420614787" cy="120.20179256260998" r="2.306234324179529">
+          <animate attributeName="opacity" values="0.3;1;0.3" dur="1.617281747310281s" repeatCount="indefinite"/>
+        </circle><circle cx="168.13332893779094" cy="162.66819223018848" r="2.833444026514148">
+          <animate attributeName="opacity" values="0.3;1;0.3" dur="2.9198846762644632s" repeatCount="indefinite"/>
+        </circle><circle cx="76.25668824646561" cy="160.74109946328556" r="2.6188924462403746">
+          <animate attributeName="opacity" values="0.3;1;0.3" dur="1.5800999171418115s" repeatCount="indefinite"/>
+        </circle><circle cx="277.0569204960868" cy="98.5472574810466" r="1.7829106072359937">
+          <animate attributeName="opacity" values="0.3;1;0.3" dur="1.818779833646647s" repeatCount="indefinite"/>
+        </circle><circle cx="274.76266490119923" cy="54.93645852269184" r="2.2096269542764935">
+          <animate attributeName="opacity" values="0.3;1;0.3" dur="1.8154885040602329s" repeatCount="indefinite"/>
+        </circle><circle cx="265.87175778930225" cy="150.9153196450679" r="2.2443474843390803">
+          <animate attributeName="opacity" values="0.3;1;0.3" dur="1.200028260500503s" repeatCount="indefinite"/>
+        </circle><circle cx="100.92832887066571" cy="166.69449793309977" r="2.297409796165161">
+          <animate attributeName="opacity" values="0.3;1;0.3" dur="2.3442258549465325s" repeatCount="indefinite"/>
+        </circle><circle cx="45.20278716804678" cy="72.10951027893353" r="1.22197589423092">
+          <animate attributeName="opacity" values="0.3;1;0.3" dur="1.7363767916442865s" repeatCount="indefinite"/>
+        </circle><circle cx="281.44178062129475" cy="108.50736972380514" r="2.833012463999611">
+          <animate attributeName="opacity" values="0.3;1;0.3" dur="1.1883607817431026s" repeatCount="indefinite"/>
+        </circle><circle cx="164.73437965032997" cy="32.90131374630664" r="1.1721915564745884">
+          <animate attributeName="opacity" values="0.3;1;0.3" dur="1.4999618638183594s" repeatCount="indefinite"/>
         </circle>
         </g>
       
@@ -103,16 +103,16 @@
         
     <g transform="translate(226, -25)">
       <!-- Speech bubble -->
-      <rect x="0" y="0" width="90" height="24" rx="10" ry="10" 
+      <rect x="0" y="0" width="62" height="24" rx="10" ry="10" 
             fill="#FFFFFF" stroke="#2d333b" stroke-width="1.5"/>
       <!-- Bubble tail -->
       <polygon points="15,24 20,32 25,24" 
                fill="#FFFFFF" stroke="#2d333b" stroke-width="1.5"/>
       <line x1="16" y1="24" x2="24" y2="24" stroke="#FFFFFF" stroke-width="2"/>
       <!-- Text -->
-      <text x="45" y="16" 
+      <text x="31" y="16" 
             font-family="'Segoe UI', Arial, sans-serif" font-size="10" 
-            fill="#2d333b" text-anchor="middle">I AM FIRE!</text>
+            fill="#2d333b" text-anchor="middle">zzZ...</text>
     </g>
   
         <!-- Seasonal Accessory (z-index: above pet) -->
@@ -129,13 +129,13 @@
       
       <!-- XP Progress Bar -->
       <rect x="20" y="306" width="256" height="8" rx="4" fill="#e0e0e0" stroke="#0288d1" stroke-width="1"/>
-      <rect x="20" y="306" width="25.6" height="8" rx="4" fill="#4fc3f7">
-        <animate attributeName="width" from="0" to="25.6" dur="0.5s" fill="freeze"/>
+      <rect x="20" y="306" width="46.08" height="8" rx="4" fill="#4fc3f7">
+        <animate attributeName="width" from="0" to="46.08" dur="0.5s" fill="freeze"/>
       </rect>
       
       <!-- XP Text -->
       <text x="50%" y="329" text-anchor="middle" font-family="monospace" font-size="9" fill="#666">
-        XP: 27150 / 28090 (10%)
+        XP: 27230 / 28090 (18%)
       </text>
     
       
@@ -144,42 +144,42 @@
     <g class="achievements">
       
       <g transform="translate(5, 0)">
-        <title>Spark: 3 day streak</title>
-        <circle cx="10" cy="10" r="10" fill="rgba(255,255,255,0.9)" stroke="#ddd" stroke-width="1"/>
-        <text x="10" y="14" text-anchor="middle" font-size="11">⚡</text>
-      </g>
-    
-      <g transform="translate(30, 0)">
         <title>Rising Star: Level 5</title>
         <circle cx="10" cy="10" r="10" fill="rgba(255,255,255,0.9)" stroke="#ddd" stroke-width="1"/>
         <text x="10" y="14" text-anchor="middle" font-size="11">🌟</text>
       </g>
     
-      <g transform="translate(55, 0)">
+      <g transform="translate(30, 0)">
         <title>Shining: Level 10</title>
         <circle cx="10" cy="10" r="10" fill="rgba(255,255,255,0.9)" stroke="#ddd" stroke-width="1"/>
         <text x="10" y="14" text-anchor="middle" font-size="11">✨</text>
       </g>
     
-      <g transform="translate(80, 0)">
+      <g transform="translate(55, 0)">
         <title>Rainbow: Level 25</title>
         <circle cx="10" cy="10" r="10" fill="rgba(255,255,255,0.9)" stroke="#ddd" stroke-width="1"/>
         <text x="10" y="14" text-anchor="middle" font-size="11">🌈</text>
       </g>
     
-      <g transform="translate(105, 0)">
+      <g transform="translate(80, 0)">
         <title>Rocket: Level 50</title>
         <circle cx="10" cy="10" r="10" fill="rgba(255,255,255,0.9)" stroke="#ddd" stroke-width="1"/>
         <text x="10" y="14" text-anchor="middle" font-size="11">🚀</text>
       </g>
     
-      <g transform="translate(130, 0)">
+      <g transform="translate(105, 0)">
         <title>Night Owl: Late night commit</title>
         <circle cx="10" cy="10" r="10" fill="rgba(255,255,255,0.9)" stroke="#ddd" stroke-width="1"/>
         <text x="10" y="14" text-anchor="middle" font-size="11">🦉</text>
       </g>
     
-      
+      <g transform="translate(130, 0)">
+        <title>Weekend Warrior: Weekend commit</title>
+        <circle cx="10" cy="10" r="10" fill="rgba(255,255,255,0.9)" stroke="#ddd" stroke-width="1"/>
+        <text x="10" y="14" text-anchor="middle" font-size="11">🏖️</text>
+      </g>
+    
+      <text x="160" y="14" font-family="monospace" font-size="9" fill="#666">+1</text>
     </g>
   </g>
     </svg>
